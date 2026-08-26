@@ -1,0 +1,18 @@
+{%- case settings.product_rating_app -%}
+  {%- when 'judge_me' -%}
+    <div class='jdgm-widget jdgm-preview-badge mb-xs' data-id='{{ product.id }}'>
+      {{ product.metafields.judgeme.badge }}
+    </div>
+  {%- when 'loox' -%}
+    <div class="loox-rating mb-xs" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div>
+  {%- when 'okendo' -%}
+    {%- if product.metafields.okendo.StarRatingSnippet != blank -%}
+      <div data-oke-star-rating data-oke-reviews-product-id="shopify-{{ product.id }}">
+        {{ product.metafields.okendo.StarRatingSnippet }}
+      </div>
+    {%- endif -%}
+  {%- when 'yotpo' -%}
+    <div class="yotpo bottomLine mb-xs" data-product-id="{{ product.id }}"></div>
+  {%- when 'ali_reviews' -%}
+    <div product-id="{{ product.id }}" product-handle="{{ product.handle }}" class="alireviews-review-star-rating alireviews-review-theme mb-xs"></div>
+{%- endcase -%}

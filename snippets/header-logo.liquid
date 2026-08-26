@@ -1,0 +1,89 @@
+{% comment %} 
+{%- render 'header-logo',
+  logo_width_desktop: section.settings.logo_max_width_desktop,
+  logo_width_mobile: section.settings.logo_max_width_mobile,
+  sticky_logo_width_desktop: section.settings.sticky_logo_max_width_desktop
+  sticky_logo_width_mobile: section.settings.sticky_logo_max_width_mobile
+  transparent_logo_width_desktop: section.settings.transparent_logo_max_width_desktop
+  transparent_logo_width_mobile: section.settings.transparent_logo_max_width_mobile
+-%}
+ {% endcomment %}
+
+{%- if section.settings.sticky_logo_image != blank -%}
+  {% assign hide_main_logo_on_stick = ' hide_logo_on_sticky' %}
+  {%- capture sticky_logo -%}
+    {%- liquid
+      assign sticky_logo_alt = section.settings.sticky_logo_image.alt | default: shop.name | escape
+      assign sticky_logo_height = sticky_logo_width_desktop | times: 2 | divided_by: section.settings.sticky_logo_image.aspect_ratio
+      assign sticky_logo_width = sticky_logo_width_desktop | times: 2
+    -%}
+    {% capture sticky_logo_sizes %}{{ sticky_logo_width }}px{% endcapture %}
+    {% capture sticky_logo_widths %}{{ sticky_logo_width_desktop }}, {{ sticky_logo_width | round }}, {{ sticky_logo_width }}{% endcapture %}
+    {% assign sticky_logo_class = 'header__logo-image header__logo-image--sticky d-none ' %}
+      {{ section.settings.sticky_logo_image | image_url: width: 600 | image_tag: class: sticky_logo_class, widths: sticky_logo_widths, height: sticky_logo_height, width: sticky_logo_width, alt: sticky_logo_alt, sizes: sticky_logo_sizes, loading: 'lazy', fetchpriority:'low' }}
+  {%- endcapture -%}
+{%- endif -%}
+
+{%- if section.settings.transparent_logo_image != blank -%}
+  {% assign hide_main_logo_on_transparent = ' hide_logo_on_transparent ' %}
+  {%- capture transparent_logo -%}
+    {%- liquid
+      assign transparent_logo_alt = section.settings.transparent_logo_image.alt | default: shop.name | escape
+      assign transparent_logo_height = transparent_logo_width_desktop | times: 2 | divided_by: section.settings.transparent_logo_image.aspect_ratio
+      assign transparent_logo_width = transparent_logo_width_desktop | times: 2
+    -%}
+    {% capture transparent_logo_sizes %}{{ transparent_logo_width }}px{% endcapture %}
+    {% capture transparent_logo_widths %}{{ transparent_logo_width_desktop }}, {{ transparent_logo_width | round }}, {{ transparent_logo_width }}{% endcapture %}
+    {% assign transparent_logo_class = 'header__logo-image header__logo-image--transparent d-none ' %}
+      {{ section.settings.transparent_logo_image | image_url: width: 600 | image_tag: class: transparent_logo_class, widths: transparent_logo_widths, height: transparent_logo_height, width: sticky_logo_width, alt: transparent_logo_alt, sizes: transparent_logo_sizes, loading: 'lazy', fetchpriority:'low' }}
+  {%- endcapture -%}
+{%- endif -%}
+
+<div class="header__logo header__item d-flex middle-xs top-lg"
+style="
+--logo-ratio: {{ section.settings.logo_image.aspect_ratio }};
+--logo-width-desktop: {{ logo_width_desktop -}} px;
+--logo-width-mobile: {{ logo_width_mobile }}px;
+--main-logo-ratio: {{ section.settings.logo_image.aspect_ratio }};
+--sticky-logo-width-desktop: {{ sticky_logo_width_desktop -}}px;
+--sticky-logo-width-mobile: {{ sticky_logo_width_mobile }}px;
+--sticky-logo-ratio: {{ section.settings.sticky_logo_image.aspect_ratio }};
+--transparent-logo-width-desktop: {{ transparent_logo_width_desktop -}}px;
+--transparent-logo-width-mobile: {{ transparent_logo_width_mobile }}px;
+--transparent-logo-ratio: {{ section.settings.transparent_logo_image.aspect_ratio }};
+--item-clm-span: {{ section.settings.logo_width_desktop }};
+">
+  {%- if request.page_type == 'index' or request.page_type == 'password' -%}
+    <{{ section.settings.enable_h1_tag | default: 'span' | replace: true, 'h1' }} class="h4 m-zero wb-break-word visually-hidden">{{ section.settings.logo_image.alt | default: shop.name | escape }}</{{ section.settings.enable_h1_tag | default: 'span' | replace: true, 'h1' }}>
+  {%- endif -%}
+  <a href="{{ routes.root_url }}" aria-label="{{ section.settings.logo_image.alt | default: shop.name | escape }}" class="header__logo-link w-100 m-zero js-header-logo-link d-block h4 p-relative wb-break-word">
+    {%- if section.settings.logo_image != blank -%}
+      {%- liquid
+        assign logo_alt = section.settings.logo_image.alt | default: shop.name | escape
+        assign logo_height = section.settings.logo_max_width_desktop | times: 2 | divided_by: section.settings.logo_image.aspect_ratio
+        assign logo_width = section.settings.logo_max_width_desktop | times: 2
+      -%}
+      {% capture sizes %}{{ logo_width }}px{% endcapture %}
+      {% capture widths %}{{ section.settings.logo_max_width_desktop }}, {{ logo_width | round }}, {{ logo_width }}{% endcapture %}
+      {% assign main_logo_class = 'header__logo-image ' | append: hide_main_logo_on_stick | append: hide_main_logo_on_transparent | append: hide_main_logo_on_transparent %}
+        {{ section.settings.logo_image | image_url: width: 600 | image_tag: class: main_logo_class, widths: widths, height: logo_height, width: logo_width, alt: logo_alt, sizes: sizes, loading: 'eager', fetchpriority:'high' }}
+    {%- else -%}
+      <span class="header__heading {{ hide_main_logo_on_transparent }} {% if section.settings.sticky_logo_image == blank %} heading__fallback-name {% endif %}  m-zero wb-break-word">{{ shop.name }}</span>
+    {%- endif -%}
+    {{ sticky_logo }}
+    {{ transparent_logo }}
+  </a>
+  {%- if banner_text != blank -%}
+    {%- if banner_link != blank -%}
+      <a href="{{ banner_link }}" class="header__banner" style="--header-banner-bg: {{ banner_bg_color | default: '#5b7f95' }};">
+    {%- else -%}
+      <span class="header__banner" style="--header-banner-bg: {{ banner_bg_color | default: '#5b7f95' }};">
+    {%- endif -%}
+      <span class="header__banner-text">{{ banner_text }}</span>
+    {%- if banner_link != blank -%}
+      </a>
+    {%- else -%}
+      </span>
+    {%- endif -%}
+  {%- endif -%}
+</div>

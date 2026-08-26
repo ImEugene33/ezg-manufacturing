@@ -1,0 +1,122 @@
+{%- liquid
+  assign image_loading = image_loading | default: 'lazy'
+  assign fetchpriority = fetchpriority | default: 'low'
+  assign ratio = settings.product_card_image_ratio | replace: 'auto', product.featured_media.aspect_ratio
+  assign section_id = section.id | md5 | truncate: 12, ""
+  assign random_number =  "now" | date: "%N" | append: section_id | append: product.id
+
+  assign product_image_id =  random_number | prepend: 'cardProductImage-'
+  assign product_link_class =  random_number | prepend: 'js-card-product-link-'
+  assign image_width = image_width | default: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000'
+
+  assign sizes = sizes | default: '(min-width: 769px) calc(' | append:  settings.container_max_width | append: 'px / 4), (min-width: 459px) calc(100vw/2), 100vw'
+  assign product_placeholder = 'product-apparel-1' | placeholder_svg_tag: 'placeholder w-100 h-100 media d-block'
+  assign product_image = product_placeholder
+
+  assign product_image_classes = 'h-100 media d-block ' | append: settings.product_card_image_type
+  assign product_image = product.featured_media | image_url: width: product.featured_media.width | image_tag: widths: image_width, sizes: sizes, alt: product.title, class: product_image_classes, id: product_image_id, loading: image_loading, fetchpriority: fetchpriority, decoding: 'async'
+
+  assign days_new = settings.new_in_date_limit
+  assign current_date = 'now' | date: "%s"
+  assign published_date = product.published_at | date: "%s"
+  assign days_since_published = current_date | minus: published_date | divided_by: 86400
+%}
+<sht-lazy-loader class="mini-card card-animate card--border mini-card-component p-xs rad-m o-hidden w-100 h-100 js-product-card-block p-relative" data-loading="{{ image_loading }}">
+  <a href="{{- product.url | within: collection | default: '#' -}}" class="d-block w-100 h-100 p-absolute top-0 left-0 zi-1 {{ product_link_class }}" aria-label="{{ product.title | escape }}" tabindex="-1"></a>
+  <div class="mini-card__product-media p-relative rad-s h-fit-content o-hidden" style="background-color: {{ settings.product_card_image_background }};">
+    {% render 'image', image_item: product_image, ratio: ratio %}
+  </div>
+  <div class="mini-card__product-info">
+    {% if show_badge %}
+      <div class="product__badge d-flex fw-wrap top-xs zi-1 hide-empty gap-3xs mb-xs">
+        {%- if product.available == false and settings.product_card_show_sold_out_badge -%}
+          <span class="fs-heading-xs component-heading badge badge--newin d-inline-block background color-{{ settings.sold_out_color }} {{ settings.stock_badge_corner_radius }}">
+            {{ 'products.product.sold_out' | t }}
+          </span>
+        {%- endif -%}
+        {%- if product.compare_at_price != null and product.compare_at_price > product.price -%}
+          {% if settings.product_card_show_sale_badge == 'text_sale_amount' %}
+          <span class="fs-heading-xs component-heading badge badge--sale d-inline-block background color-{{ settings.sale_color }} {{ settings.stock_badge_corner_radius }}">
+            <span>
+              {%- liquid
+                assign save_amount = product.compare_at_price | minus: product.price | times: 1.0 | divided_by: product.compare_at_price | times: 100 | round
+                if product.has_only_default_variant
+                  echo 'products.product.card.save_percent' | t: save_amount: save_amount
+                else
+                  assign save_amount = 0
+                  for variant in product.variants
+                    assign saving = variant.compare_at_price | minus: variant.price | times: 1.0 | divided_by: variant.compare_at_price | times: 100 | round
+                    assign save_amount = saving | at_least: save_amount
+                  endfor
+                  echo 'products.product.card.save_percent_up_to' | t: save_amount: save_amount
+                endif
+              -%}
+            </span>
+            <span>
+              {{ 'products.product.off' | t }}
+            </span>
+          </span>
+          {% elsif settings.product_card_show_sale_badge == 'text_only' %}
+            <span class="fs-heading-xs component-heading badge badge--sale d-inline-block background color-{{ settings.sale_color }} {{ settings.stock_badge_corner_radius }}">
+              {{ 'products.product.sale_off' | t }}
+            </span>
+          {% endif %}
+        {%- endif -%}
+        {%- if days_since_published < days_new and settings.product_card_show_new_in_badge -%}
+          <span class="fs-heading-xs component-heading badge badge--sale d-inline-block background color-{{ settings.new_in_color }} {{ settings.stock_badge_corner_radius }}">
+            {{ 'products.product.new_in' | t }}
+          </span>
+        {%- endif -%}
+      </div>
+    {% endif %}
+    <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+    {% if show_vendor %}
+      <span class="mini-card--vendor fs-body-s d-block mb-2xs color-text-80 js-mini-card-vendor f-extra">{{- product.vendor -}}</span>
+    {% endif %}
+
+    <h3 class="fs-heading-s component-heading mb-xs">
+      <a href="{{- product.url | within: collection -}}" class="td-none ele-focus-visible {{ product_link_class }}">{{- product.title -}}</a>
+    </h3>
+
+    {%- if show_rating -%}
+      <div class="mini-card-product__rating {{ rating_class }} mb-xs">
+        {%- render 'product-rating', product: product -%}
+      </div>
+    {%- endif -%}
+    {%- if show_price -%}
+      {%- liquid
+        render 'product-price' product: product, target: product, price_class: 'd-block mb-2xs mini-card--price js-mini-card-price', price_style: 'fs-body-xl'
+      -%}
+    {%- endif -%}
+    {%- if show_variant_swatches  and settings.product_card_show_variant_swatches -%}
+      <div class="product-card__variant-swatches mb-xs hide-empty">
+        {% liquid
+          assign card_variant_labels = settings.variant_option_name
+        %}
+        {%- render 'card-product-variant-swatches', product: product, product_image_id: product_image_id, product_link_class: product_link_class, content_align: card_position,card_variant_labels:card_variant_labels -%}
+      </div>
+    {%- endif -%}
+    <div class="mt-xs d-flex gap-3xs hide-empty ">
+      {%- if show_quick_view -%}
+        <button class="btn btn-icon-m btn-secondary d-block" aria-label="{{ "products.product.quick_view" | t }}" data-product-url="{{ product.url | split: "?" | first }}?view=quick-view-drawer" onclick="window.dialogQuickShop.showModal(this);">
+          {%- render 'icon-infor', class: 'icon icon-fix-m' -%}
+        </button>
+      {%- endif -%}
+      {%- unless product.gift_card? -%}
+        {%- if quick_buy and quick_buy != 'not_use'-%}
+          {%- if product.has_only_default_variant -%}
+            {%- render 'quick-add-form', section: section, product: product, content_align: card_content_position | default: settings.product_card_position, btn_class: 'btn-icon-m', , icon_class: 'icon icon-fix-m', quick_buy: quick_buy -%}
+          {%- else -%}
+            <button class="btn btn-icon-m btn-secondary d-block" aria-label="{{ "products.product.quick_add" | t }}" data-selling-plan="{{- product.requires_selling_plan -}}" data-quick-buy="{{ quick_buy }}" data-product-url="{{ product.url | split: "?" | first }}?view=quick-buy" aria-haspopup="dialog" onclick="window.dialogQuickBuy.showModal(this, true)" {% unless product.available %}disabled{% endunless %}>
+              {%- render 'icon-add-to-cart', class: 'icon icon-fix-m' -%}
+            </button>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endunless -%}
+    </div>
+    <div class="d-flex w-100 gap-3xs mt-m d-none-important js-selling-plan-error-message">
+      {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+      <p class="fs-body-s color-text-80 mb-0 max-quantity-message">{{ 'products.product.selling_plan_error_message' | t }}</p>
+    </div>
+  </div>
+</sht-lazy-loader>

@@ -1,0 +1,584 @@
+{%- liquid
+  assign xs = 12.0 | divided_by: section.settings.columns_per_row_mobile
+  assign md = 12.0 | divided_by: section.settings.columns_per_row_desktop
+
+  assign items_per_row_on_desktop = section.settings.columns_per_row_desktop | plus: 0
+  assign items_per_row_on_mobile = section.settings.columns_per_row_mobile | plus: 0
+
+  assign carousel_style = 'js-carousel-items ox-auto p-relative scrollable scrollable-x disable-scrollbars'
+  assign carousel_item = 'js-carousel-item p-relative scrollable-aln-start'
+
+  assign data_step_desktop = items_per_row_on_desktop
+  assign data_step_mobile = items_per_row_on_mobile
+
+  if settings.carousel_slide == 'single_item'
+    assign data_step_desktop = 1
+    assign data_step_mobile = 1
+  endif
+
+  assign index = 1
+  assign index_accessibility = 0
+
+  unless section.settings.custom_panel_color.alpha == 0.0 or section.settings.custom_panel_color == blank
+    assign color_panel = 'color: ' | append: section.settings.custom_panel_color | append: '; --color-normal-text-rgb:' | append: section.settings.custom_panel_color.red | append: ',' | append: section.settings.custom_panel_color.green | append: ',' | append: section.settings.custom_panel_color.blue
+  endunless
+  unless section.settings.custom_panel_background.alpha == 0.0 or section.settings.custom_panel_background == blank
+    assign background_panel = '; background: ' | append: section.settings.custom_panel_background | append: '; --color-background-rgb:' | append: section.settings.custom_panel_background.red | append: ',' | append: section.settings.custom_panel_background.green | append: ',' | append: section.settings.custom_panel_background.blue
+  endunless
+-%}
+{%- render 'section-padding-collapse' -%}
+<sht-product-bundle data-animate="regular-section" data-section="{{ section.id }}" class="js-animate section d-block color-{{- section.settings.color_scheme }} background" data-ui-component="Section Product Bundle" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}">
+  <div class="section--vertical product-bundle-wrapper">
+    {%- if section.settings.heading != blank or section.settings.description != blank or section.settings.enable_countdown == true -%}
+      <div class="section__header">
+        <div class="ctnr">
+          {% render 'section-content-horizontal',
+            section: section,
+            class: 'section__text--horizontal p-relative zi-1',
+            heading_size: section.settings.heading_size,
+            button_main_style: 'btn-s btn-tertiary',
+            enable_button: false,
+            enable_countdown: section.settings.enable_countdown
+          %}
+        </div>
+      </div>
+    {%- endif -%}
+    <div class="section__content">
+      <div class="ctnr">
+        <sht-carousel class="sht-carousel p-relative d-block" data-enable="{{ section.settings.carousel_desktop }}" data-enable-mobile="{{ section.settings.carousel_mobile }}">
+          <div aria-atomic="true" class="rw o-hidden section-content-style r-gap-scale-xl {{ carousel_style }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel-md' }}" style="--carousel-xs:{{- xs -}}; --carousel-sm:{{- xs -}}; --carousel-md: {{- md -}};">
+            {% if section.settings.product_list == blank and section.settings.collection != blank %}
+              {%- for product in section.settings.collection.products limit: section.settings.products_to_shows -%}
+                {% liquid
+                  assign total_items = section.settings.products_to_shows
+                  if section.settings.collection.products.size < section.settings.products_to_shows
+                    assign total_items = section.settings.collection.products.size
+                  endif
+                  assign index = index | plus: 1
+                  assign index_accessibility = index_accessibility | plus: 1
+                  if index == 5
+                    assign index = 1
+                  endif
+                %}
+                <sht-carousel-itm class="carousel__item clm {{ carousel_item }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel__item-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel__item-md' }}"
+                style="--w-xs:{{- xs -}};--w-md: {{- md -}};" role="group" aria-roledescription="Slide" aria-label="{{ 'accessibility.slide' | t }} {{ index_accessibility }} {{ 'accessibility.of' | t }} {{ forloop.length }}" data-item-index="{{ index_accessibility }}">
+                  {% render 'card-product-block',
+                    product: product,
+                    quick_buy: 'not_use',
+                    button_compare: false,
+                    is_bundle: true,
+                    show_quick_view: section.settings.show_quick_view,
+                    id_bundle: section.id,
+                    image_loading: 'lazy',
+                    fetchpriority: 'low'
+                  %}
+                </sht-carousel-itm>
+              {%- endfor %}
+            {% elsif section.settings.product_list != blank %}
+              {%- for product in section.settings.product_list -%}
+                {% liquid
+                  assign index = index | plus: 1
+                  assign index_accessibility = index_accessibility | plus: 1
+                  if index == 5
+                    assign index = 1
+                  endif
+                %}
+                <sht-carousel-itm class="carousel__item clm {{ carousel_item }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel__item-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel__item-md' }}"
+                style="--w-xs:{{- xs -}};--w-md: {{- md -}};" role="group" aria-roledescription="Slide" aria-label="{{ 'accessibility.slide' | t }} {{ index_accessibility }} {{ 'accessibility.of' | t }} {{ forloop.length }}" data-item-index="{{ index_accessibility }}">
+                  {% render 'card-product-block',
+                    product: product,
+                    quick_buy: 'not_use',
+                    button_compare: false,
+                    is_bundle: true,
+                    show_quick_view: section.settings.show_quick_view,
+                    id_bundle: section.id,
+                    image_loading: 'lazy',
+                    fetchpriority: 'low'
+                  %}
+                </sht-carousel-itm>
+              {%- endfor %}
+            {% else %}
+              {% for i in (1..4) limit: section.settings.products_to_shows %}
+                <sht-carousel-itm data-attribute-placeholder="1" aria-hidden="true" aria-disabled="true" class="clm carousel__item {{ carousel_item }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel__item-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel__item-md' }}"
+                style="--w-xs:{{- xs -}};--w-md: {{- md -}};" role="group" aria-roledescription="Slide" aria-label="{{ 'accessibility.slide' | t }} {{ forloop.index }} {{ 'accessibility.of' | t }} {{ forloop.length }}" data-item-index="{{ forloop.index }}">
+                  {% render 'card-product-placeholder',
+                    product: product,
+                    product_placeholder: forloop.index
+                  %}
+                </sht-carousel-itm>
+              {% endfor %}
+              {% liquid
+                assign index = index | plus: 1
+                assign index_accessibility = index_accessibility | plus: 1
+                if index == 5
+                  assign index = 1
+                endif
+              %}
+            {% endif %}
+          </div>
+
+          <div class="carousel-pagination middle-y w-100 p-absolute no-js-hidden zi-3">
+            <button type="button" data-step="{{ data_step_desktop }}" data-step-mb="{{ data_step_mobile }}" class="js-carousel-prev-btn btn-carousel-prev btn btn-icon-l btn-secondary middle-y p-absolute left-0 rtl-flip-x" aria-label="{{ 'accessibility.previous_slide' | t }}" name="previous" disabled>{% render 'icon-caret-left' %}</button>
+            <button type="button" data-step="{{ data_step_desktop }}" data-step-mb="{{ data_step_mobile }}" class="js-carousel-next-btn btn-carousel-next btn btn-icon-l btn-secondary middle-y p-absolute right-0 rtl-flip-x" aria-label="{{ 'accessibility.next_slide' | t }}" name="next" disabled>{% render 'icon-caret-right' %}</button>
+          </div>
+
+          <div class="carousel-overflow {{ section.settings.carousel_mobile | replace: 'true', '' | replace: 'false', 'd-none' }} {{ section.settings.carousel_desktop | replace: 'true', 'd-block-md' | replace: 'false', 'd-none-md' }}"></div>
+
+          {% if settings.show_progress_indicator %}
+            {% liquid
+              assign show_on_desktop = false
+              assign show_on_mobile = false
+              if section.settings.carousel_desktop == 'true' and items_per_row_on_desktop < total_items
+                  assign show_on_desktop = true
+              endif
+              if section.settings.carousel_mobile == 'true' and items_per_row_on_mobile < total_items
+                  assign show_on_mobile = true
+              endif
+            %}
+
+            <div class="slider-scrollbar p-2xl {% if show_on_desktop %} d-flex-md {% else %} d-none-md {% endif %} {% if show_on_mobile %} d-flex {% else %} d-none {% endif %}">
+              <div class="scrollbar-track js-scrollbar-track" data-thumb-mobile="{{ items_per_row_on_mobile }}" data-thumb-tablet="{{ items_per_row_on_mobile }}" data-thumb-desk="{{ items_per_row_on_desktop }}" data-thumb-total="{{ total_items }}" style="--width-thumb-desktop: {{ items_per_row_on_desktop | times: 100.0 | divided_by: total_items }}%; --width-thumb-tablet: {{ 2 | times: 100.0 | divided_by: total_items }}%; --width-thumb-mobile: {{ 1 | times: 100.0 | divided_by: total_items }}%">
+                <div class="scrollbar-thumb js-scrollbar-thumb"></div>
+              </div>
+            </div>
+          {% endif %}
+        </sht-carousel>
+      </div>
+    </div>
+  </div>
+
+  <sht-product-bundle-panel data-panel-state="closed" style="{{ background_panel }};{{ color_panel }}" data-section="{{ section.id }}" data-min-products="{{ section.settings.min_products }}" data-enable-unlimited-add="{{ section.settings.enable_unlimited_add }}" class="d-flex fd-column product-bundle-form ctnr m-auto sht-bundle-panel no-focus-visible rad-l o-hidden background border p-sticky bottom-0 p-s zi-3 gap-m">
+    <div class="bundle-panel__header d-flex between-xs top-xs gap-m js-bundle-panel-header">
+      <div class="bundle-panel__content d-grid ">
+        <span class="m-zero d-flex gap-3xs maw-fit-content">
+          <span class="fs-body-xl">
+            {{ 'products.product.bundle' | t }}
+            <sup class="fs-body-xs js-quatity-product-bundle h-fit-content f-extra {{ settings.numbers_style |  replace: 'number', '' }}">0</sup>
+          </span>
+        </span>
+        <p class="fs-body-s color-text-60 m-zero">{{ section.settings.bundle_description }}</p>
+      </div>
+      <button type="button" aria-label="{{- "accessibility.collapse_modal" | t -}}" class="js-expand-panel btn btn-icon-m bg-transparent flex-0-auto">
+        {%- render 'icon-reduce', class: 'icon icon-fix-l icon-reduce d-none' -%}
+        {%- render 'icon-enlarge', class: 'icon icon-fix-l icon-enlarge' -%}
+      </button>
+    </div>
+    <div class="bundle-panel__body d-none js-bundle-panel-body">
+      <sht-carousel class="sht-carousel bundle-panel__carousel p-relative d-block">
+        <div aria-atomic="true" class="section-content-style js-bundle-panel-items rw o-hidden r-gap-scale-xl js-carousel-items ox-auto p-relative scrollable scrollable-x disable-scrollbars carousel--special zi-1" style="--carousel-xs:12;">
+        </div>
+        <div class="d-grid bundle-panel__placeholder flex-1 p-absolute js-placeholder-compare inset h-100">
+          <div class="item-product-bundle d-flex center-xs middle-xs">
+            <span class="color-text-60 fs-body-m">
+              {{ 'products.product.select_product' | t }}
+            </span>
+          </div>
+          <div class="item-product-bundle d-flex-sm d-none center-xs middle-xs">
+            <span class="color-text-60 fs-body-m">
+              {{ 'products.product.select_product' | t }}
+            </span>
+          </div>
+          <div class="item-product-bundle d-flex-md d-none center-xs middle-xs">
+            <span class="color-text-60 fs-body-m">
+              {{ 'products.product.select_product' | t }}
+            </span>
+          </div>
+        </div>
+        <div class="carousel-pagination js-carousel-pagination middle-y w-100 p-absolute no-js-hidden zi-3">
+          <button type="button" data-step="1" data-step-mb="1" class="js-carousel-prev-btn btn-carousel-prev btn btn-icon-l btn-secondary middle-y p-absolute left-0 rtl-flip-x" aria-label="{{ 'accessibility.previous_slide' | t }}" name="previous" disabled>{% render 'icon-caret-left' %}</button>
+          <button type="button" data-step="1" data-step-mb="1" class="js-carousel-next-btn btn-carousel-next btn btn-icon-l btn-secondary middle-y p-absolute right-0 rtl-flip-x" aria-label="{{ 'accessibility.next_slide' | t }}" name="next" disabled>{% render 'icon-caret-right' %}</button>
+        </div>
+        <div class="carousel-overflow bundle-carousel-overflow"></div>
+      </sht-carousel>
+    </div>
+
+    <sht-prd-bundle-frm class="d-block bundle-panel__footer js-bundle-panel-footer">
+      <button disabled type="submit" name="add" aria-label="{{ 'products.product.add_to_cart' | t }}" class="js-bundle-button btn-bundle-add btn btn-primary btn-m gap-3xs w-100">
+        <span class="js-product-form-spinner product-form-spinner icon d-flex middle-xs">
+          {% render 'icon-spinner', size: '20px' %}
+        </span>
+        <span class="js-product-bundle-form-submit-btn-text">
+          Add {{ section.settings.min_products }} more
+        </span>
+      </button>
+    </sht-prd-bundle-frm>
+  </sht-product-bundle-panel>
+
+</sht-product-bundle>
+
+{% schema %}
+{
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "name": "t:sections.product_bundle.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.product_bundle.paragraph"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.section_heading.label",
+      "default": "Product bundle"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.heading_size.label",
+      "id": "heading_size",
+      "visible_if": "{{ section.settings.heading != blank }}",
+      "options": [
+        {
+          "value": "h3-regular",
+          "label": "t:general.settings.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:general.settings.heading_size.options.large.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:general.settings.heading_size.options.regular.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:general.settings.heading_size.options.small.label"
+        }
+      ],
+      "default": "h5"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:general.settings.section_description.label",
+      "default": "<p>Show your best offers</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.product_list.content",
+      "info": "t:general.settings.headers.product_list.info"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:general.settings.collection.label"
+    },
+    {
+      "type": "range",
+      "max": 24,
+      "min": 3,
+      "step": 1,
+      "default": 8,
+      "id": "products_to_shows",
+      "label": "t:general.settings.maximum_products_in_collection_to_show.label",
+      "info": "t:general.settings.maximum_products_in_collection_to_show.info",
+      "visible_if": "{{ section.settings.collection != blank }}"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "t:general.settings.products.label",
+      "info": "t:sections.featured_product_list.settings.replaces_collection.info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.bundle.content"
+    },
+    {
+      "type": "text",
+      "id": "bundle_description",
+      "label": "t:general.settings.bundle_description.label",
+      "default": "Add 2 items to get 20% discount"
+    },
+    {
+      "type": "range",
+      "id": "min_products",
+      "label": "t:general.settings.min_products.label",
+      "info": "t:general.settings.min_products.info",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_unlimited_add",
+      "label": "t:general.settings.enable_unlimited_add.label",
+      "info": "t:general.settings.enable_unlimited_add.info",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "custom_panel_background",
+      "label": "t:general.settings.custom_panel_background.label"
+    },
+    {
+      "type": "color",
+      "id": "custom_panel_color",
+      "label": "t:general.settings.custom_panel_content.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.desktop_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "carousel_desktop",
+      "label": "t:general.settings.list_style.label",
+      "default": "false",
+      "options": [
+        {
+          "value": "false",
+          "label": "t:general.settings.option_grid.label"
+        },
+        {
+          "value": "true",
+          "label": "t:general.settings.option_carousel.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_per_row_desktop",
+      "label": "t:general.settings.columns_per_row.label",
+      "default": "4",
+      "options": [
+        {
+          "value": "3",
+          "label": "t:general.settings.columns_per_row.options_3.label"
+        },
+        {
+          "value": "4",
+          "label": "t:general.settings.columns_per_row.options_4.label"
+        },
+        {
+          "value": "5",
+          "label": "t:general.settings.columns_per_row.options_5.label"
+        },
+        {
+          "value": "6",
+          "label": "t:general.settings.columns_per_row.options_6.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.mobile_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "carousel_mobile",
+      "label": "t:general.settings.list_style.label",
+      "default": "true",
+      "options": [
+        {
+          "value": "false",
+          "label": "t:general.settings.option_grid.label"
+        },
+        {
+          "value": "true",
+          "label": "t:general.settings.option_carousel.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_per_row_mobile",
+      "label": "t:general.settings.columns_per_row.label",
+      "default": "2",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.quickview.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_view",
+      "label": "t:general.settings.show_quick_view.label",
+      "info": "t:general.settings.show_quick_view.info",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.countdown_timer.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_countdown",
+      "label": "t:general.settings.enable_countdown_timer.label",
+      "info": "t:general.settings.headers.countdown_timer.info",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_end",
+      "label": "t:general.settings.hide_the_countdown.label",
+      "default": true,
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "t:general.settings.end_date.label",
+      "info": "t:general.settings.end_date.info",
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "t:general.settings.end_time.label",
+      "info": "t:general.settings.end_time.info",
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    },
+    {
+      "type": "richtext",
+      "id": "end_text",
+      "label": "t:general.settings.end_text.label",
+      "info": "t:general.settings.end_text.info",
+      "default": "<p>This event is finished</p>",
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    },
+    {
+      "type": "color",
+      "id": "countdown_background",
+      "label": "t:general.settings.custom_background.label",
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    },
+    {
+      "type": "color",
+      "id": "countdown_number_color",
+      "label": "t:general.settings.custom_number.label",
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "vendor",
+      "name": "t:general.verdor.name",
+      "limit": 1,
+      "settings": [
+      ]
+    },
+    {
+      "type": "title",
+      "name": "t:general.title.name",
+      "limit": 1,
+      "settings": [
+      ]
+    },
+    {
+      "type": "product_type",
+      "name": "t:general.product_type.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "color",
+          "id": "color_product_type",
+          "label": "t:general.settings.custom_color.label"
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "t:general.price.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "color",
+          "id": "color_product_price",
+          "label": "t:general.settings.custom_color.label"
+        }
+      ]
+    },
+    {
+      "type": "product_attributes",
+      "name": "t:sections.main_product.blocks.attributes.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:general.settings.paragrap_2.label"
+        }
+      ]
+    },
+    {
+      "type": "variants",
+      "name": "t:general.variants.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:general.settings.paragrap_3.label"
+        },
+        {
+          "type": "text",
+          "id": "card_product_variants",
+          "label": "t:general.settings.product_variants.label",
+          "default": "Material, Size"
+        }
+      ]
+    },
+    {
+      "type": "product_rating",
+      "name": "t:general.product_rating.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:general.settings.rating_paragrap.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.product_bundle.name",
+      "blocks": [
+        {
+          "type": "product_type"
+        },
+        {
+          "type": "product_attributes"
+        },
+        {
+          "type": "vendor"
+        },
+        {
+          "type": "title"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "variants"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,447 @@
+{%- liquid 
+    assign loading = 'lazy'
+    assign decoding = 'async'
+    assign fetchpriority = 'auto'
+    assign preload = false
+
+    if section.index == 1
+      assign loading = 'eager'
+      assign fetchpriority = 'high'
+      assign preload = true
+    endif
+    assign position_class = section.settings.content_position | append: ' ' | append: section.settings.mobile_content_position
+    assign alignment_class = section.settings.content_alignment | append: ' ' | append: section.settings.mobile_content_alignment
+    assign size = '100vw'
+    if section.settings.banner_width == 'max-width'
+      assign size_container = settings.container_max_width | append: 'px'
+      assign size = '(min-width: SIZE) SIZE, 100vw' | replace: 'SIZE', size_container
+    endif
+    assign has_mobile_image = ''
+    assign alt_text = section.settings.background_image.image.alt | default: section.settings.background_image.image.src | split: '/' | last | split: '.' | first
+    assign mobile_image_name = section.settings.mobile_background_image.image.src | split: '/' | last | split: '.' | first
+    assign mobile_alt_text = section.settings.mobile_background_image.image.alt | default: mobile_image_name
+    assign background_image = section.settings.background_image | image_url: width: section.settings.background_image.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200', sizes: size, alt: alt_text, class: 'js-image-lazy media of-cover w-100 h-100', loading: loading, fetchpriority: fetchpriority, decoding: decoding, preload: preload
+    if section.settings.mobile_background_image
+      assign mobile_background_image = section.settings.mobile_background_image | image_url: width: section.settings.mobile_background_image.width | image_tag: widths: '320, 450, 550, 750, 950, 1024', sizes: size, alt: mobile_alt_text, class: 'js-image-lazy-mobile d-none-md d-block w-100 h-100 of-cover p-absolute top-0', loading: loading, fetchpriority: fetchpriority, decoding: decoding, preload: preload
+      assign has_mobile_image = 'has_mobile_image'
+    endif
+    assign overlay_opacity = section.settings.overlay_opacity | divided_by: 100.0
+    assign overlay_mask_color = section.settings.section_mask_overlay_color | replace: 'rgba(0,0,0,0)', 'inherit' | color_modify: 'alpha', overlay_opacity
+    assign overlay_content_color = section.settings.section_content_overlay_color | replace: 'rgba(0,0,0,0)', 'inherit'
+    if section.settings.content_position == 'middle-md' and section.settings.content_alignment == 'ta-left-md top-md'
+      assign promotion_mask_position = 'sht-mask--middle-left-md'
+    elsif section.settings.content_position == 'middle-md' and section.settings.content_alignment == 'ta-right-md bottom-md'
+      assign promotion_mask_position = 'sht-mask--middle-right-md'
+    else
+      assign promotion_mask_position = section.settings.content_position | prepend: 'sht-mask--'
+    endif
+    if section.settings.mobile_content_position == 'middle-xs' and section.settings.mobile_content_alignment == 'ta-left top-xs'
+      assign mobile_promotion_mask_position = 'sht-mask--middle-left'
+    elsif section.settings.mobile_content_position == 'middle-xs' and section.settings.mobile_content_alignment == 'ta-right bottom-xs'
+      assign mobile_promotion_mask_position = 'sht-mask--middle-right'
+    else
+      assign mobile_promotion_mask_position = section.settings.mobile_content_position | prepend: 'sht-mask--' | replace: 'top-xs', 'top' | replace: 'middle-xs', 'middle' | replace: 'bottom-xs', 'bottom'
+    endif
+    if section.settings.background_image != blank or section.settings.mobile_background_image != blank
+      assign image_height = section.settings.image_height
+      assign mobile_image_height = section.settings.mobile_image_height
+      assign aspect_ratio = 'unset'
+      assign mobile_aspect_ratio = 'unset'
+      if mobile_image_height == 'unset'
+        if section.settings.mobile_background_image != blank
+          assign mobile_aspect_ratio = section.settings.mobile_background_image.aspect_ratio
+        elsif section.settings.background_image != blank
+          assign mobile_aspect_ratio = section.settings.background_image.aspect_ratio
+        endif
+      endif
+      if image_height == 'unset' and section.settings.background_image != blank
+        assign aspect_ratio = section.settings.background_image.aspect_ratio
+      endif
+    endif
+-%}
+{%- unless section.settings.banner_width == 'full-width' -%}
+	{%- render 'section-padding-collapse' -%}
+{%- endunless -%}
+
+{%- if section.settings.enable_transparent_header -%}
+  {%- render 'transparent-header-style' -%}
+{%- endif -%}
+
+{%- if section.blocks.size > 0 or section.settings.background_image != blank or section.settings.mobile_background_image != blank -%}
+  <div data-animate="banner-section" class="js-animate section o-hidden color-{{ section.settings.color_scheme }} background section-promotion--{{ section.settings.banner_width }} promotion-section" data-ui-component="Section Newsletter" role="region"
+  {% if section.settings.enable_transparent_header %} enable-transparent-header {% endif %}>
+      <div class="ctnr p-relative o-hidden sht-mask d-flex rad-l-md promotion-section-container mask-overlay-border {{ promotion_mask_position }} {{ mobile_promotion_mask_position }} {{ position_class }}"
+      style=" --color-mask: {{ overlay_mask_color | default: 'inherit' }};
+              color: {{ overlay_content_color | default: 'inherit' }};
+              --overlay: {{ overlay_opacity }};
+              --mh-xs:{{ mobile_image_height }};
+              --mh-md:{{ image_height }};
+              --ar-md: {{ aspect_ratio }};
+              --ar-xs: {{ mobile_aspect_ratio }}">
+          <div class="banner-media__animate promotion-section__background p-absolute inset o-hidden rad-l-md {{ has_mobile_image }}">
+            {%- if section.settings.background_image != blank -%}
+              {%- render 'image',
+              image_item: background_image,
+              image_wrap_classes: 'h-100 desktop-background',
+              image_classes: 'h-100' -%}
+            {%- endif -%}
+            {% if section.settings.mobile_background_image != blank %}
+              {%- render 'image',
+              image_item: mobile_background_image,
+              image_wrap_classes: 'h-100 p-absolute inset',
+              image_classes: 'h-100' -%}
+            {% endif %}
+          </div>
+          <div class="w-100 p-relative zi-2">
+            {%- render 'section-content', alignment_class: alignment_class, class: 'newsletter-content' -%}
+          </div>
+      </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+"name": "t:sections.footer.blocks.newsletter.name",
+"disabled_on": {
+  "groups": [
+    "header",
+    "footer",
+    "custom.overlay"
+  ]
+},
+"settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_transparent_header",
+      "label": "t:general.settings.enable_transparent_header.label",
+      "info": "t:general.settings.enable_transparent_header_2.info",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.image.content",
+      "info": "t:general.settings.background_image_optional.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:general.settings.background_image.label",
+      "info": "t:general.settings.background_image.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background_image",
+      "label": "t:general.settings.mobile_background_image_optional.label",
+      "info": "t:general.settings.mobile_background_image.info"
+    },
+    {
+      "type": "range",
+      "unit": "%",
+      "max": 90,
+      "min": 0,
+      "step": 10,
+      "default": 30,
+      "id": "overlay_opacity",
+      "label": "t:general.settings.overlay_opacity.label"
+    },
+    {
+      "type": "color",
+      "id": "section_mask_overlay_color",
+      "label": "t:general.settings.custom_mask_overlay_opacity.label",
+      "visible_if": "{{ section.settings.overlay_opacity != 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "section_content_overlay_color",
+      "label": "t:general.settings.custom_content_overlay_opacity.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.desktop_layout.label",
+      "info": "t:section.newsletter.settings.layout.info"
+    },
+    {
+      "type": "select",
+      "id": "banner_width",
+      "label": "t:general.settings.background_image_width.label",
+      "options": [
+        {
+          "value": "max-width",
+          "label": "t:general.settings.options.option_max_width.label"
+        },
+        {
+          "value": "stretch",
+          "label": "t:general.settings.options.option_stretch.label"
+        },
+        {
+          "value": "full-width",
+          "label": "t:general.settings.options.option_full_width.label"
+        }
+      ],
+      "default": "stretch"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "label": "t:general.settings.background_image_height.label",
+      "info": "t:section.newsletter.settings.banner_height.info",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:general.settings.options.option_hug_content.label"
+        },
+        {
+          "value": "50vh",
+          "label": "t:general.settings.options.option_50_percent_screen.label"
+        },
+        {
+          "value": "70vh",
+          "label": "t:general.settings.options.option_70_percent_screen.label"
+        },
+        {
+          "value": "100vh",
+          "label": "t:general.settings.options.option_fill_screen.label"
+        },
+        {
+          "value": "unset",
+          "label": "t:general.settings.options.option_original.label"
+        }
+      ],
+      "default": "70vh"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "t:general.settings.content_position.label",
+      "options": [
+        {
+          "value": "top-md",
+          "label": "t:general.settings.content_position.content_position_options.options_1.label"
+        },
+        {
+          "value": "middle-md",
+          "label": "t:general.settings.content_position.content_position_options.options_2.label"
+        },
+        {
+          "value": "bottom-md",
+          "label": "t:general.settings.content_position.content_position_options.options_3.label"
+        }
+      ],
+      "default": "middle-md"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left-md top-md",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center-md middle-md",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right-md bottom-md",
+          "label": "t:general.settings.option_right.label"
+        }
+      ], 
+      "default": "ta-center-md middle-md"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.mobile_layout.content",
+      "info": "t:section.newsletter.settings.layout.info"
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_height",
+      "label": "t:general.settings.background_image_height.label",
+      "info": "t:section.newsletter.settings.banner_height.info",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:general.settings.options.option_hug_content.label"
+        },
+        {
+          "value": "50vh",
+          "label": "t:general.settings.options.option_50_percent_screen.label"
+        },
+        {
+          "value": "70vh",
+          "label": "t:general.settings.options.option_70_percent_screen.label"
+        },
+        {
+          "value": "100vh",
+          "label": "t:general.settings.options.option_fill_screen.label"
+        },
+        {
+          "value": "unset",
+          "label": "t:general.settings.options.option_original.label"
+        }
+      ],
+      "default": "70vh"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_position",
+      "label": "t:general.settings.content_position.label",
+      "options": [
+        {
+          "value": "top-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_1.label"
+        },
+        {
+          "value": "middle-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_2.label"
+        },
+        {
+          "value": "bottom-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_3.label"
+        }
+      ],
+      "default": "middle-xs"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left top-xs",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center middle-xs",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right bottom-xs",
+          "label": "t:general.settings.option_right.label"
+        }
+      ], 
+      "default": "ta-center middle-xs"
+    }
+],
+"blocks": [
+  {
+    "name": "t:general.settings.subheading.label",
+    "type": "subheading",
+    "limit": 1,
+    "settings": [
+      {
+        "type": "text",
+        "id": "subheading_text",
+        "label": "t:general.settings.text.label",
+        "default": "Add a tagline"
+      }
+    ]
+  },
+  {
+    "name": "t:general.settings.heading.label",
+    "type": "heading",
+    "limit": 1,
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "t:general.settings.text.label",
+        "default": "Newsletter heading"
+      },
+      {
+        "type": "select",
+        "label": "t:general.settings.text_size.label",
+        "id": "heading_size",
+        "visible_if": "{{ block.settings.heading_text != blank }}",
+        "options": [
+          {
+            "value": "headline",
+            "label": "t:general.settings.heading_size.options.extra_large.label"
+          },
+          {
+            "value": "h1",
+            "label": "t:general.settings.heading_size.options.large.label"
+          },
+          {
+            "value": "h2",
+            "label": "t:general.settings.heading_size.options.regular.label"
+          },
+          {
+            "value": "h3",
+            "label": "t:general.settings.heading_size.options.small.label"
+          }
+        ],
+        "default": "h2"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_h1_tag",
+        "label": "t:general.settings.enable_h1_tag.label",
+        "info": "t:general.settings.enable_h1_tag_info.info",
+        "default": false,
+        "visible_if": "{{ block.settings.heading_text != blank }}"
+      }
+    ]
+  },
+  {
+    "name": "t:general.settings.description.name",
+    "type": "description",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "description_text",
+        "label": "t:general.settings.text.label",
+        "default": "<p>Write a short sentence describing what customers can expect from your newsletter</p>"
+      }
+    ]
+  },
+  {
+    "name": "t:section.newsletter.block.settings.newsletter_form.name",
+    "type": "newsletter_form",
+    "limit": 1,
+    "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:section.newsletter.block.settings.newsletter_form.info"
+        },
+        {
+          "type": "text",
+          "id": "submit_button",
+          "label": "t:general.settings.submit_button.label",
+          "default": "Subscribe"
+        }
+    ]
+  }
+],
+"presets": [
+  {
+    "name": "t:sections.footer.blocks.newsletter.name",
+    "blocks": [
+      {
+        "type": "subheading"
+      },
+      {
+        "type": "heading"
+      },
+      {
+        "type": "description"
+      },
+      {
+        "type": "newsletter_form"
+      }
+    ]
+  }
+]
+}
+{% endschema %}

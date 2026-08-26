@@ -1,0 +1,50 @@
+{%-liquid
+assign carousel_style = 'js-carousel-items ox-auto p-relative scrollable scrollable-x disable-scrollbars'
+assign carousel_item = 'js-carousel-item p-relative scrollable-aln-start'
+-%}
+<sht-prd-recom class="product__info product__block-{{- block.type }} d-block hide-empty" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block.settings.products_to_show }}&intent=complementary" {{ block.shopify_attributes }}>
+  {% if recommendations.products_count > 0 %}
+    <sht-carousel class="sht-carousel product__info-wrapper p-relative d-block mb-3xl" data-enable="true" data-enable-mobile="true">
+      {% liquid
+        assign align_class = 'end-xs'
+        assign margin_content = 'mt-s'
+        if block.settings.heading != blank
+          assign align_class = 'between-xs'
+        else
+          if recommendations.products_count == 1
+            assign margin_content = ''
+          endif
+        endif
+      %}
+      <div class="carousel-header d-flex {{ align_class }}">
+        <span class="fs-body-xl hide-empty d-block"> {{- block.settings.heading -}} </span>
+        <div class="no-js-hidden d-flex gap-3xs {% if recommendations.products_count == 1 %}d-none-important{% endif %}">
+          <button type="button" data-step="1" data-step-mb="1" class="js-carousel-prev-btn btn-carousel-prev btn btn-icon-m btn-secondary ele-focus-visible rtl-flip-x" aria-label="{{ 'accessibility.previous_slide' | t }}" name="previous" disabled>{% render 'icon-caret-left' %}</button>
+          <button type="button" data-step="1" data-step-mb="1" class="js-carousel-next-btn btn-carousel-next btn btn-icon-m btn-secondary ele-focus-visible rtl-flip-x" aria-label="{{ 'accessibility.next_slide' | t }}" name="next" disabled>{% render 'icon-caret-right' %}</button>
+        </div>
+      </div>
+      <div class="carousel-content p-relative {{ margin_content }}">
+        <div aria-atomic="true" class="rw section-content-style o-hidden r-gap-scale-xl {{ carousel_style }} carousel--special" style="--carousel-xs: 12;">
+          {% for recommendation in recommendations.products limit: block.settings.products_to_show %}
+            <sht-carousel-itm class="carousel__item clm {{ carousel_item }} {% if forloop.index == forloop.length %}child-full-width{% endif %}"
+              style="--w-xs: 12; --w-sm:12; --w-md: 12;"
+              role="group"
+              aria-roledescription="Slide"
+              aria-label="{{ 'accessibility.slide' | t }} {{ forloop.index }} {{ 'accessibility.of' | t }} {{ forloop.length }}"
+              data-item-index="{{ forloop.index }}"
+            >
+              {% render 'mini-card-product',
+                product: recommendation,
+                show_vendor: block.settings.show_vendor,
+                show_price: block.settings.show_price,
+                show_quick_view: block.settings.show_quick_view,
+                quick_buy: block.settings.quick_buy,
+                show_rating: block.settings.show_rating
+              %}
+            </sht-carousel-itm>
+          {% endfor %}
+        </div>
+      </div>
+    </sht-carousel>
+  {% endif %}
+</sht-prd-recom>

@@ -1,0 +1,229 @@
+/* Sales Contact Form */
+.sales-contact,
+.sales-contact *,
+.sales-contact *::before,
+.sales-contact *::after {
+  box-sizing: border-box;
+}
+.sales-contact {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.sales-contact__container {
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+@media screen and (min-width: 1024px) {
+  .sales-contact__container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 46px;
+  }
+}
+
+/* Info card */
+.sales-contact__info {
+  background-color: #ebf0f2;
+  border-radius: 2px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+@media screen and (min-width: 1024px) {
+  .sales-contact__info {
+    flex: 0 0 46%;
+    padding: 20px 20px 40px;
+  }
+}
+
+.sales-contact__info-text {
+  margin: 1px;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.32px;
+  color: #000000;
+}
+.sales-contact__info-text p {
+  margin: 0 0 16px;
+}
+.sales-contact__info-text p a {
+  color: #4b687a;
+  text-decoration: underline;
+  
+}
+.sales-contact__info-text p:last-child {
+  margin-bottom: 0;
+}
+
+.sales-contact__reps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sales-contact__rep {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+@media screen and (min-width: 480px) {
+  .sales-contact__rep {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+}
+
+.sales-contact__rep-name {
+  margin: 0;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.32px;
+  color: #000000;
+}
+
+.sales-contact__rep-title {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.28px;
+  color: #51534a;
+}
+
+.sales-contact__rep-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 2px;
+  background-color: #4b687a;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.32px;
+  text-decoration: none;
+  white-space: nowrap;
+  align-self: flex-start;
+  min-height: 44px;
+}
+@media screen and (min-width: 480px) {
+  .sales-contact__rep-phone {
+    align-self: center;
+  }
+}
+.sales-contact__rep-phone:hover {
+  opacity: 0.85;
+}
+
+.sales-contact__rep-phone-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: #ffffff;
+}
+
+/* Form column */
+.sales-contact__form-col {
+  width: 100%;
+}
+@media screen and (min-width: 1024px) {
+  .sales-contact__form-col {
+    flex: 1 1 auto;
+  }
+}
+
+.sales-contact__message {
+  margin: 0 0 20px;
+  padding: 12px;
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 18px;
+}
+.sales-contact__message--success {
+  background-color: #ebf0f2;
+  color: #191919;
+}
+.sales-contact__message--error {
+  background-color: #f9e8e8;
+  color: #b42318;
+}
+
+.sales-contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sales-contact__field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sales-contact__field-label {
+  display: block;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.32px;
+  color: var(--color-normal-text);
+}
+
+.sales-contact__field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media screen and (min-width: 768px) {
+  .sales-contact__field-row {
+    flex-direction: row;
+  }
+}
+.sales-contact__field-row .sales-contact__input {
+  flex: 1;
+  min-width: 0;
+}
+
+.sales-contact__input,
+.sales-contact__textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  padding: 12px;
+  font-family: "Helvetica Neue";
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.28px;
+  color: var(--color-normal-text);
+  background-color: transparent;
+  min-height: 44px;
+}
+.sales-contact__input::placeholder,
+.sales-contact__textarea::placeholder {
+  color: var(--color-normal-text);
+  opacity: 0.6;
+}
+.sales-contact__input:focus,
+.sales-contact__textarea:focus {
+  outline: none;
+  border-color: var(--color-button-primary-background);
+}
+
+.sales-contact__textarea {
+  min-height: 138px;
+  resize: vertical;
+}
+
+.sales-contact__submit {
+  width: 100%;
+}

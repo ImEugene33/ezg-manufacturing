@@ -1,0 +1,12 @@
+{%- if request.design_mode and section.settings.show_layout_grid -%}
+    <style>
+        {{ 'editor.css' | inline_asset_content }}
+    </style>
+    <div class="p-absolute w-100 h-100 zi-1 pe-none {{ class }}">
+        <div class="gap-m d-none d-grid-lg h-100 w-100 {{ section.settings.enable_fullwidth | default: 'ctnr' | replace: 'true', '' }}" style="--gtc-equal-lg: 12;">
+            {%- for i in (1..12) -%}
+            <div class="bg-grid"></div>
+            {%- endfor -%}
+        </div>
+    </div>
+{%- endif -%}

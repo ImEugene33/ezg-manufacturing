@@ -1,0 +1,1539 @@
+{%- liquid 
+  assign section_id = section.id | md5 | truncate: 12, ''
+  assign form_id = section_id | prepend: 'cf-'
+  assign alignment_class = section.settings.heading_alignment_desktop | append: ' ' | append: section.settings.heading_alignment_mobile
+  assign color_form_background = section.settings.color_custom_form_background
+  assign color_form_content = section.settings.color_custom_form_content
+  assign default_item_heading = "section.map.heading_info" | t
+  assign default_button_send_message = "general.button.send_message" | t
+  unless color_form_background.alpha == 0.0 or color_form_background == blank
+    assign color_form_background = 'background: ' | append: color_form_background | append: '; --color-background-rgb: ' | append: color_form_background.red | append: ', ' | append: color_form_background.green | append: ', ' | append: color_form_background.blue
+  endunless
+  unless color_form_content.alpha == 0.0 or color_form_content == blank
+    assign color_form_content = 'color: ' | append: color_form_content | append: '; --color-normal-text-rgb: ' | append: color_form_content.red | append: ', ' | append: color_form_content.green | append: ', ' | append: color_form_content.blue
+  endunless
+-%}
+{%- if section.blocks.size > 0 or section.settings.heading_text != blank or section.settings.description_text != blank or section.settings.enable_contact_form != false -%}
+  {%- render 'section-padding-collapse' -%}
+  <div data-animate="regular-section" class="js-animate section faqs o-hidden background color-{{- section.settings.color_scheme }}" data-ui-component="Section FAQs" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}">
+    <div class="ctnr">
+      {%- if section.settings.heading_text != blank or section.settings.description_text != blank%}
+        <div class="section__text d-flex fd-column {{ alignment_class }}">
+          {%- if section.settings.heading_text != blank%}
+            <h2 class="section__heading faqs__heading promotional-heading {{ section.settings.heading_size }} hide-empty">{{- section.settings.heading_text | escape -}}</h2>
+          {% endif -%}
+          {%- if section.settings.description_text != blank %}
+            <div class="section__description faqs__desc fs-body-xl rte hide-empty o-hidden w-100">{{- section.settings.description_text -}}</div>
+          {% endif -%}
+        </div>
+      {% endif -%}
+      <div class="faqs__content gap-scale-2xl center-xs mt-scale-4xl d-flex {{ section.settings.content_ordering }} {{ section.settings.content_ordering_mobile }} fd-column">
+        {% if section.blocks.size > 0 %}
+          <div class="faqs__information">
+            <sht-accordion class="accordion d-flex fd-column" data-properties='{"multiple": {{ section.settings.one_item_expand }} }'>
+              {%- for block in section.blocks -%}
+                {%- liquid
+                  assign aria_expanded = 'false'
+                  assign ac_open_css = ''
+                  assign styles = 'max-height: 0;'
+  
+                  if section.settings.open_first_item and forloop.first
+                    assign aria_expanded = 'true'
+                    assign ac_open_css = 'open'
+                    assign styles = ''
+                  endif
+                -%}
+                <div class="accordion__item js-accordion-item rad-m border mb-scale-xl" {{ block.shopify_attributes }}>
+                  <button class="region-trigger accordion__header-large accordion__button ele-focus-visible w-100 js-accordion-trigger d-flex middle-xs p-relative c-pointer rad-m {{ ac_open_css }}" id="collapsible-control-{{- block.id -}}" aria-expanded="{{ aria_expanded }}" aria-controls="collapsible-content-{{- block.id -}}">
+                    {%- liquid
+                      if block.settings.show_icon
+                        render 'icon', theme_library_icon: block.settings.theme_library_icon, icon_color: block.settings.icon_color, icon_source: block.settings.icon_source, icon_image: block.settings.icon_image, custom_code: block.settings.custom_code, size: 'icon-fix-xl'
+                      endif
+                    -%}
+                    <span class="fs-heading-s component-heading m-zero flex-1 ta-left">
+                      {{- block.settings.heading_faq_item | default: default_item_heading | escape -}}
+                    </span>
+                    <span class="toggle__icon d-flex middle-xs center-xs p-relative">
+                      {% render 'icon-toggle', icon_arrow: 'icon-caret-down icon-fix-xl icon', class_first: 'toggle__icon--plus p-absolute icon-fix-xl icon', class_second: 'toggle__icon--minus p-absolute icon-fix-xl icon' %}
+                    </span>
+                  </button>
+                  <div class="fs-body-m accordion__content-large o-hidden rte js-accordion-content accordion-content {{ ac_open_css }}" id="collapsible-content-{{- block.id -}}" role="region" aria-describedby="collapsible-control-{{- block.id -}}" tabindex="-1"  style="{{ styles }}">
+                    {{- block.settings.description_faq_item-}}
+                  </div> 
+                </div>
+              {%- endfor -%}
+            </sht-accordion>
+          </div>
+        {% endif %}
+        
+        {% if section.settings.enable_contact_form %} 
+          <div class="faqs__form">
+            <div class="p-m border rad-l" style="{{ color_form_background }}; {{ color_form_content }}">
+              {%- if section.settings.heading_contact_form != blank -%}
+                <h3 class="regular-heading hide-empty m-zero h4">{{- section.settings.heading_contact_form | escape -}}</h3>
+              {%- endif -%}
+              {%- if section.settings.description_contact_form != blank -%}
+                <div class="section__description fs-body-xl rte hide-empty o-hidden">{{- section.settings.description_contact_form -}}</div>
+              {%- endif -%}
+              <div class="rw center-xs mt-scale-2xl">
+                <div class="clm m-zero-md js-animate" style="--w-xs:12; --duration: .6s; --delay: .3s;">
+                  {%- form 'contact', id: form_id, class: 'form-contact' -%}
+                    {%- if form.posted_successfully? or form.errors -%}
+                      <sht-noti class="js-popover-noti ml-m noti-message message--success d-flex middle-xs between-xs gap-xs p-s maw-fit-content-sm rad-m color-{{ settings.popover_notification_color }} background">
+                        <div class="d-flex middle-xs gap-xs fs-body-m">
+                          <div class="icon-success p-relative">
+                            <svg class="h-100 w-100">
+                              <circle cx="12" cy="12" r="11"></circle>
+                              <circle cx="12" cy="12" r="11" class="progress"></circle>
+                            </svg>
+                            {%- if form.posted_successfully? -%}
+                              <div class="p-absolute d-flex middle-xs center-xs inset">
+                                {% render 'icon-check' | class: 'icon icon-fix-m'  %}
+                              </div>
+                            {%- elsif form.errors -%}
+                              <div class="p-absolute d-flex middle-xs center-xs inset">
+                                {% render 'icon-x-mark' | class: 'icon icon-fix-m' %}
+                              </div>
+                            {%- endif -%}
+                          </div>
+                          {%- if form.posted_successfully? -%}
+                            <span class="flex-1">{{ 'general.contact_form.success' | t }}</span>
+                          {%- elsif form.errors -%}
+                            <span class="flex-1">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</span>
+                          {%- endif -%}
+                          <div class="btn btn-icon-m js-icon-cancel">
+                            {% render 'icon-x-mark' | class: 'icon icon-fix-m' %}
+                          </div>
+                        </div>
+                      </sht-noti>
+                    {%- endif -%}
+                    <div class="rw gap-equal">
+                      <div class="clm field mb-scale-xl" style="--w-xs:12;--w-md:6">
+                        <label class="d-block field__label fs-body-m" for="{{ form_id }}-name">{{ 'templates.contact.form.name' | t }}</label>
+                        <input 
+                        class="field__text field--focus field--hover fs-body-m w-100" 
+                        autocomplete="name" 
+                        type="text" 
+                        id="{{ form_id }}-name" 
+                        name="contact[Name]"
+                        value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" 
+                        placeholder="{{ 'templates.contact.form.name_placeholder' | t }}"
+                        >
+                      </div>
+                      <div class="clm field mb-scale-xl" style="--w-xs:12;--w-md:6">
+                        <label class="field__label fs-body-m d-block p-relative" for="{{ form_id }}-email">{{ 'templates.contact.form.email' | t }}<sup class="p-absolute ml-4xs color-danger">*</sup></label>
+                        <input
+                        autocomplete="email"
+                        type="email"
+                        id="{{ form_id }}-email"
+                        class="field__text field--focus field--hover fs-body-m w-100"
+                        name="contact[email]"
+                        spellcheck="false"
+                        autocapitalize="off" 
+                        value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                        aria-required="true"
+                        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                        placeholder="{{ 'templates.contact.form.email_placeholder' | t }}"
+                        required
+                        >
+                      </div>
+                      
+                      <div class="clm field mb-scale-2xl" style="--w-xs:12;">
+                        <label class="field__label fs-body-m p-relative d-block" for="{{ form_id }}-message">{{ 'templates.contact.form.message' | t }}<sup class="p-absolute ml-4xs color-danger">*</sup></label>
+                        <textarea
+                          rows="5"
+                          id="{{ form_id }}-message"
+                          required
+                          class="textarea field__text field--focus field--hover fs-body-m w-100"
+                          name="contact[{{ 'templates.contact.form.message_title' | t }}]"
+                          placeholder="{{ 'templates.contact.form.message_placeholder' | t }}"
+                        >
+                          {{- form.body -}}
+                        </textarea>
+                      </div>
+                      <div class="clm field d-flex fd-column fd-row-sm center-xs" style="--w-xs:12;">
+                        <button type="submit" class="btn btn-primary btn-l ta-center w-100 w-md-auto">
+                          {{- section.settings.button_label | default: default_button_send_message -}}
+                        </button>
+                      </div>
+                    </div>
+                  {%- endform -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div> 
+{%- endif -%}
+{% schema %}
+	{
+    "name": "t:sections.faqs.name",
+    "disabled_on": {
+      "groups": [
+        "header",
+        "footer",
+        "custom.overlay"
+      ]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.general.content"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:general.settings.color_schemes.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "text", 
+        "id": "heading_text",
+        "label": "t:general.settings.section_heading.label",
+        "default": "Frequently asked questions"
+      },
+      {
+        "type": "select",
+        "label": "t:general.settings.heading_size.label",
+        "id": "heading_size",
+        "visible_if": "{{ section.settings.heading_text != blank }}",
+        "options": [
+          {
+            "value": "headline",
+            "label": "t:general.settings.heading_size.options.extra_large.label"
+          },
+          {
+            "value": "h1",
+            "label": "t:general.settings.heading_size.options.large.label"
+          },
+          {
+            "value": "h2",
+            "label": "t:general.settings.heading_size.options.regular.label"
+          },
+          {
+            "value": "h3",
+            "label": "t:general.settings.heading_size.options.small.label"
+          }
+        ],
+        "default": "h2"
+      },
+      {
+        "type": "richtext",
+        "id": "description_text",
+        "label": "t:general.settings.section_description.label",
+        "default": "<p>Write some useful information about your business, contact information or links to various FAQ pages.</p>"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.faqs.settings.headers.faq_item.content"
+      },
+      {
+        "type": "checkbox",
+        "id": "one_item_expand",
+        "label": "t:sections.faqs.settings.one_item_expand.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "open_first_item",
+        "label": "t:sections.faqs.settings.open_first_item.label",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.contact_form.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_contact_form",
+        "label": "t:sections.faqs.settings.enable_contact_form.label",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "heading_contact_form",
+        "label": "t:general.settings.heading.label",
+        "default": "Didn’t find your answer?",
+        "visible_if": "{{ section.settings.enable_contact_form == true }}"
+      },
+      {
+        "type": "richtext",
+        "id": "description_contact_form",
+        "label": "t:general.settings.description.label",
+        "default": "<p>Link to some useful pages that your customers might want to know about.</p>",
+        "visible_if": "{{ section.settings.enable_contact_form == true }}"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "t:general.settings.button_label.label",
+        "default": "Send message",
+        "visible_if": "{{ section.settings.enable_contact_form == true }}"
+      },
+      {
+        "type": "color",
+        "id": "color_custom_form_background",
+        "label": "t:sections.faqs.settings.color_custom_form_background.label",
+        "default": "rgba(0,0,0,0)",
+        "visible_if": "{{ section.settings.enable_contact_form == true }}"
+      },
+      {
+        "type": "color",
+        "id": "color_custom_form_content",
+        "label": "t:sections.faqs.settings.color_custom_form_content.label",
+        "default": "rgba(0,0,0,0)",
+        "visible_if": "{{ section.settings.enable_contact_form == true }}"
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.desktop_layout.content"
+      },
+      {
+        "type": "select",
+        "id": "heading_alignment_desktop",
+        "label": "t:general.settings.heading_alignment.label",
+        "options": [
+          {
+            "value": "ta-left-md top-md",
+            "label": "t:general.settings.option_left.label"
+          },
+          {
+            "value": "ta-center-md middle-md",
+            "label": "t:general.settings.option_center.label"
+          },
+          {
+            "value": "ta-right-md bottom-md",
+            "label": "t:general.settings.option_right.label"
+          }
+        ],
+        "default": "ta-center-md middle-md"
+      },
+      {
+        "type": "select",
+        "id": "content_ordering",
+        "label": "t:general.settings.content_ordering.label",
+        "default": "fd-row-sm",
+        "visible_if": "{{ section.settings.enable_contact_form == true }}",
+        "options": [
+          {
+            "value": "fd-row-sm",
+            "label": "t:sections.faqs.settings.faqs_first.label"
+          },
+          {
+            "value": "fd-row-reverse-sm",
+            "label": "t:sections.faqs.settings.contact_form_first.label"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.mobile_layout.content"
+      },
+      {
+        "type": "select",
+        "id": "heading_alignment_mobile",
+        "label": "t:general.settings.heading_alignment.label",
+        "options": [
+          {
+            "value": "ta-left top-xs",
+            "label": "t:general.settings.option_left.label"
+          },
+          {
+            "value": "ta-center middle-xs",
+            "label": "t:general.settings.option_center.label"
+          },
+          {
+            "value": "ta-right bottom-xs",
+            "label": "t:general.settings.option_right.label"
+          }
+        ],
+        "default": "ta-left top-xs"
+      },
+      {
+        "type": "select",
+        "id": "content_ordering_mobile",
+        "label": "t:general.settings.content_ordering.label",
+        "default": "fd-column",
+        "visible_if": "{{ section.settings.enable_contact_form == true }}",
+        "options": [
+          {
+            "value": "fd-column",
+            "label": "t:sections.faqs.settings.faqs_first.label"
+          },
+          {
+            "value": "fd-column-reverse",
+            "label": "t:sections.faqs.settings.contact_form_first.label"
+          }
+        ]
+      }
+    ],
+		"blocks": [
+      {
+        "type": "faq_item",
+        "name": "t:sections.faqs.blocks.faq_item.name",
+        "settings": [
+          {
+            "type": "header",
+            "content": "t:general.settings.headers.icon.content"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_icon",
+            "label": "t:general.settings.show_icon.label",
+            "default": true
+          },
+          {
+            "type": "select",
+            "label": "t:general.settings.icon_source.label",
+            "id": "icon_source",
+            "visible_if": "{{ block.settings.show_icon == true }}",
+            "options": [
+              {
+                "value": "theme_library",
+                "label": "t:general.settings.theme_library.label"
+              },
+              {
+                "value": "image",
+                "label": "t:general.settings.image.label"
+              },
+              {
+                "value": "custom_svg",
+                "label": "t:general.settings.custom_svg.label"
+              }
+            ],
+            "default": "theme_library"
+          },
+          {
+            "type": "select",
+            "label": "t:general.settings.theme_library.label",
+            "id": "theme_library_icon",
+            "visible_if": "{{ block.settings.icon_source == 'theme_library' and block.settings.show_icon == true }}",
+            "options": [
+              {
+                "group": "Functional",
+                "value": "3d",
+                "label": "3d"
+              },
+              {
+                "group": "Functional",
+                "value": "add-03",
+                "label": "add 03"
+              },
+              {
+                "group": "Functional",
+                "value": "add-to-cart",
+                "label": "add to cart"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-down-circled",
+                "label": "arrow down circled"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-down",
+                "label": "arrow down"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-left-circled",
+                "label": "arrow left circled"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-left",
+                "label": "arrow left"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-right-circled",
+                "label": "arrow right circled"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-right",
+                "label": "arrow right"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-separate-vertical",
+                "label": "arrow separate vertical"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-separate",
+                "label": "arrow separate"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-union-vertical",
+                "label": "arrow union vertical"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-union",
+                "label": "arrow union"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-up-circled",
+                "label": "arrow up circled"
+              },
+              {
+                "group": "Functional",
+                "value": "arrow-up",
+                "label": "arrow up"
+              },
+              {
+                "group": "Functional",
+                "value": "bag-check",
+                "label": "bag check"
+              },
+              {
+                "group": "Functional",
+                "value": "bell-ringing",
+                "label": "bell ringing"
+              },
+              {
+                "group": "Functional",
+                "value": "bell",
+                "label": "bell"
+              },
+              {
+                "group": "Functional",
+                "value": "bookmark",
+                "label": "bookmark"
+              },
+              {
+                "group": "Functional",
+                "value": "calendar-1",
+                "label": "calendar 1"
+              },
+              {
+                "group": "Functional",
+                "value": "calendar",
+                "label": "calendar"
+              },
+              {
+                "group": "Functional",
+                "value": "caret-down",
+                "label": "caret down"
+              },
+              {
+                "group": "Functional",
+                "value": "caret-left",
+                "label": "caret left"
+              },
+              {
+                "group": "Functional",
+                "value": "caret-right",
+                "label": "caret right"
+              },
+              {
+                "group": "Functional",
+                "value": "caret-up",
+                "label": "caret up"
+              },
+              {
+                "group": "Functional",
+                "value": "cart",
+                "label": "cart"
+              },
+              {
+                "group": "Functional",
+                "value": "chart",
+                "label": "chart"
+              },
+              {
+                "group": "Functional",
+                "value": "chat-bubble",
+                "label": "chat bubble"
+              },
+              {
+                "group": "Functional",
+                "value": "check-circled-outline",
+                "label": "check circled outline"
+              },
+              {
+                "group": "Functional",
+                "value": "check",
+                "label": "check"
+              },
+              {
+                "group": "Functional",
+                "value": "clock",
+                "label": "clock"
+              },
+              {
+                "group": "Functional",
+                "value": "collapse",
+                "label": "collapse"
+              },
+              {
+                "group": "Functional",
+                "value": "community",
+                "label": "community"
+              },
+              {
+                "group": "Functional",
+                "value": "copy",
+                "label": "copy"
+              },
+              {
+                "group": "Functional",
+                "value": "cycle",
+                "label": "cycle"
+              },
+              {
+                "group": "Functional",
+                "value": "download",
+                "label": "download"
+              },
+              {
+                "group": "Functional",
+                "value": "drag",
+                "label": "drag"
+              },
+              {
+                "group": "Functional",
+                "value": "enlarge",
+                "label": "enlarge"
+              },
+              {
+                "group": "Functional",
+                "value": "expand",
+                "label": "expand"
+              },
+              {
+                "group": "Functional",
+                "value": "eye-solid",
+                "label": "eye solid"
+              },
+              {
+                "group": "Functional",
+                "value": "eye",
+                "label": "eye"
+              },
+              {
+                "group": "Functional",
+                "value": "filter",
+                "label": "filter"
+              },
+              {
+                "group": "Functional",
+                "value": "grabber",
+                "label": "grabber"
+              },
+              {
+                "group": "Functional",
+                "value": "group",
+                "label": "group"
+              },
+              {
+                "group": "Functional",
+                "value": "hourglass",
+                "label": "hourglass"
+              },
+              {
+                "group": "Functional",
+                "value": "infor",
+                "label": "infor"
+              },
+              {
+                "group": "Functional",
+                "value": "like",
+                "label": "like"
+              },
+              {
+                "group": "Functional",
+                "value": "link",
+                "label": "link"
+              },
+              {
+                "group": "Functional",
+                "value": "lock",
+                "label": "lock"
+              },
+              {
+                "group": "Functional",
+                "value": "mail",
+                "label": "mail"
+              },
+              {
+                "group": "Functional",
+                "value": "map-pin",
+                "label": "map pin"
+              },
+              {
+                "group": "Functional",
+                "value": "map",
+                "label": "map"
+              },
+              {
+                "group": "Functional",
+                "value": "menu",
+                "label": "menu"
+              },
+              {
+                "group": "Functional",
+                "value": "minus",
+                "label": "minus"
+              },
+              {
+                "group": "Functional",
+                "value": "notes",
+                "label": "notes"
+              },
+              {
+                "group": "Functional",
+                "value": "open-new-tab",
+                "label": "open new tab"
+              },
+              {
+                "group": "Functional",
+                "value": "page",
+                "label": "page"
+              },
+              {
+                "group": "Functional",
+                "value": "pause",
+                "label": "pause"
+              },
+              {
+                "group": "Functional",
+                "value": "play",
+                "label": "play"
+              },
+              {
+                "group": "Functional",
+                "value": "plus",
+                "label": "plus"
+              },
+              {
+                "group": "Functional",
+                "value": "question-bubble",
+                "label": "question bubble"
+              },
+              {
+                "group": "Functional",
+                "value": "question-mark",
+                "label": "question mark"
+              },
+              {
+                "group": "Functional",
+                "value": "quote-block",
+                "label": "quote block"
+              },
+              {
+                "group": "Functional",
+                "value": "reduce",
+                "label": "reduce"
+              },
+              {
+                "group": "Functional",
+                "value": "rss",
+                "label": "rss"
+              },
+              {
+                "group": "Functional",
+                "value": "scales",
+                "label": "scales"
+              },
+              {
+                "group": "Functional",
+                "value": "search",
+                "label": "search"
+              },
+              {
+                "group": "Functional",
+                "value": "send",
+                "label": "send"
+              },
+              {
+                "group": "Functional",
+                "value": "sound-high",
+                "label": "sound high"
+              },
+              {
+                "group": "Functional",
+                "value": "sound-off",
+                "label": "sound off"
+              },
+              {
+                "group": "Functional",
+                "value": "star-outlined",
+                "label": "star outlined"
+              },
+              {
+                "group": "Functional",
+                "value": "star-solid",
+                "label": "star solid"
+              },
+              {
+                "group": "Functional",
+                "value": "trashbin",
+                "label": "trashbin"
+              },
+              {
+                "group": "Functional",
+                "value": "tune-off",
+                "label": "tune off"
+              },
+              {
+                "group": "Functional",
+                "value": "tune-on",
+                "label": "tune on"
+              },
+              {
+                "group": "Functional",
+                "value": "user-circle",
+                "label": "user circle"
+              },
+              {
+                "group": "Functional",
+                "value": "view-columns-default",
+                "label": "view columns default"
+              },
+              {
+                "group": "Functional",
+                "value": "view-columns-dense",
+                "label": "view columns dense"
+              },
+              {
+                "group": "Functional",
+                "value": "view-columns-loose",
+                "label": "view columns loose"
+              },
+              {
+                "group": "Functional",
+                "value": "warning-circled",
+                "label": "warning circled"
+              },
+              {
+                "group": "Functional",
+                "value": "x-mark",
+                "label": "x mark"
+              },
+              {
+                "group": "Functional",
+                "value": "zoom-in",
+                "label": "zoom in"
+              },
+              {
+                "group": "Functional",
+                "value": "zoom-out",
+                "label": "zoom out"
+              },
+              {
+                "group": "Social media",
+                "value": "discord",
+                "label": "discord"
+              },
+              {
+                "group": "Social media",
+                "value": "facebook",
+                "label": "facebook"
+              },
+              {
+                "group": "Social media",
+                "value": "instagram",
+                "label": "instagram"
+              },
+              {
+                "group": "Social media",
+                "value": "line",
+                "label": "line"
+              },
+              {
+                "group": "Social media",
+                "value": "linkedin",
+                "label": "linkedin"
+              },
+              {
+                "group": "Social media",
+                "value": "pinterest",
+                "label": "pinterest"
+              },
+              {
+                "group": "Social media",
+                "value": "reddit",
+                "label": "reddit"
+              },
+              {
+                "group": "Social media",
+                "value": "snapchat",
+                "label": "snapchat"
+              },
+              {
+                "group": "Social media",
+                "value": "spotify",
+                "label": "spotify"
+              },
+              {
+                "group": "Social media",
+                "value": "threads",
+                "label": "threads"
+              },
+              {
+                "group": "Social media",
+                "value": "tiktok",
+                "label": "tiktok"
+              },
+              {
+                "group": "Social media",
+                "value": "tumblr",
+                "label": "tumblr"
+              },
+              {
+                "group": "Social media",
+                "value": "vimeo",
+                "label": "vimeo"
+              },
+              {
+                "group": "Social media",
+                "value": "wechat",
+                "label": "wechat"
+              },
+              {
+                "group": "Social media",
+                "value": "whatsapp",
+                "label": "whatsapp"
+              },
+              {
+                "group": "Social media",
+                "value": "x",
+                "label": "x"
+              },
+              {
+                "group": "Social media",
+                "value": "youtube",
+                "label": "youtube"
+              },
+              {
+                "group": "Fashion",
+                "value": "backpack",
+                "label": "backpack"
+              },
+              {
+                "group": "Fashion",
+                "value": "bag",
+                "label": "bag"
+              },
+              {
+                "group": "Fashion",
+                "value": "boot",
+                "label": "boot"
+              },
+              {
+                "group": "Fashion",
+                "value": "crown",
+                "label": "crown"
+              },
+              {
+                "group": "Fashion",
+                "value": "dress",
+                "label": "dress"
+              },
+              {
+                "group": "Fashion",
+                "value": "face-mask",
+                "label": "face mask"
+              },
+              {
+                "group": "Fashion",
+                "value": "glasses",
+                "label": "glasses"
+              },
+              {
+                "group": "Fashion",
+                "value": "hand-washing",
+                "label": "hand washing"
+              },
+              {
+                "group": "Fashion",
+                "value": "handbag",
+                "label": "handbag"
+              },
+              {
+                "group": "Fashion",
+                "value": "hat",
+                "label": "hat"
+              },
+              {
+                "group": "Fashion",
+                "value": "high-heel",
+                "label": "high heel"
+              },
+              {
+                "group": "Fashion",
+                "value": "hoodie",
+                "label": "hoodie"
+              },
+              {
+                "group": "Fashion",
+                "value": "pants",
+                "label": "pants"
+              },
+              {
+                "group": "Fashion",
+                "value": "ruler",
+                "label": "ruler"
+              },
+              {
+                "group": "Fashion",
+                "value": "sandals",
+                "label": "sandals"
+              },
+              {
+                "group": "Fashion",
+                "value": "scarf",
+                "label": "scarf"
+              },
+              {
+                "group": "Fashion",
+                "value": "shirt",
+                "label": "shirt"
+              },
+              {
+                "group": "Fashion",
+                "value": "short-pants",
+                "label": "short pants"
+              },
+              {
+                "group": "Fashion",
+                "value": "sneaker",
+                "label": "sneaker"
+              },
+              {
+                "group": "Fashion",
+                "value": "sock",
+                "label": "sock"
+              },
+              {
+                "group": "Fashion",
+                "value": "suitcase",
+                "label": "suitcase"
+              },
+              {
+                "group": "Fashion",
+                "value": "umbrella",
+                "label": "umbrella"
+              },
+              {
+                "group": "Fashion",
+                "value": "underwear",
+                "label": "underwear"
+              },
+              {
+                "group": "Fashion",
+                "value": "watch",
+                "label": "watch"
+              },
+              {
+                "group": "Interior",
+                "value": "angle-tool",
+                "label": "angle tool"
+              },
+              {
+                "group": "Interior",
+                "value": "archive",
+                "label": "archive"
+              },
+              {
+                "group": "Interior",
+                "value": "armchair",
+                "label": "armchair"
+              },
+              {
+                "group": "Interior",
+                "value": "bathtub",
+                "label": "bathtub"
+              },
+              {
+                "group": "Interior",
+                "value": "bed",
+                "label": "bed"
+              },
+              {
+                "group": "Interior",
+                "value": "bin",
+                "label": "bin"
+              },
+              {
+                "group": "Interior",
+                "value": "building",
+                "label": "building"
+              },
+              {
+                "group": "Interior",
+                "value": "chair",
+                "label": "chair"
+              },
+              {
+                "group": "Interior",
+                "value": "closet",
+                "label": "closet"
+              },
+              {
+                "group": "Interior",
+                "value": "crib",
+                "label": "crib"
+              },
+              {
+                "group": "Interior",
+                "value": "desk",
+                "label": "desk"
+              },
+              {
+                "group": "Interior",
+                "value": "drawer",
+                "label": "drawer"
+              },
+              {
+                "group": "Interior",
+                "value": "dresser",
+                "label": "dresser"
+              },
+              {
+                "group": "Interior",
+                "value": "flower",
+                "label": "flower"
+              },
+              {
+                "group": "Interior",
+                "value": "fridge",
+                "label": "fridge"
+              },
+              {
+                "group": "Interior",
+                "value": "garage",
+                "label": "garage"
+              },
+              {
+                "group": "Interior",
+                "value": "hammer",
+                "label": "hammer"
+              },
+              {
+                "group": "Interior",
+                "value": "home",
+                "label": "home"
+              },
+              {
+                "group": "Interior",
+                "value": "ladder",
+                "label": "ladder"
+              },
+              {
+                "group": "Interior",
+                "value": "lamp",
+                "label": "lamp"
+              },
+              {
+                "group": "Interior",
+                "value": "locker",
+                "label": "locker"
+              },
+              {
+                "group": "Interior",
+                "value": "mirror",
+                "label": "mirror"
+              },
+              {
+                "group": "Interior",
+                "value": "pillow",
+                "label": "pillow"
+              },
+              {
+                "group": "Interior",
+                "value": "sleeper-chair",
+                "label": "sleeper chair"
+              },
+              {
+                "group": "Interior",
+                "value": "toilet",
+                "label": "toilet"
+              },
+              {
+                "group": "Interior",
+                "value": "tools",
+                "label": "tools"
+              },
+              {
+                "group": "Interior",
+                "value": "two-seater-sofa",
+                "label": "two seater sofa"
+              },
+              {
+                "group": "Interior",
+                "value": "washing-machine",
+                "label": "washing machine"
+              },
+              {
+                "group": "Technology",
+                "value": "4k",
+                "label": "4k"
+              },
+              {
+                "group": "Technology",
+                "value": "airplay",
+                "label": "airplay"
+              },
+              {
+                "group": "Technology",
+                "value": "battery-charge",
+                "label": "battery charge"
+              },
+              {
+                "group": "Technology",
+                "value": "battery-charging",
+                "label": "battery charging"
+              },
+              {
+                "group": "Technology",
+                "value": "battery-empty",
+                "label": "battery empty"
+              },
+              {
+                "group": "Technology",
+                "value": "battery-full",
+                "label": "battery full"
+              },
+              {
+                "group": "Technology",
+                "value": "bluetooth",
+                "label": "bluetooth"
+              },
+              {
+                "group": "Technology",
+                "value": "cable",
+                "label": "cable"
+              },
+              {
+                "group": "Technology",
+                "value": "camera",
+                "label": "camera"
+              },
+              {
+                "group": "Technology",
+                "value": "charging-station",
+                "label": "charging station"
+              },
+              {
+                "group": "Technology",
+                "value": "code",
+                "label": "code"
+              },
+              {
+                "group": "Technology",
+                "value": "flash",
+                "label": "flash"
+              },
+              {
+                "group": "Technology",
+                "value": "game-controller",
+                "label": "game controller"
+              },
+              {
+                "group": "Technology",
+                "value": "hd",
+                "label": "hd"
+              },
+              {
+                "group": "Technology",
+                "value": "headphone",
+                "label": "headphone"
+              },
+              {
+                "group": "Technology",
+                "value": "laptop",
+                "label": "laptop"
+              },
+              {
+                "group": "Technology",
+                "value": "media-image",
+                "label": "media image"
+              },
+              {
+                "group": "Technology",
+                "value": "media-video",
+                "label": "media video"
+              },
+              {
+                "group": "Technology",
+                "value": "monitor",
+                "label": "monitor"
+              },
+              {
+                "group": "Technology",
+                "value": "movie",
+                "label": "movie"
+              },
+              {
+                "group": "Technology",
+                "value": "multi-devices",
+                "label": "multi devices"
+              },
+              {
+                "group": "Technology",
+                "value": "phone",
+                "label": "phone"
+              },
+              {
+                "group": "Technology",
+                "value": "printer",
+                "label": "printer"
+              },
+              {
+                "group": "Technology",
+                "value": "sd",
+                "label": "sd"
+              },
+              {
+                "group": "Technology",
+                "value": "smartphone",
+                "label": "smartphone"
+              },
+              {
+                "group": "Technology",
+                "value": "speaker",
+                "label": "speaker"
+              },
+              {
+                "group": "Technology",
+                "value": "tv",
+                "label": "tv"
+              },
+              {
+                "group": "Technology",
+                "value": "video-camera",
+                "label": "video camera"
+              },
+              {
+                "group": "Technology",
+                "value": "watch-1",
+                "label": "watch 1"
+              },
+              {
+                "group": "Technology",
+                "value": "wifi",
+                "label": "wifi"
+              },
+              {
+                "group": "Shopping",
+                "value": "apple-wallet",
+                "label": "apple wallet"
+              },
+              {
+                "group": "Shopping",
+                "value": "barcode",
+                "label": "barcode"
+              },
+              {
+                "group": "Shopping",
+                "value": "cash",
+                "label": "cash"
+              },
+              {
+                "group": "Shopping",
+                "value": "discount",
+                "label": "discount"
+              },
+              {
+                "group": "Shopping",
+                "value": "dollar",
+                "label": "dollar"
+              },
+              {
+                "group": "Shopping",
+                "value": "gift",
+                "label": "gift"
+              },
+              {
+                "group": "Shopping",
+                "value": "heart",
+                "label": "heart"
+              },
+              {
+                "group": "Shopping",
+                "value": "master-card",
+                "label": "master card"
+              },
+              {
+                "group": "Shopping",
+                "value": "palette",
+                "label": "palette"
+              },
+              {
+                "group": "Shopping",
+                "value": "piggy",
+                "label": "piggy"
+              },
+              {
+                "group": "Shopping",
+                "value": "qr-code",
+                "label": "qr code"
+              },
+              {
+                "group": "Shopping",
+                "value": "recycle",
+                "label": "recycle"
+              },
+              {
+                "group": "Shopping",
+                "value": "scan",
+                "label": "scan"
+              },
+              {
+                "group": "Shopping",
+                "value": "seal-check",
+                "label": "seal check"
+              },
+              {
+                "group": "Shopping",
+                "value": "shop",
+                "label": "shop"
+              },
+              {
+                "group": "Shopping",
+                "value": "wallet",
+                "label": "wallet"
+              },
+              {
+                "group": "Shipping",
+                "value": "layer-1",
+                "label": "layer 1"
+              },
+              {
+                "group": "Shipping",
+                "value": "air-plane",
+                "label": "air plane"
+              },
+              {
+                "group": "Shipping",
+                "value": "box",
+                "label": "box"
+              },
+              {
+                "group": "Shipping",
+                "value": "delivery-truck",
+                "label": "delivery truck"
+              },
+              {
+                "group": "Shipping",
+                "value": "globe",
+                "label": "globe"
+              },
+              {
+                "group": "Shipping",
+                "value": "return",
+                "label": "return"
+              },
+              {
+                "group": "Shipping",
+                "value": "rocket",
+                "label": "rocket"
+              },
+              {
+                "group": "Shipping",
+                "value": "truck",
+                "label": "truck"
+              },
+              {
+                "group": "Emoji",
+                "value": "alien",
+                "label": "alien"
+              },
+              {
+                "group": "Emoji",
+                "value": "happy",
+                "label": "happy"
+              },
+              {
+                "group": "Emoji",
+                "value": "puzzed",
+                "label": "puzzed"
+              },
+              {
+                "group": "Emoji",
+                "value": "quite",
+                "label": "quite"
+              },
+              {
+                "group": "Emoji",
+                "value": "sad",
+                "label": "sad"
+              },
+              {
+                "group": "Emoji",
+                "value": "surprise",
+                "label": "surprise"
+              }
+            ],
+            "default": "happy"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_image",
+            "label": "t:general.settings.image.label",
+            "info": "t:general.settings.use_square_image.info",
+            "visible_if": "{{ block.settings.icon_source == 'image' and block.settings.show_icon == true }}"
+          },
+          {
+            "type": "html",
+            "label": "t:general.settings.custom_svg.label",
+            "id": "custom_code",
+            "info": "t:general.settings.custom_svg.info",
+            "visible_if": "{{ block.settings.icon_source == 'custom_svg' and block.settings.show_icon == true }}"
+          },
+          {
+            "type": "color",
+            "id": "icon_color",
+            "label": "t:general.settings.custom_icon_color.label",
+            "visible_if": "{{ block.settings.show_icon == true }}"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.header.settings.content.content"
+          },
+          {
+            "type": "text",
+            "id": "heading_faq_item",
+            "label": "t:general.settings.heading.label",
+            "default": "Do you ship overseas?"
+          },
+          {
+            "type": "richtext",
+            "id": "description_faq_item",
+            "label": "t:general.settings.description.label",
+            "default": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.</p>"
+          },
+        ]
+      }
+		],
+    "presets": [
+      {
+        "name": "t:sections.faqs.name",
+        "blocks": [
+          {
+            "type": "faq_item"
+          },
+          {
+            "type": "faq_item"
+          },
+          {
+            "type": "faq_item"
+          },
+          {
+            "type": "faq_item"
+          },
+          {
+            "type": "faq_item"
+          }
+        ]
+      }
+    ]
+	}
+{% endschema %}

@@ -1,0 +1,18 @@
+{%- render 'header-cart'
+  , class: 'header__button--icon d-none' -%}
+<span class="header__button--text d-none {{ button_text_size }}">
+  {{ 'general.search.cart' | t }}
+</span>
+<span class="visually-hidden">{{ 'sections.header.cart_label' | t }}</span>
+<span class="header__cart-count fs-body-xs {{ settings.numbers_style | replace: 'number', '' }} d-flex middle-xs center-xs p-absolute ta-center ws-nowrap header-cart-count-{{- cart.item_count }} {% if cart.item_count == 0 %}opacity-0 hidden-xs{% endif %}">
+  <span class="js-cart-count-number cart-count-number fs-body-xs d-block p-relative f-extra">
+    {%- if cart.item_count > 99 -%}
+      99+
+    {%- else -%}
+      {{- cart.item_count -}}
+    {%- endif -%}
+  </span>
+</span>
+<span class="visually-hidden">
+  {{- 'sections.header.cart_count.other' | t: count: cart.item_count -}}
+</span>

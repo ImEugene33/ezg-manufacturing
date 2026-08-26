@@ -1,0 +1,12 @@
+{%- if request.design_mode and section.settings.show_layout_grid -%}
+  <style>
+      {{ 'editor.css' | inline_asset_content }}
+  </style>
+  <div class="content-collage-placeholder section p-absolute w-100 h-100 zi-2 pe-none" >
+    <div class="js-content-collage-placeholder w-100 d-grid content-collage gap-xs {{ section.settings.enable_fullwidth | default: 'ctnr' | replace: 'true', '' }}" style="--desktop-grid-auto-row: {{ section.settings.desktop_row_height | append: 'px' }}; --mobile-grid-auto-row: {{ section.settings.mobile_row_height | append: 'px' }};">
+      {% comment %} {%- for i in (1..blocks) -%}
+        <div class="content-collage__block-layout-grid"></div>
+      {%- endfor -%} {% endcomment %}
+    </div>
+  </div>
+{%- endif -%}

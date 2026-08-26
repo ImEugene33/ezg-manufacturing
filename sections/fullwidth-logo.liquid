@@ -1,0 +1,204 @@
+{%- liquid
+  assign loading = 'lazy'
+  assign decoding ='async'
+  assign fetchpriority = 'auto'
+  assign preload = false
+
+  if section.index == 1
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+    assign preload = true
+  endif
+  assign section_padding = ''
+  if section.settings.logo_source == 'svg' and section.settings.svg_code == blank
+    assign section_padding = 'section-no-content'
+  endif
+  assign logo_alt = section.settings.logo_image.alt | default: shop.name | escape
+  assign ratio = 'calc(1400/180)'
+  if section.settings.logo_image != blank
+    assign ratio = section.settings.logo_image.aspect_ratio
+  endif
+-%}
+<div data-animate="regular-section" class="js-animate section--fullwidth-logo o-hidden color-{{- section.settings.color_scheme }} background {{ section_padding }}" data-ui-component="Section Fullwidth Logo">
+  <div class="ctnr">
+    <div class="p-relative fullwidth-logo--wrapper o-hidden d-flex fd-column {{ section.settings.logo_alignment }} m-0-auto" style="--logo-max-width: {{ section.settings.logo_max_width }}%; --ratio: {{ ratio }}">
+      {%- case section.settings.logo_source -%}
+        {%- when 'image' -%}
+          {%- if section.settings.logo_image != blank -%}
+            {{ section.settings.logo_image | image_url: width: section.settings.logo_image.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000', sizes: '100vw', alt: logo_alt, class: 'js-image-lazy maw-100 of-cover media', loading: loading, fetchpriority: fetchpriority, decoding: decoding, preload: preload }}
+          {%- else -%}
+            <img
+              srcset="{{ 'normcore-logo.png' | asset_url }} 1x, {{ 'normcore-logo.png' | asset_url }} 2x"
+              src="{{ 'normcore-logo.png' | asset_url }}"
+              loading="lazy"
+              class="logo media"
+              width="1400"
+              height="180"
+              alt="{{ shop.name | escape }}"
+            >
+          {%- endif -%}
+        {%- when 'svg' -%}
+          {%- if section.settings.svg_code != blank -%}
+            <div class="logo-svg">
+              {{- section.settings.svg_code -}}
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          <div class="logo-text" style="--logo-text-scale: {{ section.settings.font_scale }}">
+            <span class="logo-text logo-text-{{- section.settings.font }} m-zero wb-break-word">{{ shop.name }}</span>
+          </div>
+      {%- endcase -%}
+      {% if section.settings.link_to_home != blank %}
+        <a href="{{- routes.root_url -}}" class="logo-link p-absolute inset zi-2 ele-focus-visible" aria-label="{{- logo_alt | default: shop.name | escape -}}"></a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.fullwidth_logo.name",
+  "disabled_on": {
+    "groups": [
+      "custom.overlay"
+    ]
+  },
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "unit": "%",
+      "max": 100,
+      "min": 50,
+      "step": 10,
+      "default": 100,
+      "id": "logo_max_width",
+      "label": "t:general.settings.logo_max_width.label"
+    },
+    {
+      "type": "select",
+      "id": "logo_alignment",
+      "label": "t:sections.fullwidth_logo.settings.logo_alignment.label",
+      "options": [
+        {
+          "value": "top-xs",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "middle-xs",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "bottom-xs",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "middle-xs"
+    },
+    {
+      "type": "checkbox",
+      "id": "link_to_home",
+      "label": "t:general.settings.link_to_homepage.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.fullwidth_logo.logo_source.content"
+    },
+    {
+      "type": "select",
+      "id": "logo_source",
+      "label": "t:general.settings.logo.label",
+      "options": [
+        {
+          "value": "store_name",
+          "label": "t:general.settings.store_name.label"
+        },
+        {
+          "value": "image",
+          "label": "t:general.settings.image.label"
+        },
+        {
+          "value": "svg",
+          "label": "t:general.settings.svg.label"
+        }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.store_name.content",
+      "visible_if": "{{ section.settings.logo_source == 'store_name' }}"
+    },
+    {
+      "type": "select",
+      "id": "font",
+      "label": "t:general.settings.font.label",
+      "info": "t:general.settings.font_extra.info",
+      "visible_if": "{{ section.settings.logo_source == 'store_name' }}",
+      "options": [
+        {
+          "value": "heading",
+          "label": "t:general.settings.option_heading.label"
+        },
+        {
+          "value": "body",
+          "label": "t:general.settings.option_body.label"
+        },
+        {
+          "value": "extra",
+          "label": "t:general.settings.option_extra.label"
+        }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "range",
+      "max": 10,
+      "min": 5,
+      "step": 1,
+      "default": 10,
+      "id": "font_scale",
+      "label": "t:general.settings.font_scale.label",
+      "visible_if": "{{ section.settings.logo_source == 'store_name' }}",
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.logo.content",
+      "visible_if": "{{ section.settings.logo_source == 'image' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "t:general.settings.logo_image.label",
+      "info": "t:sections.fullwidth_logo.settings.logo_image.info",
+      "visible_if": "{{ section.settings.logo_source == 'image' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.svg.label",
+      "visible_if": "{{ section.settings.logo_source == 'svg' }}"
+    },
+    {
+      "type": "html",
+      "label": "t:general.settings.svg.label",
+      "id": "svg_code",
+      "visible_if": "{{ section.settings.logo_source == 'svg' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.fullwidth_logo.name"
+    }
+  ]
+}
+{% endschema %}

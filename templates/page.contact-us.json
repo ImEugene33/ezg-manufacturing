@@ -1,0 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "contact_form_gpdPzN": {
+      "type": "contact-form",
+      "blocks": {
+        "custom_text_field_R4hqDf": {
+          "type": "custom_text_field",
+          "settings": {
+            "label": "Order number",
+            "placeholder": "Leave field blank if not relevant to order",
+            "required_field": false,
+            "use_as_textarea": false
+          }
+        },
+        "custom_dropdown_zRWaYM": {
+          "type": "custom_dropdown",
+          "settings": {
+            "label": "Order Type",
+            "value": "Order support, Shipping/Tracking/Delivery, Order return, Repair/Warranty, Product information/Feedback, Request to HQ, My Online Account/Checkout, Other"
+          }
+        }
+      },
+      "block_order": [
+        "custom_text_field_R4hqDf",
+        "custom_dropdown_zRWaYM"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading_text": "Contact us",
+        "heading_size": "h2",
+        "section_image": "",
+        "content_alignment_desktop": "ta-left-md",
+        "desktop_content_ordering": "text-first-md",
+        "mobile_content_alignment": "ta-left",
+        "mobile_content_ordering": "text-first",
+        "button_label": "Send message"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "contact_form_gpdPzN"
+  ]
+}

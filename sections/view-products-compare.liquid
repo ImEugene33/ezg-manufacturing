@@ -1,0 +1,82 @@
+{% liquid
+  assign sizes = "(min-width: 769px) calc(100vw/4), (min-width: 459px) calc(100vw/2), calc(100vw/2)"
+  assign product_placeholder = 'product-apparel-1' | placeholder_svg_tag: 'placeholder w-100 h-100 media d-block'
+  assign product_image = product_placeholder
+
+  assign product_image = product.featured_media | image_url: width: product.featured_media.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000', sizes: sizes, alt: product.title, class: 'h-100 w-100 of-cover'
+  assign media_style = settings.product_card_image_background | prepend: "background-color: "
+%}
+<div class="flex-1">
+  <div class="js-prd-cp-media p-relative prd-cp-item" data-product-id="{{ product.id }}">
+    <div class="p-relative o-hidden rad-m">
+      <a href="{{- product.url | within: collection | default: '#' -}}" class="d-block w-100 h-100 p-absolute top-0 left-0 zi-1" aria-label="{{ product.title | escape }}" tabindex="-1"></a>
+      {% render 'image', image_item: product_image, ratio: 'inherit', media_wrap_style: media_style, image_wrap_classes: "rad-m" %}
+    </div>
+  </div>
+
+  <div class="js-prd-cp-title prd-cp-item" data-product-id="{{ product.id }}">
+    <h3 class="fs-heading-s component-heading mt-scale-l">
+      <a href="{{ product.url | default: '#' }}" class="pe-no-link">
+        {{ product.title | escape }}
+      </a>
+    </h3>
+  </div>
+
+  <div class="js-prd-cp-vendor prd-cp-item" data-product-id="{{ product.id }}">
+    <span class="visually-hidden">{{- 'accessibility.vendor' | t -}}</span>
+    <span class="js-vendor f-extra">{{- product.vendor -}}</span>
+  </div>
+
+  <div class="js-prd-cp-des prd-cp-des prd-cp-item" data-product-id="{{ product.id }}">
+    <div>
+      <div class="prd-cp-des__content p-relative o-hidden js-expandable-content" data-expanded="false">
+        <div class="rte">
+          {{- product.description -}}
+        </div>
+      </div>
+      <div class="prd-cp-des__btn w-100 ta-left p-relative">
+        <button type="button" class="btn btn-m btn-tertiary js-expandable-content-btn c-pointer" data-view-more="Show more" data-view-less="Show less">
+          {{ 'general.show_more.label' | t }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="js-prd-cp-type prd-cp-item f-extra" data-product-id="{{ product.id }}">
+    {{- product.type -}}
+  </div>
+
+  <div class="js-prd-cp-tags d-flex gap-3xs fw-wrap prd-cp-item f-extra" data-product-id="{{ product.id }}">
+    {%- for tag in product.tags -%}
+      <span class="{{ settings.enable_product_attribute_uppercase | replace: true, 'tt-up' }} tag background">{{- tag -}}</span>
+    {%- endfor -%}
+  </div>
+
+  <div class="js-prd-cp-variants mb-xs prd-cp-item" data-product-id="{{ product.id }}">
+    {% render 'product-compare-variants' %}
+  </div>
+
+  <div class="js-prd-cp-price d-flex fw-wrap prd-cp-item" data-product-id="{{ product.id }}" role="status">
+    {% render 'product-price', product: product, target: product.selected_or_first_available_variant %}
+  </div>
+
+  <div class="js-prd-cp-rating prd-cp-item" data-product-id="{{ product.id }}">
+    {%- render 'product-rating', product: product -%}
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Show product compare",
+  "tag": "section",
+  "class": "section-view-product-compare",
+  "settings": [
+    {
+      "type": "text",
+      "label":  "t:general.settings.text.label",
+      "id": "text"
+    }
+  ]
+}
+{% endschema %}

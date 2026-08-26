@@ -1,0 +1,41 @@
+{%- liquid
+  assign money_price = 5000 | money
+  assign money_price_sale = 10000 | money
+  if settings.currency_code_enabled
+    assign money_price = 5000 | money_with_currency
+    assign money_price_sale = 10000 | money_with_currency
+  endif
+  assign card_position = settings.product_card_position
+
+  if settings.show_second_image_on_hover == "zoom_in"
+    assign card_class = 'card--zoom-in'
+  endif
+-%}
+<div class="card--{{ settings.product_card_style }} product-card {{ secondary_image_class }} w-100 h-100 p-relative rad-m o-hidden {{ card_class }}">
+  <div class="product__media p-relative card__media o-hidden" style="--ratio:{{ settings.product_card_image_ratio }}">
+    {{ 'product-apparel-' | append: product_placeholder | placeholder_svg_tag: 'placeholder of-cover media w-100 h-100 d-block' }}
+  </div>
+  <div class="card__content wb-break-word p-m {{ card_position }}">
+    <div class="fs-body-s d-block mb-2xs color-text-60 f-extra">
+      <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+      <span>{{ 'products.product.product_vendor' | t }}</span>
+    </div>
+    <h3 class="{{ settings.product_card_title_text_size }} mb-xs">
+      <a href="#" tabindex="-1" class="pe-no-link">{{ 'product.product.product_title' | t }}</a>
+    </h3>
+    <span class="price d-block">
+      <span class="price__regular d-none">
+        <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+        <span class="price-item price-item--regular price-item--last d-inline-block">{{ money_price }}</span>
+      </span>
+      <span class="price__sale d-flex middle-xs gap-3xs fw-wrap {{ card_position }} {{ settings.product_card_price_text_size }}">
+        <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+        <span class="price-item price-item--last d-inline-block">{{ money_price }}</span>
+        <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+        <span class="d-inline-block">
+          <s class="price-item price-item--regular color-text-60">{{ money_price_sale }}</s>
+        </span>
+      </span>
+    </span>
+  </div>
+</div>

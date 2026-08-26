@@ -1,0 +1,65 @@
+{%- liquid
+  assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id
+  assign quantity_pricing_array = product.selected_or_first_available_variant.quantity_price_breaks | sort: 'quantity'
+  assign price = target.price | default: 5000
+  assign regular_price = product.selected_or_first_available_variant.price
+  if settings.currency_code_enabled
+    assign regular_price = regular_price | money_with_currency
+  endif
+-%}
+{%- capture quantity_pricing_unit_price -%}
+  {%- unless product.selected_or_first_available_variant.unit_price_measurement == null -%}
+    <small class="unit-price d-block mt-xs fs-body-s {{ unit_price }}">
+      <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+      <span class="price-item d-inline-block color-text-60" style="{{ sub_price_style }}">
+        <span>({{- product.selected_or_first_available_variant.unit_price | money -}}</span>
+        <span aria-hidden="true">/</span>
+        <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+        <span>
+          {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+            {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}
+          {%- endif -%}
+          {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }})
+        </span>
+      </span>
+    </small>
+  {%- endunless -%}
+{%- endcapture -%}
+<quantity-pricing class="d-block w-100">
+  <input type="text" class="js-volume-cart-item visually-hidden" value="{{ cart_qty }}" name="quantityInput-{{ product.selected_or_first_available_variant.id }}">
+  <div class="d-flex fd-column gap-3xs p-s ta-left">
+    {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+      <p class="fs-body-s mb-0">{{ 'general.label.increment_of' | t }} {{ product.selected_or_first_available_variant.quantity_rule.increment }}</p>
+    {%- endif -%}
+    {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+      <p class="fs-body-s mb-0">{{ 'general.label.min' | t }} {{ product.selected_or_first_available_variant.quantity_rule.min }}</p>
+    {%- endif -%}
+    {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+      <p class="fs-body-s mb-0">{{ 'general.label.max' | t }} {{ product.selected_or_first_available_variant.quantity_rule.max }}</p>
+    {%- endif -%}
+  </div>
+  <ul class="ls-none quantity-pricing-container">
+    <li class="d-flex between-xs gap-xs quantity-pricing-item">
+      <span class="fs-body-s"><span class="js-pricing-item-quantity">{{ product.selected_or_first_available_variant.quantity_rule.min }}</span>+</span>
+      <span class="fs-body-s js-pricing-item-price">{{ regular_price }}<span class="js-pricing-item-unit-price">{{ quantity_pricing_unit_price }}</span></span>
+    </li>
+    {%- for price_break in quantity_pricing_array -%}
+      {%- liquid
+        assign price_break_price = price_break.price
+        if price_break_price > price
+          assign price_break_price = price
+        endif
+        if settings.currency_code_enabled
+          assign price_break_price = price_break_price | money_with_currency
+        endif
+      -%}
+      <li class="d-flex between-xs gap-xs quantity-pricing-item">
+        <span class="fs-body-s"><span class="js-pricing-item-quantity">{{ price_break.minimum_quantity }}</span>+</span>
+        <span class="fs-body-s">
+          <span class="js-pricing-item-price">{{ price_break_price }}</span>
+          <span class="js-pricing-item-unit-price hide-empty">{{- quantity_pricing_unit_price -}}</span>
+        </span>
+      </li>
+    {%- endfor -%}
+  </ul>
+</quantity-pricing>

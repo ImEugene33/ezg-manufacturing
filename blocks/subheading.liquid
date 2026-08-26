@@ -1,0 +1,30 @@
+{%- liquid
+  assign subheading = block.settings.subheading
+-%}
+
+{%- if subheading != blank -%}
+  <span class="subheading promotional-subheading d-block hide-empty" {{ block.shopify_attributes }} role="region" aria-labelledby="subheading-{{ section.id }} {{ block.shopify_attributes }}">
+    {{- subheading | escape -}}
+  </span>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:general.settings.subheading.label",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:general.settings.text.label",
+      "default": "Add a tagline"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.subheading",
+      "category": "t:general.typography"
+    }
+  ]
+}
+{% endschema %}
+

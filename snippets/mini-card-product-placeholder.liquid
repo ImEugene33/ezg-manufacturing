@@ -1,0 +1,40 @@
+{%- liquid
+  assign money_price = 5000 | money
+  assign money_price_sale = 10000 | money
+  if settings.currency_code_enabled
+    assign money_price = 5000 | money_with_currency
+    assign money_price_sale = 10000 | money_with_currency
+  endif
+-%}
+<div class="mini-card card-animate card--border mini-card-component p-s rad-m o-hidden h-100 ">
+  <div class="mini-card__product-media rad-s h-fit-content o-hidden" style="--ratio: {{ settings.product_card_image_ratio }}">
+    {{ 'product-apparel-' | append: product_placeholder | placeholder_svg_tag: 'placeholder of-cover media w-100 h-100 d-block' }}
+  </div>
+  <div class="mini-card__product-info">
+    {%- if show_vendor -%}
+      <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+      <span class="fs-body-s d-block mb-2xs color-text-80">{{ 'products.product.product_vendor' | t }}</span>
+    {%- endif -%}
+
+    <h3 class="fs-heading-s component-heading mb-xs">
+      {{ 'product.product.product_title' | t }}
+    </h3>
+
+    {%- if show_price -%}
+      <span class="price d-block">
+        <span class="price__regular d-none">
+          <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+          <span class="price-item price-item--regular price-item--last d-inline-block">{{ money_price }}</span>
+        </span>
+        <span class="price__sale fw-wrap d-flex middle-xs gap-3xs {{ content_align }} fs-body-xl">
+          <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+          <span class="price-item price-item--last d-inline-block">{{ money_price }}</span>
+          <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+          <span class="d-inline-block">
+            <s class="price-item price-item--regular color-text-60">{{ money_price_sale }}</s>
+          </span>
+        </span>
+      </span>
+    {%- endif -%}
+  </div>
+</div>

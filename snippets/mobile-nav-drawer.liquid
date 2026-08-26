@@ -1,0 +1,150 @@
+{{ 'mobile-nav-drawer.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign mnd_has_tab_1 = false
+  assign mnd_has_tab_2 = false
+  if section.settings.mobile_nav_tab_1_label != blank and section.settings.mobile_nav_tab_1_menu != blank
+    assign mnd_has_tab_1 = true
+  endif
+  if section.settings.mobile_nav_tab_2_label != blank and section.settings.mobile_nav_tab_2_menu != blank
+    assign mnd_has_tab_2 = true
+  endif
+-%}
+{%- if mnd_has_tab_1 or mnd_has_tab_2 -%}
+<mobile-nav-drawer id="MobileNavDrawer" class="mobile-nav-drawer d-none-lg" hidden aria-hidden="true">
+  <div class="mobile-nav-drawer__overlay" data-mnd-close></div>
+  <div class="mobile-nav-drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.drawer.title' | t }}">
+    <div class="mobile-nav-drawer__topbar">
+      <button type="button" class="mobile-nav-drawer__icon-btn" data-mnd-close aria-label="{{ 'accessibility.close' | t }}">
+        {%- render 'icon-x-mark', class: 'icon' -%}
+      </button>
+      <a href="{{ routes.root_url }}" class="mobile-nav-drawer__logo">
+        {%- if section.settings.logo_image -%}
+          {{- section.settings.logo_image | image_url: width: 200 | image_tag: widths: '52,104', sizes: '52px', alt: shop.name, loading: 'lazy', class: 'mobile-nav-drawer__logo-img' -}}
+        {%- else -%}
+          <span class="mobile-nav-drawer__logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+      <div class="mobile-nav-drawer__topbar-icons">
+        <a href="{{ routes.account_url }}" class="mobile-nav-drawer__icon-btn" aria-label="{{ 'general.search.account' | t }}">
+          {%- render 'icon-user-circle', class: 'icon' -%}
+        </a>
+        <a
+          role="button"
+          href="{{ routes.cart_url }}"
+          data-event="{{ settings.cart_type }}"
+          {%- if settings.cart_type == 'drawer' %} onclick="event.preventDefault();try { window.shtCartDrawer.openDrawer(this); } catch(err) { window.location.assign('{{ routes.cart_url }}'); }"{% endif %}
+          class="mobile-nav-drawer__icon-btn js-cart-drawer-trigger"
+          aria-label="{{ 'general.search.cart' | t }}"
+        >
+          {%- render 'header-cart', class: 'icon' -%}
+          {%- if cart.item_count > 0 -%}
+            <span class="mobile-nav-drawer__cart-count">{{ cart.item_count }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+    </div>
+
+    {%- if mnd_has_tab_1 and mnd_has_tab_2 -%}
+      <div class="mobile-nav-drawer__tabs" role="tablist">
+        <button type="button" class="mobile-nav-drawer__tab mobile-nav-drawer__tab--first is-active" data-mnd-tab="0" role="tab" aria-selected="true">
+          {%- if section.settings.mobile_nav_tab_1_icon != blank -%}
+            <span class="mobile-nav-drawer__tab-icon">{{ section.settings.mobile_nav_tab_1_icon }}</span>
+          {%- endif -%}
+          <span class="mobile-nav-drawer__tab-label">{{ section.settings.mobile_nav_tab_1_label }}</span>
+        </button>
+        <button type="button" class="mobile-nav-drawer__tab mobile-nav-drawer__tab--second" data-mnd-tab="1" role="tab" aria-selected="false">
+          {%- if section.settings.mobile_nav_tab_2_icon != blank -%}
+            <span class="mobile-nav-drawer__tab-icon">{{ section.settings.mobile_nav_tab_2_icon }}</span>
+          {%- endif -%}
+          <span class="mobile-nav-drawer__tab-label">{{ section.settings.mobile_nav_tab_2_label }}</span>
+        </button>
+      </div>
+    {%- endif -%}
+
+    <div class="mobile-nav-drawer__body">
+      {%- if mnd_has_tab_1 -%}
+        <div class="mobile-nav-drawer__tab-panel mobile-nav-drawer__tab-panel--first is-active" data-mnd-panel="0">
+          <div class="mobile-nav-drawer__screen is-active js-mnd-scroll disable-scrollbars" data-mnd-screen="0-root">
+            {%- render 'mobile-nav-drawer-list', links: section.settings.mobile_nav_tab_1_menu.links, level: 0, tab_index: 0, extra_link_label: section.settings.mobile_nav_tab_1_last_link_label, extra_link_url: section.settings.mobile_nav_tab_1_last_link_link -%}
+            {%- render 'mobile-nav-drawer-cta' -%}
+          </div>
+          {%- for link in section.settings.mobile_nav_tab_1_menu.links -%}
+            {%- if link.links.size > 0 -%}
+              {%- capture mnd_accent -%}
+                {%- render 'mobile-nav-drawer-accent', title: link.title, index: forloop.index0 -%}
+              {%- endcapture -%}
+              {%- assign mnd_accent = mnd_accent | strip -%}
+              <div class="mobile-nav-drawer__screen js-mnd-scroll disable-scrollbars" data-mnd-screen="0-{{ forloop.index0 }}" hidden>
+                <button type="button" class="mobile-nav-drawer__back-row" data-mnd-back style="--mnd-item-accent: {{ mnd_accent }};">
+                  {%- render 'icon-arrow-left', class: 'icon' -%}
+                  <span class="mobile-nav-drawer__row-label">{{ link.title }}</span>
+                </button>
+                {%- render 'mobile-nav-drawer-list', links: link.links, level: 1 -%}
+                {% comment %} {%- if link.url != blank and link.url != '#' -%}
+                  <a href="{{ link.url }}" class="mobile-nav-drawer__row mobile-nav-drawer__row--view-all">
+                    <span class="mobile-nav-drawer__row-label">{{ 'sections.header.mobile_nav.view_all' | t: title: link.title }}</span>
+                    {%- render 'icon-arrow-up-right', size: 18 -%}
+                  </a>
+                {%- endif -%}
+                {%- render 'mobile-nav-drawer-cta' -%} {% endcomment %}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- comment -%} second tab: blue accent theme, plain back-row label, straight arrows, generic "View All" {%- endcomment -%}
+      {%- if mnd_has_tab_2 -%}
+        <div class="mobile-nav-drawer__tab-panel mobile-nav-drawer__tab-panel--second{% unless mnd_has_tab_1 %} is-active{% endunless %}" data-mnd-panel="1"{% if mnd_has_tab_1 %} hidden{% endif %}>
+          <div class="mobile-nav-drawer__screen is-active js-mnd-scroll disable-scrollbars" data-mnd-screen="1-root">
+            {%- render 'mobile-nav-drawer-list', links: section.settings.mobile_nav_tab_2_menu.links, level: 0, tab_index: 1 -%}
+            {%- render 'mobile-nav-drawer-cta' -%}
+          </div>
+          {%- for link in section.settings.mobile_nav_tab_2_menu.links -%}
+            {%- if link.links.size > 0 -%}
+              {%- assign mnd_accent = '#5B7F95' -%}
+              <div class="mobile-nav-drawer__screen js-mnd-scroll disable-scrollbars" data-mnd-screen="1-{{ forloop.index0 }}" hidden>
+                <button type="button" class="mobile-nav-drawer__back-row" data-mnd-back style="--mnd-item-accent: {{ mnd_accent }};">
+                  {%- render 'icon-arrow-left', class: 'icon' -%}
+                  <span class="mobile-nav-drawer__row-label">{{ link.title }}</span>
+                </button>
+                {%- render 'mobile-nav-drawer-list', links: link.links, level: 1 -%}
+                {% comment %} {%- if link.url != blank and link.url != '#' -%}
+                  <a href="{{ link.url }}" class="mobile-nav-drawer__row mobile-nav-drawer__row--view-all">
+                    <span class="mobile-nav-drawer__row-label">{{ 'sections.header.mobile_nav.view_all_generic' | t }}</span>
+                    {%- render 'icon-arrow-right', size: 18 -%}
+                  </a>
+                {%- endif -%}
+                {%- render 'mobile-nav-drawer-cta' -%} {% endcomment %}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.mobile_nav_footer_link_1_label != blank or section.settings.mobile_nav_footer_link_2_label != blank -%}
+      <div class="mobile-nav-drawer__footer">
+        {%- if section.settings.mobile_nav_footer_link_1_label != blank -%}
+          <a href="{{ section.settings.mobile_nav_footer_link_1_link | default: '#' }}" class="mobile-nav-drawer__footer-link">
+            {%- render 'icon-phone', size: 24 -%}
+            <span>{{ section.settings.mobile_nav_footer_link_1_label }}</span>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.mobile_nav_footer_link_1_label != blank and section.settings.mobile_nav_footer_link_2_label != blank -%}
+          <span class="mobile-nav-drawer__footer-divider" aria-hidden="true"></span>
+        {%- endif -%}
+        {%- if section.settings.mobile_nav_footer_link_2_label != blank -%}
+          <a href="{{ section.settings.mobile_nav_footer_link_2_link | default: '#' }}" class="mobile-nav-drawer__footer-link">
+            {%- render 'icon-infor', size: 24 -%}
+            <span>{{ section.settings.mobile_nav_footer_link_2_label }}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</mobile-nav-drawer>
+{%- liquid
+  assign files = "mobile-nav-drawer.js" | split: ', '
+  render 'js-loader', files: files
+-%}
+{%- endif -%}

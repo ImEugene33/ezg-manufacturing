@@ -1,0 +1,52 @@
+
+
+{% render 'button', block: block %}
+
+{% schema %}
+{
+  "name": "t:general.button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_primary_label",
+      "label": "t:general.settings.label.label",
+      "info": "t:general.settings.hide_if_empty.info",
+      "default": "Explore more"
+    },
+    {
+      "type": "select",
+      "id": "button_primary_style",
+      "visible_if": "{{ block.settings.button_primary_label != blank }}",
+      "label": "t:general.settings.style.label",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:general.settings.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:general.settings.secondary.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:general.text_link"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "url",
+      "id": "button_primary_link",
+      "label": "t:general.settings.link.label",
+      "visible_if": "{{ block.settings.button_primary_label != blank }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.button",
+      "category": "t:general.basic"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,158 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_nCiVRc": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_qDft3k": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "",
+            "heading_size": "headline",
+            "enable_h1_tag": false
+          }
+        },
+        "description_9847dw": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p></p><p></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_qDft3k",
+        "description_9847dw"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 50,
+        "section_mask_overlay_color": "",
+        "section_content_overlay_color": "",
+        "desktop_image": "shopify://shop_images/WOC_2025_banner.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "start-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "rich_text_V9UbLn": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Ui3Hqd": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "EZG Tradeshows & Events",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_6648iV": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Our team can be found on the road at industry leading trade events throughout the year. We look forward to seeing our customers in person and taking the opportunity to provide hands on instruction for our equipment. </p><p> If you’re planning to attend a show and wish to arrange to speak with one of our sales specialists, or just want to find out where we will be exhibiting equipment this is the place to connect with us and find out more.</p>"
+          }
+        },
+        "button_GgwNP9": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Contact",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_Ui3Hqd",
+        "description_6648iV",
+        "button_GgwNP9"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "blog_post_list_UJRe9h": {
+      "type": "blog-post-list",
+      "blocks": {
+        "tags_9eGALe": {
+          "type": "tags",
+          "settings": {}
+        },
+        "title_JUJgii": {
+          "type": "title",
+          "settings": {}
+        },
+        "additional_information_gHpphb": {
+          "type": "additional_information",
+          "settings": {
+            "info_to_show": "published_date"
+          }
+        },
+        "excerpt_x6yT9J": {
+          "type": "excerpt",
+          "settings": {
+            "truncate_text": true
+          }
+        }
+      },
+      "block_order": [
+        "tags_9eGALe",
+        "title_JUJgii",
+        "additional_information_gHpphb",
+        "excerpt_x6yT9J"
+      ],
+      "name": "t:sections.blog_post_list.name",
+      "settings": {
+        "color_scheme": "",
+        "blog": "",
+        "heading": "Event Posts",
+        "heading_size": "h4",
+        "description": "",
+        "items_to_show": 8,
+        "show_featured_image": true,
+        "image_ratio": "1/1",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "true",
+        "enable_button": true,
+        "button_text": "View all",
+        "button_position": "above-listing"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_nCiVRc",
+    "rich_text_V9UbLn",
+    "blog_post_list_UJRe9h"
+  ]
+}

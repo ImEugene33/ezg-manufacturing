@@ -1,0 +1,149 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "quick-view-drawer",
+      "blocks": {
+        "product_code": {
+          "type": "product_type",
+          "disabled": true,
+          "settings": {
+            "color_product_type": ""
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "color_product_price": "",
+            "show_tax_and_shipping_policy": true,
+            "show_sold_out_badge": true,
+            "show_sale_badge": "not_use",
+            "show_new_in_badge": true
+          }
+        },
+        "variant": {
+          "type": "variant_selector",
+          "settings": {
+            "show_low_stock": true,
+            "show_stock_counter": true,
+            "selector_style": "block",
+            "show_variant_swatches": true
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout_buttons": true,
+            "show_gift_card_form": true,
+            "show_payment_method": true,
+            "payment_heading": "We accept"
+          }
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "heading": "Product Specs",
+            "description_type": "regular",
+            "expand_collapsible": false
+          }
+        },
+        "collapsible_item_K3MbpH": {
+          "type": "collapsible_item",
+          "settings": {
+            "enable_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "infor",
+            "custom_code": "",
+            "custom_icon_color": "",
+            "expand_collapsible": true,
+            "heading": "Product Specs",
+            "text": "<p>The Serpentine coffee table boasts an elegant and organic form. Its elliptical top, finished in a striking marble pattern, rests gracefully upon a slender, open-framed base. The base's sweeping curves echo the shape of the tabletop, creating a sense of visual harmony. The Serpentine is a statement piece that brings a touch of sophistication and contemporary flair to any living space.</p>"
+          }
+        },
+        "performance_graphs_NNbhBM": {
+          "type": "performance_graphs",
+          "settings": {
+            "graphs_style": "linear",
+            "custom_graphs_color": "",
+            "heading": "Product performance",
+            "show_as_collapsible": true,
+            "expand_collapsible": true,
+            "label": "Product fit",
+            "graph_max_value": 5,
+            "product_value": 4,
+            "use_list_of_graphs": false,
+            "graphs_metafield": ""
+          }
+        },
+        "collapsible_item": {
+          "type": "collapsible_item",
+          "settings": {
+            "enable_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "truck",
+            "custom_code": "",
+            "custom_icon_color": "",
+            "expand_collapsible": false,
+            "heading": "Shipping & Returns",
+            "text": "<p><strong>Delivery Information</strong></p><p>Standard delivery is available for most locations. Please check with our customer service for specific delivery options in your area.</p><p><strong>Returns</strong></p><p>We accept returns within our standard return policy timeframe. Please contact our support team for assistance with returns and exchanges.</p>"
+          }
+        },
+        "divider_REczji": {
+          "type": "divider",
+          "settings": {
+            "divider_color": "#e7e7e7"
+          }
+        },
+        "complementary_products": {
+          "type": "complementary_products",
+          "settings": {
+            "heading": "Complete with",
+            "products_to_show": 3,
+            "show_vendor": true
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_code",
+        "title",
+        "price",
+        "variant",
+        "buy_buttons",
+        "description",
+        "collapsible_item_K3MbpH",
+        "performance_graphs_NNbhBM",
+        "collapsible_item",
+        "divider_REczji",
+        "complementary_products",
+        "share"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "main_media_ratio": "1/1",
+        "thumbnails_ratio": "1/1 fill",
+        "media_background_color": "#f3f3f3"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

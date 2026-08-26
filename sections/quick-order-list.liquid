@@ -1,0 +1,651 @@
+{%- liquid
+  assign status_attribute = ''
+  unless product.available
+    assign status_attribute = 'disabled'
+  endunless
+  assign size_guide_dialog_id = section.id | md5 | truncate: 12, ""
+  assign size_guide_cta = 'disabled'
+  if section.settings.size_guide_content != blank
+    assign size_guide_cta = ''
+  endif
+  assign size_guide_text = 'products.product.size_guide' | t
+  assign size_label_heading = section.settings.size_label_heading | default: size_guide_text | escape
+  assign total_quantity = cart | line_items_for: product | sum: 'quantity'
+  if total_quantity <= 1
+    assign total_quantity = 'sections.header.cart_count.one' | t: count: total_quantity
+  else
+    assign total_quantity = 'sections.header.cart_count.other' | t: count: total_quantity
+  endif
+-%}
+{%- render 'section-padding-collapse' -%}
+<div data-animate="regular-section" id="section-{{ section.id }}" data-ui-component="Section Quick Order List" role="region" class="js-animate section section-quick-order-list background color-{{- section.settings.color_scheme }}">
+  <sht-quick-order-list 
+    class="ctnr d-block js-quick-shop-container" 
+    id="QuickOrderList-{{ section.id }}"
+    data-url="{{ product.url }}" 
+    data-section="{{ section.id }}"
+  >
+    <input aria-label="Total Product Order List" type="text" class="visually-hidden js-total-product-bulk" name="totalProductOrderListInput" id="totalProductOrderListInput">
+    <div class="order-list-header d-flex fd-column gap-m mb-m">
+      {% if section.settings.enable_size_guide %}
+        <div class="ta-right">
+          <button class="btn btn-plain btn-tertiary d-flex gap-3xs middle-xs ta-right js-size-guide-btn {{ size_guide_cta | replace: 'disabled', 'disable' }}" aria-haspopup="dialog" onclick="window.dialogSizeGuide{{ size_guide_dialog_id }}.showModal(this, true)" {{ size_guide_cta }}>
+            {{- size_label_heading -}}
+            {%- render 'icon-ruler', class: 'icon icon-fix-l' -%}
+          </button>
+        </div>
+      {% endif %}
+      <div class="d-flex between-xs middle-xs gap-m color-text-60 fs-body-s f-extra">
+        <div class="d-flex between-xs middle-xs gap-m order-list-block-info">
+          <p class="order-list-variant mb-0">{{- 'products.product.variant' | t -}}</p>
+          <p class="order-list-quantity d-none d-block-md mb-0">{{- 'sections.cart.label.quantity' | t -}}</p>
+          <p class="order-list-price d-none d-block-md mb-0 ta-right">{{- 'customer.order.price' | t -}}</p>
+        </div>
+        <p class="order-list-total mb-0 ta-right">{{- 'customer.order.total' | t -}}</p>
+      </div>
+      <div class="divider"></div>
+    </div>
+    <div class="order-list-body">
+      {%- if product.quantity_price_breaks_configured? -%}
+        <p class="fs-body-m mb-m color-text-60 hide-empty">{{- 'product.volume_pricing_available' | t -}}</p>
+      {%- endif -%}
+      <sht-quick-shop-frm class="bulk-body js-cart-container hide-empty dialog--animate js-quick-buy-block quick-buy-container" id="quickShopForm-{{ section.id }}-{{ product.id }}" data-url="{{ product.url }}" data-product-id="{{ product.id }}" data-section-id="{{ section.id }}">
+        <form action="{{ routes.cart_update_url }}" method="POST" class="js-cart-form">
+          {% paginate product.variants by section.settings.variants_per_page %}
+            <div class="js-quick-shop-form-wrapper" id="loadMoreContent">
+              {%- unless product.has_only_default_variant -%}
+                {%- if section.settings.enable_variant_grouping == false or product.options.size == 1 -%}
+                  {%- for variant in product.variants -%}
+                    {%- liquid
+                      assign index = forloop.index0
+                      assign media = ''
+                      assign alt_image_text = variant.image.alt | default: product.title
+                      assign media = variant.image | image_url: width: 200 | image_tag: widths: '200', sizes: '100vw', alt: alt_image_text, class: 'media w-100 h-100 of-cover'
+                      assign quick_buy_background_color = section.settings.background_color | default: 'transparent'
+                      assign media_background = 'background-color: ' | append: quick_buy_background_color | append: ';'
+                      assign product_quantity = variant.inventory_quantity
+                      if variant.inventory_policy == 'continue' or variant.inventory_management == blank
+                        assign product_quantity = 9999
+                      endif
+                      assign ratio_image = section.settings.thumbnail_ratio | replace: '2/3', '0.667' | replace: '3/2', '1.5'
+                      if ratio_image == 'auto'
+                        assign ratio_image = variant.image.aspect_ratio | default: 0
+                      endif
+                      assign ratio_image_class = section.settings.thumbnail_ratio | replace: '2/3', 'portrait' | replace: '3/2', 'landscape' | replace: '1', 'square' | prepend: 'order-image-' 
+                    -%}
+                    <div class="d-flex between-xs gap-m pt-s pb-s variant-bulk-item order-list-item js-order-list-item js-variant-bulk-item" id="variant-{{ section.id }}-{{ variant.id }}" data-variant-id="{{ variant.id }}">
+                      <div class="d-flex between-xs top-xs gap-m order-list-block-info {{ ratio_image_class }}">
+                        <div class="order-list-variant p-relative">
+                        {%- liquid
+                          if section.settings.show_thumbnails and media != blank
+                            render 'image', image_item: media, image_wrap_classes: 'rad-s bulk-image p-absolute top-0 left-0', media_wrap_style: media_background, ratio: section.settings.thumbnail_ratio
+                          endif 
+                        -%}
+                          <div class="d-flex fd-column gap-scale-3xs order-list-variant-information" style="--ratio-image: {{ ratio_image }};">
+                            <a href="{{ product.url }}" class="card__heading d-block fs-heading-s component-heading">{{ variant.title | escape }}</a>
+                            <div class="fs-body-xs color-text-60 hide-empty f-extra">
+                              {%- if variant.sku != blank and section.settings.show_sku -%}
+                                <p class="mb-0">SKU: {{ variant.sku }}</p>
+                              {%- endif -%}
+                              {%- if variant.barcode != blank and section.settings.show_barcode -%}
+                                <p class="mb-0">Barcode: {{ variant.barcode }}</p>
+                              {%- endif -%}
+                            </div>
+                          </div>
+                          </div>
+                          <div class="order-list-quantity order-list-item-quantity ta-right">
+                          {%- if product_quantity > 0 -%}
+                            <div class="js-quantity-wrapper product-quantity-container">
+                              <div class="product__quantity d-flex gap-xs middle-xs quantity-pricing-container">
+                                <label class="field__label visually-hidden" for="productQuantityInput-{{ product.id }}-{{ index }}">{{ 'products.product.quantity.label' | t }}:</label>
+                                <sht-qty-inp-quick-buy class="field_quantity d-inline-flex middle-xs center-xs" data-product-quantity="{{ product_quantity }}" data-selling-plan="{{- variant.requires_selling_plan -}}">
+                                  <button class="js-quantity-btn btn btn-icon-m btn-secondary" name="minus" data-name="minus" type="button" {{ status_attribute }}>
+                                    <span class="visually-hidden">{{ 'general.cart.decrease' | t }}</span>
+                                    {% render 'icon-minus', class: 'icon icon-fix-m' %} 
+                                  </button>
+                                  <input class="js-quantity-input product-quantity-input input-number color-secondary-text fs-body-m btn-icon-m b-zero ta-center bg-transparent" 
+                                  type="number" 
+                                  name="quantity" 
+                                  value="{{ cart | item_count_for_variant: variant.id }}"
+                                  data-cart-quantity="{{ cart | item_count_for_variant: variant.id }}" 
+                                  min="{{ product.selected_or_first_available_variant.quantity_rule.min }}" 
+                                  step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                                  {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                                    max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                                  {% endif %}
+                                  aria-label="{{ 'products.product.quantity.input_label' | t: product: product.title | escape }}" 
+                                  id="productQuantityInput-{{ product.id }}-{{ index }}"
+                                  data-index="{{ index | plus: 1 }}">
+                                  <button class="js-quantity-btn btn btn-icon-m btn-secondary" name="plus" data-name="plus" type="button" {{ status_attribute }}>
+                                    <span class="visually-hidden">{{ 'general.cart.increase' | t }}</span>
+                                    {% render 'icon-plus', class: 'icon icon-fix-m' %}
+                                  </button>
+                                </sht-qty-inp-quick-buy>
+                                {%- if product.quantity_price_breaks_configured? -%}
+                                  <div class="quick-order-list-quantity-pricing p-relative product-quantity-pricing">
+                                    <button class="btn btn-tertiary btn-s d-flex middle-xs gap-3xs quantity-pricing-btn js-quantity-pricing-btn">
+                                      {%- render 'icon-warning-circled', class: 'icon icon-fix-l' -%}
+                                      <span class="d-none-md volume-pricing-available-text">{{ 'product.volume_pricing_available' | t }}</span>
+                                    </button>
+                                    <div class="quantity-pricing-content js-quantity-pricing-content rad-m background disable-scrollbars">
+                                      {%- render 'quantity-pricing', product: product, target: product.selected_or_first_available_variant -%}
+                                    </div>
+                                  </div>
+                                {%- endif -%}
+                                <sht-remove-btn role="button" aria-label="{{ 'accessibility.delete_item_button' | t }}" tabindex="0" class="d-none-important rad-s btn btn-s btn-remove js-delete-variant-btn delete-variant-btn" id="removeVariant-{{ variant.id }}" data-variant-id="{{ variant.id }}">
+                                  <span class="visually-hidden">{{ 'accessibility.delete' | t }}</span>
+                                  {% render 'icon-trashbin', class: 'icon icon-fix-m' %}
+                                </sht-remove-btn>
+                              </div>
+                              <div class="d-flex w-100 gap-3xs mt-2xs d-none-important js-max-quantity-message">
+                                {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+                                <p class="fs-body-s color-text-80 mb-0 max-quantity-message ta-left">{{ 'product.variant.bulk.error_message' | t }}</p>
+                              </div>
+                              <div class="d-flex w-100 gap-3xs mt-2xs d-none-important js-selling-plan-error-message">
+                                {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+                                <p class="fs-body-s color-text-80 mb-0 max-quantity-message ta-left">{{ 'products.product.selling_plan_error_message' | t }}</p>
+                              </div>
+                              {%- if product.quantity_price_breaks_configured? -%}
+                                <div class="d-flex w-100 gap-3xs mt-2xs d-none-important js-quantity-pricing-message">
+                                  {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+                                  {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+                                    <p class="fs-body-s color-text-80 mb-0 d-none-important js-min-quantity-pricing-message ta-left">{{ 'product.min_error_message' | t: min: product.selected_or_first_available_variant.quantity_rule.min }}</p>
+                                  {%- endif -%}
+                                  {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+                                    <p class="fs-body-s color-text-80 mb-0 d-none-important js-max-quantity-pricing-message ta-left">{{ 'product.max_error_message' | t: max: product.selected_or_first_available_variant.quantity_rule.max }}</p>
+                                  {%- endif -%}
+                                  {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+                                    <p class="fs-body-s color-text-80 mb-0 d-none-important js-step-quantity-pricing-message ta-left">{{ 'product.step_error_message' | t: step: product.selected_or_first_available_variant.quantity_rule.increment }}</p>
+                                  {%- endif -%}
+                                </div>
+                              {%- endif -%}
+                            </div>
+                          {%- else -%}
+                            {%- if variant.inventory_policy != 'continue' and variant.inventory_management != blank -%}
+                              <span class="d-flex gap-2xs middle-xs stock-status">
+                                <span class="icon-status icon-error-sign"></span>
+                                <span class="hide-empty fs-body-m color-text-80">{{- 'products.product.out_of_stock' | t -}}</span>
+                              </span>
+                            {%- endif -%}
+                          {%- endif -%}
+                          </div>
+                          <div class="product-bulk-price d-flex base-line gap-xs order-list-price order-list-item-price ta-right hide-empty">
+                            {%- render 'product-price', product: product, target: variant, price_style: 'fs-body-xl' -%}
+                          </div>
+                      </div>
+                      <div class="bulk-price order-list-total">
+                        <span class="js-variant-bulk-total-price fs-heading-s component-heading variant-bulk-total-price hide-empty" id="totalPrice-{{ section.id }}-{{ variant.id }}">{{ cart | line_items_for: variant | sum: 'original_line_price' | money_with_currency }}</span>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                {%- else -%}
+                  <div class="variant-groups d-flex fd-column gap-4xl">
+                    {%- liquid
+                      assign color_list = ""
+                      assign color_label = product.options[0]
+                      for variant in product.variants
+                        if color_list contains variant.option1
+                          continue
+                        else
+                          assign color_list = color_list | append: variant.option1 | append: ";"
+                        endif
+                      endfor
+                      assign colors = color_list | split: ";"
+                    -%}
+
+                    {%- for color in colors -%}
+                      {%- if color != "" -%}
+                        <div class="variant-group d-flex fd-column gap-xs">
+                          <div class="mb-0 fs-heading-xs component-heading d-flex middle-xs gap-xs">
+                            <span class="hide-empty flex-auto">{{- color_label | upcase -}}</span>
+                            <span class="tag hide-empty">{{- color | upcase -}}</span>
+                          </div>
+                          <div class="variant-bulk-items" id="loadMoreContent">
+                            {%- for variant in product.variants -%}
+                              {%- if variant.option1 == color -%}
+                                {%- liquid
+                                  assign index = forloop.index0
+                                  assign media = ''
+                                  assign alt_image_text = variant.image.alt | default: product.title
+                                  assign media = variant.image | image_url: width: 200 | image_tag: widths: '200', sizes: '100vw', alt: alt_image_text, class: 'media w-100 h-100 of-cover'
+                                  assign quick_buy_background_color = section.settings.background_color | default: 'transparent'
+                                  assign media_background = 'background-color: ' | append: quick_buy_background_color | append: ';'
+                                  assign product_quantity = variant.inventory_quantity
+                                  if variant.inventory_policy == 'continue' or variant.inventory_management == blank
+                                    assign product_quantity = 9999
+                                  endif
+                                  assign ratio_image = section.settings.thumbnail_ratio | replace: '2/3', '0.667' | replace: '3/2', '1.5'
+                                  if ratio_image == 'auto'
+                                    assign ratio_image = variant.image.aspect_ratio | default: 0
+                                  endif
+                                  assign ratio_image_class = section.settings.thumbnail_ratio | replace: '2/3', 'portrait' | replace: '3/2', 'landscape' | replace: '1', 'square' | prepend: 'order-image-'
+                                -%}
+                                <div class="d-flex between-xs gap-m pt-s pb-s variant-bulk-item order-list-item js-order-list-item js-variant-bulk-item" id="variant-{{ section.id }}-{{ variant.id }}" data-variant-id="{{ variant.id }}">
+                                  <div class="d-flex between-xs top-xs gap-m order-list-block-info {{ ratio_image_class }}">
+                                    <div class="order-list-variant p-relative">
+                                      {%- liquid
+                                        if section.settings.show_thumbnails and media != blank
+                                          render 'image', image_item: media, image_wrap_classes: 'rad-s bulk-image p-absolute top-0 left-0', media_wrap_style: media_background, ratio: section.settings.thumbnail_ratio
+                                        endif 
+                                      -%}
+                                      <div class="d-flex fd-column gap-scale-3xs order-list-variant-information" style="--ratio-image: {{ ratio_image }};">
+                                        <a href="{{ product.url }}" class="card__heading d-block component-heading fs-heading-s ele-focus-visible">{{ variant.option2 }}{% if variant.option3 %}/{{ variant.option3 }}{% endif %}</a>
+                                        <div class="fs-body-xs color-text-60 hide-empty f-extra">
+                                          {%- if variant.sku != blank and section.settings.show_sku -%}
+                                            <p class="mb-0">SKU: {{ variant.sku }}</p>
+                                          {%- endif -%}
+                                          {%- if variant.barcode != blank and section.settings.show_barcode -%}
+                                            <p class="mb-0">Barcode: {{ variant.barcode }}</p>
+                                          {%- endif -%}
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="order-list-quantity order-list-item-quantity ta-right">
+                                      {%- if product_quantity > 0 -%}
+                                        <div class="js-quantity-wrapper product-quantity-container">
+                                          <div class="product__quantity d-flex gap-xs middle-xs quantity-pricing-container">
+                                            <label class="field__label visually-hidden" for="productQuantityInput-{{ product.id }}-{{ index }}">{{ 'products.product.quantity.label' | t }}:</label>
+                                            <sht-qty-inp-quick-buy class="field_quantity d-inline-flex middle-xs center-xs" data-product-quantity="{{ product_quantity }}" data-selling-plan="{{- variant.requires_selling_plan -}}">
+                                              <button class="js-quantity-btn btn btn-icon-m btn-secondary" name="minus" data-name="minus" type="button" {{ status_attribute }}>
+                                                <span class="visually-hidden">{{ 'general.cart.decrease' | t }}</span>
+                                                {% render 'icon-minus', class: 'icon icon-fix-m' %} 
+                                              </button>
+                                              <input class="js-quantity-input product-quantity-input input-number color-secondary-text fs-body-m btn-icon-m b-zero ta-center bg-transparent" 
+                                              type="number" 
+                                              name="quantity" 
+                                              value="{{ cart | item_count_for_variant: variant.id }}"
+                                              data-cart-quantity="{{ cart | item_count_for_variant: variant.id }}" 
+                                              min="{{ product.selected_or_first_available_variant.quantity_rule.min }}" 
+                                              step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                                              {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                                                max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                                              {% endif %}
+                                              aria-label="{{ 'products.product.quantity.input_label' | t: product: product.title | escape }}" 
+                                              id="productQuantityInput-{{ product.id }}-{{ index }}"
+                                              data-index="{{ index | plus: 1 }}">
+                                              <button class="js-quantity-btn btn btn-icon-m btn-secondary" name="plus" data-name="plus" type="button" {{ status_attribute }}>
+                                                <span class="visually-hidden">{{ 'general.cart.increase' | t }}</span>
+                                                {% render 'icon-plus', class: 'icon icon-fix-m' %}
+                                              </button>
+                                            </sht-qty-inp-quick-buy>
+                                            {%- if product.quantity_price_breaks_configured? -%}
+                                              <div class="quick-order-list-quantity-pricing p-relative product-quantity-pricing">
+                                                <button class="btn btn-tertiary btn-s d-flex middle-xs gap-3xs quantity-pricing-btn js-quantity-pricing-btn">
+                                                  {%- render 'icon-warning-circled', class: 'icon icon-fix-l' -%}
+                                                  <span class="d-none-md volume-pricing-available-text">{{ 'product.volume_pricing_available' | t }}</span>
+                                                </button>
+                                                <div class="quantity-pricing-content js-quantity-pricing-content rad-m background disable-scrollbars">
+                                                  {%- render 'quantity-pricing', product: product, target: product.selected_or_first_available_variant -%}
+                                                </div>
+                                              </div>
+                                            {%- endif -%}
+                                            <sht-remove-btn role="button" aria-label="{{ 'accessibility.delete_item_button' | t }}" tabindex="0" class="d-none-important rad-s btn btn-s btn-remove js-delete-variant-btn delete-variant-btn" id="removeVariant-{{ variant.id }}" data-variant-id="{{ variant.id }}">
+                                              <span class="visually-hidden">{{ 'accessibility.delete' | t }}</span>
+                                              {% render 'icon-trashbin', class: 'icon icon-fix-m' %}
+                                            </sht-remove-btn>
+                                          </div>
+                                          <div class="d-flex w-100 gap-3xs mt-2xs d-none-important js-max-quantity-message">
+                                            {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+                                            <p class="fs-body-s color-text-80 mb-0 max-quantity-message ta-left">{{ 'product.variant.bulk.error_message' | t }}</p>
+                                          </div>
+                                          <div class="d-flex w-100 gap-3xs mt-2xs d-none-important js-selling-plan-error-message">
+                                            {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+                                            <p class="fs-body-s color-text-80 mb-0 max-quantity-message ta-left">{{ 'products.product.selling_plan_error_message' | t }}</p>
+                                          </div>
+                                          {%- if product.quantity_price_breaks_configured? -%}
+                                            <div class="d-flex w-100 gap-3xs mt-2xs d-none-important js-quantity-pricing-message">
+                                              {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+                                              {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+                                                <p class="fs-body-s color-text-80 mb-0 d-none-important js-min-quantity-pricing-message ta-left">{{ 'product.min_error_message' | t: min: product.selected_or_first_available_variant.quantity_rule.min }}</p>
+                                              {%- endif -%}
+                                              {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+                                                <p class="fs-body-s color-text-80 mb-0 d-none-important js-max-quantity-pricing-message ta-left">{{ 'product.max_error_message' | t: max: product.selected_or_first_available_variant.quantity_rule.max }}</p>
+                                              {%- endif -%}
+                                              {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+                                                <p class="fs-body-s color-text-80 mb-0 d-none-important js-step-quantity-pricing-message ta-left">{{ 'product.step_error_message' | t: step: product.selected_or_first_available_variant.quantity_rule.increment }}</p>
+                                              {%- endif -%}
+                                            </div>
+                                          {%- endif -%}
+                                        </div>
+                                      {%- else -%}
+                                        {%- if variant.inventory_policy != 'continue' and variant.inventory_management != blank -%}
+                                          <span class="d-flex gap-2xs middle-xs stock-status">
+                                            <span class="icon-status icon-error-sign"></span>
+                                            <span class="hide-empty fs-body-m color-text-80">{{- 'products.product.out_of_stock' | t -}}</span>
+                                          </span>
+                                        {%- endif -%}
+                                      {%- endif -%}
+                                    </div>
+                                    <div class="product-bulk-price d-flex base-line gap-xs order-list-price order-list-item-price ta-right">
+                                      {%- render 'product-price', product: product, target: variant, price_style: 'fs-body-xl' -%}
+                                    </div> 
+                                  </div>
+                                  <div class="bulk-price order-list-total">
+                                    <span class="js-variant-bulk-total-price fs-heading-s component-heading variant-bulk-total-price hide-empty" id="totalPrice-{{ section.id }}-{{ variant.id }}">{{ cart | line_items_for: variant | sum: 'original_line_price' | money_with_currency }}</span>
+                                  </div>
+                                </div>
+                              {%- endif -%}
+                            {%- endfor -%}
+                          </div>
+                        </div>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              {%- else -%}
+                {%- liquid
+                  assign media = ''
+                  assign alt_image_text = product.featured_image.alt | default: product.title
+                  assign media = product.featured_image | image_url: width: 200 | image_tag: widths: '200', sizes: '100vw', alt: alt_image_text, class: 'media w-100 h-100 of-cover'
+                  assign quick_buy_background_color = section.settings.background_color | default: 'transparent'
+                  assign media_background = 'background-color: ' | append: quick_buy_background_color | append: ';'
+                  assign product_quantity = product.selected_or_first_available_variant.inventory_quantity
+                  if product.selected_or_first_available_variant.inventory_policy == 'continue' or product.selected_or_first_available_variant.inventory_management == blank
+                    assign product_quantity = 9999
+                  endif
+                  assign ratio_image = section.settings.thumbnail_ratio | replace: '2/3', '0.667' | replace: '3/2', '1.5'
+                  if ratio_image == 'auto'
+                    assign ratio_image = product.featured_image.aspect_ratio | default: 0
+                  endif
+                  assign ratio_image_class = section.settings.thumbnail_ratio | replace: '2/3', 'portrait' | replace: '3/2', 'landscape' | replace: '1', 'square' | prepend: 'order-image-'
+                -%}
+                <div class="d-flex between-xs gap-m pt-s pb-s variant-bulk-item order-list-item js-order-list-item js-variant-bulk-item" id="variant-{{ section.id }}-{{ product.selected_or_first_available_variant.id }}" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+                  <div class="d-flex between-xs top-xs gap-m order-list-block-info {{ ratio_image_class }}">
+                    <div class="order-list-variant p-relative">
+                      {%- liquid
+                        if section.settings.show_thumbnails and media != blank
+                          render 'image', image_item: media, image_wrap_classes: 'rad-s bulk-image p-absolute top-0 left-0', media_wrap_style: media_background, ratio: section.settings.thumbnail_ratio
+                        endif
+                      -%}
+                      <div class="d-flex fd-column gap-scale-3xs order-list-variant-information" style="--ratio-image: {{ ratio_image }};">
+                        <a href="{{ product.url }}" class="card__heading d-block fs-heading-s component-heading">{{ product.title | escape }}</a>
+                        <div class="fs-body-xs color-text-60 hide-empty f-extra">
+                          {%- if product.selected_or_first_available_variant.sku != blank and section.settings.show_sku -%}
+                            <p class="mb-0">SKU: {{ product.selected_or_first_available_variant.sku }}</p>
+                          {%- endif -%}
+                          {%- if product.selected_or_first_available_variant.barcode != blank and section.settings.show_barcode -%}
+                            <p class="mb-0">Barcode: {{ product.selected_or_first_available_variant.barcode }}</p>
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order-list-quantity order-list-item-quantity ta-right">
+                      {%- if product_quantity > 0 -%}
+                        <div class="js-quantity-wrapper product-quantity-container">
+                          <div class="product__quantity d-flex gap-xs middle-xs quantity-pricing-container">
+                            <label class="field__label visually-hidden" for="productQuantityInput-{{ product.selected_or_first_available_variant.id }}">{{ 'products.product.quantity.label' | t }}:</label>
+                            <sht-qty-inp-quick-buy class="field_quantity d-inline-flex middle-xs center-xs" data-product-quantity="{{ product_quantity }}" data-selling-plan="{{- product.requires_selling_plan -}}">
+                              <button class="js-quantity-btn btn btn-icon-m btn-secondary" name="minus" data-name="minus" type="button" {{ status_attribute }}>
+                                <span class="visually-hidden">{{ 'general.cart.decrease' | t }}</span>
+                                {% render 'icon-minus', class: 'icon icon-fix-m' %}
+                              </button>
+                              <input class="js-quantity-input product-quantity-input input-number color-secondary-text fs-body-m btn-icon-m b-zero ta-center bg-transparent"
+                              type="number"
+                              name="quantity"
+                              value="{{ cart | item_count_for_variant: product.selected_or_first_available_variant.id }}"
+                              data-cart-quantity="{{ cart | item_count_for_variant: product.selected_or_first_available_variant.id }}"
+                              min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                              step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                              {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                                max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                              {% endif %}
+                              aria-label="{{ 'products.product.quantity.input_label' | t: product: product.title | escape }}"
+                              id="productQuantityInput-{{ product.selected_or_first_available_variant.id }}"
+                              data-index="{{ index | plus: 1 }}">
+                              <button class="js-quantity-btn btn btn-icon-m btn-secondary" name="plus" data-name="plus" type="button" {{ status_attribute }}>
+                                <span class="visually-hidden">{{ 'general.cart.increase' | t }}</span>
+                                {% render 'icon-plus', class: 'icon icon-fix-m' %}
+                              </button>
+                            </sht-qty-inp-quick-buy>
+                            {%- if product.quantity_price_breaks_configured? -%}
+                              <div class="quick-order-list-quantity-pricing p-relative product-quantity-pricing">
+                                <button class="btn btn-tertiary btn-s d-flex middle-xs gap-3xs quantity-pricing-btn js-quantity-pricing-btn">
+                                  {%- render 'icon-warning-circled', class: 'icon icon-fix-l' -%}
+                                  <span class="d-none-md volume-pricing-available-text">{{ 'product.volume_pricing_available' | t }}</span>
+                                </button>
+                                <div class="quantity-pricing-content js-quantity-pricing-content rad-m background disable-scrollbars">
+                                  {%- render 'quantity-pricing', product: product, target: product.selected_or_first_available_variant -%}
+                                </div>
+                              </div>
+                            {%- endif -%}
+                            <sht-remove-btn role="button" aria-label="{{ 'accessibility.delete_item_button' | t }}" tabindex="0" class="d-none-important rad-s btn btn-s btn-remove js-delete-variant-btn delete-variant-btn" id="removeVariant-{{ product.selected_or_first_available_variant.id }}" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+                              <span class="visually-hidden">{{ 'accessibility.delete' | t }}</span>
+                              {% render 'icon-trashbin', class: 'icon icon-fix-m' %}
+                            </sht-remove-btn>
+                          </div>
+                          <div class="d-flex w-100 gap-3xs mt-2xs d-none-important js-max-quantity-message">
+                            {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+                            <p class="fs-body-s color-text-80 mb-0 max-quantity-message ta-left">{{ 'product.variant.bulk.error_message' | t }}</p>
+                          </div>
+                          <div class="d-flex w-100 gap-3xs mt-2xs d-none-important js-selling-plan-error-message">
+                            {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+                            <p class="fs-body-s color-text-80 mb-0 max-quantity-message ta-left">{{ 'products.product.selling_plan_error_message' | t }}</p>
+                          </div>
+                          {%- if product.quantity_price_breaks_configured? -%}
+                            <div class="d-flex w-100 gap-3xs mt-2xs d-none-important js-quantity-pricing-message">
+                              {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+                              {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+                                <p class="fs-body-s color-text-80 mb-0 d-none-important js-min-quantity-pricing-message ta-left">{{ 'product.min_error_message' | t: min: product.selected_or_first_available_variant.quantity_rule.min }}</p>
+                              {%- endif -%}
+                              {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+                                <p class="fs-body-s color-text-80 mb-0 d-none-important js-max-quantity-pricing-message ta-left">{{ 'product.max_error_message' | t: max: product.selected_or_first_available_variant.quantity_rule.max }}</p>
+                              {%- endif -%}
+                              {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+                                <p class="fs-body-s color-text-80 mb-0 d-none-important js-step-quantity-pricing-message ta-left">{{ 'product.step_error_message' | t: step: product.selected_or_first_available_variant.quantity_rule.increment }}</p>
+                              {%- endif -%}
+                            </div>
+                          {%- endif -%}
+                        </div>
+                      {%- else -%}
+                        {%- if product.selected_or_first_available_variant.inventory_policy != 'continue' and product.selected_or_first_available_variant.inventory_management != blank -%}
+                          <span class="d-flex gap-2xs middle-xs stock-status">
+                            <span class="icon-status icon-error-sign"></span>
+                            <span class="hide-empty fs-body-m color-text-80">{{- 'products.product.out_of_stock' | t -}}</span>
+                          </span>
+                        {%- endif -%}
+                      {%- endif -%}
+                    </div>
+                    <div class="product-bulk-price d-flex base-line gap-xs order-list-price order-list-item-price ta-right hide-empty">
+                      {%- render 'product-price', product: product, target: product.selected_or_first_available_variant, price_style: 'fs-body-xl' -%}
+                    </div>
+                  </div>
+                  <div class="bulk-price order-list-total">
+                    <span class="js-variant-bulk-total-price fs-heading-s component-heading variant-bulk-total-price hide-empty" id="totalPrice-{{ section.id }}-{{ product.selected_or_first_available_variant.id }}">{{ cart | line_items_for: product | sum: 'original_line_price' | money_with_currency }}</span>
+                  </div>
+                </div>
+              {%- endunless -%}
+            </div>
+            <div class="js-paginate mb-xl">
+              {%- render 'pagination', paginate: paginate -%}
+            </div>
+        {% endpaginate %}
+        </form>
+      </sht-quick-shop-frm>
+    </div>
+    <div class="order-list-footer background">
+      <div class="d-flex between-xs middle-xs fw-wrap gap-m order-list-cart-btn">
+        <a href="{{- routes.cart_url | default: '#' -}}" class="product-btn-atc btn btn-primary btn-m">
+          {{ 'general.cart.view' | t }}
+        </a>
+        <p class="js-variant-selector-quantity mb-0 hide-empty fs-body-l order-list-total-item">{{- total_quantity -}}</p>
+        <div class="ta-right order-list-total-price">
+          <p class="mb-0 js-bulk-total-price fs-body-l hide-empty">{{- cart | line_items_for: product | sum: 'original_line_price' | money_with_currency -}}</p>
+          <p class="fs-body-s color-text-60 mb-0">{{ 'general.cart.subtotal' | t }}</p>
+        </div>
+        <div class="d-flex middle-xs between-xs fw-wrap gap-s w-100 order-list-payment-block">
+          <p class="mb-0 ta-center color-text-60 fs-body-m order-list-tax-text rte">
+            {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+              {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+            {%- elsif cart.taxes_included -%}
+              {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+            {%- elsif shop.shipping_policy.body != blank -%}
+              {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+            {%- else -%}
+              {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+            {%- endif -%}
+          </p>
+          {%- if section.settings.show_payment_method and shop.enabled_payment_types -%}
+            {%- if product.available -%}
+              <div class="product__payment-method order-list-payment-method wb-break-word d-flex fw-wrap gap-s center-xs middle-xs">
+                <span class="fs-body-s">{{- section.settings.payment_heading | escape -}}</span>
+                <ul class="list list-payment d-flex gap-2xs fw-wrap ls-none">
+                  {%- for type in shop.enabled_payment_types -%}
+                    <li class="list-payment__item d-flex">
+                      {{ type | payment_type_svg_tag | replace: 'id="pi', 'id="pi-quick-order-list'}}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </sht-quick-order-list>
+</div>
+
+{%- liquid
+    if section.settings.enable_size_guide
+      render 'product-size-guide', size_guide_dialog_id: size_guide_dialog_id, size_guide_block: section, size_guide_heading: size_label_heading
+    endif
+-%}
+{%- schema -%}
+{
+  "name": "t:sections.quick_order_list.name",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.quick_order_list.general.info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-3"
+    },
+    {
+      "type": "checkbox",
+      "label": "t:general.settings.show_sku.label",
+      "id": "show_sku",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "label": "t:general.settings.show_barcode.label",
+      "id": "show_barcode",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "label": "t:general.settings.enable_variant_grouping.label",
+      "id": "enable_variant_grouping",
+      "default": true,
+      "info": "t:general.settings.enable_variant_grouping.info"
+    },
+    {
+      "type": "range",
+      "id": "variants_per_page",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "default": 50,
+      "label": "t:general.variants_per_page"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.variant_thumbnails.label"
+    },
+    {
+      "type": "checkbox",
+      "label": "t:general.settings.show_thumbnails.label",
+      "id": "show_thumbnails",
+      "default": true
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.thumbnail_ratio.label",
+      "id": "thumbnail_ratio",
+      "visible_if": "{{ section.settings.show_thumbnails == true }}",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "t:general.settings.image_ratio.options.option_square.label"
+        },
+        {
+          "value": "3/2",
+          "label": "t:general.settings.image_ratio.options.option_landscape.label"
+        },
+        {
+          "value": "2/3",
+          "label": "t:general.settings.image_ratio.options.option_portrait.label"
+        },
+        {
+          "value": "auto",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        }
+      ],
+      "default": "1/1"
+    },
+    {
+      "type": "color",
+      "label": "t:general.settings.background_color.label",
+      "id": "background_color",
+      "info": "t:general.settings.media_background.info",
+      "visible_if": "{{ section.settings.show_thumbnails == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.payment_method.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_method",
+      "label": "t:general.settings.show_payment_method.label",
+      "default": false,
+      "info": "t:general.settings.add_payment_methods.info"
+    },
+    {
+      "type": "text",
+      "id": "payment_heading",
+      "label": "t:general.settings.heading.label",
+      "default": "We accept",
+      "visible_if": "{{ section.settings.show_payment_method == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.size_guide.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_size_guide",
+      "label": "t:general.settings.enable_size_guide.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "size_label_heading",
+      "label": "t:general.settings.heading.label",
+      "default": "Size chart",
+      "visible_if": "{{ section.settings.enable_size_guide == true }}"
+    },
+    {
+      "type": "page",
+      "id": "size_guide_content",
+      "label": "t:general.settings.content.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.quick_order_list.name"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{%- endschema -%}

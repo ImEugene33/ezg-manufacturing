@@ -1,0 +1,156 @@
+{%- comment -%}
+{% render 'card-collection',
+  collection: collection,
+  media_ratio: '1/1'
+  show_product_count: settings.show_product_count
+%}
+{%- endcomment -%}
+{%- liquid
+  assign image_loading = image_loading | default: 'lazy'
+  assign fetchpriority = fetchpriority | default: 'auto'
+  assign decoding = 'async'
+  assign preload = false
+
+  assign widths = widths | default: '160, 260, 320, 450, 550, 750, 950, 1024, 1200'
+  assign sizes = sizes | default: '(min-width: 769px) calc(' | append:  settings.container_max_width | append: 'px / 3), 50vw'
+  assign classes = classes | default: 'js-image-lazy media of-cover w-100 h-100'
+
+  if custom_media != blank
+    assign custom_alt_text = custom_media.image.alt | default: custom_media.image.src | split: '/' | last | split: '.' | first
+    capture custom_srcset
+      if custom_media.width >= 160
+        echo custom_media | image_url: width: 160 | append: ' 160w,'
+      endif
+      if custom_media.width >= 260
+        echo custom_media | image_url: width: 260 | append: ' 260w,'
+      endif
+      if custom_media.width >= 320
+        echo custom_media | image_url: width: 320 | append: ' 320w,'
+      endif
+      if custom_media.width >= 450
+        echo custom_media | image_url: width: 450 | append: ' 450w,'
+      endif
+      if custom_media.width >= 550
+        echo custom_media | image_url: width: 550 | append: ' 550w,'
+      endif
+      if custom_media.width >= 750
+        echo custom_media | image_url: width: 750 | append: ' 750w,'
+      endif
+      if custom_media.width >= 950
+        echo custom_media | image_url: width: 950 | append: ' 950w,'
+      endif
+      if custom_media.width >= 1024
+        echo custom_media | image_url: width: 1024 | append: ' 1024w,'
+      endif
+      if custom_media.width >= 1200
+        echo custom_media | image_url: width: 1200 | append: ' 1200w,'
+      endif
+      echo custom_media | image_url | append: ' ' | append: custom_media.width | append: 'w'
+    endcapture
+    assign collection_image = custom_media | image_url: width: 550 | image_tag: srcset: custom_srcset, sizes: sizes, alt: custom_alt_text, class: classes, loading: image_loading, fetchpriority: fetchpriority, decoding: decoding, preload: preload
+  else
+    assign product_alt_text = collection.products.first.featured_image.alt | default: collection.products.first.featured_image.src | split: '/' | last | split: '.' | first
+    assign alt_text = collection.image.alt | default: collection.image.src | split: '/' | last | split: '.' | first
+    assign collection_image = 'collection-apparel-1' | placeholder_svg_tag: 'placeholder media of-cover w-100 h-100'
+    
+    if collection.products.first.featured_image
+      capture product_srcset
+        if collection.products.first.featured_image.width >= 160
+          echo collection.products.first.featured_image | image_url: width: 160 | append: ' 160w,'
+        endif
+        if collection.products.first.featured_image.width >= 260
+          echo collection.products.first.featured_image | image_url: width: 260 | append: ' 260w,'
+        endif
+        if collection.products.first.featured_image.width >= 320
+          echo collection.products.first.featured_image | image_url: width: 320 | append: ' 320w,'
+        endif
+        if collection.products.first.featured_image.width >= 450
+          echo collection.products.first.featured_image | image_url: width: 450 | append: ' 450w,'
+        endif
+        if collection.products.first.featured_image.width >= 550
+          echo collection.products.first.featured_image | image_url: width: 550 | append: ' 550w,'
+        endif
+        if collection.products.first.featured_image.width >= 750
+          echo collection.products.first.featured_image | image_url: width: 750 | append: ' 750w,'
+        endif
+        if collection.products.first.featured_image.width >= 950
+          echo collection.products.first.featured_image | image_url: width: 950 | append: ' 950w,'
+        endif
+        if collection.products.first.featured_image.width >= 1024
+          echo collection.products.first.featured_image | image_url: width: 1024 | append: ' 1024w,'
+        endif
+        if collection.products.first.featured_image.width >= 1200
+          echo collection.products.first.featured_image | image_url: width: 1200 | append: ' 1200w,'
+        endif
+        echo collection.products.first.featured_image | image_url | append: ' ' | append: collection.products.first.featured_image.width | append: 'w'
+      endcapture
+      assign collection_image = collection.products.first.featured_image | image_url: width: 550 | image_tag: srcset: product_srcset, sizes: sizes, alt: product_alt_text, class: classes, loading: image_loading, fetchpriority: fetchpriority, decoding: decoding, preload: preload
+    endif
+    
+    if collection.image
+      capture collection_srcset
+        if collection.image.width >= 160
+          echo collection.image | image_url: width: 160 | append: ' 160w,'
+        endif
+        if collection.image.width >= 260
+          echo collection.image | image_url: width: 260 | append: ' 260w,'
+        endif
+        if collection.image.width >= 320
+          echo collection.image | image_url: width: 320 | append: ' 320w,'
+        endif
+        if collection.image.width >= 450
+          echo collection.image | image_url: width: 450 | append: ' 450w,'
+        endif
+        if collection.image.width >= 550
+          echo collection.image | image_url: width: 550 | append: ' 550w,'
+        endif
+        if collection.image.width >= 750
+          echo collection.image | image_url: width: 750 | append: ' 750w,'
+        endif
+        if collection.image.width >= 950
+          echo collection.image | image_url: width: 950 | append: ' 950w,'
+        endif
+        if collection.image.width >= 1024
+          echo collection.image | image_url: width: 1024 | append: ' 1024w,'
+        endif
+        if collection.image.width >= 1200
+          echo collection.image | image_url: width: 1200 | append: ' 1200w,'
+        endif
+        echo collection.image | image_url | append: ' ' | append: collection.image.width | append: 'w'
+      endcapture
+      assign collection_image = collection.image | image_url: width: 550 | image_tag: srcset: collection_srcset, sizes: sizes, alt: alt_text, class: classes, loading: image_loading, fetchpriority: fetchpriority, decoding: decoding, preload: preload
+    endif
+  endif
+
+  assign card_style = 'd-flex fd-column h-100 gap-s p-s'
+  assign content_style = ''
+  assign media_style = 'rad-xs'
+  if settings.collection_card_style == 'standard'
+    assign card_style = 'd-flex fd-column h-100'
+    assign content_style = 'p-s'
+    assign media_style = ''
+  endif
+-%}
+<sht-lazy-loader class="card card--border card-collection card-animate card-collection--color background w-100 p-relative {{ card_style }} rad-m o-hidden d-flex fd-column h-100" data-loading="{{ image_loading }}">
+  <a aria-label="{{ collection.title | escape }}" href="{{ collection.url }}" class="d-block h-100 w-100 zi-3 p-absolute inset ele-focus-visible"></a>
+  <div class="card__content wb-break-word d-flex gap-xs between-xs flex-1 {{ content_style }}">
+    <div class="d-grid gap-3xs flex-1 ta-left h-fit-content">
+      <h3 class="fs-heading-m component-heading m-zero">{{ collection.title }}
+        {%- if settings.quantity_card_style == 'superscript' -%}
+          <sup class="fs-body-xs f-extra {{ settings.collection_card_show_product_quantity | default: ' d-none-important' | replace: 'true', '' }} {{ settings.numbers_style | replace: 'number', '' }}">
+            {{ collection.products.size }}
+          </sup>
+        {%- endif -%}
+      </h3>
+      {% if settings.quantity_card_style == 'separate_line' %}
+        <span class="fs-heading-xs component-heading color-text-60 wb-break-word f-extra {{ settings.collection_card_show_product_quantity | default: ' d-none-important' | replace: 'true', '' }}">
+          {{ 'general.collection.view_collection' | t: count: collection.products.size }}
+        </span>
+      {% endif %}
+    </div>
+    {% render 'icon-caret-right', class: 'icon icon-fix-m color-text-60 rtl-flip-x' %}
+  </div>
+  <div class="card__media p-relative ratio o-hidden {{ media_style }}" >
+    {% render 'image', image_item: collection_image, src: collection_image.src, image_wrap_classes: 'h-100', image_classes: 'h-100 w-100', ratio: ratio %}
+  </div>
+</sht-lazy-loader>

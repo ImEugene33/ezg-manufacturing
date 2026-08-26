@@ -1,0 +1,186 @@
+{%- liquid
+  assign desktop_image = section.settings.desktop_image
+  assign mobile_image = section.settings.mobile_image
+  assign heading = section.settings.heading
+  assign heading_tag = section.settings.heading_tag | default: 'h1'
+  assign text = section.settings.text
+  assign button_label = section.settings.button_label
+  assign button_link = section.settings.button_link
+
+  assign loading = 'lazy'
+  assign fetchpriority = 'auto'
+  if section.index == 1
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+  endif
+
+  assign sizes = '(min-width: ' | append: settings.container_max_width | append: 'px) ' | append: settings.container_max_width | append: 'px, 100vw'
+  assign alt = desktop_image.alt | default: heading | default: 'Hero'
+
+  assign desktop_image_class = 'hero__media-img hero__media-img--desktop'
+  if mobile_image != blank
+    assign desktop_image_class = desktop_image_class | append: ' hero__media-img--has-mobile-alt'
+  endif
+-%}
+
+<link rel="stylesheet" href="{{ 'section-hero.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<section class="hero color-{{ section.settings.color_scheme }}" style="--hero-padding-desktop: {{ section.settings.padding_desktop }}px; --hero-padding-mobile: {{ section.settings.padding_mobile }}px;">
+  <div class="hero__container">
+    <div class="hero__media">
+      {%- if mobile_image != blank -%}
+        {{ mobile_image | image_url: width: mobile_image.width | image_tag:
+          widths: '375, 550, 750, 1000',
+          sizes: '100vw',
+          alt: alt,
+          loading: loading,
+          fetchpriority: fetchpriority,
+          class: 'hero__media-img hero__media-img--mobile'
+        }}
+      {%- endif -%}
+      {%- if desktop_image != blank -%}
+        {{ desktop_image | image_url: width: desktop_image.width | image_tag:
+          widths: '375, 550, 750, 1100, 1500, 1800, 2200, 2600, 3000',
+          sizes: sizes,
+          alt: alt,
+          loading: loading,
+          fetchpriority: fetchpriority,
+          class: desktop_image_class
+        }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: desktop_image_class }}
+      {%- endif -%}
+    </div>
+    <div class="hero__content">
+      <div class="hero__copy">
+        {%- if heading != blank -%}
+          {%- if heading_tag == 'h2' -%}
+            <h2 class="hero__heading h1">{{ heading }}</h2>
+          {%- else -%}
+            <h1 class="hero__heading">{{ heading }}</h1>
+          {%- endif -%}
+        {%- endif -%}
+        {%- if text != blank -%}
+          <div class="hero__text">{{ text }}</div>
+        {%- endif -%}
+      </div>
+      {%- if button_label != blank -%}
+        {%- if button_link != blank -%}
+          <a href="{{ button_link }}" class="hero__btn btn btn--primary">{{ button_label }}</a>
+        {%- else -%}
+          <a class="btn btn--disabled hero__btn btn--primary" aria-disabled="true">{{ button_label }}</a>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.hero.name",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.images.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "t:sections.hero.settings.desktop_image.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "t:general.settings.mobile_image.label",
+      "info": "t:sections.hero.settings.mobile_image.info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.heading.label"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.heading.label",
+      "default": "Contract Manufacturing"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:sections.hero.settings.heading_tag.label",
+      "options": [
+        { "value": "h1", "label": "t:general.settings.heading_size.options.h1.label" },
+        { "value": "h2", "label": "t:general.settings.heading_size.options.h2.label" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.text.content"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:general.settings.text.label",
+      "default": "<p>Since 1998, EZG has been delivering reliable custom manufacturing services for industries that demand precision and durability.</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.button.content"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:general.settings.button_label.label",
+      "default": "Contact Our Team"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:general.settings.button_link.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.hero.settings.headers.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.hero.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.hero.settings.headers.padding.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "t:sections.hero.settings.padding_desktop.label",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "t:sections.hero.settings.padding_mobile.label",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.hero.name"
+    }
+  ]
+}
+{% endschema %}

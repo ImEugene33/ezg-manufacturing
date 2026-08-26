@@ -1,0 +1,45 @@
+{%- for block in section.blocks -%}
+  {%- liquid
+    assign graph_popup_id = block.id | append: section.id | md5 | truncate: 12, ""
+    assign graph_list = block.settings.graphs_metafield
+    assign graph_namespace = graph_list | split: '.' | first
+    assign graph_key = graph_list | split: '.' | last
+    assign graph_values = product.metafields[graph_namespace][graph_key].value
+  -%}
+  {%- if block.type == 'performance_graphs' -%}
+    {%- if block.settings.use_list_of_graphs -%}
+      {%- for graph_value in graph_values -%}
+        {%- liquid
+          assign graph_popup_id = graph_popup_id | append: forloop.index
+          assign popup_id = 'dialogGraphPopup' | append: graph_popup_id
+          assign popup_label = 'dialogTitle' | append: graph_popup_id
+        -%}
+        {%- if graph_value.description != blank -%}
+          {%- render 'popup-hidden',
+            popup_id: popup_id,
+            popup_label: popup_label,
+            popup_heading: graph_value.label,
+            popup_description: graph_value.description,
+            popup_style: 'graph-dialog',
+            class: 'js-progress-popup'
+          -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- liquid
+        assign popup_id = 'dialogGraphPopup' | append: graph_popup_id
+        assign popup_label = 'dialogTitle' | append: graph_popup_id
+      -%}
+      {%- if block.settings.description != blank -%}
+        {%- render 'popup-hidden',
+          popup_id: popup_id,
+          popup_label: popup_label,
+          popup_heading: block.settings.label,
+          popup_description: block.settings.description,
+          popup_style: 'graph-dialog',
+          class: 'js-progress-popup'
+        -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}

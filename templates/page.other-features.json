@@ -1,0 +1,664 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "video_banner_g3qQhX": {
+      "type": "video-banner",
+      "blocks": {
+        "heading_Mp9ViM": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Normal, but hardcore",
+            "heading_size": "h2",
+            "enable_h1_tag": true
+          }
+        },
+        "description_kcmkPV": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>A minimalistic and timeless solution, perfect for showcasing large catalogs and maximizing conversions through advanced customization and user-focused functionality.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Mp9ViM",
+        "description_kcmkPV"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 30,
+        "section_mask_overlay_color": "#000000",
+        "section_content_overlay_color": "#ffffff",
+        "video_source": "video_external",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "enable_controller": true,
+        "enable_loop": true,
+        "video_control_color": "transparent",
+        "section_image_width": "max-width",
+        "height_desktop": "original",
+        "desktop_content_position": "end-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "end-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "rich_text_pjdWAK": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_DDKCq7": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Along with collection promotions and media, we offer a variety of tools to meet every business's needs.",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_DDKCq7"
+      ],
+      "settings": {
+        "color_scheme": "scheme-206402cf-0ad6-469e-a6e7-0a7e0526ddad",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "content_collage_kNNbaN": {
+      "type": "content-collage",
+      "blocks": {
+        "text_FxpRWw": {
+          "type": "text",
+          "settings": {
+            "heading": "Advanced navigation",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-center-md middle-md",
+            "desktop_column": "4",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-center middle-xs",
+            "mobile_column": "2",
+            "mobile_row": "1",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "#fafafa",
+            "text_color": "#000000"
+          }
+        },
+        "video_CV6TTa": {
+          "type": "video",
+          "settings": {
+            "heading": "Powerful mega menu",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Enable transforming standard menu into three types of mega menus for large catalog store, add promotion banners, include product and collection images.</p>",
+            "video_source": "video_external",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "image_WjGckA": {
+          "type": "image",
+          "settings": {
+            "heading": "Advanced search",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Customize funnels with merchant suggested promotions. Built-in features in Search & Discovery enhance store setup efficiency.</p>",
+            "desktop_image": "",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "3",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-center middle-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "image_mdn4eD": {
+          "type": "image",
+          "settings": {
+            "heading": "Highly flexibility popups",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Promote multi popups with different triggers: Interaction-based and Time-based. Support additional functionalities for comprehensive popups.</p>",
+            "desktop_image": "",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "3",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-center middle-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_FxpRWw",
+        "video_CV6TTa",
+        "image_WjGckA",
+        "image_mdn4eD"
+      ],
+      "settings": {
+        "color_scheme": "scheme-206402cf-0ad6-469e-a6e7-0a7e0526ddad",
+        "enable_fullwidth": false,
+        "show_layout_grid": false,
+        "desktop_row_height": 200,
+        "mobile_row_height": 240
+      }
+    },
+    "rich_text_TNCxgQ": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_kHwTzR": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Essential features for wholesale",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_VhgbE8": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Designed to aid businesses involved in bulk sales, equipped with essential wholesale features to improve the purchasing experience for wholesalers.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_kHwTzR",
+        "description_VhgbE8"
+      ],
+      "settings": {
+        "color_scheme": "schema-1",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "multi_columns_TNa8wQ": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_zPryW3": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "",
+            "title": "Quick order list",
+            "description": "<p>Enable B2B buyers to bulk add variants to products</p>",
+            "btn_label": "Try it now",
+            "btn_link": ""
+          }
+        },
+        "image_column_79TCUw": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "",
+            "title": "Bulk buy in Product list",
+            "description": "<p>Allow buyers to bulk buy products right from the product list.</p>",
+            "btn_label": "Try it now",
+            "btn_link": ""
+          }
+        },
+        "image_column_V7qxLP": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "",
+            "title": "Adaptable in both B2B and B2C",
+            "description": "<p>Implement 'bulk' and 'standard' interchangeably in various areas of your store without restriction. This enables scalability for future growth or adoption of a hybrid model</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_zPryW3",
+        "image_column_79TCUw",
+        "image_column_V7qxLP"
+      ],
+      "settings": {
+        "color_scheme": "schema-1",
+        "heading": "",
+        "heading_size": "h4",
+        "description": "",
+        "item_position": "ta-center center-xs",
+        "media_ratio": "3/2",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "false",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "rich_text_KwzN33": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_EFpUtb": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Optimization for creating engagement",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_8nwwjH": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>In addition to Product showcase and Media promotion for large catalog CRO, we offer built-in features to boost your store's CRO</p>"
+          }
+        },
+        "button_aDVJmU": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Visit Product showcase features",
+            "button_primary_style": "secondary",
+            "button_primary_link": "",
+            "button_secondary_label": "Visit media promotions",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_EFpUtb",
+        "description_8nwwjH",
+        "button_aDVJmU"
+      ],
+      "settings": {
+        "color_scheme": "scheme-206402cf-0ad6-469e-a6e7-0a7e0526ddad",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "image_with_text_fAqyWa": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_AwpTmC": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Highly customizable header & footer",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_TEqVWW": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>With the new grid-based layout, header and footer can now be customized to an unlimited number of layouts.</p><p>Optimize your store with our conversion-centric tools, driving sales and engaging visitors right from their first click.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_AwpTmC",
+        "description_TEqVWW"
+      ],
+      "settings": {
+        "color_scheme": "scheme-206402cf-0ad6-469e-a6e7-0a7e0526ddad",
+        "image_alignment": "top-xs",
+        "image_1": "",
+        "image_1_link": "",
+        "image_2_link": "",
+        "image_3_link": "",
+        "image_4_link": "",
+        "desktop_layout": "text_first",
+        "desktop_media_width": "6",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "image_with_text_AtpqmQ": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_yREPj9": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Countdown everywhere",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_N8G9bN": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Countdown timer can easily set up in almost all standard sections with in-depth customize to create urgent to buyers Merchants can easily customize the countdown timer to fit seamlessly into various sections of their store, ensuring a sense of urgency for buyers</p>"
+          }
+        },
+        "countdown_timer_Pnjehy": {
+          "type": "countdown_timer",
+          "settings": {
+            "hide_on_end": true,
+            "end_date": "2025-12-24",
+            "end_time": "",
+            "end_text": "<p>Event is finished</p>",
+            "countdown_background": "#ffe0a6",
+            "countdown_number_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "heading_yREPj9",
+        "description_N8G9bN",
+        "countdown_timer_Pnjehy"
+      ],
+      "settings": {
+        "color_scheme": "scheme-206402cf-0ad6-469e-a6e7-0a7e0526ddad",
+        "image_alignment": "middle-xs",
+        "image_1": "",
+        "image_1_link": "",
+        "image_2_link": "",
+        "image_3_link": "",
+        "image_4_link": "",
+        "desktop_layout": "fd-row-reverse-md",
+        "desktop_media_width": "6",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "multi_columns_Y6Arqk": {
+      "type": "multi-columns",
+      "blocks": {
+        "video_column_iF8neg": {
+          "type": "video_column",
+          "settings": {
+            "video_source": "external",
+            "external_video_link": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "title": "Integrated cross-sell",
+            "description": "<p>Integrate easily with complementary products from Search & discovery app.</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_XdLJFV": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "",
+            "title": "Cart Enhancement Features",
+            "description": "<p>Enhance customer experience with smart cart features and product recommendations.</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_Wt6pHQ": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "",
+            "title": "Recently viewed products inside cart",
+            "description": "<p>Guide customers to recent products viewed easily, prompting re-evaluation.</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_column_iF8neg",
+        "image_column_XdLJFV",
+        "image_column_Wt6pHQ"
+      ],
+      "settings": {
+        "color_scheme": "schema-1",
+        "heading": "Increase your sales & conversion with powerful features in cart",
+        "heading_size": "h3-regular",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "3/2",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "multi_columns_ebp8W4": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_hEBgde": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "",
+            "title": "Varied filters style",
+            "description": "<p>Select 1 varied filter layout for collection to fulfill business needs</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "video_column_UwjbUp": {
+          "type": "video_column",
+          "settings": {
+            "video_source": "external",
+            "external_video_link": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "title": "Personalize browsing experience",
+            "description": "<p>Enable customers to display or hide filters, adjust the grid view to meet their browsing preferences</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "video_column_yHrPrq": {
+          "type": "video_column",
+          "settings": {
+            "video_source": "external",
+            "external_video_link": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "title": "Product comparison",
+            "description": "<p>Enable users to efficiently compare products based on features, attributes, and price without navigating to another page</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_hEBgde",
+        "video_column_UwjbUp",
+        "video_column_yHrPrq"
+      ],
+      "settings": {
+        "color_scheme": "schema-1",
+        "heading": "Enhance and personalize collection browsing experience",
+        "heading_size": "h3-regular",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "faqs_wLzcTb": {
+      "type": "faqs",
+      "blocks": {
+        "faq_item_6tJzYn": {
+          "type": "faq_item",
+          "settings": {
+            "show_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "truck",
+            "custom_code": "",
+            "icon_color": "",
+            "heading_faq_item": "Do you ship overseas?",
+            "description_faq_item": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We offer various delivery options to meet your needs.</p>"
+          }
+        },
+        "faq_item_YgwCaw": {
+          "type": "faq_item",
+          "settings": {
+            "show_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "truck",
+            "custom_code": "",
+            "icon_color": "",
+            "heading_faq_item": "What types of furniture do you offer?",
+            "description_faq_item": "<p>We offer a wide range of furniture, including sofas, dining tables, chairs, coffee tables, bookshelves, and bedroom sets. We also carry modern, minimalist, and classic styles to match any home aesthetic.</p>"
+          }
+        },
+        "faq_item_9wtq6w": {
+          "type": "faq_item",
+          "settings": {
+            "show_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "truck",
+            "custom_code": "",
+            "icon_color": "",
+            "heading_faq_item": "Do you provide customization options for furniture?",
+            "description_faq_item": "<p>Yes! Many of our furniture pieces can be customized in terms of size, fabric, and color. Let us know your preferences, and we'll help you create the perfect piece for your space.</p>"
+          }
+        },
+        "faq_item_hnLcEA": {
+          "type": "faq_item",
+          "settings": {
+            "show_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "truck",
+            "custom_code": "",
+            "icon_color": "",
+            "heading_faq_item": "Do you offer home decor items in addition to furniture?",
+            "description_faq_item": "<p>Absolutely! We have a curated selection of home decor, including rugs, wall art, vases, lighting, mirrors, and decorative accents to complete your interior design.</p>"
+          }
+        },
+        "faq_item_HmkK4R": {
+          "type": "faq_item",
+          "settings": {
+            "show_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "truck",
+            "custom_code": "",
+            "icon_color": "",
+            "heading_faq_item": "Can I see fabric and material samples before making a purchase?",
+            "description_faq_item": "<p>Yes, we provide fabric swatches and material samples in-store and online. This way, you can feel confident about your choice before making a purchase.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_6tJzYn",
+        "faq_item_YgwCaw",
+        "faq_item_9wtq6w",
+        "faq_item_hnLcEA",
+        "faq_item_HmkK4R"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading_text": "Streamlined Support: FAQs Combined with a Contact Form",
+        "heading_size": "h2",
+        "description_text": "",
+        "one_item_expand": true,
+        "open_first_item": true,
+        "enable_contact_form": true,
+        "heading_contact_form": "Didn't find your answer?",
+        "description_contact_form": "<p>Link to some useful pages that your customers might want to know about.</p>",
+        "button_label": "Send message",
+        "color_custom_form_background": "rgba(0,0,0,0)",
+        "color_custom_form_content": "rgba(0,0,0,0)",
+        "heading_alignment_desktop": "ta-center-md middle-md",
+        "content_ordering": "fd-row-sm",
+        "heading_alignment_mobile": "ta-center middle-xs",
+        "content_ordering_mobile": "fd-column"
+      }
+    },
+    "rich_text_7qN64w": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_8a6tX6": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Expert help & resources",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_adcp9q": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Can't figure out something with our themes?<br/>Don't worry, our support team is just a click away.</p>"
+          }
+        },
+        "button_kAnJiX": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Read docs",
+            "button_primary_style": "secondary",
+            "button_primary_link": "",
+            "button_secondary_label": "Contact us",
+            "button_secondary_style": "primary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_8a6tX6",
+        "description_adcp9q",
+        "button_kAnJiX"
+      ],
+      "settings": {
+        "color_scheme": "scheme-206402cf-0ad6-469e-a6e7-0a7e0526ddad",
+        "desktop_content_alignment": "ta-center-md middle-md",
+        "mobile_content_alignment": "ta-center middle-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "video_banner_g3qQhX",
+    "rich_text_pjdWAK",
+    "content_collage_kNNbaN",
+    "rich_text_TNCxgQ",
+    "multi_columns_TNa8wQ",
+    "rich_text_KwzN33",
+    "image_with_text_fAqyWa",
+    "image_with_text_AtpqmQ",
+    "multi_columns_Y6Arqk",
+    "multi_columns_ebp8W4",
+    "faqs_wLzcTb",
+    "rich_text_7qN64w"
+  ]
+}

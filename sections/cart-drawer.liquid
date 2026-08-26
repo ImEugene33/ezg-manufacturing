@@ -1,0 +1,773 @@
+{%- liquid
+  assign now =  "now" | date: "%N"
+  assign section_id = section.id | md5 | truncate: 12, ""
+  assign tab_aria_controls_prefix = "products-tabs-tabs-" | append: section_id | append: now
+  assign tab_id = "products-tabs-tab-" | append: section_id | append: now
+  assign promotion_link = section.settings.promotion_link
+  assign button_label = section.settings.button_label
+  assign promotion_image_alt  = section.settings.promotion_image.alt | default: section.settings.promotion_image.image | split: '/' | last
+  assign promotion_image = 'blog-apparel-1' | placeholder_svg_tag: 'placeholder h-100 w-100'
+  assign promotion_image = section.settings.promotion_image | image_url: width: section.settings.promotion_image.width | image_tag: widths: '550, 750', sizes: '100vw', alt: promotion_image_alt, class: 'media of-cover h-100 w-100'
+
+  assign promotion_content_alignment = section.settings.content_alignment
+  assign promotion_content_position = section.settings.content_position
+  assign sht_mask_promotion = promotion_content_position | replace: '-xs', ''
+  if sht_mask_promotion == 'center'
+    if promotion_content_alignment contains 'left'
+      assign sht_mask_promotion = 'center-left '
+    elsif promotion_content_alignment contains 'right'
+      assign sht_mask_promotion = 'center-right'
+    endif
+  endif
+
+  assign overlay_opacity = section.settings.section_overlay_opacity | divided_by: 100.0
+
+  assign overlay_color = 'inherit'
+  unless section.settings.promotion_mask_overlay_color.alpha == 0.0 or section.settings.promotion_mask_overlay_color == blank
+    assign overlay_color = section.settings.promotion_mask_overlay_color | color_modify: 'alpha', overlay_opacity
+  endunless
+  unless section.settings.promotion_content_overlay_color.alpha == 0.0 or section.settings.promotion_content_overlay_color == blank
+    assign content_color = 'color:' | append: section.settings.promotion_content_overlay_color | append: '; --color-normal-text-rgb:' | append: section.settings.promotion_content_overlay_color.red | append: ',' | append: section.settings.promotion_content_overlay_color.green | append: ',' | append: section.settings.promotion_content_overlay_color.blue
+  endunless
+
+  assign promotion_image_ratio = section.settings.promotion_image_ratio
+  if section.settings.promotion_image_ratio == 'auto'
+    assign promotion_image_ratio = section.settings.promotion_image.aspect_ratio
+  endif
+-%}
+{% capture cart_promotion %}
+  <div class="cart-drawer__promotion">
+    <div class="p-relative d-flex fd-column rad-m border o-hidden ratio sht-mask sht-mask--{{ sht_mask_promotion }} content--{{ sht_mask_promotion }} {{ promotion_content_alignment }} {{ promotion_content_position }}" style="--ratio: {{ promotion_image_ratio }}; --color-mask: {{ overlay_color }}; --overlay: {{ overlay_opacity }}; {{ content_color }}">
+      {%- if promotion_link != blank and button_label == blank -%}
+        <a href="{{- promotion_link -}}" class="p-absolute top-0 right-0 bottom-0 left-0 zi-2" aria-label="{{- button_label | escape -}}"></a>
+      {%- endif -%}
+      <div class="w-100 h-100 inset p-absolute of-cover">
+        {% render 'image', image_item: promotion_image, image_wrap_classes: 'h-100 w-100', image_classes: 'h-100 w-100 visible-xs' %}
+      </div>
+      <div class="card__content p-m p-relative zi-1 o-hidden">
+        <h3 class="fs-heading-m component-heading hide-empty">{{- section.settings.promotion_heading -}}</h3>
+        <div class="rte mt-xs hide-empty">{{- section.settings.promotion_description -}}</div>
+        {%- if button_label != blank -%}
+            <a href="{{- promotion_link | default: '#' -}}" {{ promotion_link | default: 'tabindex="-1"' | replace: promotion_link , '' }} class="btn btn-primary btn-m mt-s pe-no-link {{ promotion_link | default: 'disable' | replace: promotion_link , '' }}">{{- button_label -}}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{% endcapture %}
+
+{% capture cart_empty %}
+  <sht-cart-drwr-frm class="d-flex fd-column oy-scroll disable-scrollbars h-100">
+    <div class="d-flex fd-column center-xs middle-xs flex-1 gap-scale-xl pb-scale-xl">
+      {% if settings.cart_show_icon %}
+        {% render 'icon-loader', icon: settings.empty_state_icon , class: 'icon-cart-empty' %}
+      {% endif %}
+      <p class="m-zero fs-body-xl">{{ 'general.cart.cart_empty' | t }}</p>
+      <a {% if settings.empty_state_button_link == blank %} disabled tabindex="-1" {% endif %} class="btn btn-{{- settings.empty_state_button_style }} btn-l hide-empty" href="{{- settings.empty_state_button_link | default: '#' -}}">{{ settings.empty_state_button_label }}</a>
+    </div>
+    {% if section.settings.show_in_empty_cart %}
+      {{ cart_promotion }}
+    {% endif %}
+  </sht-cart-drwr-frm>
+{% endcapture %}
+
+<sht-cart-drwr data-heading="{{ section.settings.complementary_heading }}" data-limit="{{ section.settings.complementary_max_products }}" data-enable-vendor="{{ section.settings.complementary_show_vendor }}" data-enable-price="{{ section.settings.complementary_show_price }}" data-ui-component="Section Cart Drawer" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}" id="shtCartDrawer" class="drawer cart-drawer inset p-fixed no-focus-visible d-flex end-xs hidden-xs{% if section.settings.show_link_to_cart %} show-link-to-cart{% endif %} {{ section.settings.show_rating | default: 'card-drawer-rating--hidden' | replace: 'true', '' }} {{ section.settings.show_rating_recently_viewed | default: 'card-drawer-recentview-rating--hidden' | replace: 'true', '' }}" aria-hidden="true" hidden tabindex="-1">
+  <div id="cartDrawer" class="h-100 w-100 d-flex end-xs">
+    <div class="drawer-overlay js-drawer-overlay p-fixed inset w-100 h-100v"></div>
+    <sht-tabs class="drawer-wrapper drawer-content-container js-drawer-wrapper js-scroll-container p-relative zi-2 background color-{{- section.settings.color_scheme }}" role="dialog" aria-label="{{ 'sections.cart.title' | t }}" aria-modal="true">
+      <div class="drawer__header d-flex middle-xs between-xs gap-xs">
+        <ul class="js-tab-container p-relative ox-auto disable-scrollbars ls-none ws-nowrap d-flex gap-m base-line" role="tablist">
+          <li class="tab__item o-hidden d-inline-block" role="presentation">
+            <a class="tab__link fs-body-xl d-block p-relative ele-focus-visible  tab__link--active js-tab-link" role="tab" id="{{ tab_id }}-cart" href="#{{ tab_aria_controls_prefix }}-cart" aria-controls="{{ tab_aria_controls_prefix }}-cart">
+              <h2 class="drawer__heading h5 m-zero js-drawer-heading regular-heading">
+                {{ 'general.cart.label' | t }}
+                <sup class="fs-body-xl js-cart-drawer-count-number f-extra {{ settings.numbers_style | replace: 'number', '' }}">{{ cart.item_count }}</sup>
+              </h2>
+            </a>
+          </li>
+          {%- if section.settings.recently_viewed_enabled -%}
+            <li class="tab__item o-hidden d-inline-block" role="presentation">
+              <a class="tab__link fs-body-xl d-block p-relative ele-focus-visible  js-tab-link" role="tab" id="{{ tab_id }}-recent" href="#{{ tab_aria_controls_prefix }}-recent" aria-controls="{{ tab_aria_controls_prefix }}-recent">
+                <h2 class="drawer__heading h5 m-zero js-drawer-heading regular-heading">
+                  {{ 'general.recently_viewed.label' | t }}
+                </h2>
+              </a>
+            </li>
+          {%- endif -%}
+        </ul>
+        <button class="js-drawer-btn-close js-cart-drawer-btn-close drawer__btn-close btn btn-icon-l btn-icon btn-tertiary" onclick="window.shtCartDrawer.closeDrawer(event);" type="button" aria-label="{{ 'accessibility.close' | t }}">
+          {%- render 'icon-x-mark' -%}
+        </button>
+      </div>
+      <div class="drawer__body tab__content js-tab-content">
+        <div class="tab__panel tab__panel--active d-flex fd-column h-100 js-tab-panel js-cart-drawer-wrapper o-hidden {{ tab_aria_controls_prefix }}-cart" data-tab-content-id="{{ tab_aria_controls_prefix }}-cart" aria-labelledby="{{ tab_id }}-cart" role="tabpanel">
+          {%- if cart == empty -%}
+            {{ cart_empty }}
+          {%- else -%}
+            <sht-scroll-gradient-overlay class="p-relative h-100 gradient-overlay--bottom gradient-overlay o-hidden">
+              <div class="drawer__container js-scroll-element scrollbars disable-scrollbars">
+                {% if settings.cart_show_free_shipping_notification and settings.cart_minimum_order_price_for_free_shipping != blank %}
+                  <div class="free-shipping-notification js-free-shipping-notification-message mb-scale-2xl js-cart-drawer-free-shipping">
+                    {% render 'free-shipping-amount', cart: cart, section: section, class: 'd-flex fd-column gap-3xs' %}
+                  </div>
+                {% endif %}
+                <sht-message-success class="js-drawer-message gap-3xs mb-s middle-xs d-none">
+                  <span class="icon  icon--success fs-0">
+                    {% render 'icon-check' | class: 'icon icon-fix-m' %}
+                  </span>
+                  <span class="fs-body-s color-text-80">
+                    {{ "general.cart_drawer.success_message" | t }}
+                  </span>
+                </sht-message-success>
+                <sht-cart-drwr-frm class="">
+                  <span class="js-cart-drawer-count visually-hidden">{{ cart.item_count }}</span>
+                  <form action="{{ routes.cart_url }}" id="cart-drawer-form" class="cart-drawer__form" method="post">
+                    <ul class="ls-none d-flex fd-column gap-3xl js-cart-drawer-items js-cart-items">
+                      {%- for item in cart.items -%}
+                        <li id="cartDrawerItem-{{ item.index | plus: 1 }}" class="cart-item cart-drawer__product js-cart-drawer-item d-flex gap-xs">
+                          {%- liquid
+                            assign media = 'product-apparel-1' | placeholder_svg_tag: 'placeholder js-image-lazy h-100 w-100 d-block visible-xs'
+                            assign media_classes = 'h-100 media d-block ' | append: settings.product_card_image_type
+                            assign alt_image = item.title
+                            assign media = item.image | image_url: width: 300 | image_tag: widths: '300', sizes: '100vw', alt: alt_image, class: media_classes
+                            assign product_quantity = item.product.selected_or_first_available_variant.inventory_quantity
+                            if item.product.selected_or_first_available_variant.inventory_policy == 'continue' or item.product.selected_or_first_available_variant.inventory_management == blank
+                              assign product_quantity = 9999
+                            endif
+                          %}
+                          <div class="cart-item__image p-relative" style="--background-image: {{ settings.product_card_image_background }}">
+                            {% render 'image', image_item: media, src: media.src, image_wrap_classes: 'rad-s', ratio: settings.product_card_image_ratio %}
+                          </div>
+                          <div class="cart-drawer__product-info flex-1 d-flex fd-column">
+                            {% if settings.cart_show_vendor %}
+                              <span class="fs-body-s d-block mb-2xs color-text-80 f-extra">{{- item.product.vendor -}}</span>
+                            {% endif %}
+                            <div class="d-flex gap-3xs mb-xs between-xs">
+                              <div>
+                                <a href="{{ item.url }}" class="card__heading d-block mb-xs component-heading fs-heading-s ele-focus-visible">{{ item.product.title | escape }}</a>
+
+                                <div class="">
+                                  {%- if item.product.has_only_default_variant == false or item.properties.size != 0 or item.selling_plan_allocation != null -%}
+                                    <dl class="m-zero wb-break-word hide-empty fs-body-s color-text-60 f-extra">
+                                      {%- if item.product.has_only_default_variant == false -%}
+                                        <div>
+                                          <span>
+                                            {%- liquid
+                                              assign options_names = ''
+                                              for option in item.options_with_values
+                                                assign options_names = options_names | append: ', ' | append: option.value
+                                              endfor
+                                              echo  options_names | replace_first: ', ', ''
+                                            -%}
+                                            </span>
+                                        </div>
+                                      {%- endif -%}
+                                    </dl>
+                                  {%- endif -%}
+                                  {% render 'product-price', product: item.product, target: item.variant %}
+                                  <div class="cart-drawer__properties wb-break-word hide-empty fs-body-s color-text-60 hide-empty d-flex fd-column gap-2xs mt-xs pt-xs">
+                                    {%- for property in item.properties -%}
+                                      {%- assign property_first_char = property.first | slice: 0 -%}
+                                      {%- if property.last != blank and property_first_char != '_' -%}
+                                        <div>
+                                          <p class="mb-0">{{ property.first }}:
+                                            {%- if property.last contains '/uploads/' -%}
+                                              <a href="{{ property.last }}" class="link" target="_blank">
+                                                {{ property.last | split: '/' | last }}
+                                              </a>
+                                            {% else %}
+                                              {{ property.last }}
+                                            {% endif %}
+                                          </p>
+                                        </div>
+                                      {%- endif -%}
+                                    {%- endfor -%}
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="cart-drawer__price ta-right js-cart-drawer-price">
+                                <div class="wb-break-word d-flex fd-column component-heading fs-heading-s">
+                                  {%- if item.original_line_price != item.final_line_price -%}
+                                    <div class="cart-item__discounted-prices">
+                                      <span class="visually-hidden">
+                                        {{ 'products.product.price.sale_price' | t }}
+                                      </span>
+                                      <span class="d-block">
+                                        {% if settings.currency_code_enabled %}
+                                          {{ item.final_line_price | money_with_currency }}
+                                        {% else %}
+                                          {{ item.final_line_price | money }}
+                                        {% endif %}
+                                      </span>
+                                      <span class="visually-hidden">
+                                        {{ 'products.product.price.regular_price' | t }}
+                                      </span>
+                                    </div>
+                                  {%- else -%}
+                                    <span class="d-block">
+                                      {% if settings.currency_code_enabled %}
+                                        {{ item.original_line_price | money_with_currency }}
+                                      {% else %}
+                                        {{ item.original_line_price | money }}
+                                      {% endif %}
+                                    </span>
+                                  {%- endif -%}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="cart-drawer__quantity fd-column d-flex top-xs gap-xs js-cart-drawer-quantity" data-variant-id="{{ item.variant.id }}">
+                              <div>
+                                <label class="visually-hidden" for="cartDrawerQuantityField-{{ item.index | plus: 1 }}">{{ 'products.product.quantity.label' | t }}</label>
+                                <sht-cart-drwr-qty-inp class="field_quantity d-inline-flex middle-xs center-xs" data-product-quantity="{{ product_quantity }}">
+                                  <button class="js-cart-drawer-quantity-btn js-cart-drawer-quantity-btn-minus js-cart-drawer-btn btn btn-icon-m btn-secondary" name="minus" data-name="minus" type="button">
+                                    <span class="visually-hidden">{{ 'general.cart.decrease' | t }}</span>
+                                    {% render 'icon-minus', class: 'icon-fix-m icon' %}
+                                  </button>
+                                  <input class="js-cart-drawer-quantity-input product-quantity-input input-number fs-body-l btn-icon-m b-zero ta-center bg-transparent" 
+                                  type="number" 
+                                  name="updates[]" 
+                                  data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}" 
+                                  value="{{ item.quantity }}" 
+                                  min="{{ item.product.selected_or_first_available_variant.quantity_rule.min }}"
+                                  step="{{ item.product.selected_or_first_available_variant.quantity_rule.increment }}"
+                                  {% if item.product.selected_or_first_available_variant.quantity_rule.max != null %}
+                                    max="{{ item.product.selected_or_first_available_variant.quantity_rule.max }}"
+                                  {% endif %}
+                                  aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}" 
+                                  id="cartDrawerQuantityField-{{ item.index | plus: 1 }}" 
+                                  data-index="{{ item.index | plus: 1 }}"
+                                  data-quantity-rule="{{ item.product.selected_or_first_available_variant.quantity_rule | escape }}"
+                                  >
+                                  <button class="js-cart-drawer-quantity-btn js-cart-drawer-quantity-btn-plus js-cart-drawer-btn btn btn-icon-m btn-secondary" name="plus" data-name="plus" type="button">
+                                    <span class="visually-hidden">{{ 'general.cart.increase' | t }}</span>
+                                    {% render 'icon-plus', class: 'icon-fix-m icon' %}
+                                  </button>
+                                </sht-cart-drwr-qty-inp>
+                                <sht-cart-drwr-rmv-btn id="cartDrawerRemove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
+                                  <button class="js-cart-drawer-delete-btn js-cart-drawer-btn btn-remove btn btn-plain b-zero d-inline-flex middle-xs center-xs btn-m" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}" type="button">
+                                    {% render 'icon-trashbin', class: 'icon-fix-m icon' %}
+                                  </button>
+                                </sht-cart-drwr-rmv-btn>
+                              </div>
+                              {%- if item.product.quantity_price_breaks_configured? -%}
+                                <div class="w-100 p-relative product-quantity-pricing">
+                                  <button type="button" class="btn btn-tertiary btn-s d-flex middle-xs gap-3xs quantity-pricing-btn js-quantity-pricing-btn">
+                                    {%- render 'icon-warning-circled', class: 'icon icon-fix-l' -%}
+                                    <span class="volume-pricing-available-text">{{ 'product.volume_pricing_available' | t }}</span>
+                                  </button>
+                                  <div class="quantity-pricing-content js-quantity-pricing-content rad-m background disable-scrollbars">
+                                    {%- render 'quantity-pricing', product: item.product, target: item.product.selected_or_first_available_variant -%}
+                                  </div>
+                                </div>
+                              {%- endif -%}
+                              <div>
+                                <div class="d-flex d-none-important product-form-message middle-xs gap-3xs" id="cart-drawer-line-item-error-{{ item.index | plus: 1 }}" role="alert">
+                                  <div class="icon d-flex">
+                                    {% render 'icon-warning-circled', class: 'icon icon-fix-m color-error' %}
+                                  </div>
+                                  <small class="js-cart-drawer-form-item-error-message"></small>
+                                </div>
+                                <div class="d-flex w-100 gap-3xs d-none-important js-max-quantity-message">
+                                  {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+                                  <p class="fs-body-s color-text-80 mb-0 max-quantity-message">{{ 'products.product.add_more_text' | t }} {{ item.product.title }} {{ 'sections.featured_blog.article.in_date' | t }} {{ item.product.selected_or_first_available_variant.title }} {{ 'products.product.item_to_cart' | t }}</p>
+                                </div>
+                                {%- if item.product.quantity_price_breaks_configured? -%}
+                                  <div class="d-flex w-100 gap-3xs mb-2xs d-none-important js-quantity-pricing-message">
+                                    {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+                                    {%- if item.product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+                                      <p class="fs-body-s color-text-80 mb-0 d-none-important js-min-quantity-pricing-message ta-left">{{ 'product.min_error_message' | t: min: item.product.selected_or_first_available_variant.quantity_rule.min }}</p>
+                                    {%- endif -%}
+                                    {%- if item.product.selected_or_first_available_variant.quantity_rule.max != null -%}
+                                      <p class="fs-body-s color-text-80 mb-0 d-none-important js-max-quantity-pricing-message ta-left">{{ 'product.max_error_message' | t: max: item.product.selected_or_first_available_variant.quantity_rule.max }}</p>
+                                    {%- endif -%}
+                                    {%- if item.product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+                                      <p class="fs-body-s color-text-80 mb-0 d-none-important js-step-quantity-pricing-message ta-left">{{ 'product.step_error_message' | t: step: item.product.selected_or_first_available_variant.quantity_rule.increment }}</p>
+                                    {%- endif -%}
+                                  </div>
+                                {%- endif -%}
+                              </div>
+                            </div>
+                            <div class="cart-drawer__sale d-flex fd-column gap-2xs hide-empty mt-s">
+                              {%- if item.selling_plan_allocation != nil -%}
+                                <div class="cart-item__discounted hide-empty d-flex middle-xs gap-3xs">
+                                  <span class="discounted-icon icon fs-0">
+                                    {% render 'icon-discount', class: 'icon-fix-m icon' %}
+                                  </span>
+                                  <span class="color-text-80 fs-body-s">
+                                    {{ item.selling_plan_allocation.selling_plan.name }}
+                                  </span>
+                                </div>
+                              {%- endif -%}
+                              {%- if item.original_line_price != item.final_line_price -%}
+                                {%- for discount in item.discounts -%}
+                                  <div class="cart-item__discounted hide-empty d-flex middle-xs gap-3xs">
+                                    <span class="discounted-icon icon fs-0">
+                                      {% render 'icon-discount', class: 'icon-fix-m icon' %}
+                                    </span>
+                                    <span class="color-text-80 fs-body-s">
+                                      {{ discount.title }}
+                                      (
+                                      {{- discount.savings | money -}}
+                                      )
+                                    </span>
+                                  </div>
+                                {%- endfor -%}
+                              {%- endif -%}
+                            </div>
+                          </div>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                    <div id="cart-drawer__errors" class="js-cart-drawer-errors d-none" role="alert"></div>
+                  </form>
+                </sht-cart-drwr-frm>
+                {% liquid
+                  assign carousel_style = 'js-carousel-items ox-auto p-relative scrollable scrollable-x disable-scrollbars'
+                  assign carousel_item = 'js-carousel-item p-relative scrollable-aln-start'
+                  assign product_array = ''
+                  for item in cart.items
+                    if forloop.index == 1
+                      assign product_array = product_array | append: item.product_id
+                    else
+                      assign product_array = product_array | append: ',' | append: item.product_id
+                    endif
+                  endfor
+                %}
+
+                <sht-cart-drwr-cpry class="hide-empty d-block mt-3xl o-hidden" data-product-id="{{ product_array }}" data-url="{{routes.product_recommendations_url}}?section_id={{ section.id }}&limit=10&intent=complementary&product_id=">
+                  <div class="sht-carousel product__info-wrapper js-cart-complementary-product-main p-relative d-none mb-3xl" data-enable="true" data-enable-mobile="true">
+                    <div class="carousel-header d-flex mb-s end-xs middle-xs">
+                      <span class="fs-body-xl hide-empty d-block js-cart-complementary-heading-content flex-1"></span>
+                      <div class="no-js-hidden d-flex gap-3xs js-cart-complementary-product-btn">
+                        <button type="button" data-step="2" data-step-mb="1" class="js-carousel-prev-btn btn-carousel-prev btn btn-icon-m btn-secondary ele-focus-visible rtl-flip-x" aria-label="{{ 'accessibility.previous_slide' | t }}" name="previous" disabled>{% render 'icon-caret-left' %}</button>
+                        <button type="button" data-step="2" data-step-mb="1" class="js-carousel-next-btn btn-carousel-next btn btn-icon-m btn-secondary ele-focus-visible rtl-flip-x" aria-label="{{ 'accessibility.next_slide' | t }}" name="next" disabled>{% render 'icon-caret-right' %}</button>
+                      </div>
+                    </div>
+                    <div class="carousel-content p-relative">
+                      <div aria-atomic="true" class="rw section-content-style js-cart-complementary-product-list o-hidden r-gap-scale-xl {{ carousel_style }} carousel--special" style="--carousel-xs: 12;">
+                        {% for recommendation in recommendations.products %}
+                          <sht-carousel-itm data-id="{{ recommendation.id }}" class="js-cart-complementary-product-item complementary-product-item carousel__item clm {{ carousel_item }}"
+                            style="--w-xs:12; --w-sm:6;"
+                            role="group"
+                            aria-roledescription="Slide"
+                            aria-label="{{ 'accessibility.slide' | t }} {{ forloop.index }} {{ 'accessibility.of' | t }} {{ forloop.length }}"
+                            data-item-index="{{ forloop.index }}"
+                          >
+                            {% render 'mini-card-product',
+                              product: recommendation,
+                              show_vendor: true,
+                              show_price: true,
+                              show_rating: true,
+                              rating_class: 'rating-recommendation',
+                              image_loading: 'lazy',
+                              fetchpriority: 'low'
+                            %}
+                          </sht-carousel-itm>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </sht-cart-drwr-cpry>
+              </div>
+            </sht-scroll-gradient-overlay>
+            <div class="drawer__footer p-sticky bottom-0 cart-drawer__footer zi-1 js-cart-drawer-footer">
+              <div class="cart-amount js-cart-form-content-cart-total d-flex fd-column gap-s">
+                <div class="hide-empty js-cart-level-discount-applications">
+                  {%- if cart.cart_level_discount_applications.size > 0 -%}
+                    <ul class="ls-none cart__discounted" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                      {%- for discount in cart.cart_level_discount_applications -%}
+                        <li class="d-flex middle-xs between-xs gap-m">
+                          <div class="d-flex middle-xs gap-3xs">
+                            <span class="discounted-icon icon fs-0">
+                              {% render 'icon-discount', class: 'icon-fix-m icon' %}
+                            </span>
+                            <span class="fs-body-s color-text-80">{{ discount.title }}</span>
+                          </div>
+                          <span class="m-zero ta-right">
+                            -
+                            {% if settings.currency_code_enabled %}
+                              {{ discount.total_allocated_amount | money_with_currency }}
+                            {% else %}
+                              {{ discount.total_allocated_amount | money }}
+                            {% endif %}
+                          </span>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+                {% if settings.show_discount_field and cart != empty %}
+                  <div class="cart__discount rad-m border">
+                    {% render 'cart-discount', section: section %}
+                  </div>
+                {% endif %}
+
+                {% if settings.enable_cart_order_notes and cart != empty %}
+                  <div class="cart__note p-s rad-m border">
+                    <details class="d-flex fd-column">
+                      <summary class="d-inline-block ls-none c-pointer w-100 ele-focus-visible">
+                        <span class="d-flex gap-xs middle-xs fs-body-m">
+                          {% render 'icon-notes', class: 'icon icon-fix-m' %}
+                          {{ 'general.cart.cart_order_note' | t }}
+                        </span>
+                      </summary>
+                      <sht-cart-drwr-note>
+                        <label class="visually-hidden" for="cartNote">{{ 'general.cart.cart_note_title' | t }}</label>
+                        <textarea id="cartNote" class="textarea field__text field--focus field--hover fs-body-m w-100 mt-2xl" form="cart-drawer-form" name="note" placeholder="{{ 'general.enter_order_note.label' | t }}" rows="5">{{ cart.note }}</textarea>
+                      </sht-cart-drwr-note>
+                    </details>
+                  </div>
+                {% endif %}
+                <div class="d-flex fd-column gap-s w-100">
+                  <div class="cart__checkout d-flex fd-column gap-scale-xs js-cart-total">
+                    <noscript>
+                      <button type="submit" class="w-100 btn btn-primary rad-m p-m " form="cart-drawer-form">
+                        {{ 'sections.cart.update' | t }}
+                      </button>
+                    </noscript>
+                    <button type="submit" class="js-cart-drawer-submit-btn w-100 btn btn-primary rad-m p-m cart-drawer__checkout gap-m" name="checkout" {% if cart == empty %} disabled {% endif %} form="cart-drawer-form">
+                      <span class="d-flex gap-xs middle-xs fs-body-xl">
+                        {% render 'icon-bag-check', class: 'icon icon-fix-2xl' %}
+                        {{ 'sections.cart.checkout' | t }}
+                      </span>
+                      <span class="m-zero ta-right component-heading fs-heading-l">
+                        {% if settings.currency_code_enabled %}
+                          {{ cart.total_price | money_with_currency }}
+                        {% else %}
+                          {{ cart.total_price | money }}
+                        {% endif %}
+                      </span>
+                    </button>
+                    {%- if additional_checkout_buttons and settings.cart_enable_dynamic_checkout_button -%}
+                      <div class="w-100">
+                        {{ content_for_additional_checkout_buttons }}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                  <div class="cart__checkout-link ta-center d-none">
+                    <a href="{{ routes.cart_url }}" {% if section.settings.show_link_to_cart == false %} tabindex="-1" {% endif %} class="btn btn-tertiary btn-s w-100 d-flex gap-3xs maw-fit-content">
+                      {{ 'general.cart.go_to_cart_page' | t }}
+                      {% render 'icon-caret-right', class: 'icon icon-fix-l rtl-flip-x' %}
+                    </a>
+                  </div>
+                  <div class="js-cart-form-errors hide-empty"></div>
+                </div>
+                {% if settings.show_tax_shipping %}
+                  <small class="ta-center fs-body-m color-text-60 d-block rte">
+                    {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                      {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                    {%- elsif cart.taxes_included -%}
+                      {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+                    {%- elsif shop.shipping_policy.body != blank -%}
+                      {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+                    {%- else -%}
+                      {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+                    {%- endif -%}
+                  </small>
+                {% endif %}
+                {%- if settings.cart_show_payment_method == true and shop.enabled_payment_types -%}
+                  <div class="product__payment-method wb-break-word d-flex fw-wrap gap-s center-xs middle-xs">
+                    <span class="fs-body-s">{{- settings.cart_payment_heading | escape -}}</span>
+                    <ul class="list list-payment d-flex gap-2xs fw-wrap ls-none">
+                      {%- for type in shop.enabled_payment_types -%}
+                        <li class="list-payment__item d-flex">
+                          {{ type | payment_type_svg_tag | replace: 'id="pi', 'id="pi-cart-drawer' }}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.recently_viewed_enabled -%}
+          <div class="tab__panel h-100 js-tab-panel o-hidden {{ tab_aria_controls_prefix }}-recent" data-tab-content-id="{{ tab_aria_controls_prefix }}-recent" aria-labelledby="{{ tab_id }}-recent" role="tabpanel">
+            <div class="d-flex fd-column between-xs h-100 oy-scroll disable-scrollbars">
+              <sht-recently-viewed-drawer class="p-relative flex-1"
+                data-limit="{{ section.settings.recently_viewed_max_products }}"
+                data-enable-vendor="{{- section.settings.recently_viewed_show_vendor -}}"
+                data-enable-price="{{- section.settings.recently_viewed_show_price -}}"
+                data-enable-rating="{{- section.settings.show_rating_recently_viewed -}}"
+              >
+                <div class="js-drawer-recently-viewed d-flex fw-wrap section-content-style gap-scale-m js-recently-viewed-drawer recently-viewed-drawer"></div>
+                <div class="js-rv-empty h-100 d-flex fd-column center-xs middle-xs flex-1 gap-scale-xl pb-scale-xl">
+                  {% if settings.cart_show_icon %}
+                    {% render 'icon-loader', icon: settings.empty_state_icon , class: 'icon-cart-empty' %}
+                  {% endif %}
+                  <p class="m-zero fs-body-xl">{{ 'general.recently_viewed.empty' | t }}</p>
+                  <a {% if settings.empty_state_button_link == blank %} disabled tabindex="-1" {% endif %} class="btn btn-{{- settings.empty_state_button_style }} btn-l hide-empty" href="{{- settings.empty_state_button_link | default: '#' -}}">{{ settings.empty_state_button_label }}</a>
+                </div>
+              </sht-recently-viewed-drawer>
+              {%- if section.settings.show_in_recently_viewed_tab -%}
+                {{ cart_promotion }}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </sht-tabs>
+    <div class="cart-drawer-data d-none">
+      <div class="js-drawer-empty drawer-empty">{{ cart_empty }}</div>
+    </div>
+  </div>
+  <button aria-label="{{- "accessibility.close_modal" | t -}}" class="js-drawer-btn-close visually-hidden">
+    {%- render 'icon-x-mark' -%}
+  </button>
+</sht-cart-drwr>
+
+{% schema %}
+{
+  "name": "t:sections.cart_drawer.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart_drawer.settings.cart_drawer_paragraph_1.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart_drawer.settings.cart_drawer_paragraph_2.content"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_link_to_cart",
+      "label": "t:sections.cart_drawer.settings.show_link_to_cart.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.promotion.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_in_empty_cart",
+      "label": "t:sections.cart_drawer.settings.show_in_empty_cart.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_in_recently_viewed_tab",
+      "label": "t:sections.cart_drawer.settings.show_in_recently_viewed_tab.label",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "promotion_image",
+      "label": "t:general.settings.image.label",
+      "info": "t:sections.cart_drawer.settings.promotion_image.info",
+      "visible_if": "{{ section.settings.show_in_empty_cart == true or section.settings.show_in_recently_viewed_tab == true }}"
+    },
+    {
+      "type": "select",
+      "id": "promotion_image_ratio",
+      "label": "t:general.settings.image_ratio.label",
+      "visible_if": "{{ section.settings.show_in_empty_cart == true or section.settings.show_in_recently_viewed_tab == true }}",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "t:general.settings.image_ratio.options.option_square.label"
+        },
+        {
+          "value": "3/2",
+          "label": "t:general.settings.image_ratio.options.option_landscape.label"
+        },
+        {
+          "value": "2/3",
+          "label": "t:general.settings.image_ratio.options.option_portrait.label"
+        },
+        {
+          "value": "auto",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        }
+      ],
+      "default": "1/1"
+    },
+    {
+      "type": "text",
+      "id": "promotion_heading",
+      "label": "t:general.settings.heading.label",
+      "default": "Promotion heading",
+      "visible_if": "{{ section.settings.show_in_empty_cart == true or section.settings.show_in_recently_viewed_tab == true }}"
+    },
+    {
+      "type": "richtext",
+      "id": "promotion_description",
+      "label": "t:general.settings.description.label",
+      "visible_if": "{{ section.settings.show_in_empty_cart == true or section.settings.show_in_recently_viewed_tab == true }}"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:general.settings.button_label.label",
+      "info": "t:general.settings.hide_if_empty.info",
+      "visible_if": "{{ section.settings.show_in_empty_cart == true or section.settings.show_in_recently_viewed_tab == true }}"
+    },
+    {
+      "type": "url",
+      "id": "promotion_link",
+      "label": "t:general.settings.link.label",
+      "info": "t:sections.cart_drawer.settings.link.info",
+      "visible_if": "{{ section.settings.show_in_empty_cart == true or section.settings.show_in_recently_viewed_tab == true }}"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "t:general.settings.content_position.label",
+      "visible_if": "{{ section.settings.show_in_empty_cart == true or section.settings.show_in_recently_viewed_tab == true }}",
+      "options": [
+        {
+          "value": "start-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_1.label"
+        },
+        {
+          "value": "center-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_2.label"
+        },
+        {
+          "value": "end-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_3.label"
+        }
+      ],
+      "default": "center-xs"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "visible_if": "{{ section.settings.show_in_empty_cart == true or section.settings.show_in_recently_viewed_tab == true }}",
+      "options": [
+        {
+          "value": "ta-left top-xs",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center middle-xs",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right bottom-xs",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-center middle-xs"
+    },
+    {
+      "type": "range",
+      "unit": "%",
+      "max": 90,
+      "min": 0,
+      "step": 10,
+      "default": 30,
+      "id": "section_overlay_opacity",
+      "label": "t:general.settings.overlay_opacity.label",
+      "visible_if": "{{ section.settings.show_in_empty_cart == true or section.settings.show_in_recently_viewed_tab == true }}"
+    },
+    {
+      "type": "color",
+      "id": "promotion_mask_overlay_color",
+      "label": "t:general.settings.custom_mask_overlay_opacity.label",
+      "visible_if": "{{ section.settings.show_in_empty_cart == true or section.settings.show_in_recently_viewed_tab == true }}"
+    },
+    {
+      "type": "color",
+      "id": "promotion_content_overlay_color",
+      "label": "t:general.settings.custom_content_overlay_opacity.label",
+      "visible_if": "{{ section.settings.show_in_empty_cart == true or section.settings.show_in_recently_viewed_tab == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.complementary_products.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.cart_drawer.settings.complementary_products.content"
+    },
+    {
+      "type": "text",
+      "id": "complementary_heading",
+      "label": "t:general.settings.heading.label",
+      "default": "Recommendations"
+    },
+    {
+      "type": "range",
+      "id": "complementary_max_products",
+      "label": "t:general.settings.max_products_to_show.label",
+      "default": 3,
+      "min": 1,
+      "max": 10,
+      "step": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "complementary_show_vendor",
+      "label": "t:general.settings.show_vendor.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "t:general.settings.show_rating.label",
+      "info": "t:general.settings.show_rating.info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "complementary_show_price",
+      "label": "t:general.settings.show_price.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.cart_drawer.settings.headers.recently_viewed_products.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "recently_viewed_enabled",
+      "label": "t:sections.cart_drawer.settings.recently_viewed_products.enable.label",
+      "default": false,
+      "info": "t:sections.cart_drawer.settings.recently_viewed_products.enable.info"
+    },
+    {
+      "type": "range",
+      "id": "recently_viewed_max_products",
+      "label": "t:general.settings.max_products_to_show.label",
+      "default": 3,
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "visible_if": "{{ section.settings.recently_viewed_enabled == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "recently_viewed_show_vendor",
+      "label": "t:general.settings.show_vendor.label",
+      "default": true,
+      "visible_if": "{{ section.settings.recently_viewed_enabled == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating_recently_viewed",
+      "label": "t:general.settings.show_rating.label",
+      "info": "t:general.settings.show_rating.info",
+      "default": false,
+      "visible_if": "{{ section.settings.recently_viewed_enabled == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "recently_viewed_show_price",
+      "label": "t:general.settings.show_price.label",
+      "default": true,
+      "visible_if": "{{ section.settings.recently_viewed_enabled == true }}"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+<details class="d-flex fd-column">
+  <summary class="p-s d-inline-block ls-none c-pointer w-100 ele-focus-visible">
+    <span class="d-flex gap-xs middle-xs fs-body-m">
+      {% render 'icon-discount', class: 'icon icon-fix-m' %}
+      {{ 'general.discount_code' | t }}
+    </span>
+  </summary>
+
+  <sht-cart-discount class="p-s cart-discount js-cart-discount" data-section-id="{{ section.id }}">
+    <div class="cart-discount__form-container">
+      <div class="cart-discount__form js-discount-form" data-discount-form>
+        <div class="field d-flex gap-xs">
+          <input
+            type="text"
+            name="discount"
+            id="cartDiscountCode"
+            class="cart-discount__input field__text js-discount-input field--focus field--hover fs-body-m w-100"
+            placeholder="{{ 'general.discount_code' | t }}"
+            autocomplete="off"
+            aria-label="{{ 'general.discount_code' | t }}"
+            aria-describedby="cartDiscountError"
+          >
+          <button type="button" class="cart-discount__button js-discount-submit btn btn-m btn-primary flex-auto">
+            {{ 'general.apply' | t }}
+          </button>
+        </div>
+
+        <div class="cart-discount__success mt-m gap-3xs middle-xs d-flex w-100 d-none-important js-max-quantity-message" id="cartDiscountSuccess" role="alert">
+          <span class="fs-0 color-success">
+            {% render "icon-check" | class: "icon d-block icon-fix-m" %}
+          </span>
+          <p class="js-success-discount fs-body-s color-text-80 mb-0 max-quantity-message">{{ 'general.discount_code_success' | t }}</p>
+        </div>
+
+        <div class="cart-discount__error mt-m d-flex w-100 middle-xs gap-3xs d-none-important js-max-quantity-message" id="cartDiscountError" role="alert">
+          {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+          <p class="js-error-discount fs-body-s color-text-80 mb-0 max-quantity-message">{{ 'general.discount_code_error' | t }}</p>
+          <p class="js-error-shipping fs-body-s color-text-80 mb-0 max-quantity-message d-none-important">{{ 'general.shipping_discount_error' | t }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-discount__pills mt-m d-flex middle-xs gap-2xs js-discount-pills fw-wrap">
+      {%- for discount_application in cart.discount_applications -%}
+        {%- if discount_application.type == 'discount_code' -%}
+          <div class="cart-discount__pill d-flex middle-xs center-xs gap-xs">
+            <span class="cart-discount__code fs-body-m" data-discount-code="{{ discount_application.title }}">{{ discount_application.title }}</span>
+            <button class="cart-discount__remove js-remove-discount d-inline-flex middle-xs center-xs flex-0-auto btn btn-icon btn-icon-xs btn-tertiary" data-remove-discount="{{ discount_application.title }}" aria-label="{{ 'general.remove_discount' | t: code: discount_application.title }}">
+              {% render 'icon-x-mark', class: 'icon-fix-m', size: 16 %}
+            </button>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </sht-cart-discount>
+</details>

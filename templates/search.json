@@ -1,0 +1,74 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-search",
+      "blocks": {
+        "product_type_4FJtfX": {
+          "type": "product_type",
+          "settings": {
+            "color_product_type": ""
+          }
+        },
+        "title_QH4tC7": {
+          "type": "title",
+          "settings": {}
+        },
+        "price_6GUreK": {
+          "type": "price",
+          "settings": {
+            "color_product_price": ""
+          }
+        },
+        "variants_aTHx7y": {
+          "type": "variants",
+          "settings": {
+            "card_product_variants": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_type_4FJtfX",
+        "title_QH4tC7",
+        "price_6GUreK",
+        "variants_aTHx7y"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "products_per_load": "24",
+        "products_load_method": "pagination",
+        "enable_h1_tag": true,
+        "allow_change_columns": true,
+        "switcher_style": "btn-viewby--fill",
+        "enable_filter": true,
+        "show_group_name_filters": true,
+        "enable_sort": true,
+        "limited_filter_options_desktop": 6,
+        "show_quick_view": true,
+        "quick_buy": "standard",
+        "show_featured_image": true,
+        "image_ratio": "3/2",
+        "show_blog_tags": true,
+        "show_author": true,
+        "show_published_date": true,
+        "show_excerpt": true,
+        "filter_sort_layout": "sidebar",
+        "item_per_row_desktop": "4",
+        "close_all_filter": false,
+        "item_per_row_mobile": "2",
+        "close_all_filter_mb": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

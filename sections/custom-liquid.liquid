@@ -1,0 +1,145 @@
+{%- render 'section-padding-collapse' -%}
+<div data-animate="regular-section" class="js-animate section section--vertical color-{{- section.settings.color_scheme }} background o-hidden" data-ui-component="Section Custom Liquid">
+  <div class="section__header">
+    <div class="ctnr">
+      <div class="section__text w-100 d-flex fd-column hide-empty {{ section.settings.heading_alignment_desktop }} {{ section.settings.heading_alignment_mobile }}" >
+        {%- if section.settings.subheading != blank -%}
+          <p class="subheading section__subheading promotional-subheading">{{- section.settings.subheading | escape -}}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="section__heading promotional-heading {{ section.settings.heading_size }}">{{- section.settings.heading | escape -}}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="section__description fs-body-xl rte o-hidden">{{- section.settings.description -}}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  <div class="section__content">
+    <div class="ctnr">
+      {{- section.settings.liquid_code -}}
+    </div>
+  </div>
+</div>
+{% schema %} 
+    {
+      "name": "t:sections.custom_liquid.name",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.general.content"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:general.settings.color_schemes.label",
+          "default": "scheme-1"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "t:general.settings.section_subheading.label",
+          "default": "Add a tagline"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:general.settings.section_heading.label",
+          "default": "Custom liquid"
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.heading_size.label",
+          "id": "heading_size",
+          "visible_if": "{{ section.settings.heading != blank }}",
+          "options": [
+            {
+              "value": "h3-regular",
+              "label": "t:general.settings.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:general.settings.heading_size.options.large.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:general.settings.heading_size.options.regular.label"
+            },
+            {
+              "value": "h6",
+              "label": "t:general.settings.heading_size.options.small.label"
+            }
+          ],
+          "default": "h5"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:general.settings.section_description.label"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.liquid_code.label"
+        },
+        {
+          "type": "liquid",
+          "id": "liquid_code",
+          "label": "t:general.settings.liquid_code.label",
+          "default": "<p style=\"text-align: center\">Write or copy/paste Liquid code</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.desktop_layout.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_alignment_desktop",
+          "label": "t:general.settings.heading_alignment.label",
+          "options": [
+            {
+              "value": "ta-left-md top-md",
+              "label": "t:general.settings.option_left.label"
+            },
+            {
+              "value": "ta-center-md middle-md",
+              "label": "t:general.settings.option_center.label"
+            },
+            {
+              "value": "ta-right-md bottom-md",
+              "label": "t:general.settings.option_right.label"
+            }
+          ],
+          "default": "ta-center-md middle-md"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.mobile_layout.content"
+        },
+      {
+        "type": "select",
+        "id": "heading_alignment_mobile",
+        "label": "t:general.settings.heading_alignment.label",
+        "options": [
+          {
+            "value": "ta-left top-xs",
+            "label": "t:general.settings.option_left.label"
+          },
+          {
+            "value": "ta-center middle-xs",
+            "label": "t:general.settings.option_center.label"
+          },
+          {
+            "value": "ta-right bottom-xs",
+            "label": "t:general.settings.option_right.label"
+          }
+        ],
+        "default": "ta-left top-xs"
+      }
+      ],
+      "presets": [
+        {
+          "name": "t:sections.custom_liquid.name"
+        }
+      ]
+    }
+    {% endschema %}

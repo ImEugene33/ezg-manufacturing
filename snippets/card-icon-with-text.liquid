@@ -1,0 +1,38 @@
+{%- comment -%}
+{% render 'card-icon-with-text',
+  card_border: boolean,
+  text_position: section.settings.text_position,  // Default is text below icon
+  icon_color: icon_color,
+  theme_library_icon: block.settings.theme_library_icon,
+  icon_source: block.settings.icon_source,
+  icon_image: block.settings.icon_image,
+  custom_code: block.settings.custom_code,
+  icon_size: icon_size,
+  title: block.settings.title,
+  description: block.settings.description,
+  link: block.settings.link,
+  label: block.settings.label,
+%}
+{%- endcomment -%}
+
+<div class="{{ text_position | default: 'fd-column' }} card-icon card-animate {{ class }} d-flex gap-s {% if card_border %}card--border rad-l p-m {% endif %}w-100 p-relative" {{ block.shopify_attributes }}>
+  {% render 'icon',
+    icon_color: icon_color,
+    theme_library_icon: theme_library_icon,
+    icon_source: icon_source,
+    icon_image: icon_image,
+    custom_code: custom_code,
+    title: title,
+    description: description,
+    size: icon_size
+  %}
+  <div class="flex-1 card-icon__content">
+    <span class="{{ heading_size | default: 'fs-heading-m' }} component-heading d-block mb-xs hide-empty">{{- title -}}</span>
+    <div class="fs-body-m mb-m rte hide-empty">{{- description -}}</div>
+    {% if label != blank %}
+      <a href="{{- link | default: '#' -}}" {{ link | default: 'tabindex="-1"' | replace: link , '' }} class="btn btn-tertiary btn-s hide-empty pe-no-link {{ link | default: 'disable' | replace: link , '' }}">
+        {{- label -}}
+      </a>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,250 @@
+{% liquid
+  assign section_id = section.id | md5 | truncate: 12, ""
+  assign loading = "lazy"
+  assign decoding = "async"
+  assign fetchpriority = "auto"
+
+  if section.index == 1
+    assign loading = "eager"
+    assign fetchpriority = "high"
+  endif
+
+  assign media_index = 1
+  assign media_classes = 'js-image-lazy h-100 w-100 of-cover media'
+  assign media_widths = '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000'
+%}
+{%- if section.blocks.size > 0 or section.settings.heading_text != blank or section.settings.description_text != blank or section.settings.enable_contact_form != false -%}
+  {%- render 'section-padding-collapse' -%}
+  <div data-animate="regular-section" class="js-animate section section--vertical background color-{{- section.settings.color_scheme }} d-block p-relative" data-ui-component="Section Image Gallery" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}">
+    {%- if section.settings.heading != blank or section.settings.description != blank or section.settings.button_text != blank or section.settings.enable_countdown == true -%}
+      <div class="section__header">
+        <div class="ctnr">
+          {% render 'section-content-horizontal',
+            section: section,
+            class: 'section__text--horizontal p-relative zi-1 gap-scale-xl',
+            heading_size: section.settings.heading_size,
+            button_main_text: section.settings.button_text,
+            button_main_link: section.settings.button_link,
+            button_main_style: 'btn-s btn-tertiary btn-horizontal',
+            enable_button: true,
+            enable_countdown: false
+          %}
+        </div>
+      </div>
+    {%- endif -%}
+    {%- if section.blocks.size > 0 -%}
+      <sht-masonry class="section__content" data-base-size="{{ settings.body_font_base }}" data-enable-offset="{{ section.settings.enable_offset_columns }}">
+        <div class="ctnr w-100 d-grid p-relative masonry js-masonry gap-xs" data-column-desktop="{{ section.settings.desktop_column }}" style="--column-count: {{ section.settings.desktop_column }};">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign media_index = media_index | plus: 1
+              assign placeholder_index = forloop.index | minus: 1 | modulo: 3 | plus: 1
+              assign placeholder_image = 'blog-apparel-' | append: placeholder_index | placeholder_svg_tag: 'placeholder js-image-lazy w-100 h-100 of-cover d-block o-hidden media'
+              assign media = placeholder_image
+              assign media_ratio = section.settings.image_ratio | replace: 'auto', '1/1'
+            -%}
+            {%- if block.settings.item_image != blank -%}
+              {%- liquid
+                assign desktop_media_sizes = 'calc(100vw / COLUMN_DESKTOP )' | replace: 'COLUMN_DESKTOP', section.settings.desktop_column
+                assign media_sizes = '(min-width: 1025px)' | append: desktop_media_sizes | append: ', (min-width: 459px) calc(100vw / 3), calc(100vw / 2)'
+                assign media_alt = block.settings.item_image.alt | default: block.settings.item_image.image | split: '/' | last
+                assign media = block.settings.item_image | image_url: width: block.settings.item_image.width | image_tag: widths: media_widths, sizes: media_sizes, alt: media_alt, class: media_classes, loading: loading, fetchpriority: fetchpriority, decoding: decoding
+                assign media_ratio = section.settings.image_ratio | replace: 'auto', block.settings.item_image.aspect_ratio
+              -%}
+              <sht-image-gallery-item class="p-absolute d-block masonry-item js-masonry-item border o-hidden rad-m " data-ratio="{{ media_ratio }}" {{ block.shopify_attributes }}>
+                <button class="js-open-image-gallery-btn open-image-gallery-btn ele-focus-visible  c-zoom-in p-relative d-block h-100 w-100 p-zero" data-gallery-dialog-id="dialogImageGallery{{ section_id }}" data-dialog-media-id="{{ section.id }}-{{ block.id }}" type="button" aria-haspopup="dialog" aria-label="{{ 'accessibility.open_media_modal' | t: index: media_index }}">
+                  {{ media }}
+                </button>
+              </sht-image-gallery-item>
+            {%- else -%}
+              <sht-image-gallery-item class="p-absolute d-block masonry-item js-masonry-item border o-hidden rad-m " data-ratio="{{ media_ratio }}" {{ block.shopify_attributes }}>
+                {{ media }}
+              </sht-image-gallery-item>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </sht-masonry>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+{%- render 'image-gallery-dialog', product: product, rand: section_id, ratio: 1, object_fit: 'of-cover', media_background: section.settings.media_background_color -%}
+
+{% schema %}
+  {
+    "name": "t:sections.image_gallery.name",
+    "disabled_on": {
+      "groups": [
+        "header",
+        "footer",
+        "custom.overlay"
+      ]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.general.content"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:general.settings.color_schemes.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "t:general.settings.section_heading.label",
+        "default": "Image Gallery"
+      },
+      {
+        "type": "select",
+        "label": "t:general.settings.heading_size.label",
+        "id": "heading_size",
+        "visible_if": "{{ section.settings.heading != blank }}",
+        "options": [
+          {
+            "value": "h3-regular",
+            "label": "t:general.settings.heading_size.options.extra_large.label"
+          },
+          {
+            "value": "h4",
+            "label": "t:general.settings.heading_size.options.large.label"
+          },
+          {
+            "value": "h5",
+            "label": "t:general.settings.heading_size.options.regular.label"
+          },
+          {
+            "value": "h6",
+            "label": "t:general.settings.heading_size.options.small.label"
+          }
+        ],
+        "default": "h5"
+      },
+      {
+        "type": "richtext",
+        "id": "description",
+        "label": "t:general.settings.section_description.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_offset_columns",
+        "label": "t:sections.image_gallery.settings.enable_offset_columns.label",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.image_item.content"
+      },
+      {
+        "type": "select",
+        "id": "image_ratio",
+        "label": "t:general.settings.image_ratio.label",
+        "options": [
+          {
+            "value": "1/1",
+            "label": "t:general.settings.image_ratio.options.option_square.label"
+          },
+          {
+            "value": "2/3",
+            "label": "t:general.settings.image_ratio.options.option_portrait.label"
+          },
+          {
+            "value": "3/2",
+            "label": "t:general.settings.image_ratio.options.option_landscape.label"
+          },
+          {
+            "value": "auto",
+            "label": "t:general.settings.image_ratio.options.option_original.label"
+          }
+        ],
+        "default": "auto"
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.desktop_layout.content"
+      },
+      {
+        "type": "select",
+        "id": "desktop_column",
+        "label": "t:general.settings.columns_per_row.label",
+        "default": "4",
+        "options": [
+          {
+            "value": "3",
+            "label": "t:general.settings.columns_per_row.options_3.label"
+          },
+          {
+            "value": "4",
+            "label": "t:general.settings.columns_per_row.options_4.label"
+          },
+          {
+            "value": "5",
+            "label": "t:general.settings.columns_per_row.options_5.label"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.button.content"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "t:general.settings.button_label.label",
+        "info": "t:general.settings.hide_if_empty.info",
+        "default": "Explore more"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "t:general.settings.link.label",
+        "visible_if": "{{ section.settings.button_text != blank }}"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "t:general.settings.image.name",
+        "type": "image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "item_image",
+            "label": "t:general.settings.image.label"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.image_gallery.name",
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          }
+			  ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,552 @@
+{%- liquid
+  assign items_per_row_on_desktop = section.settings.columns_per_row_desktop
+  assign items_per_row_on_mobile = 1
+  assign md = 12.0 | divided_by: items_per_row_on_desktop
+  assign image_sizes = '(min-width: 1025px) calc(100vw/' | append: items_per_row_on_desktop | append: '), (min-width: 768px) calc(100vw/2), 100vw'
+  assign carousel_style = 'js-carousel-items ox-auto p-relative scrollable scrollable-x disable-scrollbars'
+  assign carousel_item = 'js-carousel-item p-relative scrollable-aln-start'
+  assign data_step_desktop = items_per_row_on_desktop
+  assign data_step_mobile = ''
+  assign total_items = section.blocks.size
+
+  if settings.carousel_slide == 'single_item'
+    assign data_step_desktop = 1
+    assign data_step_mobile = 1
+  endif
+  assign loading = 'lazy'
+  assign decoding = 'async'
+  assign fetchpriority = 'auto'
+  if section.index == 1
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+  endif
+-%}
+{%- if section.blocks.size > 0 or section.settings.heading != blank or section.settings.description != blank or section.settings.button_label != blank -%}
+  {%- render 'section-padding-collapse' -%}
+  <div data-animate="regular-section" class="js-animate section color-{{- section.settings.color_scheme }} background o-hidden" data-ui-component="Section Multi Columns" role="region">
+    <div class="ctnr d-flex fd-column r-gap-4xl">
+      {%- if section.settings.heading != blank or section.settings.description != blank or section.settings.button_label != blank -%}
+        <div class="section__header">
+          {%- render 'section-content-horizontal',
+            class: 'section__text--horizontal p-relative zi-1',
+            heading_size: section.settings.heading_size,
+            button_main_text: section.settings.button_label,
+            button_main_link: section.settings.button_link,
+            button_main_style: 'btn-s btn-tertiary',
+            enable_button: true,
+            enable_countdown: false
+          -%}
+        </div>
+      {%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <div class="section__content">
+          <sht-carousel class="sht-carousel p-relative d-block"
+            data-enable="{{ section.settings.carousel_desktop }}"
+            data-enable-mobile="{{ section.settings.carousel_mobile }}">
+            <div aria-atomic="true"
+              class="rw section-content-style o-hidden r-gap-scale-xl {{ carousel_style }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel-md' }}"
+              style="--carousel-xs: 12; --carousel-sm: 6; --carousel-md: {{- md -}};">
+              {%- for block in section.blocks -%}
+                {%- assign btn_link = block.settings.btn_link -%}
+                <sht-carousel-itm
+                  class="carousel__item clm {{ section.settings.item_position }} {{ carousel_item }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel__item-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel__item-md' }}"
+                  style="--w-xs: 12; --w-sm: 6; --w-md: {{- md -}};"
+                  role="group"
+                  aria-roledescription="Slide"
+                  aria-label="{{ 'accessibility.slide' | t }} {{ forloop.index }} {{ 'accessibility.of' | t }} {{ total_items }}"
+                  data-item-index="{{ forloop.index }}"
+                  {{ block.shopify_attributes }}>
+                <div class="d-flex fd-column between-xs h-100 card--border rad-m o-hidden card-animate">
+                  <div class="d-flex fd-column between-xs">
+                    <div class="media__card hide-empty">
+                      {%- case block.type -%}
+                        {%- when 'video_column' %}
+                          {%- liquid
+                            assign media_ratio = section.settings.media_ratio
+                            if media_ratio == 'auto'
+                              if block.settings.video_source == 'external'
+                                assign media_ratio = 1.778
+                              else
+                                assign media_ratio = block.settings.video_hosted.aspect_ratio | default: 1.778
+                              endif
+                            endif
+                            render 'video', src: block.settings.video_source, media_ratio: media_ratio, video_thumbnail: block.settings.video_thumbnail_image, video_hosted: block.settings.video_hosted, external_video_link: block.settings.external_video_link, play_icon: true, image_sizes: image_sizes, block: block
+                          -%}
+                        {%- when 'image_column' %}
+                          <div class="">
+                            {%- liquid
+                                assign item_image = 'blog-apparel-1' | placeholder_svg_tag: 'placeholder w-100 h-100 media d-block'
+                                assign custom_alt_text = block.settings.image_column_image.image.alt | default: block.settings.image_column_image.image.src | split: '/' | last | split: '.' | first
+                                assign item_image = block.settings.image_column_image | image_url: width: block.settings.image_column_image.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000', sizes: image_sizes, alt: custom_alt_text, class: 'media of-cover w-100 h-100', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+                                render 'image', image_item: item_image, ratio: section.settings.media_ratio
+                            -%}
+                          </div>
+                      {%- endcase -%}
+                    </div>
+                    {%- if block.settings.title != blank or block.settings.description != blank -%}
+                    <div class="d-flex fd-column gap-xs p-m">
+                      <h2 class="{{ section.settings.heading_size_item }} component-heading hide-empty">{{- block.settings.title | escape -}}</h2>
+                      <div class="rte hide-empty">
+                        {{- block.settings.description -}}
+                      </div>
+                    </div>
+                    {%- endif -%}
+                  </div>
+                  {%- if block.settings.btn_label != blank -%}
+                    <div class="p-m pt-0">
+                      <a href="{{- btn_link | default: '#' -}}" {{ btn_link | default: 'tabindex="-1"' | replace: btn_link , '' }}
+                        class="btn btn-tertiary hide-empty w-fit-content {{ btn_link | default: 'disable' | replace: btn_link , '' }}">
+                        {{- block.settings.btn_label | escape -}}
+                      </a>
+                    </div>
+                  {%- endif -%}
+                </div>
+                </sht-carousel-itm>
+              {%- endfor %}
+            </div>
+            <div class="carousel-pagination middle-y w-100 p-absolute no-js-hidden zi-3">
+              <button
+                type="button"
+                data-step="{{ data_step_desktop }}"
+                data-step-mb="{{ data_step_mobile }}"
+                class="js-carousel-prev-btn btn-carousel-prev btn btn-icon-l btn-secondary middle-y p-absolute left-0 rtl-flip-x"
+                aria-label="{{ 'accessibility.previous_slide' | t }}"
+                name="previous"
+                disabled
+              >
+                {% render 'icon-caret-left' %}
+              </button>
+              <button
+                type="button"
+                data-step="{{ data_step_desktop }}"
+                data-step-mb="{{ data_step_mobile }}"
+                class="js-carousel-next-btn btn-carousel-next btn btn-icon-l btn-secondary middle-y p-absolute right-0 rtl-flip-x"
+                aria-label="{{ 'accessibility.next_slide' | t }}"
+                name="next"
+                disabled
+              >
+                {% render 'icon-caret-right' %}
+              </button>
+            </div>
+            <div class="carousel-overflow"></div>
+            {%- if settings.show_progress_indicator -%}
+              {%- liquid
+                assign show_on_desktop = false
+                assign show_on_mobile = false
+                if section.settings.carousel_desktop == 'true' and items_per_row_on_desktop < total_items
+                  assign show_on_desktop = true
+                endif
+                if section.settings.carousel_mobile == 'true' and items_per_row_on_mobile < total_items
+                  assign show_on_mobile = true
+                endif
+              -%}
+              <div class="slider-scrollbar p-2xl {% if show_on_desktop %} d-flex-md {% else %} d-none-md {% endif %} {% if show_on_mobile %} d-flex {% else %} d-none {% endif %}">
+                <div
+                  class="scrollbar-track js-scrollbar-track"
+                  data-thumb-mobile="{{ items_per_row_on_mobile }}"
+                  data-thumb-tablet="{{ items_per_row_on_mobile }}"
+                  data-thumb-desk="{{ items_per_row_on_desktop }}"
+                  data-thumb-total="{{ total_items }}"
+                  style="--width-thumb-desktop: {{ items_per_row_on_desktop | times: 100.0 | divided_by: total_items }}%; --width-thumb-tablet: {{ 2 | times: 100.0 | divided_by: total_items }}%; --width-thumb-mobile: {{ 1 | times: 100.0 | divided_by: total_items }}%"
+                >
+                  <div class="scrollbar-thumb js-scrollbar-thumb"></div>
+                </div>
+              </div>
+            {%- endif -%}
+          </sht-carousel>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "t:general.settings.multi_columns.label",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.section_heading.label",
+      "default": "Multi columns"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.heading_size.label",
+      "id": "heading_size",
+      "visible_if": "{{ section.settings.heading != blank }}",
+      "options": [
+        {
+          "value": "h3-regular",
+          "label": "t:general.settings.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:general.settings.heading_size.options.large.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:general.settings.heading_size.options.regular.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:general.settings.heading_size.options.small.label"
+        }
+      ],
+      "default": "h5"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:general.settings.section_description.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.multi_columns.settings.column_item.label"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.text_alignment.label",
+      "id": "item_position",
+      "options": [
+        {
+          "value": "ta-left start-xs",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center center-xs",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right end-xs",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-center center-xs"
+    },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "t:sections.multi_columns.settings.media_ratio.label",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "t:general.settings.image_ratio.options.option_square.label"
+        },
+        {
+          "value": "2/3",
+          "label": "t:general.settings.image_ratio.options.option_portrait.label"
+        },
+        {
+          "value": "3/2",
+          "label": "t:general.settings.image_ratio.options.option_landscape.label"
+        },
+        {
+          "value": "auto",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        }
+      ],
+      "default": "1/1"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.heading_size.label",
+      "id": "heading_size_item",
+      "options": [
+        {
+          "value": "fs-heading-s",
+          "label": "t:general.settings.heading_size.options.regular.label"
+        },
+        {
+          "value": "fs-heading-m",
+          "label": "t:general.settings.heading_size.options.large.label"
+        }
+      ],
+      "default": "fs-heading-m"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.desktop_layout.label"
+    },
+    {
+      "type": "select",
+      "id": "carousel_desktop",
+      "label": "t:general.settings.list_style.label",
+      "default": "true",
+      "options": [
+        {
+          "value": "false",
+          "label": "t:general.settings.option_grid.label"
+        },
+        {
+          "value": "true",
+          "label": "t:general.settings.option_carousel.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_per_row_desktop",
+      "label": "t:general.settings.columns_per_row.label",
+      "default": "3",
+      "options": [
+        {
+          "value": "3",
+          "label": "t:general.settings.columns_per_row.options_3.label"
+        },
+        {
+          "value": "4",
+          "label": "t:general.settings.columns_per_row.options_4.label"
+        },
+        {
+          "value": "5",
+          "label": "t:general.settings.columns_per_row.options_5.label"
+        },
+        {
+          "value": "6",
+          "label": "t:general.settings.columns_per_row.options_6.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.mobile_layout.label"
+    },
+    {
+      "type": "select",
+      "id": "carousel_mobile",
+      "label": "t:general.settings.list_style.label",
+      "default": "true",
+      "options": [
+        {
+          "value": "false",
+          "label": "t:general.settings.option_grid.label"
+        },
+        {
+          "value": "true",
+          "label": "t:general.settings.option_carousel.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.button.content"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:general.settings.button_label.label",
+      "info": "t:general.settings.hide_if_empty.info",
+      "default": "Explore more"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:general.settings.link.label",
+      "visible_if": "{{ section.settings.button_label != blank }}"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "t:blocks.multi_columns.settings.video_column.label",
+      "type": "video_column",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:blocks.multi_columns.settings.video_heading.label"
+        },
+        {
+          "type": "select",
+          "id": "video_source",
+          "label": "t:blocks.multi_columns.settings.video_source.label",
+          "options": [
+            {
+              "value": "external",
+              "label": "t:blocks.multi_columns.settings.option_external.label"
+            },
+            {
+              "value": "video_hosted",
+              "label": "t:blocks.multi_columns.settings.option_shopify_hosted.label"
+            }
+          ],
+          "default": "external"
+        },
+        {
+          "type": "video_url",
+          "id": "external_video_link",
+          "label": "t:general.settings.external_video.label",
+          "info": "t:general.settings.video_link.info",
+          "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+          "accept": ["youtube", "vimeo"],
+          "visible_if": "{{ block.settings.video_source == 'external' }}"
+        },
+        {
+          "type": "video",
+          "id": "video_hosted",
+          "label": "t:blocks.multi_columns.settings.shopify_hosted_video.label",
+          "visible_if": "{{ block.settings.video_source == 'video_hosted' }}"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_thumbnail_image",
+          "label": "t:blocks.multi_columns.settings.video_thumbnail_image.label"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.text.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:general.settings.heading.label",
+          "default": "Featured video"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:general.settings.description.label",
+          "default": "<p>Highlight your values, products, or services</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.button.content"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "t:general.settings.label.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "Explore more"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "t:general.settings.link.label",
+          "visible_if": "{{ block.settings.btn_label != blank }}"
+        }
+      ]
+    },
+    {
+      "name": "t:blocks.multi_columns.settings.image_column.label",
+      "type": "image_column",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.image.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_column_image",
+          "label": "t:general.settings.image.label"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.text.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:general.settings.heading.label",
+          "default": "Featured image"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:general.settings.description.label",
+          "default": "<p>Highlight your values, products, or services</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.button.content"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "t:general.settings.label.label",
+          "info": "t:general.settings.hide_if_empty.info"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "t:general.settings.link.label",
+          "visible_if": "{{ block.settings.btn_label != blank }}"
+        }
+      ]
+    },
+    {
+      "name": "t:blocks.multi_columns.settings.text_only_column.label",
+      "type": "text_only_column",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.text.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:general.settings.heading.label",
+          "default": "Featured text"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:general.settings.description.label",
+          "default": "<p>Highlight your values, products, or services</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.button.content"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "t:general.settings.label.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "Explore more"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "t:general.settings.link.label",
+          "visible_if": "{{ block.settings.btn_label != blank }}"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.multi_columns.label",
+      "blocks": [
+        {
+          "type": "image_column"
+        },
+        {
+          "type": "video_column"
+        },
+        {
+          "type": "image_column"
+        },
+        {
+          "type": "video_column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,48 @@
+<div class="card card--border card-animate w-100 h-100 p-s rad-m o-hidden d-flex fd-column gap-xs">
+  {%- if show_image -%}
+    {%- liquid
+      assign loading = loading | default: 'lazy'
+      assign fetchpriority = fetchpriority | default: 'low'
+      assign decoding = decoding | default: 'async'
+      assign widths = widths | default: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000'
+      assign sizes = sizes | default: '(min-width: 769px) calc(' | append: settings.container_max_width | append: 'px / 4), (min-width: 459px) calc(100vw/2), 100vw'
+      assign article_placeholder = 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder media of-cover h-100 w-100 d-block'
+      assign article_image = article_placeholder
+      assign article_image = article.image.src | image_url: width: article.image.width | image_tag: widths: widths, sizes: sizes, alt: article.title, class: 'js-image-lazy media of-cover w-100', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+    -%}
+    <div class="p-relative card__media">
+      <a aria-label="{{- article.title | escape -}}" href="{{- article.url -}}" class="p-absolute w-100 h-100 zi-3 inset ele-focus-visible"></a>
+      {% render 'image', ratio: image_ratio, image_item: article_image, image_wrap_classes: 'rad-s' %}
+    </div>
+  {%- endif -%}
+  <div class="card__content" >
+    {%- if show_tags %}
+      <ul class="ls-none d-flex gap-3xs fw-wrap hide-empty mb-2xs">
+        {%- for tag in article.tags -%}
+          <li class="fs-heading-xs component-heading f-extra">
+            {{- tag | link_to_tag: tag | replace: '<a', '<a class="tag"' -}}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+    <h3 class="fs-heading-m component-heading">
+      <a href="{{- article.url -}}">{{- article.title -}}</a>
+    </h3>
+    <div class="mt-xs mb-2xs fs-body-s color-text-60">
+      {%- if show_author -%}
+        <span>{{- article.author -}}</span>
+      {% endif %}
+      {%- if show_author and show_published_date -%}
+        <span class="">•</span>
+      {% endif %}
+      {%- if show_published_date -%}
+        <span>{{- article.published_at | date: format: 'abbreviated_date' -}}</span>
+      {%- endif -%}
+    </div>
+    {%- if show_excerpt -%}
+      <p class="card__excerpt o-hidden hide-empty fs-body-m">
+        {{- article.excerpt_or_content | strip_html -}}
+      </p>
+    {%- endif -%}
+  </div>
+</div>

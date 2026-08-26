@@ -1,0 +1,14 @@
+{% liquid
+  assign rand = "now" | date: "%N" | md5
+  unless settings.progress_bar_color.alpha == 0.0 or settings.progress_bar_color == blank
+    assign free_shipping_style = '--color-normal-text-rgb: ' | append: settings.progress_bar_color.red | append: ',' | append: settings.progress_bar_color.green | append: ',' | append: settings.progress_bar_color.blue
+  endunless
+%}
+
+<sht-free-shipping-bar class="no-js-hidden {{ class }}" data-total-price="{{ cart.total_price }}" data-free-shipping-original-price="{{ settings.cart_minimum_order_price_for_free_shipping }}" data-free-shipping-price="{{ settings.cart_minimum_order_price_for_free_shipping | times: 100 }}">
+  <span class="d-block js-free-shipping-message mb-3xs hide-empty"></span>
+  <span class="cart-freeship-progress d-flex middle-xs w-100 gap-s">
+    <progress id="cartFreeShippingProgress-{{ section.id | default: rand }}" class="freeship-progress js-free-shipping-progress d-block flex-1" value="" max="" style="{{ free_shipping_style }}"></progress>
+    <span class="js-free-shipping-progress-content"></span>
+  </span>
+</sht-free-shipping-bar>

@@ -1,0 +1,45 @@
+{%-liquid
+
+-%}
+
+<sht-variant-swtch class="variant-swatches no-js-hidden d-flex {{ content_align }}" data-variant-name="{{ variant_name }}">
+  {%- for value in option.values -%}
+    {%-liquid
+      assign selected_variant = product.selected_variant
+      assign variant_img = ''
+      assign variant_style = 'vsi--button'
+      for variant in product.variants
+        if variant.title contains value and variant.image
+          assign variant_style = 'vsi--swatch'
+          assign selected_variant = variant
+          break
+        endif
+      endfor
+      assign swatch_value = null
+      if value.swatch.color != blank or value.swatch.image != blank
+        if value.swatch.image
+          assign swatch_value = value.swatch.image | image_url
+        elsif value.swatch.color
+          assign swatch_value = value.swatch.color
+        else
+          assign swatch_value = null
+        endif
+      endif
+    -%}
+    {%- if settings.variant_display_type == 'variant_image' and selected_variant.image -%}
+      <button 1 class="variant-option {{ variant_style }} vsi--swatch-image js-variant-swatch-item p-relative has-tooltip" aria-controls="{{ image_id }}" data-product-link-class="{{ product_link_class }}" data-product-image-id="{{ product_image_id }}" data-option-value="{{ value | downcase | escape | remove: " " }}" title="{{ value | escape }}" aria-label="{{ 'products.product.media.view_color_swatch' | t: color_swatch_name: value, product_name: product.title }}" type="button">
+        {{ selected_variant.image | image_url: width: 100 | image_tag: widths: '100', class: 'product-swatches-image absolute zi-1 top-0 left-0 w-100 h-100 of-cover', loading: "lazy" , fetchpriority: "auto", decoding: "async" }}
+        <span class="variant-option-label tooltip tooltip__text tooltip--top p-absolute" aria-hidden="true">{{- value | escape -}}</span>
+      </button>
+    {%- elsif settings.variant_display_type == 'custom_value' -%}
+      <button 2 class="variant-option {{ variant_style }} vsi--swatch-button js-variant-swatch-item" aria-controls="{{ image_id }}" data-product-link-class="{{ product_link_class }}" data-product-image-id="{{ product_image_id }}" data-option-value="{{ value | downcase | escape | remove: " " }}" data-swatch-option-value="{{ swatch_value }}" title="{{ value | escape }}" aria-label="{{ 'products.product.media.view_color_swatch' | t: color_swatch_name: value, product_name: product.title }}" type="button">
+        <span class="variant-option-label js-variant-option-label" aria-hidden="true">{{- value | escape -}}</span>
+      </button>
+    {%- else -%}
+      <button 3 class="variant-option {{ variant_style }} vsi--swatch-button js-variant-swatch-item" aria-controls="{{ image_id }}" data-product-link-class="{{ product_link_class }}" data-product-image-id="{{ product_image_id }}" title="{{ value | escape }}" aria-label="{{ 'products.product.media.view_color_swatch' | t: color_swatch_name: value, product_name: product.title }}" type="button">
+        {{- variant_img -}}
+        <span class="variant-option-label" aria-hidden="true">{{- value | escape -}}</span>
+      </button>
+    {%- endif -%}
+  {%- endfor -%}
+</sht-variant-swtch>

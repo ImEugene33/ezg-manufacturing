@@ -1,0 +1,313 @@
+{%- liquid
+  assign alignment_class = section.settings.desktop_content_alignment | append: ' ' | append: section.settings.mobile_content_alignment
+  if section.settings.desktop_content_alignment contains "bottom-md"
+    assign alignment_class_btn = "end-md"
+  elsif section.settings.desktop_content_alignment contains "middle-md"
+    assign alignment_class_btn = "center-md"
+  endif
+  assign image_alt = section.settings.image.alt | default: section.settings.image.image | split: '/' | last
+  assign clm_info = 12
+  if section.settings.image != blank
+    assign clm_media = 6
+    assign clm_info = 6
+    if section.settings.desktop_image_width == '2/3'
+      assign clm_media = 8
+      assign clm_info = 4
+    endif
+  endif
+-%}
+{%- render 'section-padding-collapse' -%}
+<div data-animate="regular-section" class="js-animate section section--vertical background color-{{- section.settings.color_scheme }} p-relative" data-ui-component="Main 404" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}">
+  <div class="ctnr w-100">
+    <div class="d-flex gap-scale-4xl {{ section.settings.desktop_content_ordering }} {{ section.settings.mobile_content_ordering -}}">
+      {% if section.blocks.size > 0 %}
+        <div class="section__text d-flex fd-column {{ alignment_class }}" style="--w-xs:12; --w-md:{{ clm_info }}">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'subheading' -%}
+                <span class="section__subheading promotional-subheading subheading d-block hide-empty">{{- block.settings.subheading | escape -}}</span>
+              {%- when 'heading' -%}
+                {%- if block.settings.enable_h1_tag -%}
+                  <h1 class="section__heading promotional-heading {{ block.settings.heading_size }} hide-empty">{{- block.settings.heading | escape -}}</h1>
+                {%- else -%}
+                  <h2 class="section__heading promotional-heading {{ block.settings.heading_size }} hide-empty">{{- block.settings.heading | escape -}}</h2>
+                {%- endif -%}
+              {%- when 'description' -%}
+                <div class="section__description fs-body-xl rte hide-empty o-hidden">{{- block.settings.description -}}</div>
+              {%- when 'button' -%}
+                <div class="section__button-group d-flex fw-wrap fd-column fd-row-md gap-xs mt-scale-2xl hide-empty {{ alignment_class }} {{ alignment_class_btn }} ">
+                  {%- if block.settings.home_page_link_text != blank -%}
+                    <a class="btn btn-m btn-secondary d-flex gap-3xs" href="{{- routes.root_url -}}">
+                      {% render 'icon-home', class: 'icon icon-fix-l' %}
+                      <span class="flex-1">{{- block.settings.home_page_link_text -}}</span>
+                    </a>
+                  {%- endif -%}
+                  {%- if block.settings.catalogue_link_text != blank -%}
+                    <a class="btn btn-m btn-secondary d-flex gap-3xs" href="{{- routes.all_products_collection_url -}}">
+                      {% render 'icon-shop', class: 'icon icon-fix-l' %}
+                      <span class="flex-1">{{- block.settings.catalogue_link_text -}}</span>
+                    </a>
+                  {%- endif -%}
+                </div>
+              {%- when 'search'-%}
+                <div class="section__search d-flex fd-column {{ alignment_class }}"  {{ block.shopify_attributes }}>
+                  <form action="{{- routes.search_url -}}" class="form-search p-relative w-100">
+                    <div class="search-submit p-absolute middle-y left-0 pe-none">
+                      <button type="submit" aria-label="{{ "accessibility.search" | t }}" class="btn bg-transparent pl-s">
+                        {% render 'icon-search', class: 'icon icon-fix-xl' %}
+                      </button>
+                    </div>
+                    <label class="field__label visually-hidden" for="section404Input">
+                      {{ 'general.search.search' | t }}
+                    </label>
+                    <input
+                      id="section404Input"
+                      type="text"
+                      placeholder="{{ 'general.search.search_the_site' | t }}"
+                      name="q"
+                      value="{{ search.terms | escape }}"
+                      class="input-search field__text field--hover w-100"
+                    >
+                  </form>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      {% endif %}
+      {% if section.settings.image != blank %}
+        <div class="section__media flex-1 w-100 rad-m o-hidden" style="--w-xs:12; --w-md:{{ clm_media }}">
+          {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: widths: '750, 950, 1024, 1200, 1400, 1600, 1800, 2000', sizes: '(min-width: 1025px) calc(100vw/2), 100vw', alt: image_alt, class: 'w-100 h-100 of-cover media' -}}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "t:sections.main_404.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.image.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.desktop_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_ordering",
+      "label": "t:general.settings.content_ordering.label",
+      "default": "fd-row-md",
+      "options": [
+        {
+          "value": "fd-row-md",
+          "label": "t:general.settings.section_ordering.option_text_first.label"
+        },
+        {
+          "value": "fd-row-reverse-md",
+          "label": "t:sections.images_with_text.settings.content_ordering.options_2.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_width",
+      "label": "t:general.settings.image_width.label",
+      "options": [
+        {
+          "value": "1/2",
+          "label": "t:general.settings.block_width.options_1_2.label"
+        },
+        {
+          "value": "2/3",
+          "label": "2/3"
+        }
+      ],
+      "default": "1/2"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left-md top-md",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center-md middle-md",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right-md bottom-md",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-center-md middle-md"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.mobile_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_ordering",
+      "label": "t:general.settings.content_ordering.label",
+      "default": "fd-column",
+      "options": [
+        {
+          "value": "fd-column",
+          "label": "t:general.settings.section_ordering.option_text_first.label"
+        },
+        {
+          "value": "fd-column-reverse",
+          "label": "t:sections.images_with_text.settings.content_ordering.options_2.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left top-xs",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center middle-xs",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right bottom-xs",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-center middle-xs"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subheading",
+      "name": "t:general.settings.subheading.label",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "label": "t:general.settings.text.label",
+          "id": "subheading",
+          "default": "404 — Page not found"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "t:general.settings.heading.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:general.settings.text.label",
+          "default": "We're sorry, this page is not available!"
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.text_size.label",
+          "id": "heading_size",
+          "visible_if": "{{ block.settings.heading != blank }}",
+          "options": [
+            {
+              "value": "headline",
+              "label": "t:general.settings.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:general.settings.heading_size.options.large.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:general.settings.heading_size.options.regular.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:general.settings.heading_size.options.small.label"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_h1_tag",
+          "label": "t:general.settings.enable_h1_tag.label",
+          "info": "t:general.settings.enable_h1_tag_info.info",
+          "default": true,
+          "visible_if": "{{ block.settings.heading != blank }}"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "t:general.settings.description.name",
+      "settings": [
+        {
+          "type": "richtext",
+          "label": "t:general.settings.text.label",
+          "id": "description",
+          "default": "<p>The page URL might be outdated or contains typo errors. Please contact us at hello@saleshunterthemes.com or select options below.</p>"
+        }
+      ]
+    },
+    {
+      "type": "search",
+      "name": "t:general.settings.search.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:general.settings.no_customization.label"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "t:general.settings.buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "home_page_link_text",
+          "label": "t:sections.main_404.settings.home_page_link_text.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "Back to home page"
+        },
+        {
+          "type": "text",
+          "id": "catalogue_link_text",
+          "label": "t:sections.main_404.settings.catalogue_link_text.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "Explore our catalogue"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

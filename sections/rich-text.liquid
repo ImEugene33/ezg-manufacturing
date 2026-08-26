@@ -1,0 +1,316 @@
+{% liquid 
+assign alignment_class = section.settings.desktop_content_alignment | append: ' ' | append: section.settings.mobile_content_alignment
+%}
+{%- render 'section-padding-collapse' -%}
+{%- if section.blocks.size > 0 -%}
+  <div data-animate="regular-section" id="section-{{ section.id }}" data-ui-component="Section Rich Text" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }} "
+  class="js-animate section rich-text background color-{{- section.settings.color_scheme }}">
+    <div class="ctnr">
+      <div class="rich-text__content">
+        {%- render 'section-content',
+        alignment_class: alignment_class
+        -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+{% schema %}
+  {
+    "name": "t:sections.rich_text.name",
+    "disabled_on": {
+      "groups": [
+        "header",
+        "footer",
+        "custom.overlay"
+      ]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.general.content"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:general.settings.color_schemes.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.desktop_layout.content"
+      },
+      {
+        "type": "select",
+        "id": "desktop_content_alignment",
+        "label": "t:general.settings.content_alignment.label",
+        "options": [
+          {
+            "value": "ta-left-md top-md",
+            "label": "t:general.settings.option_left.label"
+          },
+          {
+            "value": "ta-center-md middle-md",
+            "label": "t:general.settings.option_center.label"
+          },
+          {
+            "value": "ta-right-md bottom-md",
+            "label": "t:general.settings.option_right.label"
+          }
+        ], 
+        "default": "ta-center-md middle-md"
+      },
+      { 
+        "type": "header",
+        "content": "t:general.settings.headers.mobile_layout.content"
+      },
+      {
+        "type": "select",
+        "id": "mobile_content_alignment",
+        "label": "t:general.settings.content_alignment.label",
+        "options": [
+          {
+            "value": "ta-left top-xs",
+            "label": "t:general.settings.option_left.label"
+          },
+          {
+            "value": "ta-center middle-xs",
+            "label": "t:general.settings.option_center.label"
+          },
+          {
+            "value": "ta-right bottom-xs",
+            "label": "t:general.settings.option_right.label"
+          }
+        ], 
+        "default": "ta-left top-xs"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "t:general.settings.subheading.label",
+        "type": "subheading",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "subheading_text",
+            "label": "t:general.settings.text.label",
+            "default": "Add a tagline"
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "name": "t:general.settings.heading.label",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading_text",
+            "label": "t:general.settings.text.label",
+            "default": "Some heading"
+          },
+          {
+            "type": "select",
+            "label": "t:general.settings.text_size.label",
+            "id": "heading_size",
+            "visible_if": "{{ block.settings.heading_text != blank }}",
+            "options": [
+              {
+                "value": "headline",
+                "label": "t:general.settings.heading_size.options.extra_large.label"
+              },
+              {
+                "value": "h1",
+                "label": "t:general.settings.heading_size.options.large.label"
+              },
+              {
+                "value": "h2",
+                "label": "t:general.settings.heading_size.options.regular.label"
+              },
+              {
+                "value": "h3",
+                "label": "t:general.settings.heading_size.options.small.label"
+              }
+            ],
+            "default": "h2"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_h1_tag",
+            "label": "t:general.settings.enable_h1_tag.label",
+            "info": "t:general.settings.enable_h1_tag_info.info",
+            "default": false,
+            "visible_if": "{{ block.settings.heading_text != blank }}"
+          }
+        ]
+      },
+      {
+        "name": "t:general.settings.description.name",
+        "type": "description",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "description_text",
+            "label": "t:general.settings.text.label",
+            "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "name": "t:general.settings.buttons.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "t:general.settings.headers.button_1.content"
+          },
+          {
+            "type": "text",
+            "id": "button_primary_label",
+            "label": "t:general.settings.label.label",
+            "info": "t:general.settings.hide_if_empty.info",
+            "default": "Explore more"
+          },
+          {
+            "type": "select",
+            "id": "button_primary_style",
+            "label": "t:general.settings.style.label",
+            "visible_if": "{{ block.settings.button_primary_label != blank }}",
+            "options": [
+              {
+                "value": "primary",
+                "label": "t:general.settings.primary.label"
+              },
+              {
+                "value": "secondary",
+                "label": "t:general.settings.secondary.label"
+              }
+            ],
+            "default": "primary"
+          },
+          {
+            "type": "url",
+            "id": "button_primary_link",
+            "label": "t:general.settings.link.label",
+            "visible_if": "{{ block.settings.button_primary_label != blank }}"
+          },
+          {
+            "type": "header",
+            "content": "t:general.settings.headers.button_2.content"
+          },
+          {
+            "type": "text",
+            "id": "button_secondary_label",
+            "label": "t:general.settings.label.label",
+            "info": "t:general.settings.hide_if_empty.info",
+            "default": "View details"
+          },
+          {
+            "type": "select",
+            "id": "button_secondary_style",
+            "label": "t:general.settings.style.label",
+            "visible_if": "{{ block.settings.button_secondary_label != blank }}",
+            "options": [
+              {
+                "value": "primary",
+                "label": "t:general.settings.primary.label"
+              },
+              {
+                "value": "secondary",
+                "label": "t:general.settings.secondary.label"
+              }
+            ],
+            "default": "secondary"
+          },
+          {
+            "type": "url",
+            "id": "button_secondary_link",
+            "label": "t:general.settings.link.label",
+            "visible_if": "{{ block.settings.button_secondary_label != blank }}"
+          }
+        ]
+      },
+      {
+        "type": "countdown_timer",
+        "name": "t:general.settings.countdown_timer.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:general.settings.countdown_paragraph.content"
+          },
+          {
+            "type": "checkbox",
+            "id": "hide_on_end",
+            "label": "t:general.settings.hide_the_countdown.label",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "end_date",
+            "label": "t:general.settings.end_date.label",
+            "info": "t:general.settings.end_date.info"
+          },
+          {
+            "type": "text",
+            "id": "end_time",
+            "label": "t:general.settings.end_time.label",
+            "info": "t:general.settings.end_time.info"
+          },
+          {
+            "type": "richtext",
+            "id": "end_text",
+            "label": "t:general.settings.end_text.label",
+            "info": "t:general.settings.end_text.info",
+            "default": "<p>Event is finished</p>"
+          },
+          {
+            "type": "color",
+            "id": "countdown_background",
+            "label": "t:general.settings.custom_background.label",
+            "default": "rgba(0,0,0,0)"
+          },
+          {
+            "type": "color",
+            "id": "countdown_number_color",
+            "label": "t:general.settings.custom_number.label",
+            "default": "rgba(0,0,0,0)"
+          }
+        ]
+      },
+      {
+        "type": "custom_liquid",
+        "name": "t:sections.custom_liquid.name",
+        "settings": [
+          {
+            "type": "liquid",
+            "id": "custom_liquid_code",
+            "label": "t:sections.custom_liquid.name",
+            "info": "t:general.settings.custom_liquid.info"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.rich_text.name",
+        "blocks": [
+          {
+            "type": "subheading"
+          },
+          {
+            "type": "heading"
+          },
+          {
+            "type": "description"
+          },
+          {
+            "type": "button"
+          }
+        ]
+      } 
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,481 @@
+{{ 'section-side-by-side.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign media_type = section.settings.media_type | default: 'image'
+  assign image = section.settings.image
+  assign video_source = section.settings.video_source | default: 'external'
+  assign video_url = section.settings.video_url
+  assign video_hosted = section.settings.video_hosted
+  assign video_autoplay = section.settings.video_autoplay
+
+  assign heading = section.settings.heading
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
+  assign text = section.settings.text
+  assign button_label = section.settings.button_label
+  assign button_link = section.settings.button_link
+  assign button_style = section.settings.button_style | default: 'primary'
+  assign button_align_desktop = section.settings.button_align_desktop | default: 'left'
+  assign image_position = section.settings.image_position | default: 'left'
+  assign image_width = section.settings.image_width_desktop | default: 50
+
+  assign ratio_setting = section.settings.aspect_ratio | default: '1.78'
+  if ratio_setting == 'native'
+    if media_type == 'video' and video_source == 'hosted'
+      assign aspect_ratio = video_hosted.aspect_ratio | default: 1.78
+    elsif media_type == 'image'
+      assign aspect_ratio = image.aspect_ratio | default: 1.78
+    else
+      assign aspect_ratio = 1.78
+    endif
+  else
+    assign aspect_ratio = ratio_setting
+  endif
+
+  assign container_class = 'side-by-side__container'
+  if image_position == 'right'
+    assign container_class = container_class | append: ' side-by-side__container--image-right'
+  endif
+
+  assign image_alt = image.alt | default: heading | default: 'Side by side'
+  assign image_px_width = settings.container_max_width | times: image_width | divided_by: 100
+  assign sizes = '(min-width: 1024px) ' | append: image_px_width | append: 'px, 100vw'
+
+  assign show_controls = true
+  if video_autoplay
+    assign show_controls = false
+  endif
+
+  assign info_blocks_count = 0
+  for block in section.blocks
+    if block.type == 'info'
+      assign info_blocks_count = info_blocks_count | plus: 1
+    endif
+  endfor
+
+  assign content_class = 'side-by-side__content'
+  if info_blocks_count > 0
+    assign content_class = content_class | append: ' side-by-side__content--has-blocks'
+  endif
+-%}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mob }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+    background-color: var(--color-background);
+    color: var(--color-normal-text);
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .section-{{ section.id }} .side-by-side__container {
+    --side-by-side-image-width: {{ image_width }}%;
+    --side-by-side-aspect-ratio: {{ aspect_ratio }};
+  }
+
+  .section-{{ section.id }} .side-by-side__btn.btn--primary {
+    background-color: var(--color-button-primary-background);
+    color: var(--color-button-primary-text);
+  }
+  .section-{{ section.id }} .side-by-side__btn.btn--secondary {
+    background-color: var(--color-button-secondary-background);
+    color: var(--color-button-secondary-text);
+  }
+
+  {% for block in section.blocks %}
+    {% if block.type == 'info' and block.settings.text_color != blank %}
+      .section-{{ section.id }} .side-by-side__card--{{ block.id }} .side-by-side__heading,
+      .section-{{ section.id }} .side-by-side__card--{{ block.id }} .side-by-side__text {
+        color: {{ block.settings.text_color }};
+      }
+    {% endif %}
+  {% endfor %}
+{%- endstyle -%}
+
+<div class="section-{{ section.id }} side-by-side color-{{ section.settings.color_scheme }} {{ section.settings.sect_class }}">
+  <div class="{{ container_class }}">
+    <div class="side-by-side__media">
+      {%- if media_type == 'video' -%}
+        {%- if video_source == 'hosted' and video_hosted != blank -%}
+          {{ video_hosted | video_tag:
+            autoplay: video_autoplay,
+            muted: video_autoplay,
+            loop: video_autoplay,
+            controls: show_controls,
+            playsinline: true,
+            preload: 'metadata',
+            class: 'side-by-side__media-video'
+          }}
+        {%- elsif video_url != blank -%}
+          {%- case video_url.type -%}
+            {%- when 'youtube' -%}
+              <iframe
+                class="side-by-side__media-video"
+                src="https://www.youtube.com/embed/{{ video_url.id }}?rel=0&modestbranding=1{% if video_autoplay %}&autoplay=1&mute=1&loop=1&playlist={{ video_url.id }}{% endif %}"
+                title="{{ heading | default: 'Video' }}"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            {%- when 'vimeo' -%}
+              <iframe
+                class="side-by-side__media-video"
+                src="https://player.vimeo.com/video/{{ video_url.id }}?{% if video_autoplay %}autoplay=1&muted=1&loop=1{% endif %}"
+                title="{{ heading | default: 'Video' }}"
+                loading="lazy"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+          {%- endcase -%}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'side-by-side__media-img' }}
+        {%- endif -%}
+      {%- else -%}
+        {%- if image != blank -%}
+          {{ image | image_url: width: image.width | image_tag:
+            widths: '375, 550, 750, 1000, 1200, 1600, 2000, 2400',
+            sizes: sizes,
+            alt: image_alt,
+            loading: 'lazy',
+            class: 'side-by-side__media-img'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'side-by-side__media-img' }}
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    <div class="{{ content_class }}">
+      {%- if heading != blank or text != blank or button_label != blank -%}
+        <div class="side-by-side__card">
+          <div class="side-by-side__copy">
+            {%- if heading != blank -%}
+              {%- case heading_tag -%}
+                {%- when 'h1' -%}
+                  <h1 class="side-by-side__heading h1">{{ heading }}</h1>
+                {%- when 'h3' -%}
+                  <h3 class="side-by-side__heading side-by-side__heading--h3">{{ heading }}</h3>
+                {%- else -%}
+                  <h2 class="side-by-side__heading h2">{{ heading }}</h2>
+              {%- endcase -%}
+            {%- endif -%}
+            {%- if text != blank -%}
+              <div class="side-by-side__text">{{ text }}</div>
+            {%- endif -%}
+          </div>
+          {%- if button_label != blank -%}
+            {%- if button_link != blank -%}
+              <a href="{{ button_link }}" class="side-by-side__btn side-by-side__btn--align-{{ button_align_desktop }} btn btn--{{ button_style }}">{{ button_label }}</a>
+            {%- else -%}
+              <a class="side-by-side__btn side-by-side__btn--align-{{ button_align_desktop }} btn btn--disabled btn--{{ button_style }}" aria-disabled="true">{{ button_label }}</a>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'info' -%}
+            {%- liquid
+              assign block_heading = block.settings.heading
+              assign block_heading_tag = block.settings.heading_tag | default: 'h3'
+              assign block_text = block.settings.text
+              assign block_bg_color = block.settings.bg_color
+            -%}
+            <div
+              class="side-by-side__card side-by-side__card--{{ block.id }}"
+              {% if block_bg_color != blank %}style="background-color: {{ block_bg_color }};"{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              <div class="side-by-side__copy">
+                {%- if block_heading != blank -%}
+                  {%- if block_heading_tag == 'h2' -%}
+                    <h2 class="side-by-side__heading h2">{{ block_heading }}</h2>
+                  {%- else -%}
+                    <h3 class="side-by-side__heading side-by-side__heading--h3">{{ block_heading }}</h3>
+                  {%- endif -%}
+                {%- endif -%}
+                {%- if block_text != blank -%}
+                  <div class="side-by-side__text">{{ block_text }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.side_by_side.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.content.label"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.heading.label",
+      "default": "Side By Side"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:sections.side_by_side.settings.heading_tag.label",
+      "options": [
+        { "value": "h1", "label": "t:general.settings.heading_size.options.h1.label" },
+        { "value": "h2", "label": "t:general.settings.heading_size.options.h2.label" },
+        { "value": "h3", "label": "t:general.settings.heading_size.options.h3.label" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:general.settings.text.label",
+      "default": "<p>Add a description that highlights this content next to the image.</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.button.content"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:general.settings.button_label.label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:general.settings.button_link.label"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:general.settings.button_style.label",
+      "options": [
+        { "value": "primary", "label": "t:general.settings.primary.label" },
+        { "value": "secondary", "label": "t:general.settings.secondary.label" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "select",
+      "id": "button_align_desktop",
+      "label": "t:sections.side_by_side.settings.button_align_desktop.label",
+      "options": [
+        { "value": "left", "label": "t:general.left" },
+        { "value": "center", "label": "t:general.center" },
+        { "value": "right", "label": "t:general.right" }
+      ],
+      "default": "left",
+      "info": "t:sections.side_by_side.settings.button_align_desktop.info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.media.content"
+    },
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "t:sections.side_by_side.settings.media_type.label",
+      "options": [
+        { "value": "image", "label": "t:general.image" },
+        { "value": "video", "label": "t:general.video" }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image.label",
+      "visible_if": "{{ section.settings.media_type == 'image' }}"
+    },
+    {
+      "type": "select",
+      "id": "video_source",
+      "label": "t:general.settings.video_source.label",
+      "options": [
+        { "value": "external", "label": "t:sections.side_by_side.settings.video_source.options.external.label" },
+        { "value": "hosted", "label": "t:general.settings.hosted_video.label" }
+      ],
+      "default": "external",
+      "visible_if": "{{ section.settings.media_type == 'video' }}"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": ["youtube", "vimeo"],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "label": "t:sections.side_by_side.settings.video_url.label",
+      "visible_if": "{{ section.settings.media_type == 'video' and section.settings.video_source == 'external' }}"
+    },
+    {
+      "type": "video",
+      "id": "video_hosted",
+      "label": "t:sections.side_by_side.settings.video_hosted.label",
+      "visible_if": "{{ section.settings.media_type == 'video' and section.settings.video_source == 'hosted' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_autoplay",
+      "label": "t:sections.side_by_side.settings.video_autoplay.label",
+      "info": "t:sections.side_by_side.settings.video_autoplay.info",
+      "default": true,
+      "visible_if": "{{ section.settings.media_type == 'video' }}"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:sections.side_by_side.settings.image_position.label",
+      "options": [
+        { "value": "left", "label": "t:general.left" },
+        { "value": "right", "label": "t:general.right" }
+      ],
+      "default": "left",
+      "info": "t:sections.side_by_side.settings.image_position.info"
+    },
+    {
+      "type": "range",
+      "id": "image_width_desktop",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "label": "t:sections.side_by_side.settings.image_width_desktop.label",
+      "info": "t:sections.side_by_side.settings.image_width_desktop.info",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "t:sections.side_by_side.settings.aspect_ratio.label",
+      "options": [
+        { "value": "1.78", "label": "t:sections.side_by_side.settings.aspect_ratio.options.standard.label" },
+        { "value": "1", "label": "t:sections.side_by_side.settings.aspect_ratio.options.square.label" },
+        { "value": "1.33", "label": "t:sections.side_by_side.settings.aspect_ratio.options.landscape.label" },
+        { "value": "0.75", "label": "t:sections.side_by_side.settings.aspect_ratio.options.portrait.label" },
+        { "value": "native", "label": "t:sections.side_by_side.settings.aspect_ratio.options.native.label" }
+      ],
+      "default": "1.78",
+      "info": "t:sections.side_by_side.settings.aspect_ratio.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.side_by_side.settings.headers.padding.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.side_by_side.settings.padding_top.label",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.side_by_side.settings.padding_bottom.label",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.side_by_side.settings.padding_top_mob.label",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.side_by_side.settings.padding_bottom_mob.label",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "t:sections.side_by_side.settings.headers.background.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.side_by_side.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "sect_class",
+      "label": "t:sections.side_by_side.settings.sect_class.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "info",
+      "name": "t:sections.side_by_side.blocks.info.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:general.settings.heading.label",
+          "default": "Info block"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "t:sections.side_by_side.blocks.info.settings.heading_tag.label",
+          "options": [
+            { "value": "h2", "label": "t:general.settings.heading_size.options.h2.label" },
+            { "value": "h3", "label": "t:general.settings.heading_size.options.h3.label" }
+          ],
+          "default": "h3"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:general.settings.text.label",
+          "default": "<p>Add a description for this block.</p>"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "t:general.settings.background_color.label",
+          "info": "t:sections.side_by_side.blocks.info.settings.bg_color.info"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "t:sections.side_by_side.blocks.info.settings.text_color.label",
+          "info": "t:sections.side_by_side.blocks.info.settings.text_color.info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.side_by_side.name",
+      "blocks": [
+        { "type": "info" }
+      ]
+    }
+  ]
+}
+{% endschema %}

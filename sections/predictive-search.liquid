@@ -1,0 +1,175 @@
+{% liquid
+  assign section_id = section.id | md5 | truncate: 12, ""
+  assign now =  "now" | date: "%N"
+  assign tab_aria_controls_prefix = "products-tabs-tabs-" | append: section_id | append: now
+  assign tab_id = "products-tabs-tab-" | append: section_id | append: now
+
+  assign is_result_matching = false
+  if predictive_search.resources.products.size > 0 or predictive_search.resources.collections.size > 0 or predictive_search.resources.articles.size > 0 or predictive_search.resources.pages.size > 0 or predictive_search.resources.queries.size > 0
+    assign is_result_matching = true
+  endif
+  assign is_collection = false
+  assign is_product = false
+  assign is_article = false
+  assign is_page = false
+  assign is_query = false
+
+  for type in predictive_search.types
+    case type
+      when "collection"
+        assign is_collection = true
+      when "product"
+        assign is_product = true
+      when "article"
+        assign is_article = true
+      when "page"
+        assign is_page = true
+      when "query"
+        assign is_query = true
+    endcase
+  endfor
+
+ %}
+{%- if predictive_search.performed -%}
+  <div class="js-predictive-search-wrapper d-flex fd-column h-100" data-has-results="{{ is_result_matching }}">
+    {% if is_result_matching %}
+      <sht-tabs class="d-flex fd-column h-100">
+        <sht-tab-overflow class="predictive-search-animation p-relative tab__wrapper--underline mb-scale-2xl" data-tab-style="{{ settings.tab_style }}">
+          <ul class="js-tab-container tab__header--{{- settings.tab_style }} p-relative ox-auto disable-scrollbars ls-none ws-nowrap d-flex f-extra" role="tablist">
+            <li class="js-tab-item tab__item {{ is_product | default: 'd-none' | replace: 'true', 'd-inline-block' }} {% if predictive_search.resources.products.size == 0 %}d-none-important{% endif %}" role="presentation">
+              <a class="tab__link fs-body-xl d-block p-relative ele-focus-visible  color-light js-tab-link {{ is_product }}" role="tab" id="{{ tab_id }}-1" href="#{{ tab_aria_controls_prefix }}-1" aria-controls="{{ tab_aria_controls_prefix }}-1">
+                {{ 'general.search.products' | t }}
+              </a>
+            </li>
+            <li class="js-tab-item tab__item {{ is_query | default: 'd-none' | replace: 'true', 'd-inline-block' }} {% if predictive_search.resources.queries.size == 0 %}d-none-important{% endif %}" role="presentation">
+              <a class="tab__link fs-body-xl d-block p-relative ele-focus-visible  color-light js-tab-link {{ is_query }}" role="tab" id="{{ tab_id }}-2" href="#{{ tab_aria_controls_prefix }}-2" aria-controls="{{ tab_aria_controls_prefix }}-2">
+                {{ 'general.search.suggestions' | t }}
+              </a>
+            </li>
+            <li class="js-tab-item tab__item {{ is_collection | default: 'd-none' | replace: 'true', 'd-inline-block' }} {% if predictive_search.resources.collections.size == 0 %}d-none-important{% endif %}" role="presentation">
+              <a class="tab__link fs-body-xl d-block p-relative ele-focus-visible  color-light js-tab-link {{ is_collection }}" role="tab" id="{{ tab_id }}-3" href="#{{ tab_aria_controls_prefix }}-3" aria-controls="{{ tab_aria_controls_prefix }}-3">
+                {{ 'general.search.collections' | t }}
+              </a>
+            </li>
+            <li class="js-tab-item tab__item {{ is_article | default: 'd-none' | replace: 'true', 'd-inline-block' }} {% if predictive_search.resources.articles.size == 0 %}d-none-important{% endif %}" role="presentation">
+              <a class="tab__link fs-body-xl d-block p-relative ele-focus-visible  color-light js-tab-link {{ is_article }}" role="tab" id="{{ tab_id }}-4" href="#{{ tab_aria_controls_prefix }}-4" aria-controls="{{ tab_aria_controls_prefix }}-4">
+                {{ 'general.search.blog_posts' | t }}
+              </a>
+            </li>
+            <li class="js-tab-item tab__item {{ is_page | default: 'd-none' | replace: 'true', 'd-inline-block' }} {% if predictive_search.resources.pages.size == 0 %}d-none-important{% endif %}" role="presentation">
+              <a class="tab__link fs-body-xl d-block p-relative ele-focus-visible  color-light js-tab-link {{ is_page }}" role="tab" id="{{ tab_id }}-5" href="#{{ tab_aria_controls_prefix }}-5" aria-controls="{{ tab_aria_controls_prefix }}-5">
+                {{ 'general.search.pages' | t }}
+              </a>
+            </li>
+          </ul>
+          <div class="js-tab-overflow tab-overflow p-absolute inset pe-none"></div>
+        </sht-tab-overflow>
+        <div class="predictive-search-animation search__result-contents o-auto h-100 disable-scrollbars flex-1" id="predictive-search-results-list">
+          <div class="search__result-items js-predictive-search-result-items gap-32 gap-md-40 h-100 o-hidden">
+            <div class="tab__content js-tab-content h-100">
+              {%- if predictive_search.resources.products.size > 0 -%}
+                <sht-scroll-gradient-overlay class="tab__panel tab__panel--active d-block h-100 js-tab-panel gradient-overlay--bottom gradient-overlay {{ tab_aria_controls_prefix }}-1 js-animate" data-tab-content-id="{{ tab_aria_controls_prefix }}-1" aria-labelledby="{{ tab_id }}-1" role="tabpanel">
+                  <div class="search__result-type search__result--product o-hidden d-flex fd-column h-100 p-relative">
+                    <ul class="search__result--list js-scroll-element search-spacing disable-scrollbars r-gap-scale-m ls-none rw flex-1 p-relative" role="listbox">
+                      {%- for product in predictive_search.resources.products -%}
+                        <li class="clm" style="--w-xs: var(--xs-product);" role="option">
+                          {% render 'mini-card-product',
+                            product: product,
+                            show_vendor: true,
+                            show_price: true,
+                            show_rating: true
+                          %}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                    <div class="predictive-search-animation search__result-view-all w-100 p-absolute bottom-0 left-0 zi-3">
+                      <a href="{{ routes.search_url }}?q={{ predictive_search.terms | escape }}&{{ 'options[prefix]' | url_encode }}=last" class="btn btn-l btn-primary d-inline-flex center-xs gap-2xs w-100 p-relative">{{ 'general.search.view_all_results' | t }}</a>
+                    </div>
+                  </div>
+                </sht-scroll-gradient-overlay>
+              {%- endif -%}
+              {%- if predictive_search.resources.queries.size > 0 -%}
+                <sht-scroll-gradient-overlay class="tab__panel tab__panel--active d-block h-100 js-tab-panel gradient-overlay--bottom gradient-overlay {{ tab_aria_controls_prefix }}-2 js-animate" data-tab-content-id="{{ tab_aria_controls_prefix }}-2" aria-labelledby="{{ tab_id }}-2" role="tabpanel">
+                  <div class="search__result-type search__result--product o-hidden d-flex fd-column h-100 p-relative">
+                    <ul class="search__result--list js-scroll-element search-spacing-sm disable-scrollbars r-gap-scale-m ls-none rw flex-1" role="listbox">
+                      {%- for query in predictive_search.resources.queries -%}
+                        <li class="clm" style="--w-xs: 12;" role="option">
+                          {% render 'mini-card-suggestions',
+                            query: query,
+                          %}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                </sht-scroll-gradient-overlay>
+              {%- endif -%}
+              {%- if predictive_search.resources.collections.size > 0 -%}
+                <sht-scroll-gradient-overlay class="tab__panel tab__panel--active d-block h-100 js-tab-panel gradient-overlay--bottom gradient-overlay {{ tab_aria_controls_prefix }}-3 js-animate" data-tab-content-id="{{ tab_aria_controls_prefix }}-3" aria-labelledby="{{ tab_id }}-3" role="tabpanel">
+                  <div class="search__result-type search__result--product o-hidden d-flex fd-column h-100 p-relative">
+                    <ul class="search__result--list js-scroll-element search-spacing-sm disable-scrollbars r-gap-scale-m ls-none rw flex-1" role="listbox">
+                      {%- for collection in predictive_search.resources.collections -%}
+                        <li class="clm" style="--w-xs: var(--xs-collection);" role="option">
+                          {% render 'mini-card-collection',
+                            collection: collection,
+                          %}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                </sht-scroll-gradient-overlay>
+              {%- endif -%}
+              {%- if predictive_search.resources.articles.size > 0 -%}
+                <sht-scroll-gradient-overlay class="tab__panel tab__panel--active d-block h-100 js-tab-panel gradient-overlay--bottom gradient-overlay {{ tab_aria_controls_prefix }}-4 js-animate" data-tab-content-id="{{ tab_aria_controls_prefix }}-4" aria-labelledby="{{ tab_id }}-4" role="tabpanel">
+                  <div class="search__result-type search__result--product o-hidden d-flex fd-column h-100 p-relative">
+                    <ul class="search__result--list js-scroll-element search-spacing disable-scrollbars r-gap-scale-m ls-none rw flex-1" role="listbox">
+                      {%- for article in predictive_search.resources.articles -%}
+                        <li class="clm" style="--w-xs: var(--xs-article);" role="option">
+                          {% render 'mini-card-article',
+                            article: article
+                          %}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                    <div class="search__result-view-all w-100 p-absolute bottom-0 left-0 zi-3">
+                      <a href="{{ routes.search_url }}?q={{ predictive_search.terms | escape }}&{{ 'options[prefix]' | url_encode }}=last" class="btn btn-l btn-primary d-inline-flex center-xs gap-2xs w-100 p-relative">{{ 'general.search.view_all_results' | t }}</a>
+                    </div>
+                  </div>
+                </sht-scroll-gradient-overlay>
+              {%- endif -%}
+              {%- if predictive_search.resources.pages.size > 0 -%}
+                <sht-scroll-gradient-overlay class="tab__panel tab__panel--active d-block h-100 js-tab-panel gradient-overlay--bottom gradient-overlay {{ tab_aria_controls_prefix }}-5 js-animate" data-tab-content-id="{{ tab_aria_controls_prefix }}-5" aria-labelledby="{{ tab_id }}-5" role="tabpanel">
+                  <div class="search__result-type search__result--product o-hidden d-flex fd-column h-100 p-relative">
+                    <ul class="search__result--list js-scroll-element search-spacing disable-scrollbars r-gap-scale-m ls-none rw flex-1" role="listbox">
+                      {%- for page in predictive_search.resources.pages -%}
+                        <li class="clm" style="--w-xs: var(--xs-page);" role="option">
+                          {% render 'mini-card-page',
+                            page: page
+                          %}
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                    <div class="search__result-view-all w-100 p-absolute bottom-0 left-0 zi-3">
+                      <a href="{{ routes.search_url }}?q={{ predictive_search.terms | escape }}&{{ 'options[prefix]' | url_encode }}=last" class="btn btn-l btn-primary d-inline-flex center-xs gap-2xs w-100 p-relative">{{ 'general.search.view_all_results' | t }}</a>
+                    </div>
+                  </div>
+                </sht-scroll-gradient-overlay>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </sht-tabs>
+    {% else %}
+      <div class="d-flex middle-xs center-xs predictive-search--no-result h-100 fd-column gap-2xl pb-scale-3xl">
+        {% render 'icon-puzzed', class: 'no-result-icon' %}
+        <div class="d-flex fd-column middle-xs center-xs ta-center">
+          <span class="color-light">
+            {{ 'general.search.no_results_found_for' | t }} <span class="js-input-search fw-700"></span>.
+          </span>
+          <span>
+            {{ 'general.search.check_the_spelling' | t }}
+          </span>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{%- endif -%}

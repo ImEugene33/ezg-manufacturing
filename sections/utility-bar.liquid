@@ -1,0 +1,199 @@
+{{ 'section-utility-bar.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    background-color: var(--color-background);
+    color: var(--color-normal-text);
+    padding-top: {{ section.settings.padding_top_mob }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .utility-bar {
+    --utility-bar-text-color: var(--color-normal-text);
+    --utility-bar-accent-color: var(--color-button-primary-background);
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }} section-utility-bar-wrapper color-{{ section.settings.color_scheme }} {{ section.settings.sect_class }}">
+  <div class="utility-bar">
+    <div class="utility-bar__container">
+      <div class="utility-bar__search">
+        <a
+          role="button"
+          href="{{ routes.search_url }}"
+          data-event="{{ settings.search_type }}"
+          data-js-file-id="component-predictive-search-js-file"
+          data-js-file="{{ 'component-predictive-search.js' | asset_url }}"
+          {% if settings.search_type == 'drawer' %}onclick="event.preventDefault();"{% endif %}
+          aria-label="{{ 'accessibility.search' | t }}"
+          class="utility-bar__search-link js-search-open-trigger"
+          aria-haspopup="dialog"
+        >
+          <span class="utility-bar__search-icon">
+            {%- render 'icon-search2' -%}
+          </span>
+          <span class="utility-bar__search-text">{{ 'general.search.search' | t }}</span>
+        </a>
+      </div>
+
+      <div class="utility-bar__right">
+        {%- if section.settings.menu != blank -%}
+          <nav class="utility-bar__menu" aria-label="Secondary">
+            <ul class="utility-bar__menu-list">
+              {%- for link in section.settings.menu.links -%}
+                <li class="utility-bar__menu-item">
+                  <a href="{{ link.url }}" class="utility-bar__menu-link"{% if link.active %} aria-current="page"{% endif %}>
+                    {{- link.title -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+        {%- endif -%}
+
+        <span class="utility-bar__divider" aria-hidden="true"></span>
+
+        <div class="utility-bar__account">
+          {%- if customer -%}
+            <a href="{{ routes.account_url }}" class="utility-bar__account-link">
+              <span class="utility-bar__account-label">{{ section.settings.account_label }}</span>
+            </a>
+            <a href="{{ routes.account_logout_url }}" class="utility-bar__account-link">
+              <span class="utility-bar__account-label">{{ 'customer.log_out' | t }}</span>
+            </a>
+          {%- else -%}
+            <a href="{{ routes.account_login_url }}" class="utility-bar__account-link">
+              <span class="utility-bar__account-label">{{ section.settings.login_label }}</span>
+            </a>
+            {%- if section.settings.show_signup_link -%}
+              <a href="{{ routes.account_register_url }}" class="utility-bar__account-link">
+                <span class="utility-bar__account-label">{{ section.settings.signup_label }}</span>
+              </a>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.utility_bar.name",
+  "class": "js-section-utility-bar",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.menu.label"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:general.settings.menu.label",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.utility_bar.settings.headers.account_links.content"
+    },
+    {
+      "type": "text",
+      "id": "login_label",
+      "label": "t:sections.utility_bar.settings.login_label.label",
+      "default": "Log In"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_signup_link",
+      "label": "t:sections.utility_bar.settings.show_signup_link.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "signup_label",
+      "label": "t:sections.utility_bar.settings.signup_label.label",
+      "default": "Sign Up"
+    },
+    {
+      "type": "text",
+      "id": "account_label",
+      "label": "t:sections.utility_bar.settings.account_label.label",
+      "default": "Account"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.utility_bar.settings.headers.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.utility_bar.settings.headers.padding.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.utility_bar.settings.padding_top.label",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.utility_bar.settings.padding_bottom.label",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.utility_bar.settings.padding_top_mob.label",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.utility_bar.settings.padding_bottom_mob.label",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "sect_class",
+      "label": "t:sections.utility_bar.settings.sect_class.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.utility_bar.name"
+    }
+  ]
+}
+{% endschema %}

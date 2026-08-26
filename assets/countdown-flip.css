@@ -1,0 +1,172 @@
+.flip-card {
+  line-height: 1;
+}
+
+.flip-card:before {
+  content: '';
+  width: 100%;
+  height: 1px;
+  background-color: rgb(var(--color-normal-text-rgb));
+  top: 50%;
+  inset-inline-start: 0;
+  position: absolute;
+  z-index: 6;
+  transform: translateY(-50%);
+}
+
+.flip-card__top,
+.flip-card__bottom,
+.flip-card__back::before,
+.flip-card__back::after {
+  display: block;
+  backface-visibility: hidden;
+  background-color: rgb(var(--color-normal-text-rgb));
+  color: rgba(var(--color-background-rgb));
+  height: 50%;
+}
+
+.flip-card__bottom {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 0;
+  pointer-events: none;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.flip-card__back {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  inset-inline-start: 0%;
+  pointer-events: none;
+  width: 100%;
+}
+
+.flip-card__back:before {
+  position: relative;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.flip-card__bottom-flip:before,
+.flip-card__back::before,
+.flip-card__bottom::after {
+  content: attr(data-value);
+}
+
+.flip-card__bottom::after {
+  display: block;
+}
+
+.flip .flip-card__back::before {
+  -webkit-animation: flipTop 0.3s cubic-bezier(0.37, 0.01, 0.94, 0.35);
+  animation: flipTop 0.3s cubic-bezier(0.37, 0.01, 0.94, 0.35);
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  transform-origin: center bottom;
+}
+
+.flip .flip-card__bottom-flip {
+  transform-origin: center top;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation: flipBottom 0.6s cubic-bezier(0.15, 0.45, 0.28, 1);
+  animation: flipBottom 0.6s cubic-bezier(0.15, 0.45, 0.28, 1);
+
+}
+
+.flip-card__bottom-flip:before {
+  display: block;
+  background: rgb(var(--color-normal-text-rgb));
+}
+
+.flip-card__bottom-flip {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 0;
+  height: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+@-webkit-keyframes flipTop {
+  0% {
+    transform: rotateX(0deg);
+    z-index: 2;
+  }
+
+  0%,
+  99% {
+    opacity: 0.99;
+  }
+
+  100% {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flipTop {
+  0% {
+    transform: rotateX(0deg);
+    z-index: 2;
+  }
+
+  0%,
+  99% {
+    opacity: 0.99;
+  }
+
+  100% {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes flipBottom {
+
+  0%,
+  50% {
+    z-index: -1;
+    transform: rotateX(90deg);
+    opacity: 0;
+  }
+
+  51% {
+    opacity: 0.99;
+  }
+
+  100% {
+    opacity: 0.99;
+    transform: rotateX(0deg);
+    z-index: 5;
+  }
+}
+
+@keyframes flipBottom {
+
+  0%,
+  50% {
+    z-index: -1;
+    transform: rotateX(90deg);
+    opacity: 0;
+  }
+
+  51% {
+    opacity: 0.99;
+  }
+
+  100% {
+    opacity: 0.99;
+    transform: rotateX(0deg);
+    z-index: 5;
+  }
+}

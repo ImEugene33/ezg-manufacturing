@@ -1,0 +1,73 @@
+{{ 'account.css' | asset_url | stylesheet_tag: preload: true }}
+
+<div data-animate="regular-section" class="js-animate section account-activate background color-{{- section.settings.color_scheme }}">
+	<div class="ctnr">
+		<div class="d-flex fd-column middle-xs gap-scale-4xl">
+      <div class="ta-center">
+        <h1 class="promotional-heading h2">{{ 'customer.activate_account.title' | t }}</h1>
+        <div class="fs-body-xl mt-scale-xl">{{ 'customer.activate_account.subtext' | t }}</div>
+      </div>
+      {%- form 'activate_customer_password', class: 'form form__customer' -%}
+        {%- if form.errors -%}
+          <div class="d-flex top-xs start-xs mb-scale-2xl" tabindex="-1">
+            {% render 'icon-infor', class: 'icon-fix-m icon color-error' %}
+            <div class="ml-3xs flex-1 fs-body-s color-text-80">
+              {% for error in form.errors %}
+                <div>
+                  {% if error == 'form' %}
+                    {{ form.errors.messages[error] }}
+                  {% else %}
+                    {{ form.errors.translated_fields[error] | capitalize }} {{ form.errors.messages[error] }}
+                  {% endif %} 
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {%- endif -%}
+
+        <div class="mb-scale-xl">
+          <label for="password" class="field__label fs-body-m p-relative d-block">
+            {{ 'customer.activate_account.password' | t }}<sup class="ml-4xs color-danger p-absolute top-0">*</sup>
+          </label>
+          <input
+            type="password"
+            name="customer[password]"
+            id="password"
+            autocomplete="new-password"
+            placeholder="{{ 'customer.placeholder.password' | t }}"
+            {% if form.errors contains 'password' %}
+              aria-invalid="true"
+              aria-describedby="password-error"
+            {% endif %}
+            class="field__text{% if form.errors contains 'password' %} field--error{% endif %} w-100"
+          >
+        </div>
+        <div class="mb-scale-2xl">
+          <label for="password_confirmation" class="field__label fs-body-m p-relative d-block">
+            {{ 'customer.activate_account.password_confirm' | t }}<sup class="ml-4xs color-danger p-absolute top-0">*</sup>
+          </label>
+          <input
+            type="password"
+            name="customer[password_confirmation]"
+            id="password_confirmation"
+            autocomplete="new-password"
+            placeholder="{{ 'customer.placeholder.password' | t }}"
+            {% if form.errors contains 'password' %}
+              aria-invalid="true"
+              aria-describedby="password_confirmation-error"
+            {% endif %}
+            class="field__text{% if form.errors contains 'password_confirmation' %} field--error{% endif %} w-100"
+          >
+        </div>
+        <div>
+          <button class="btn btn-l btn-primary mb-xs w-100">
+            {{ 'customer.activate_account.button' | t }}
+          </button>
+          <button name="decline" class="btn btn-l btn-secondary w-100">
+            {{ 'customer.activate_account.cancel' | t }}
+          </button>
+        </div>
+      {%- endform -%}
+		</div>
+	</div>
+</div>

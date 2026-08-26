@@ -1,0 +1,37 @@
+
+{%- if section.blocks.size == 1 -%}
+  <div class="{{ section.settings.enable_fullwidth | default: 'ctnr' | replace: 'true', '' }} d-flex o-hidden">
+    <div class="w-100 anmb-item d-flex center-xs" {{ block.shopify_attributes }}>
+      {%- render 'anmb-item-content',
+        section_id: section.id,
+        block: section.blocks[0]
+      -%}
+    </div>
+  </div>
+{%- else -%}
+  <sht-ann-bar class="{{ section.settings.enable_fullwidth | default: 'ctnr' | replace: 'true', '' }} d-flex top-xs middle-xs"  data-section-layout="{{ section.settings.section_style }}" role="region" aria-label="{{ 'accessibility.announcement' | t }}" aria-roledescription="Carousel" data-props='{"autoPlay": true ,"duration":{{ section.settings.rotating_speed | times: 1000 }}}'>
+    <div class="slider-nav {{ section.settings.show_navigation | replace: true, 'd-flex gap-4xs' | replace: false, 'd-none-important'}} {{ section.settings.section_style | replace: 'grid-desktop', 'd-none-sm' }} ">
+      <button aria-label="{{ 'accessibility.previous_slide' | t }}" name="previous" class="js-anmb-control-prev btn btn-icon-m btn-tertiary control-anmb btn-prev rtl-flip-x" type="button">
+        {% render 'icon-caret-left', class: 'icon icon-fix-m ' %}
+      </button>
+      <button aria-label="{{ 'accessibility.next_slide' | t }}" name="next" class="js-anmb-control-next btn btn-icon-m btn-tertiary control-anmb btn-next rtl-flip-x" type="button">
+        {% render 'icon-caret-right', class: 'icon icon-fix-m' %}
+      </button>
+    </div>
+    <div aria-live="polite" aria-atomic="true" class="js-anmb-items o-hidden {{ section.settings.section_style | replace: 'grid-desktop', 'announcement--grid-desktop' | replace: 'slide', 'ox-auto disable-scrollbars scrollable-stop-always scrollable-x' }} d-flex top-xs w-100 p-relative">
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }} role="group" aria-roledescription="Slide" aria-label="{{ 'accessibility.slide' | t }} {{ forloop.index }} {{ 'accessibility.of' | t }} {{ forloop.length }}" class="js-anmb-item fs-0 scrollable-aln-start w-100 ta-left anmb-item d-flex center-xs" data-item-index="{{ forloop.index }}" {% if section.settings.section_style == 'grid-desktop' %} style="--w-sm: {{ 12 | divided_by: section.blocks.size }} "{% endif %}>
+          {%- render 'anmb-item-content', section_id: section.id, block: block -%}
+        </div>
+      {%- endfor -%}
+      {% if section.blocks.size == 2 %}
+        <div role="group" aria-roledescription="Slide" aria-label="{{ 'accessibility.slide' | t }} 1 {{ 'accessibility.of' | t }} 2" class="js-anmb-item fs-0 scrollable-aln-start w-100 ta-left anmb-item d-flex clone center-xs{{ section.settings.section_style | replace: 'grid-desktop', 'd-none-md' }}" data-item-index="3">
+          {%- render 'anmb-item-content', section_id: section.blocks[0].id, block: section.blocks[0] -%}
+        </div>
+        <div role="group" aria-roledescription="Slide" aria-label="{{ 'accessibility.slide' | t }} 2 {{ 'accessibility.of' | t }} 2" class="js-anmb-item fs-0 scrollable-aln-start w-100 ta-left anmb-item d-flex clone center-xs{{ section.settings.section_style | replace: 'grid-desktop', 'd-none-md' }}" data-item-index="4">
+          {%- render 'anmb-item-content', section_id: section.blocks[1].id, block: section.blocks[1] -%}
+        </div>
+      {% endif %}
+    </div>
+  </sht-ann-bar>
+{%- endif -%}

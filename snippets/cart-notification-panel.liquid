@@ -1,0 +1,24 @@
+<sht-cart-noti id="cartNotificationPanel" class="cart-notification zi-10 no-focus-visible rad-m color-{{ settings.popover_notification_color }} background p-s maw-fit-content-md" tabindex="-1" hidden="true">
+  <div data-type="cart-notification-panel-wrapper" class="dialog disable-scrollbars cart-notification__wapper scrollbars js-cart-notification-panel-wrapper p-relative" >
+    <div class="cart-notification-panel-container focus-inset d-flex between-xs" aria-modal="true" aria-label="{{ 'general.cart.item_added' | t }}" role="dialog" tabindex="-1">
+      <div class="d-flex middle-xs between-xs gap-xs">
+        <div class="icon-success p-relative">
+          <svg class="h-100 w-100">
+            <circle cx="12" cy="12" r="11"></circle>
+            <circle cx="12" cy="12" r="11" class="js-cart-notification-progress progress"></circle>
+          </svg>
+          <div class="p-absolute d-flex middle-xs center-xs inset">
+            {% render 'icon-check' | class: 'icon icon-fix-m' %}
+          </div>
+        </div>
+        <div class="fs-body-m">
+          <span class="js-cart-notification-product-quantity"></span>
+          <span class="js-cart-notification-message">{{ "general.cart_noti.success_message" | t }}</span>
+        </div>
+      </div>
+      <button type="button" class="cart-notification-btn-close btn btn-icon btn-icon-m btn-tertiary js-cart-notification-panel-close-btn" aria-label="{{ 'accessibility.close' | t }}" >
+        {% render 'icon-x-mark' | class: 'icon icon-fix-m' %}
+      </button>
+    </div>
+  </div>
+</sht-cart-noti>

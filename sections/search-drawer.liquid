@@ -1,0 +1,327 @@
+{% liquid
+  assign xs_product = 12.0 | divided_by: section.settings.columns_per_row_product
+  assign xs_collection = 12.0 | divided_by: section.settings.columns_per_row_collection
+  assign xs_article = 12.0 | divided_by: section.settings.columns_per_row_blog
+  assign xs_page = 12.0 | divided_by: section.settings.columns_per_row_page
+
+
+  assign suggested_link_title = ''
+  if section.settings.suggested_links_heading.size > 0
+    assign suggested_link_title = section.settings.suggested_links_heading
+  else
+    assign suggested_link_title = section.settings.suggested_links.title
+  endif
+%}
+<sht-search-drwr-section data-ui-component="Section Search Drawer" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}" class="search-drawer-section drawer o-hidden inset p-fixed no-focus-visible d-flex end-xs hidden-xs {{ section.settings.show_rating | default: 'search-rating--hidden' | replace: 'true', '' }}  {{ section.settings.show_vendor | default: 'search-vendor--hidden' | replace: 'true', '' }} {{ section.settings.show_price | default: 'search-price--hidden' | replace: 'true', '' }} {{ section.settings.show_tag_blog | default: 'search-tag--hidden' | replace: 'true', '' }}"
+style="--xs-page: {{ xs_page }}; --xs-collection: {{ xs_collection }}; --xs-article: {{ xs_article }}; --xs-product: {{ xs_product }};
+--ratio-collection: {{ section.settings.image_ratio_collection }};
+--ratio-article: {{ section.settings.image_ratio_blog }};
+">
+  <sht-predictive-srch role="dialog" aria-modal="true" class="js-predictive-search d-block search-drawer-container w-100">
+    <div class="search-drawer__overlay js-drawer-overlay drawer-overlay js-predictive-search-close-overlay"></div>
+    <div class="search-drawer__container drawer-content-container background color-{{- section.settings.color_scheme }}">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-drawer__wrapper js-drawer-wrapper predictive-search-form js-predictive-search-form p-relative zi-9 d-flex fd-column h-100">
+        <input name="options[prefix]" type="hidden" value="last">
+        <div class="search-drawer__header p-sticky zi-1 gap-scale-m">
+          <h2 class="h5">{{ 'general.search.search' | t }}</h2>
+          <div class="search__field d-flex w-100 p-relative">
+            <input id="predictiveSearch_Input" class="field__text field--focus js-predictive-search-input w-100 fs-body-m background" type="search" name="q" aria-label="{{ 'accessibility.search' | t }}" value="" placeholder="Enter keywords..." role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <span class="search__field-icon pe-none d-flex middle-xs center-xs mr-8 p-absolute top-0 pe-none color-text-60">
+              {% render 'icon-search' %}
+            </span>
+            <span class="js-clear-search-field clear-search-field clear__field-icon c-pointer zi-1">{{ 'general.search.clear' | t }}</span>
+            <label class="field__label visually-hidden" for="predictiveSearch_Input">{{ 'general.search.search' | t }}</label>
+          </div>
+          <button class="drawer__btn-close btn btn-icon btn-icon-l btn-tertiary js-drawer-btn-close js-predictive-search-close-trigger" type="button" aria-label="{{ 'accessibility.close' | t }}">
+            {% render 'icon-x-mark' %}
+          </button>
+        </div>
+        <sht-scroll-gradient-overlay class="search-drawer__body search__result o-hidden d-block js-predictive-search-results flex-1 p-relative h-100 gradient-overlay--bottom gradient-overlay" tabindex="-1" hidden>
+          <div class="js-predictive-search-loading search-loading ta-center p-absolute center-middle" hidden>
+            {% render 'icon-spinner' %}
+          </div>
+          <div class="search__result-empty disable-scrollbars js-scroll-element search-spacing-xs oy-auto h-100 js-predictive-search-message-placeholder color-light d-flex d-none fd-column gap-scale-3xl">
+            {%- if section.settings.suggested_links.links.size > 0 -%}
+              <div class="d-flex fd-column gap-s">
+                {%- if suggested_link_title -%}
+                  <h3 class="h6 hide-empty">{{- suggested_link_title -}}</h3>
+                {%- endif -%}
+                <div class="d-flex fw-wrap middle-xs gap-3xs hide-empty">
+                  {%- for link in section.settings.suggested_links.links -%}
+                    <a href="{{ link.url }}" class="tag d-inline-block">{{ link.title }}</a>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+            {%- if section.settings.suggested_products.count > 0 -%}
+              <div class="d-flex fd-column gap-s">
+                {%- if section.settings.suggested_products_heading -%}
+                  <h3 class="h6 hide-empty"> {{- section.settings.suggested_products_heading -}}</h3>
+                {%- endif -%}
+                {%- if section.settings.suggested_products -%}
+                  <div class="rw hide-empty r-gap-scale-m">
+                    {%- for product in section.settings.suggested_products -%}
+                      <div class="clm" style="--w-xs: {{- xs_product -}};">
+                        {% render 'mini-card-product',
+                          product: product,
+                          show_vendor: section.settings.show_vendor,
+                          show_price: section.settings.show_price,
+                          show_rating: section.settings.show_rating,
+                          show_quick_view: false,
+                          quick_buy: false
+                        %}
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+            {%- if section.settings.suggested_collections.count > 0 -%}
+            <div class="d-flex fd-column gap-s">
+              {%- if section.settings.suggested_collections_heading -%}
+                <h3 class="h6 hide-empty"> {{- section.settings.suggested_collections_heading -}}</h3>
+              {%- endif -%}
+              <div class="rw hide-empty r-gap-scale-m">
+                {%- for collection in section.settings.suggested_collections -%}
+                  <div class="clm" style="--w-xs: {{- xs_collection -}};">
+                    {% render 'mini-card-collection', collection: collection, ratio: section.settings.image_ratio_collection %}
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+            {%- endif -%}
+          </div>
+          <div class="js-predictive-search-results-panel predictive-search-results-panel h-100"></div>
+        </sht-scroll-gradient-overlay>
+      </form>
+    </div>
+    <button aria-label="{{- "accessibility.close_modal" | t -}}" class="js-drawer-btn-close visually-hidden">
+      {%- render 'icon-x-mark' -%}
+    </button>
+  </sht-predictive-srch>
+</sht-search-drwr-section>
+
+{%- liquid
+  render 'js-loader', files: "component-predictive-search.js" | split: ', '
+-%}
+{% schema %}
+  {
+    "name": "t:sections.search_drawer.settings.search_drawer.label",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:sections.search_drawer.settings.search_drawer.info"
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.general.content"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:general.settings.color_schemes.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.search_drawer.settings.product_results.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "t:general.settings.show_vendor.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_rating",
+        "label": "t:general.settings.show_rating.label",
+        "info": "t:general.settings.show_rating.info",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_price",
+        "label": "t:general.settings.show_price.label",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "columns_per_row_product",
+        "label": "t:general.settings.columns_per_row.label",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:sections.search_drawer.settings.collection_results.label"
+      },
+      {
+        "type": "select",
+        "id": "image_ratio_collection",
+        "label": "t:general.settings.image_ratio.label",
+        "options": [
+          {
+            "value": "1/1",
+            "label": "t:general.settings.image_ratio.options.option_square.label"
+          },
+          {
+            "value": "2/3",
+            "label": "t:general.settings.image_ratio.options.option_portrait.label"
+          },
+          {
+            "value": "3/2",
+            "label": "t:general.settings.image_ratio.options.option_landscape.label"
+          },
+          {
+            "value": "auto",
+            "label": "t:general.settings.image_ratio.options.option_original.label"
+          }
+        ],
+        "default": "1/1"
+      },
+      {
+        "type": "select",
+        "id": "columns_per_row_collection",
+        "label": "t:general.settings.columns_per_row.label",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:sections.search_drawer.settings.blog_results.label"
+      },
+      {
+        "type": "select",
+        "id": "image_ratio_blog",
+        "label": "t:general.settings.image_ratio.label",
+        "options": [
+          {
+            "value": "1/1",
+            "label": "t:general.settings.image_ratio.options.option_square.label"
+          },
+          {
+            "value": "2/3",
+            "label": "t:general.settings.image_ratio.options.option_portrait.label"
+          },
+          {
+            "value": "3/2",
+            "label": "t:general.settings.image_ratio.options.option_landscape.label"
+          },
+          {
+            "value": "auto",
+            "label": "t:general.settings.image_ratio.options.option_original.label"
+          }
+        ],
+        "default": "1/1"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_tag_blog",
+        "label": "t:sections.search_drawer.settings.show_tag_blog.label",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "columns_per_row_blog",
+        "label": "t:general.settings.columns_per_row.label",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:sections.search_drawer.settings.page_results.label"
+      },
+      {
+        "type": "select",
+        "id": "columns_per_row_page",
+        "label": "t:general.settings.columns_per_row.label",
+        "default": "1",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:sections.search_drawer.settings.empty_state.label"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:sections.search_drawer.settings.empty_state.info"
+      },
+      {
+        "type": "link_list",
+        "id": "suggested_links",
+        "label": "t:sections.search_drawer.settings.suggested_link.label"
+      },
+      {
+        "type": "text",
+        "id": "suggested_links_heading",
+        "label": "t:sections.search_drawer.settings.suggested_link_heading.label",
+        "default": "Popular searches",
+        "info": "t:sections.search_drawer.settings.suggested_link_heading.info",
+        "visible_if": "{{ section.settings.suggested_links != blank }}"
+      },
+      {
+        "type": "product_list",
+        "id": "suggested_products",
+        "label": "t:sections.search_drawer.settings.suggested_products.label"
+      },
+      {
+        "type": "text",
+        "id": "suggested_products_heading",
+        "label": "t:sections.search_drawer.settings.suggested_products_heading.label",
+        "default": "Popular products",
+        "info": "t:sections.search_drawer.settings.suggested_products_heading.info",
+        "visible_if": "{{ section.settings.suggested_products != blank }}"
+      },
+      {
+        "type": "collection_list",
+        "id": "suggested_collections",
+        "label": "t:sections.search_drawer.settings.suggested_collections.label"
+      },
+      {
+        "type": "text",
+        "id": "suggested_collections_heading",
+        "label": "t:sections.search_drawer.settings.suggested_collections_heading.label",
+        "default": "Popular collections",
+        "info": "t:sections.search_drawer.settings.suggested_collections_heading.info",
+        "visible_if": "{{ section.settings.suggested_collections != blank }}"
+      }
+    ]
+  }
+{% endschema %}

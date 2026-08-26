@@ -1,0 +1,503 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_eABMkG": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_4Yb3GW": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Contract Manufacturing",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        },
+        "description_7cEJLG": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Since 1998, EZG has been delivering reliable custom manufacturing services for industries that demand precision and durability.</p>"
+          }
+        },
+        "button_cDwWBM": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_4Yb3GW",
+        "description_7cEJLG",
+        "button_cDwWBM"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 60,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/contract-assembly-services-banner_1.png",
+        "section_image_width": "max-width",
+        "height_desktop": "adapt_img",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "icon_with_text_jLhF4j": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_T8nmwy": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "WELDING",
+            "description": "<p>Precision MIG and TIG welding by AWS-certified professionals, plus robotic welding for high-volume projects with repeatable quality.</p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_9xJUUK": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "MACHINING",
+            "description": "<p>Multi-axis CNC machining, turning, and milling for precision-engineered components in carbon steel, aluminum, stainless steel, plastics, and specialty metals.</p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_a7jqfN": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "POWDER COATING",
+            "description": "<p>The in-house powder coat booths provide high-quality sprays that deliver a uniform, corrosion resistance finish. Coatings are safe to adhere onto finished surface.</p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_gCmbhF": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "FABRICATING",
+            "description": "<p>We cut, roll, form, and assemble all types of materials using modern tools and custom manufacturing techniques.</p><p></p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_WgcLxP": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "BENDING",
+            "description": "<p>Accurate, repeatable results using industry-leading press brakes with dynamic crowning and angle control, up to 1” thick materials.</p><p></p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_bEwPJM": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "LASER CUTTING",
+            "description": "<p>High-speed fiber and optic laser cutting systems capable of cutting thick plate, tubing, and precision features with fast turnaround.</p><p></p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_T8nmwy",
+        "icon_with_text_item_9xJUUK",
+        "icon_with_text_item_a7jqfN",
+        "icon_with_text_item_gCmbhF",
+        "icon_with_text_item_WgcLxP",
+        "icon_with_text_item_bEwPJM"
+      ],
+      "name": "t:sections.icon_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "heading": "OUR CAPABILITIES",
+        "heading_size": "h5",
+        "description": "<p>With a team of engineers, project managers, and contract manufacturers, our machine shop offers unmatched innovation.</p>",
+        "text_position": "fd-column",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "#5B7F95",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "label": "",
+        "link": ""
+      }
+    },
+    "content_collage_reVHix": {
+      "type": "content-collage",
+      "blocks": {
+        "text_bjRXpk": {
+          "type": "text",
+          "settings": {
+            "heading": "STATE-OF-THE-ART TECHNOLOGY",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>We believe in investing in equipment with the highest quality. Our shop is outfitted with industry-leading machines to increase speed, accuracy, and cost efficiency. That includes Trumpf & Mazak Lasers, Mazak Milling Centers, CNC Lathes, Robotic Welding Cells, Press Brakes, Powder Coating Booths, CNC Rolls, and a Vertical Saw. From cutting to finishing, we handle 90–95% of the process in-house, giving you a quality product without unnecessary delays.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_rGdGJ3": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/cnc-machine-2.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-center-md middle-md",
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_bjRXpk",
+        "image_rGdGJ3"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_wV3tbP": {
+      "type": "content-collage",
+      "blocks": {
+        "video_BMmWQc": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://www.youtube.com/watch?v=owfU0QwS6yk",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "3",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_3F3UPJ": {
+          "type": "text",
+          "settings": {
+            "heading": "EZG Machine Shop",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>Our 185,000-square-foot facility is built for full-scale manufacturing. With a 15-ton lifting capacity and 13 feet under the hook, we handle almost all processes in-house. That means faster lead times, fewer delays, and better quality control. From raw sheet metal fabrication to finished mechanical assembly, EZG delivers a full-service manufacturing partner.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "1",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_BMmWQc",
+        "text_3F3UPJ"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "icon_with_text_4z9wih": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_VAa9h6": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "OIL AND GAS EQUIPMENT",
+            "description": "<p>Precision MIG and TIG welding by AWS-certified professionals, plus robotic welding for high-volume projects with repeatable quality.</p><p></p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_h6Xntc": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "MATERIAL HANDLING",
+            "description": "<p>Custom-built equipment to move, lift, and store products efficiently in warehouses, factories, and logistics centers.</p><p></p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_WiQyHX": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "FOOD PROCESSING",
+            "description": "<p>Safe, durable solutions made from food-grade materials to support clean food manufacturing operations.</p><p></p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_ga4bYf": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "LAWN GARDEN",
+            "description": "<p>Built-to-last equipment that supports commercial and residential landscaping, designed for performance and ease of use.</p><p></p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_MQrLJt": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "MEDICAL EQUIPMENT",
+            "description": "<p>Precision-manufactured components and parts for healthcare applications where safety, consistency, and accuracy are non-negotiable.</p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_hbUdxX": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "CONSTRUCTION EQUIPMENT",
+            "description": "<p>Heavy-duty assemblies and parts that support large-scale building projects, engineered for toughness and reliability.</p><p></p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_VAa9h6",
+        "icon_with_text_item_h6Xntc",
+        "icon_with_text_item_WiQyHX",
+        "icon_with_text_item_ga4bYf",
+        "icon_with_text_item_MQrLJt",
+        "icon_with_text_item_hbUdxX"
+      ],
+      "name": "t:sections.icon_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-dfd7f710-1c3c-4730-be7a-3884f4f918ee",
+        "heading": "",
+        "heading_size": "h5",
+        "description": "",
+        "text_position": "fd-column",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "label": "",
+        "link": ""
+      }
+    },
+    "rich_text_p77edE": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_8kGRJD": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Built By People who care",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_JFhxFP": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Since 1998, EZG has been delivering reliable custom manufacturing services for industries that demand precision and durability. From one-off parts to full product development runs, we’re equipped to meet your specs and your schedule.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_8kGRJD",
+        "description_JFhxFP"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "image_banner_z6E6Yf": {
+      "type": "image-banner",
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 30,
+        "section_mask_overlay_color": "",
+        "section_content_overlay_color": "",
+        "desktop_image": "shopify://shop_images/tig-mig-header.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "start-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "50vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "rich_text_8zHBHB": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_UkpUbR": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Let's Build something great together",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_FDzDcR": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Versatile and multipurpose, the cutting-edge media-promotion sections easily handle images, slideshows, and videos, allowing you to enhance your online store with diverse content forms.</p>"
+          }
+        },
+        "button_GaDpbC": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_UkpUbR",
+        "description_FDzDcR",
+        "button_GaDpbC"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_eABMkG",
+    "icon_with_text_jLhF4j",
+    "content_collage_reVHix",
+    "content_collage_wV3tbP",
+    "icon_with_text_4z9wih",
+    "rich_text_p77edE",
+    "image_banner_z6E6Yf",
+    "rich_text_8zHBHB"
+  ]
+}

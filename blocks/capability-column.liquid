@@ -1,0 +1,45 @@
+<div class="capability-columns__column" {{ block.shopify_attributes }}>
+  {% content_for 'blocks' %}
+</div>
+
+{% stylesheet %}
+  .capability-columns__column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+  }
+  @media only screen and (min-width: 1024px) {
+    .capability-columns__column {
+      gap: 20px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Column",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "capability-title"
+    },
+    {
+      "type": "capability-card"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Column",
+      "blocks": [
+        {
+          "type": "capability-title"
+        },
+        {
+          "type": "capability-card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

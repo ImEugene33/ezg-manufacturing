@@ -1,0 +1,970 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_pAQMq9": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_LycFRr": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Wholesale Furniture Solutions for Your Business",
+            "heading_size": "h2",
+            "enable_h1_tag": true
+          }
+        },
+        "description_PK7NqC": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Partner with us for premium furniture at wholesale prices, crafted with quality and timeless style for businesses and designers.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LycFRr",
+        "description_PK7NqC"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 40,
+        "section_mask_overlay_color": "#000000",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "end-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "end-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "fullwidth_logo_VApH4w": {
+      "type": "fullwidth-logo",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "logo_max_width": 100,
+        "logo_alignment": "middle-xs",
+        "link_to_home": true,
+        "logo_source": "svg",
+        "font": "body",
+        "font_scale": 10,
+        "svg_code": "<svg width=\"263\" height=\"40\" viewbox=\"0 0 263 40\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M0.0965196 39V0.319402H6.92405L24.9382 29.2576V0.319402H31.1618V39H24.3868L6.26756 10.0618V39H0.0965196ZM49.6371 34.7459C52.1405 34.7459 54.0575 33.8969 55.388 32.1987C56.7185 30.5006 57.3837 28.0497 57.3837 24.846C57.3837 21.6423 56.7185 19.1826 55.388 17.467C54.0575 15.7514 52.1405 14.8936 49.6371 14.8936C47.1337 14.8936 45.208 15.7514 43.86 17.467C42.512 19.1826 41.838 21.6423 41.838 24.846C41.838 28.0497 42.5032 30.5006 43.8337 32.1987C45.1817 33.8969 47.1162 34.7459 49.6371 34.7459ZM49.5846 9.74665C53.9262 9.74665 57.34 11.0859 59.8259 13.7644C62.2943 16.4429 63.5285 20.1368 63.5285 24.846C63.5285 29.5552 62.303 33.2404 59.8521 35.9014C57.3837 38.5798 53.9787 39.9191 49.6371 39.9191C45.278 39.9191 41.873 38.5886 39.4221 35.9276C36.9536 33.2841 35.7194 29.5903 35.7194 24.846C35.7194 20.1368 36.9449 16.4341 39.3958 13.7381C41.8467 11.0771 45.243 9.74665 49.5846 9.74665ZM82.2664 16.2591H80.6646C75.8153 16.2591 73.3906 18.6925 73.3906 23.5593V39H67.4296V10.6657H73.0755V15.6551C74.7211 11.8912 77.3383 10.0092 80.9272 10.0092H81.0847C81.6449 10.0443 82.0388 10.0618 82.2664 10.0618V16.2591ZM106.886 14.2633C109.005 11.3923 111.797 9.95673 115.263 9.95673C118.52 9.95673 120.892 10.8233 122.38 12.5564C123.885 14.2721 124.638 17.0118 124.638 20.7757V39H118.703V21.1959C118.703 19.1126 118.318 17.5896 117.548 16.6267C116.795 15.6638 115.605 15.1824 113.977 15.1824C112.016 15.1824 110.484 15.7864 109.381 16.9943C108.278 18.2023 107.727 19.8917 107.727 22.0625V39H101.766V20.0667C101.766 18.5612 101.346 17.3707 100.505 16.4954C99.6826 15.6201 98.5446 15.1824 97.0916 15.1824C95.1659 15.1824 93.6516 15.7951 92.5487 17.0206C91.4458 18.2461 90.8943 19.9442 90.8943 22.115V39H84.9333V10.6657H90.6317V14.3158C92.68 11.4098 95.4285 9.95673 98.8773 9.95673C100.75 9.95673 102.317 10.2981 103.578 10.9809C104.856 11.6636 105.959 12.7578 106.886 14.2633ZM147.919 20.3293C147.761 18.6487 147.14 17.327 146.054 16.3641C144.969 15.3837 143.551 14.8936 141.8 14.8936C139.455 14.8936 137.678 15.7339 136.47 17.4145C135.279 19.0776 134.684 21.5373 134.684 24.7935C134.684 27.9797 135.279 30.4131 136.47 32.0937C137.66 33.7568 139.384 34.5884 141.643 34.5884C143.446 34.5884 144.899 34.0807 146.002 33.0653C147.122 32.0324 147.814 30.5531 148.076 28.6274H153.906C153.609 32.1462 152.339 34.9035 150.098 36.8992C147.823 38.9125 144.803 39.9191 141.039 39.9191C137.17 39.9191 134.106 38.5711 131.848 35.8751C129.59 33.1616 128.46 29.5027 128.46 24.8985C128.46 20.1893 129.633 16.4779 131.979 13.7644C134.325 11.0859 137.546 9.74665 141.643 9.74665C145.232 9.74665 148.12 10.6832 150.309 12.5564C152.462 14.4296 153.635 17.0206 153.827 20.3293H147.919ZM169.65 34.7459C172.154 34.7459 174.071 33.8969 175.401 32.1987C176.732 30.5006 177.397 28.0497 177.397 24.846C177.397 21.6423 176.732 19.1826 175.401 17.467C174.071 15.7514 172.154 14.8936 169.65 14.8936C167.147 14.8936 165.221 15.7514 163.873 17.467C162.525 19.1826 161.851 21.6423 161.851 24.846C161.851 28.0497 162.517 30.5006 163.847 32.1987C165.195 33.8969 167.129 34.7459 169.65 34.7459ZM169.598 9.74665C173.94 9.74665 177.353 11.0859 179.839 13.7644C182.308 16.4429 183.542 20.1368 183.542 24.846C183.542 29.5552 182.316 33.2404 179.865 35.9014C177.397 38.5798 173.992 39.9191 169.65 39.9191C165.291 39.9191 161.886 38.5886 159.435 35.9276C156.967 33.2841 155.733 29.5903 155.733 24.846C155.733 20.1368 156.958 16.4341 159.409 13.7381C161.86 11.0771 165.256 9.74665 169.598 9.74665ZM202.28 16.2591H200.678C195.829 16.2591 193.404 18.6925 193.404 23.5593V39H187.443V10.6657H193.089V15.6551C194.734 11.8912 197.352 10.0092 200.94 10.0092H201.098C201.658 10.0443 202.052 10.0618 202.28 10.0618V16.2591ZM209.805 26.4741C209.857 29.1176 210.505 31.1483 211.748 32.5664C212.991 33.9844 214.742 34.6934 217 34.6934C218.61 34.6934 219.967 34.2908 221.07 33.4855C222.173 32.6626 222.908 31.5247 223.276 30.0717H229.263C228.72 33.0303 227.294 35.4112 224.983 37.2143C222.654 39.0175 219.871 39.9191 216.632 39.9191C212.571 39.9191 209.376 38.5711 207.047 35.8751C204.719 33.1791 203.555 29.4677 203.555 24.741C203.555 20.0667 204.728 16.3991 207.074 13.7381C209.42 11.0771 212.658 9.74665 216.79 9.74665C220.816 9.74665 223.967 11.0421 226.243 13.6331C228.537 16.2416 229.683 19.8216 229.683 24.3733C229.683 24.776 229.657 25.415 229.605 26.2903C229.587 26.3428 229.578 26.4041 229.578 26.4741H209.805ZM223.381 22.115C223.363 19.8041 222.768 18.0185 221.595 16.758C220.422 15.48 218.768 14.841 216.632 14.841C214.601 14.841 213 15.4625 211.827 16.7055C210.654 17.9484 209.971 19.7516 209.778 22.115H223.381ZM246.771 14.8936V0.660778H251.235L254.938 10.1143L258.43 0.660778H262.895V14.8936H259.901V3.65439L255.699 14.8936H254.15L249.791 3.65439V14.8936H246.771ZM231.435 3.12919V0.660778H243.699V3.12919H239.287V14.8936H235.9V3.12919H231.435Z\" fill=\"black\"></path>\n</svg>"
+      }
+    },
+    "rich_text_QzMcpX": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_3cp98P": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading_kKwxNB": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Why us?",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_Ra6AAT": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Partner with Normcore for exceptional benefits: competitive pricing, quality warranties, and full product certification. We work together to build a balanced market.</p>"
+          }
+        },
+        "countdown_timer_Y7BAiy": {
+          "type": "countdown_timer",
+          "disabled": true,
+          "settings": {
+            "hide_on_end": true,
+            "end_date": "",
+            "end_time": "",
+            "end_text": "<p>Event is finished</p>",
+            "countdown_background": "rgba(0,0,0,0)",
+            "countdown_number_color": "rgba(0,0,0,0)"
+          }
+        },
+        "button_qPt4cQ": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_primary_label": "Explore more",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "View details",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_3cp98P",
+        "heading_kKwxNB",
+        "description_Ra6AAT",
+        "countdown_timer_Y7BAiy",
+        "button_qPt4cQ"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "icon_with_text_byiLia": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_NEKt6Q": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "recycle",
+            "custom_code": "",
+            "title": "Sustainable Development Principles",
+            "description": "<p>Willing to share profits, benefits, and business opportunities with agents towards a long-term, mutually beneficial cooperation process.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_j4He7h": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "discount",
+            "custom_code": "",
+            "title": "Wholesale Pricing",
+            "description": "<p>Protect, prioritize, and provide maximum support to agents against market fluctuations, industry changes, manufacturers.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_BC7XWy": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "user-circle",
+            "custom_code": "",
+            "title": "Clear & Transparent Policy",
+            "description": "<p>1-to-1 warranty policy for up to 5 years depending on the product line. Ensure fairness among agents in the system and safeguard information from the agents.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_yAmhay": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "chart",
+            "custom_code": "",
+            "title": "Business Growth Commiment",
+            "description": "<p>Collaborate with agents to expand the market and boost business activities through various forms.</p>",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_NEKt6Q",
+        "icon_with_text_item_j4He7h",
+        "icon_with_text_item_BC7XWy",
+        "icon_with_text_item_yAmhay"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "",
+        "heading_size": "h3-regular",
+        "description": "",
+        "text_position": "fd-column",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "#4e4e4e",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "true",
+        "label": "",
+        "link": ""
+      }
+    },
+    "rich_text_fXPEPV": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_DcWFMB": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading_R4DNXi": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Functional art for your space.",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_Gnm7Mk": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>We believe small changes can make a big difference. Our wholesale furniture collection helps create inviting and productive spaces for both work and life.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_DcWFMB",
+        "heading_R4DNXi",
+        "description_Gnm7Mk"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "video_banner_dxhcKL": {
+      "type": "video-banner",
+      "blocks": {
+        "subheading_CWmYGf": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading_fGpke7": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading_text": "Video banner",
+            "heading_size": "headline",
+            "enable_h1_tag": false
+          }
+        },
+        "description_RnKXwL": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "description_text": "<p>Highlight your new collection or share content related to this image</p>"
+          }
+        },
+        "countdown_timer_UPzPPt": {
+          "type": "countdown_timer",
+          "disabled": true,
+          "settings": {
+            "hide_on_end": true,
+            "end_date": "",
+            "end_time": "",
+            "end_text": "<p>Event is finished</p>",
+            "countdown_background": "rgba(0,0,0,0)",
+            "countdown_number_color": "rgba(0,0,0,0)"
+          }
+        },
+        "button_ncx6kn": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_primary_label": "Explore more",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "View details",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_CWmYGf",
+        "heading_fGpke7",
+        "description_RnKXwL",
+        "countdown_timer_UPzPPt",
+        "button_ncx6kn"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 0,
+        "section_mask_overlay_color": "",
+        "section_content_overlay_color": "",
+        "video_source": "video_external",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "enable_controller": true,
+        "enable_loop": true,
+        "video_control_color": "primary",
+        "section_image_width": "max-width",
+        "height_desktop": "original",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-center-md middle-md",
+        "height_mobile": "50vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-center middle-xs",
+        "image_banner_link": ""
+      }
+    },
+    "running_image_link_FBUKdf": {
+      "type": "running-image-link",
+      "blocks": {
+        "collection_cyi8zt": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "large",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_p3H4Hd": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "large",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_RXEaNW": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "large",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_GqnMji": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "large",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_CFHEMe": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "large",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_tbwbN8": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "large",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_FYTa47": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "large",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "collection_cyi8zt",
+        "collection_p3H4Hd",
+        "collection_RXEaNW",
+        "collection_GqnMji",
+        "collection_CFHEMe",
+        "collection_tbwbN8",
+        "collection_FYTa47"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "Our Product Ecosystem",
+        "heading_size": "h3-regular",
+        "description": "<p>Normcore is continuously expanding its product ecosystem with five core furniture collections, thoughtfully designed to meet every need.</p>",
+        "running_direction": "animation-direction",
+        "rotating_speed": "1",
+        "list_alignment": "top-xs",
+        "item_shape": "1/1",
+        "content_position": "start-xs",
+        "content_alignment": "ta-left top-xs",
+        "button_text": "Explore more",
+        "button_link": "",
+        "enable_countdown": false,
+        "hide_on_end": true,
+        "end_date": "2024-11-11",
+        "end_time": "17:00",
+        "end_text": "<p>This event is finished</p>",
+        "countdown_background": "rgba(0,0,0,0)",
+        "countdown_number_color": ""
+      }
+    },
+    "multi_media_banner_qYXdQL": {
+      "type": "multi-media-banner",
+      "blocks": {
+        "image_BAPetA": {
+          "type": "image",
+          "settings": {
+            "heading": "Find Your Perfect Piece",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Your ideal piece is waiting to be found.</p>",
+            "desktop_image": "",
+            "overlay_opacity": 10,
+            "mask_overlay_color": "#000000",
+            "content_overlay_color": "#ffffff",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "button_label": "Accessories",
+            "button_style": "secondary",
+            "button_link": ""
+          }
+        },
+        "image_bkV7kP": {
+          "type": "image",
+          "settings": {
+            "heading": "Illuminate Your Space",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Discover premium lighting solutions.</p>",
+            "desktop_image": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "#000000",
+            "content_overlay_color": "#ffffff",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "button_label": "Lighting",
+            "button_style": "secondary",
+            "button_link": ""
+          }
+        },
+        "image_irUJCU": {
+          "type": "image",
+          "settings": {
+            "heading": "Your Space, Your Style",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Create a space that reflects your unique personality.</p>",
+            "desktop_image": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "#ffffff",
+            "content_overlay_color": "#ffffff",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "button_label": "Browse collections",
+            "button_style": "secondary",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_BAPetA",
+        "image_bkV7kP",
+        "image_irUJCU"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_layout": "desktop-stack desktop--last-emphasis",
+        "height_mobile": "100vh",
+        "mobile_layout": "mobile-column-equal"
+      }
+    },
+    "spotlight_quotes_BJkrCt": {
+      "type": "spotlight-quotes",
+      "blocks": {
+        "quote_KCqNFd": {
+          "type": "quote",
+          "settings": {
+            "avatar_image": "",
+            "star_rating": 3,
+            "review_content": "<p>Normcore has been a consistently reliable partner, providing high-quality product and excellent support. Highly recommended.</p>",
+            "author_name": "",
+            "author_description": ""
+          }
+        },
+        "quote_XEtAL9": {
+          "type": "quote",
+          "settings": {
+            "avatar_image": "",
+            "star_rating": 3,
+            "review_content": "<p>Partnering with Normcore has unlocked new levels of innovation for our business, driving significant growth and positive change.</p>",
+            "author_name": "",
+            "author_description": ""
+          }
+        },
+        "quote_yBiJ3e": {
+          "type": "quote",
+          "settings": {
+            "avatar_image": "",
+            "star_rating": 3,
+            "review_content": "<p>Normcoreis more than a partner; they're a true collaborator, deeply invested in our shared success. Their dedication is unmatched.</p>",
+            "author_name": "",
+            "author_description": ""
+          }
+        }
+      },
+      "block_order": [
+        "quote_KCqNFd",
+        "quote_XEtAL9",
+        "quote_yBiJ3e"
+      ],
+      "settings": {
+        "color_scheme": "schema-1",
+        "show_quote_icon": false,
+        "quote_text_size": "h2",
+        "content_alignment": "ta-left top-xs",
+        "image_ratio": "auto",
+        "image_size": "64",
+        "show_rating": false,
+        "star_rating_color": "#ffb82d",
+        "show_pagination": true,
+        "show_navigation": true,
+        "enable_autoplay": false,
+        "change_slide_interval": 5,
+        "slide_style": "transparent"
+      }
+    },
+    "multi_columns_FfHjbP": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_UmJUKF": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "",
+            "title": "STAFF Picks®",
+            "description": "<p>Our favorite pieces, hand-picked for simple style and comfort.</p>",
+            "btn_label": "Shop now",
+            "btn_link": ""
+          }
+        },
+        "image_column_rfrnR8": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "",
+            "title": "Storage Solutions",
+            "description": "<p>Stylish and functional storage and shelves to declutter your home.</p>",
+            "btn_label": "Shop now",
+            "btn_link": ""
+          }
+        },
+        "video_column_hijXJF": {
+          "type": "video_column",
+          "settings": {
+            "video_source": "external",
+            "external_video_link": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "title": "Living Room Essentials",
+            "description": "<p>Everything you need to create a comfortable living space.</p>",
+            "btn_label": "Shop now",
+            "btn_link": ""
+          }
+        },
+        "image_column_xPgpK6": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "",
+            "title": "Modern Furniture",
+            "description": "<p>Contemporary pieces for a stylish home.</p>",
+            "btn_label": "Shop now",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_UmJUKF",
+        "image_column_rfrnR8",
+        "video_column_hijXJF",
+        "image_column_xPgpK6"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "Curated Collections",
+        "heading_size": "h3-regular",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "logo_list_8WWCJh": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_M9pP9Y": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "",
+            "logo_link": ""
+          }
+        },
+        "logo_Kd4EAp": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "",
+            "logo_link": ""
+          }
+        },
+        "logo_aHicbg": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "",
+            "logo_link": ""
+          }
+        },
+        "logo_hNbkRF": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "",
+            "logo_link": ""
+          }
+        },
+        "logo_w7BQxE": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "",
+            "logo_link": ""
+          }
+        },
+        "logo_yNPMcA": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "",
+            "logo_link": ""
+          }
+        },
+        "logo_yEiVVN": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "",
+            "logo_link": ""
+          }
+        },
+        "logo_LpPELc": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "",
+            "logo_link": ""
+          }
+        },
+        "logo_MjtCM4": {
+          "type": "logo",
+          "settings": {
+            "logo_image": "",
+            "logo_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_M9pP9Y",
+        "logo_Kd4EAp",
+        "logo_aHicbg",
+        "logo_hNbkRF",
+        "logo_w7BQxE",
+        "logo_yNPMcA",
+        "logo_yEiVVN",
+        "logo_LpPELc",
+        "logo_MjtCM4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-60748a9c-7363-424a-8e7c-9171c135a44e",
+        "heading": "Our Trusted Partners",
+        "heading_size": "h3-regular",
+        "description": "<p>We're proud to collaborate with leading retailers across the nation and deliver high-quality products and home furniture to millions of satisfied customers.</p>",
+        "list_style": "running",
+        "running_direction": "animation-direction",
+        "rotating_speed": "1",
+        "list_alignment": "start-xs",
+        "logo_size": "50px",
+        "label": "",
+        "link": ""
+      }
+    },
+    "multi_columns_fT6FwR": {
+      "type": "multi-columns",
+      "blocks": {
+        "text_only_column_AVcKXB": {
+          "type": "text_only_column",
+          "settings": {
+            "title": "",
+            "description": "<h2>90+</h2><p>Number of chains, agents, and partners</p><p></p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "text_only_column_AkYMFj": {
+          "type": "text_only_column",
+          "settings": {
+            "title": "",
+            "description": "<h2>500.000+</h2><p>Units sold yearly</p><p></p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "text_only_column_DLt6it": {
+          "type": "text_only_column",
+          "settings": {
+            "title": "",
+            "description": "<h2>6.000.000</h2><p>Monthly end-user reach</p><p></p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_only_column_AVcKXB",
+        "text_only_column_AkYMFj",
+        "text_only_column_DLt6it"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "Agents & Partners Benefits",
+        "heading_size": "h3-regular",
+        "description": "",
+        "item_position": "ta-center center-xs",
+        "media_ratio": "3/2",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "rich_text_hMzr7K": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_zJVhzg": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Agents & Partners Policy",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_NEYMn9": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Partner with Normcore for exceptional benefits: large discounts, 1-to-1 warranties, and full certification. We work together to build a balanced market.</p>"
+          }
+        },
+        "button_EFpDT7": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Contact Our Sales Team",
+            "button_primary_style": "secondary",
+            "button_primary_link": "",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_zJVhzg",
+        "description_NEYMn9",
+        "button_EFpDT7"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "content_collage_dfNbQA": {
+      "type": "content-collage",
+      "blocks": {
+        "collection_U7EUpH": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "show_title": true,
+            "title_size": "h2",
+            "show_collection_quantity": true,
+            "quantity_style": "superscript",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "end-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "1",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_8RWRbX": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "show_title": true,
+            "title_size": "h2",
+            "show_collection_quantity": true,
+            "quantity_style": "superscript",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "end-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "1",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_g7NAkR": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "show_title": true,
+            "title_size": "h2",
+            "show_collection_quantity": true,
+            "quantity_style": "superscript",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "4",
+            "desktop_row": "3",
+            "mobile_content_position": "end-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "1",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "collection_U7EUpH",
+        "collection_8RWRbX",
+        "collection_g7NAkR"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": false,
+        "desktop_row_height": 200,
+        "mobile_row_height": 300
+      }
+    },
+    "contact_form_U4NYcw": {
+      "type": "contact-form",
+      "blocks": {
+        "custom_text_field_gqaq6M": {
+          "type": "custom_text_field",
+          "settings": {
+            "label": "Your Number (optional)",
+            "placeholder": "Ex: +84 123 4567",
+            "required_field": false,
+            "use_as_textarea": false
+          }
+        },
+        "custom_text_field_kCMkRr": {
+          "type": "custom_text_field",
+          "settings": {
+            "label": "Your Instagram (optional)",
+            "placeholder": "@username",
+            "required_field": false,
+            "use_as_textarea": false
+          }
+        }
+      },
+      "block_order": [
+        "custom_text_field_gqaq6M",
+        "custom_text_field_kCMkRr"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading_text": "Normcore looks forward to partnering with you",
+        "heading_size": "h3",
+        "section_image": "",
+        "content_alignment_desktop": "ta-left-md",
+        "desktop_content_ordering": "text-first-md",
+        "mobile_content_alignment": "ta-left",
+        "mobile_content_ordering": "image-first",
+        "button_label": "Send message"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_pAQMq9",
+    "fullwidth_logo_VApH4w",
+    "rich_text_QzMcpX",
+    "icon_with_text_byiLia",
+    "rich_text_fXPEPV",
+    "video_banner_dxhcKL",
+    "running_image_link_FBUKdf",
+    "multi_media_banner_qYXdQL",
+    "spotlight_quotes_BJkrCt",
+    "multi_columns_FfHjbP",
+    "logo_list_8WWCJh",
+    "multi_columns_fT6FwR",
+    "rich_text_hMzr7K",
+    "content_collage_dfNbQA",
+    "contact_form_U4NYcw"
+  ]
+}

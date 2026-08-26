@@ -1,0 +1,144 @@
+
+{%- liquid
+  assign is_expried = false
+  assign hide_countdown_cls = ''
+  assign hide_countdown_message_cls = 'd-none'
+  assign today = "now" | date: "%Y-%m-%d"
+  assign end_time = block.settings.end_time | default: '23:59' | append: ':00'
+  assign end_date = block.settings.end_date | default: today
+
+  assign timezone_offset = "now" | date: "%z"
+  assign expired_at = end_date | append: ' ' | append: end_time | append: ' ' | append: timezone_offset
+
+  assign expired_at_timestamp = expired_at | date: '%s'
+  assign now_timestamp = 'now' | date: '%s'
+
+  assign diff_seconds = expired_at_timestamp | minus: now_timestamp
+
+  assign days = diff_seconds | divided_by: 3600 | divided_by: 24 | round
+  assign hours = diff_seconds | modulo: 86400 | divided_by: 3600 | round
+  assign minutes = diff_seconds | modulo: 3600 | divided_by: 60 | round
+  assign seconds = diff_seconds | modulo: 60 | round
+
+  assign days_string = '00'
+  assign hours_string = '00'
+  assign minutes_string = '00'
+  assign seconds_string = '00'
+
+  if diff_seconds > 0 and days < 9 and days >= 0
+    assign days_string = days | prepend: '0'
+  elsif diff_seconds > 0 and days > 9
+    assign days_string = days
+  endif
+
+  if diff_seconds > 0 and hours < 9 and hours >= 0
+    assign hours_string = hours | prepend: '0'
+  elsif diff_seconds > 0 and hours > 9
+    assign hours_string = hours
+  endif
+
+  if diff_seconds > 0 and minutes < 9 and minutes >= 0
+    assign minutes_string = minutes | prepend: '0'
+  elsif diff_seconds > 0 and minutes > 9
+    assign minutes_string = minutes
+  endif
+
+  if diff_seconds > 0 and seconds < 9 and seconds >= 0
+    assign seconds_string = seconds | prepend: '0'
+  elsif diff_seconds > 0 and seconds > 9
+    assign seconds_string = seconds
+  endif
+
+  if diff_seconds <= 0
+    assign is_expried = true
+    if block.settings.hide_on_end
+      assign hide_countdown_cls = "d-none-important"
+    endif
+    if block.settings.end_text != blank
+      assign hide_countdown_message_cls = ''
+    endif
+  endif
+
+  unless block.settings.countdown_number_color.alpha == 0.0 or block.settings.countdown_number_color == blank
+    capture color_text
+      echo '--color-background-rgb:' | append: block.settings.countdown_number_color.rgb | append: ';'
+    endcapture
+  endunless
+  unless block.settings.countdown_background.alpha == 0.0 or block.settings.countdown_background == blank
+    capture color_background
+      echo '--color-normal-text-rgb:' | append: block.settings.countdown_background.rgb | replace: ' ', ','
+    endcapture
+  endunless
+  assign countdown_cls = number_size | default: 'h2' | append: ' countdown-count p-relative m-zero d-flex center-xs middle-xs f-extra '
+-%}
+<style>
+  #countdown-flip-{{- section.id }} .countdown-counter{
+    {{- color_text -}}
+    {{- color_background -}}
+  }
+</style>
+<sht-countdown-flip id="countdown-flip-{{- section.id -}}" class="countdown d-flex fd-column center-xs {{ class }} {{ countdown_type }}-countdown"
+  data-is-expired="{{ is_expried }}"
+  data-hide-on-end="{{ block.settings.hide_on_end }}"
+  data-time-zone-name="{{ "now" | date: "%Z" }}"
+  data-time-zone-offset="{{ timezone_offset }}"
+  data-end-time="{{ end_time }}"
+  data-end-date="{{ end_date }}"
+  {{ block.shopify_attributes }}
+  role="timer"
+  aria-label="{{ 'general.countdown.timer_label' | t }}">
+  <time datetime="{{ expired_at | date: '%Y-%m-%dT%H:%M:%S' }}" class="countdown-counter js-counter d-inline-flex fw-wrap gap-3xs {{ alignment_class }} {{ hide_countdown_cls }} {%- if block.settings.content_position contains 'ta-center' -%} center-xs {%- endif -%}">
+    <span class="d-flex fd-column middle-xs gap-4xs">
+      <span class="js-counter-days {{ countdown_cls -}}">
+        <span class="flip-card p-relative">
+          <span class="flip-card__top">{{ days_string }}</span>
+          <span class="flip-card__bottom" data-value="{{ days_string }}">{{ days_string }}</span>
+          <span class="flip-card__back" data-value="{{ days_string }}">
+            <span class="flip-card__bottom-flip" data-value="{{ days_string }}">{{ days_string }}</span>
+          </span>
+        </span>
+      </span>
+      <span aria-hidden="true" class="countdown-label">{{ 'general.countdown_banner.days' | t }}</span>
+    </span>
+    <span class="d-flex fd-column middle-xs gap-4xs">
+      <span class="{{- number_size | default: 'h2' }} countdown-count p-relative m-zero js-counter-hours d-flex center-xs middle-xs f-extra">
+        <span class="flip-card p-relative">
+          <span class="flip-card__top">{{ hours_string }}</span>
+          <span class="flip-card__bottom" data-value="{{ hours_string }}">{{ hours_string }}</span>
+          <span class="flip-card__back" data-value="{{ hours_string }}">
+            <span class="flip-card__bottom-flip" data-value="{{ hours_string }}">{{ hours_string }}</span>
+          </span>
+        </span>
+      </span>
+      <span aria-hidden="true" class="countdown-label">{{ 'general.countdown_banner.hours' | t }}</span>
+    </span>
+    <span class="d-flex fd-column middle-xs gap-4xs">
+      <span class="{{- number_size | default: 'h2' }} countdown-count p-relative m-zero js-counter-minutes d-flex center-xs middle-xs f-extra">
+        <span class="flip-card p-relative">
+          <span class="flip-card__top">{{ minutes_string }}</span>
+          <span class="flip-card__bottom" data-value="{{ minutes_string }}">{{ minutes_string }}</span>
+          <span class="flip-card__back" data-value="{{ minutes_string }}">
+            <span class="flip-card__bottom-flip" data-value="{{ minutes_string }}">{{ minutes_string }}</span>
+          </span>
+        </span>
+      </span>
+      <span aria-hidden="true" class="countdown-label">{{ countdown_type |  replace: 'small', 'general.countdown_banner_small.minutes' | replace: 'regular', 'general.countdown_banner.minutes' | t }}</span>
+    </span>
+    <span class="d-flex fd-column middle-xs gap-4xs">
+      <span class="{{- number_size | default: 'h2' }} countdown-count p-relative m-zero js-counter-seconds d-flex center-xs middle-xs f-extra">
+        <span class="flip-card p-relative">
+          <span class="flip-card__top">{{ seconds_string }}</span>
+          <span class="flip-card__bottom" data-value="{{ seconds_string }}">{{ seconds_string }}</span>
+          <span class="flip-card__back" data-value="{{ seconds_string }}">
+            <span class="flip-card__bottom-flip" data-value="{{ seconds_string }}">{{ seconds_string }}</span>
+          </span>
+        </span>
+      </span>
+      <span aria-hidden="true" class="countdown-label">{{ countdown_type |  replace: 'small', 'general.countdown_banner_small.seconds' | replace: 'regular', 'general.countdown_banner.seconds' | t }}</span>
+    </span>
+  </time>
+  <div role="alert" aria-live="polite" class="countdown-message rad-s p-3xs ta-center {% unless block.settings.hide_on_end %} mt-s {% endunless %} hide-empty rte fs-body-xs {{ hide_countdown_message_cls }} js-counter-message maw-fit-content" style="{{ message_color }}">{{- block.settings.end_text -}}</div>
+</sht-countdown-flip>
+<style>
+  {{- 'countdown-flip.css' | inline_asset_content -}}
+</style>

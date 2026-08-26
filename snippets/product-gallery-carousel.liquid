@@ -1,0 +1,28 @@
+<sht-carousel-wrapper class="d-block w-100" data-on-mobile-only="{{- carousel_desktop -}}" data-css-class-on-container="p-zero m-zero ox-auto p-relative disable-scrollbars fw-nowrap scrollable scrollable-x{{ carousel_class | default: '' }}" data-css-class-on-item="w-100 p-relative scrollable-aln-start ta-center d-flex aln-itm-ctr fg-1 fs-0{{ carousel_item_class | default: '' }}">
+  <sht-carousel class="sht-carousel p-relative d-block o-hidden" id="productGalleryCarousel-{{ section.id }}" data-section-id="{{ section.id }}">
+    <div class="product-slideshow__items js-product-slideshow js-carousel-items d-flex disable-scrollbars" role="list" aria-label="{{ 'accessibility.slider' | t }}">
+        {%-liquid
+          assign product_media_index = 1
+          if product.selected_or_first_available_variant.featured_media != null
+            assign featured_media = product.selected_or_first_available_variant.featured_media
+            assign is_first_image = true
+            render 'product-slideshow-image', xr_button: true, section: section, media: featured_media, is_first_image: is_first_image, product: product, place_holder: place_holder, product_media_index: product_media_index, is_first_item: true, rand: rand, hide_variant_image: hide_variant_image, open_zoom_modal: open_zoom_modal, ratio: ratio, media_background: media_background, is_layout_grid: is_layout_grid
+          endif
+
+          for media in product.media
+            unless media.id == product.selected_or_first_available_variant.featured_media.id
+              assign current_index = forloop.index
+              if current_index <= 2 and is_first_image == false
+                assign is_first_image = true
+              else
+                assign is_first_image = false
+              endif
+
+              assign product_media_index = product_media_index | plus: 1
+              render 'product-slideshow-image', xr_button: true, section: section, media: media, is_first_image: is_first_image, product: product, place_holder: place_holder, product_media_index: product_media_index, is_first_item: forloop.first, rand: rand, hide_variant_image: hide_variant_image, open_zoom_modal: open_zoom_modal, ratio: ratio, media_background: media_background, is_layout_grid: is_layout_grid, current_index: current_index
+            endunless
+          endfor
+        -%}
+    </div>
+  </sht-carousel>
+</sht-carousel-wrapper>

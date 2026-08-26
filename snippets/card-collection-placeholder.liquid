@@ -1,0 +1,48 @@
+{%- comment -%}
+{% render 'card-collection',
+  collection: collection,
+  media_ratio: '1/1'
+  show_product_count: settings.show_product_count
+%}
+{%- endcomment -%}
+{%- liquid
+  assign image_loading = 'lazy'
+  assign collection_placeholder = 'collection-apparel-' | append: collection_placeholder | placeholder_svg_tag: 'placeholder media of-cover h-100 w-100'
+  assign collection_title       = 'sections.collection_list.collection_title' | t
+
+  if custom_media != blank
+    assign custom_alt_text = custom_media.image.alt | default: custom_media.image.src | split: '/' | last | split: '.' | first
+    assign collection_placeholder = custom_media | image_url: width: custom_media.width | image_tag: widths: '320, 450, 550', sizes: '(min-width: 769px) calc(100vw/4), (min-width: 459px) calc(100vw/2), 100vw', alt: custom_alt_text, class: 'media of-cover w-100 h-100', loading: image_loading
+  endif
+
+  assign card_style = 'd-flex fd-column h-100 gap-m p-s'
+  assign content_style = ''
+  assign media_style = 'rad-xs'
+  if settings.collection_card_style == 'standard'
+  assign card_style = 'd-flex fd-column h-100'
+    assign content_style = 'p-s'
+    assign media_style = ''
+  endif
+-%}
+
+<div class="card card--border card-collection card-animate card-collection--color background w-100 p-relative {{ card_style }} rad-m o-hidden ">
+  <a aria-label="{{ collection_title }}" tabindex="-1" href="#" class="d-block pe-no-link h-100 w-100 zi-3 p-absolute inset"></a>
+  <div class="card__content wb-break-word d-flex gap-xs between-xs flex-1 {{ content_style }}">
+    <div class="d-grid gap-3xs flex-1 ta-left h-fit-content">
+      <h3 class="fs-heading-m component-heading m-zero">{{ collection_title }}
+        {% if settings.quantity_card_style == 'superscript' %}
+          <sup class="fs-body-xs f-extra {{ settings.collection_card_show_product_quantity | default: ' d-none-important' | replace: 'true', '' }} {{ settings.numbers_style | replace: 'number', '' }}">99</sup>
+        {% endif %}
+      </h3>
+      {% if settings.quantity_card_style == 'separate_line' %}
+        <span class="fs-heading-xs component-heading color-text-60 wb-break-word f-extra {{ settings.collection_card_show_product_quantity | default: ' d-none-important' | replace: 'true', '' }}">
+          {{ 'general.collection.view_collection' | t: count: 99 }}
+        </span>
+      {% endif %}
+    </div>
+    {% render 'icon-caret-right', | class: 'icon icon-fix-m color-text-60 rtl-flip-x' %}
+  </div>
+  <div class="card__media p-relative ratio o-hidden {{ media_style }}" >
+    {% render 'image', image_item: collection_placeholder, image_wrap_classes: 'h-100', image_classes: 'h-100 w-100', ratio: ratio %}
+  </div>
+</div>

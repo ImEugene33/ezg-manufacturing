@@ -1,0 +1,367 @@
+{%- liquid
+  assign duration = ''
+  assign icon_pause_class = section.settings.enable_autoplay | default: 'js-spotlight-pause-icon d-none' | replace: 'true', 'js-spotlight-pause-icon'
+  assign icon_pause_class = icon_pause_class | append: ' icon-control icon-pause icon icon-fix-m'
+  if section.settings.enable_autoplay
+    assign time = section.settings.change_slide_interval | times: 1000
+    assign duration = ', "duration": ' | append: time
+  endif
+-%}
+
+{%- if section.blocks.size > 0 -%}
+  {%- render 'section-padding-collapse' -%}
+  <div data-animate="regular-section" class="js-animate section section-vertical background color-{{- section.settings.color_scheme }}" data-ui-component="Section Spotlight Quotes">
+    <sht-spotlight-quote class="ctnr p-relative d-block" data-spotlight-properties='{"sectionId": "{{ section.id }}", "autoplayAccessibilityText": ["{{ 'accessibility.start_slideshow' | t }}","{{ 'accessibility.stop_slideshow' | t }}"], "autoplayText": ["▶","||"], "separatorText": "{{ 'accessibility.of' | t }}", "autoplay": {{ section.settings.enable_autoplay }} {{ duration }}}'>
+      <div role="region" aria-roledescription="Carousel" aria-label="Spotlight Quotes" class="js-spotlight p-relative d-flex fd-column gap-scale-2xl">
+        <div aria-live="polite" aria-atomic="true" id="spotlight-{{ section.id }}" class="js-spotlight-items scrollable scrollable-x scrl-bhvr-auto disable-scrollbars w-100 ox-auto fd-row ls-none p-zero m-zero d-flex">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign loading = "lazy"
+              assign decoding = "async"
+              assign fetchpriority = "auto"
+              assign current_item = ''
+              assign control_class = ''
+              if forloop.first
+                assign current_item = ' js-spotlight-content--current'
+                if section.index == 1
+                  assign loading = "eager"
+                  assign fetchpriority = "high"
+                endif
+              endif
+              if section.settings.enable_autoplay == false and section.settings.show_navigation == false and section.settings.show_pagination == false
+                assign control_class = 'd-none-important'
+              endif
+            -%}
+            <div role="group" aria-roledescription="Slide" data-item-index="{{ forloop.index }}" aria-label="{{ 'accessibility.slide' | t }} {{ forloop.index }} {{ 'accessibility.of' | t }} {{ forloop.length }}"
+              class="slider-slide slider-slide-{{ forloop.index }} js-spotlight-item scrollable-aln-start miw d-flex p-relative"
+              style="--miw:100%;" aria-hidden="true"
+              {{ block.shopify_attributes }}>
+              <div class="js-spotlight-content spotlight-content ctnr d-flex fd-column {{ section.settings.content_alignment }} flex-1 {{ current_item }}" data-spotlight-index="{{ forloop.index }}">
+                {%- if section.settings.show_quote_icon -%}
+                  <div class="spotlight-quote__icon d-inline-block">
+                    {% render 'icon-loader', icon: 'quote-block' , class: 'icon icon-fix-8xl' %}
+                  </div>
+                {%- endif -%}
+                {%- if section.settings.show_rating -%}
+                  <div class="spotlight-quote__star mt-scale-xl d-flex gap-4xs" style="--color-star: {{- section.settings.star_rating_color -}}">
+                    {% for i in (1..5) %}
+                      {% assign star_class = 'color-text-30 icon icon-fix-m' %}
+                      {% if i <= block.settings.star_rating %}
+                        {% assign star_class = 'star-filled icon icon-fix-m' %}
+                      {% endif %}
+                      {% render 'icon-star-solid', class: star_class %}
+                    {% endfor %}
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.review_content != blank -%}
+                  <div class="spotlight-quote__label mt-scale-m d-block section__heading promotional-heading rte {{ section.settings.quote_text_size }} hide-empty">
+                    {{- block.settings.review_content -}}
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.avatar_image != blank or block.settings.author_name != blank or block.settings.author_description != blank -%}
+                  <div class="spotlight-quote__author d-flex top-xs flex-auto mt-scale-xl {% if block.settings.avatar_image != blank %}gap-s{% else %}gap-4xs{% endif %}">
+                    {% liquid
+                      if block.settings.avatar_image != blank
+                        assign media_alt = block.settings.author_name | default: block.settings.avatar_image.image.alt | default: 'Author image'
+                        assign media = block.settings.avatar_image | image_url: width: block.settings.avatar_image.width | image_tag: widths: '320, 450', sizes: '100vw', alt: media_alt, class: 'js-image-lazy media of-cover h-100 w-100 d-block', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+                        assign media_wrap_style = "--avatar-width: " | append: section.settings.image_size | append: "px;"
+                        render 'image', image_item: media, image_wrap_classes: 'mt-3xs rad-s border', image_classes: 'spotlight-quote__media', media_wrap_style: media_wrap_style, ratio: section.settings.image_ratio
+                      else
+                        render 'icon-loader', icon: 'minus' , class: 'icon icon-fix-2xl'
+                      endif
+                    %}
+                    <div class=" d-flex fd-column gap-4xs flex-1">
+                      <span class="spotlight-quote__author-name flex-1 fs-body-xl fw-500 maw-fit-content ta-left hide-empty wb-break-word">
+                        {{- block.settings.author_name | escape -}}
+                      </span>
+                      <span class="spotlight-quote__author-description flex-1 fs-body-s color-text-60 maw-fit-content ta-left hide-empty wb-break-word">
+                        {{- block.settings.author_description -}}
+                      </span>
+                    </div>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+        {%- if section.blocks.size > 1 -%}
+          <div class="w-100 d-flex center-xs ta-center no-js-hidden {{ control_class }}">
+            <div class="d-flex middle-xs gap-3xs p-3xs rad-p video-controller--{{ section.settings.slide_style }}">
+              <button aria-label="{{ 'accessibility.start_slideshow' | t }}" aria-controls="spotlight-{{ section.id }}" class="btn btn-plain controls-nav-btn rad-s js-spotlight-start-n-stop-btn {{ section.settings.enable_autoplay | replace: 'false', 'd-none-important' | replace: 'true', 'd-block' }}" type="button">
+                {% render 'icon-pause', class: icon_pause_class %}
+                {% render 'icon-play' , class: 'js-spotlight-play-icon d-none icon-control icon-play icon icon-fix-m' %}
+              </button>
+              <button aria-label="{{ 'accessibility.previous_slide' | t }}" aria-controls="spotlight-{{ section.id }}" class="btn btn-plain controls-nav-btn rad-s js-spotlight-prev-btn rtl-flip-x {{ section.settings.show_navigation | replace: 'false', 'd-none-important' | replace: 'true', 'd-block' }}" type="button">
+                {% render 'icon-caret-left', class: 'icon icon-control icon-fix-m' %}
+              </button>
+              <div class="spotlight_counter fs-body-m d-flex center-xs middle-xs {{ section.settings.show_pagination | replace: 'false', 'd-none-important' | replace: 'true', 'd-block' }}">
+                <span class="js-spotlight-current icon-control">1</span>
+                <span class="spotlight_counter--separator js-spotlight-separator icon-control ml-4xs mr-4xs">{{ 'accessibility.of' | t }}</span>
+                <span class="js-spotlight-total icon-control">{{ section.blocks.size }}</span>
+              </div>
+              <button aria-label="{{ 'accessibility.next_slide' | t }}" aria-controls="spotlight-{{ section.id }}" class="btn btn-plain controls-nav-btn rad-s js-spotlight-next-btn rtl-flip-x {{ section.settings.show_navigation | replace: 'false', 'd-none-important' | replace: 'true', 'd-block' }}" type="button">
+                {% render 'icon-caret-right', class: 'icon icon-control icon-fix-m' %}
+              </button>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </sht-spotlight-quote>
+  </div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "t:sections.spotlight_quotes.name",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.quote.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quote_icon",
+      "label": "t:sections.spotlight_quotes.settings.show_quote_icon.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "label": "t:sections.spotlight_quotes.settings.quote_text_size.label",
+      "id": "quote_text_size",
+      "options": [
+        {
+          "value": "headline",
+          "label": "t:general.settings.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:general.settings.heading_size.options.large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:general.settings.heading_size.options.regular.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:general.settings.heading_size.options.small.label"
+        }
+      ],
+      "default": "headline"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left top-xs",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center middle-xs",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right bottom-xs",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-center middle-xs"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:general.settings.image_ratio.label",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "t:general.settings.image_ratio.options.option_square.label"
+        },
+        {
+          "value": "2/3",
+          "label": "t:general.settings.image_ratio.options.option_portrait.label"
+        },
+        {
+          "value": "3/2",
+          "label": "t:general.settings.image_ratio.options.option_landscape.label"
+        },
+        {
+          "value": "auto",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        }
+      ],
+      "default": "1/1"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.image_size.label",
+      "id": "image_size",
+      "options": [
+        {
+          "value": "30",
+          "label": "t:general.settings.option_small.label"
+        },
+        {
+          "value": "40",
+          "label": "t:general.settings.option_regular.label"
+        },
+        {
+          "value": "64",
+          "label": "t:general.settings.option_large.label"
+        }
+      ],
+      "default": "30"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.rating.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "t:general.settings.show_star_rating.label",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "star_rating_color",
+      "label": "t:general.settings.star_rating.label",
+      "default": "#FFB82D",
+      "visible_if": "{{ section.settings.show_rating == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.controllers.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "t:general.settings.show_pagination.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "t:general.settings.show_navigation.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "t:general.settings.enable_autoplay.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "change_slide_interval",
+      "label": "t:sections.slideshow.settings.change_quote_interval.label",
+      "min": 5,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5,
+      "visible_if": "{{ section.settings.enable_autoplay == true }}"
+    },
+    {
+      "type": "select",
+      "id": "slide_style",
+      "label": "t:general.settings.style.label",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:general.settings.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:general.settings.secondary.label"
+        },
+        {
+          "value": "transparent",
+          "label": "t:general.settings.transparent.label"
+        }
+      ],
+      "default": "transparent"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "t:general.settings.quote.content",
+      "type": "quote",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.avatar_logo.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_image",
+          "label": "t:general.settings.image.label"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.quote_content.content"
+        },
+        {
+          "type": "range",
+          "id": "star_rating",
+          "label": "t:general.settings.star_rating.label",
+          "default": 5,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "type": "richtext",
+          "id": "review_content",
+          "label": "t:general.settings.quote.label",
+          "default": "<p>Showcase your happy customers' stories</p>"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "t:general.settings.author_brand_name.label",
+          "default": "A happy customer"
+        },
+        {
+          "type": "text",
+          "id": "author_description",
+          "label": "t:general.settings.author_brand_description.label",
+          "default": "Customer's description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.spotlight_quotes.name",
+      "blocks": [
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,33 @@
+{%- liquid
+  assign product_form_id = 'productAddViewForm-' | append: section.id | append: '-' | append: product.id
+  assign button_type = 'type="button"'
+  unless product.requires_selling_plan
+    assign button_type = 'type="submit"'
+  endunless
+-%}
+<sht-prd-frm data-quick-add-form="true" class="product__form js-sht-product-form" data-section="{{ section.id }}">
+  {%- form 'product', product, id: product_form_id, class: 'form form__fields js-product-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+    <div class="form__field">
+      <input type="hidden" class="form__control" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+    </div>
+    <div class="quickview-form__buttons d-flex {{ content_align | default: settings.product_card_position }}">
+      <button
+        aria-label="{{ "products.product.quick_add" | t }}"
+        {{ button_type }}
+        data-quick-buy="{{ quick_buy }}"
+        data-product-url="{{ product.url | split: "?" | first }}?view=quick-buy" 
+        aria-haspopup="dialog" 
+        onclick="window.dialogQuickBuy.checkSellingPlan(this, true)" 
+        {% unless product.available %}disabled{% endunless %}
+        name="add"
+        data-selling-plan="{{- product.requires_selling_plan -}}"
+        class="js-product-form-submit-btn btn btn-secondary {{ btn_class }}"
+        {% unless product.available %}disabled{% endunless %}
+      >
+        <span class="p-relative d-flex middle-xs center-xs ta-center">
+          {% render 'icon-add-to-cart', class: icon_class %}
+        </span>
+      </button>
+    </div>
+  {%- endform -%}
+</sht-prd-frm>

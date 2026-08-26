@@ -1,0 +1,614 @@
+{%- liquid
+  assign loading = 'lazy'
+  assign decoding ='async'
+  assign fetchpriority = 'auto'
+  assign preload = false
+
+  if section.index == 1
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+    assign preload = true
+  endif
+
+  assign desktop_content_alignment = section.settings.desktop_content_alignment
+  assign mobile_content_alignment = section.settings.mobile_content_alignment
+  assign desktop_content_position = section.settings.desktop_content_position
+
+  assign sht_mask_desk = desktop_content_position
+
+  assign size = '100vw'
+  if section.settings.section_image_width == 'max-width'
+    assign size = '(min-width: 1024px) calc(' | append:  settings.container_max_width | append: 'px, 100vw'
+  endif
+
+  if sht_mask_desk == 'center-md'
+    if desktop_content_alignment contains 'left'
+      assign sht_mask_desk = 'center-left-md'
+    elsif desktop_content_alignment contains 'right'
+      assign sht_mask_desk = 'center-right-md'
+    endif
+  endif
+
+  if section.settings.mobile_image
+    assign mobile_image_alt  = section.settings.mobile_image.alt | default: section.settings.mobile_image.image | split: '/' | last
+    assign mobile_image = section.settings.mobile_image | image_url: width: section.settings.mobile_image.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200', sizes: size, alt: mobile_image_alt, class: 'd-none-md d-block w-100 h-100 of-cover p-absolute top-0', loading: loading, fetchpriority: fetchpriority, decoding: decoding, preload: preload
+  endif
+
+  assign desktop_image = 'hero-apparel-1' | placeholder_svg_tag: 'placeholder w-100 h-100 of-cover'
+  assign desktop_image_alt = section.settings.desktop_image.alt | default: section.settings.desktop_image.image | split: '/' | last
+  assign desktop_image = section.settings.desktop_image | image_url: width: section.settings.desktop_image.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000', sizes: size, alt: desktop_image_alt, class: 'w-100 h-100 of-cover', loading: loading, fetchpriority: fetchpriority, decoding: decoding, preload: preload
+
+  assign overlay_opacity = section.settings.section_overlay_opacity | divided_by: 100.0
+
+  assign overlay_color = 'inherit'
+  unless section.settings.section_mask_overlay_color.alpha == 0.0 or section.settings.section_mask_overlay_color == blank
+    assign overlay_color = section.settings.section_mask_overlay_color | color_modify: 'alpha', overlay_opacity
+  endunless
+  unless section.settings.section_content_overlay_color.alpha == 0.0 or section.settings.section_content_overlay_color == blank
+    assign content_color = 'color:' | append: section.settings.section_content_overlay_color
+  endunless
+
+  if section.settings.section_image_width == 'full-width'
+    assign min_height_desktop = 100 | divided_by : section.settings.desktop_image.aspect_ratio | append: 'vw'
+  elsif section.settings.section_image_width == 'stretch'
+    assign min_height_desktop = 'calc((100vw - 2*var(--fix-m))/IMAGE_RATIO_DESK)' | replace: 'IMAGE_RATIO_DESK', section.settings.desktop_image.aspect_ratio
+  else
+    assign min_height_desktop = settings.container_max_width | divided_by: section.settings.desktop_image.aspect_ratio | append: 'px'
+  endif
+
+  if section.settings.desktop_image == blank
+    assign aspect_ratio_md = '16/9'
+  endif
+
+  assign min_height_mobile = 100 | divided_by : section.settings.mobile_image.aspect_ratio | append: 'vw'
+  if section.settings.mobile_image == blank
+    assign min_height_mobile = 100 | divided_by : section.settings.desktop_image.aspect_ratio | append: 'vw'
+  endif
+  if section.settings.mobile_image == blank and section.settings.desktop_image == blank
+    assign aspect_ratio = '16/9'
+  endif
+
+-%}
+
+{%- unless section.settings.section_image_width == 'full-width' -%}
+	{%- render 'section-padding-collapse' -%}
+{%- endunless -%}
+
+{%- capture hotspot_header -%}
+  <div class="banner-content__animate section__text promotion-section-container h-100 w-100 p-relative zi-1 {{ section.settings.desktop_content_position }} {{ desktop_content_alignment }} {{ mobile_content_alignment }}">
+    <p class="subheading section__subheading promotional-subheading hide-empty">{{- section.settings.subheading_text | escape -}}</p>
+    {%- if section.settings.enable_h1_tag -%}
+      <h1 class="section__heading promotional-heading {{ section.settings.heading_size }} hide-empty">{{- section.settings.heading | escape -}}</h1>
+    {%- else -%}
+      <h2 class="section__heading promotional-heading {{ section.settings.heading_size }} hide-empty">{{- section.settings.heading | escape -}}</h2>
+    {%- endif -%}
+    <div class="section__description fs-body-xl rte hide-empty o-hidden">{{- section.settings.description -}}</div>
+  </div>
+{%- endcapture -%}
+
+<div data-animate="banner-section" id="section-{{ section.id }}" data-ui-component="Image With Hotspot" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}"
+  class="js-animate section-hotspot section promotion-section section-promotion--{{- section.settings.section_image_width }} background color-{{- section.settings.color_scheme }}" style=" --color-mask: {{ overlay_color }}; --overlay: {{ overlay_opacity }};">
+  <div class="section__header">
+    <div class="ctnr">
+      {{ hotspot_header | replace: 'promotion-section-container', '' | replace: 'section__text', 'd-flex fd-column d-none-md' }}
+    </div>
+  </div>
+  <div class="section__content">
+    <div class="ctnr rad-l o-hidden section-promotion__wrapper p-relative sht-mask-md sht-mask--{{ sht_mask_desk }} aspect-ratio-md aspect-ratio" style="--ratio: {{ aspect_ratio }}; --ratio-md: {{ aspect_ratio_md }};--mh-xs: {{ min_height_mobile }} ;--mh-md: {{ min_height_desktop }}; {{ content_color }}">
+      <div class="banner-media__animate promotion-section__background inset p-absolute">
+        {{ desktop_image }}
+        {{ mobile_image }}
+      </div>
+      <div class="p-absolute zi-1 w-100 h-100">
+        {{ hotspot_header | replace: 'section__text', 'd-none d-flex-md fd-column' }}
+        <sht-text-hotspot class="hotspot__wrapper p-absolute d-block" data-dialog-id="TextHotspotDialog{{ section.id }}">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign top_offset = block.settings.top_offset
+              assign left_offset = block.settings.left_offset
+              if section.settings.mobile_image != blank
+                assign top_offset = block.settings.top_offset_mobile
+                assign left_offset = block.settings.left_offset_mobile
+              endif
+              assign hotspot_content_x = 'hotspot__content--right'
+              assign hotspot_button_potition = 'hotspot__button--right'
+              if block.settings.left_offset <= 50
+                assign hotspot_content_x = 'hotspot__content--left'
+                assign hotspot_button_potition = 'hotspot__button--left'
+              endif
+              assign hotspot_content_y = 'hotspot__content--bottom'
+              if block.settings.top_offset <= 50
+                assign hotspot_content_y = 'hotspot__content--top'
+              endif
+            %}
+            {%- case block.type -%}
+              {%- when 'text_hotspot' -%}
+                <div class="hotspot__item p-absolute js-hotspot-item" style="--axis-x-md: {{ block.settings.left_offset }}%; --axis-y-md: {{ block.settings.top_offset }}%; --axis-x: {{ left_offset }}%; --axis-y: {{ top_offset }}%"  {{ block.shopify_attributes }}>
+                  <button class="{{ hotspot_button_potition }} hotspot__button js-carousel-trigger rad-p d-flex middle-xs center-xs c-pointer" aria-describedby="carouselItem-{{ forloop.index }}-{{ section.id }}" aria-label="{{ 'products.product.media.load_product_hotspot' | t: product_name: block.settings.heading }}" aria-controls="carousel-{{ section.id }}-{{ block.id }}"
+                    style="
+                    --background-rgb: {{ section.settings.hotspot_background.red }},{{ section.settings.hotspot_background.green }},{{ section.settings.hotspot_background.blue }};
+                    --color-rgb: {{ section.settings.hotspot_color.red }},{{ section.settings.hotspot_color.green }},{{ section.settings.hotspot_color.blue }};
+                    ">
+                    {% render 'icon-plus', class: 'pe-none icon icon-fix-m' %}
+                  </button>
+                  <sht-scroll-gradient-overlay class="{{ hotspot_content_x }} {{ hotspot_content_y }} hotspot__content gradient-overlay gradient-overlay--bottom o-hidden d-none d-block-md p-absolute zi-2 js-hotspot-content rad-l background color-{{- section.settings.color_scheme }}" id="carousel-{{ section.id }}-{{ block.id }}">
+                    <div class="hotspot__header d-flex middle-xs between-xs">
+                      <h3 class="h5 m-zero flex-1">{{- block.settings.heading | escape -}}</h3>
+                    </div>
+                    <div class="hotspot__body js-scroll-element disable-scrollbars">
+                      <div class="rte">
+                        {{- block.settings.description -}}
+                      </div>
+                      <a {{ block.settings.link | default: 'tabindex="-1"' | replace: block.settings.link , '' }} class="hotspot-btn btn btn-s btn-tertiary {{ block.settings.link | default: 'disable' | replace: block.settings.link , '' }} " href="{{ block.settings.link }}">{{ block.settings.button_label }}</a>
+                    </div>
+                  </sht-scroll-gradient-overlay>
+                </div>
+              {%- when 'product_hotspot' -%}
+                <div class="hotspot__item p-absolute js-hotspot-item" style="--axis-x-md: {{ block.settings.left_offset }}%; --axis-y-md: {{ block.settings.top_offset }}%; --axis-x: {{ left_offset }}%; --axis-y: {{ top_offset }}%"  {{ block.shopify_attributes }}>
+                  <button class="{{ hotspot_button_potition }} hotspot__button js-carousel-trigger rad-p d-flex middle-xs center-xs c-pointer" aria-describedby="carouselItem-{{ forloop.index }}-{{ section.id }}" aria-label="{{ 'products.product.media.load_product_hotspot' | t: product_name: block.settings.heading }}" aria-controls="carousel-{{ section.id }}-{{ block.id }}"
+                    style="
+                    --background-rgb: {{ section.settings.hotspot_background.red }},{{ section.settings.hotspot_background.green }},{{ section.settings.hotspot_background.blue }};
+                    --color-rgb: {{ section.settings.hotspot_color.red }},{{ section.settings.hotspot_color.green }},{{ section.settings.hotspot_color.blue }};
+                    ">
+                    {% render 'icon-plus', class: 'pe-none icon icon-fix-m' %}
+                  </button>
+
+                  <div class="{{ hotspot_content_x }} {{ hotspot_content_y }} js-hotspot-content hotspot__content o-hidden d-none d-block-md p-absolute zi-2 rad-l background color-{{- section.settings.color_scheme }}" id="carousel-{{ section.id }}-{{ block.id }}">
+                    {%- if block.settings.product != blank -%}
+                      {% render 'mini-card-product',
+                        product: block.settings.product,
+                        show_vendor: block.settings.show_vendor,
+                        show_price: block.settings.show_price,
+                        show_rating: block.settings.show_rating
+                      %}
+                    {%- else -%}
+                      {% render 'mini-card-product-placeholder',
+                        product_placeholder: 1,
+                        show_vendor: block.settings.show_vendor,
+                        show_price: block.settings.show_price,
+                      %}
+                    {%- endif -%}
+                  </div>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </sht-text-hotspot>
+      </div>
+    </div>
+  </div>
+</div>
+
+<sht-dialog-hotspot id="TextHotspotDialog{{ section.id }}" class="sht-dialog hotspot-dialog d-flex bottom-xs no-focus-visible middle-md bottom-xs end-xs p-fixed left-0 top-0 h-100 w-100 o-hidden zi-9 hidden-xs" tabindex="-1" hidden="true">
+  <div class="sht-dialog-overlay js-dialog-overlay"></div>
+  <div class="background color-{{- section.settings.color_scheme }} dialog drawer-content-container disable-scrollbars" role="dialog" aria-labelledby="dialogTitle" aria-modal="true">
+    <div class="dialog__content d-flex fd-column h-100 p-relative">
+      <button type="button" class="js-dialog-close-btn hotspot__btn-close js-hotspot-close-btn btn btn-icon btn-icon-l btn-tertiary" aria-label="{{ 'accessibility.close' | t }}" >
+        {%- render 'icon-x-mark' -%}
+      </button>
+      <div class="js-dialog-body d-flex end-xs"></div>
+    </div>
+  </div>
+</sht-dialog-hotspot>
+
+{% schema %}
+	{
+  "name": "t:sections.image_with_hotspot.name",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "subheading_text",
+      "label": "t:general.settings.section_subheading.label",
+      "default": "Add a tagline"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.section_heading.label",
+      "default": "Image with hot spot"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.heading_size.label",
+      "id": "heading_size",
+      "visible_if": "{{ section.settings.heading != blank }}",
+      "options": [
+        {
+          "value": "headline",
+          "label": "t:general.settings.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:general.settings.heading_size.options.large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:general.settings.heading_size.options.regular.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:general.settings.heading_size.options.small.label"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_h1_tag",
+      "label": "t:general.settings.enable_h1_tag.label",
+      "info": "t:general.settings.enable_h1_tag_info.info",
+      "default": false,
+      "visible_if": "{{ section.settings.heading != blank }}"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:general.settings.section_description.label",
+      "default": "<p>Highlight your new collection or share content related to this image</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.image.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "t:general.settings.default_image.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "t:general.settings.mobile_image_optional.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.desktop_layout.label"
+    },
+    {
+      "type": "select",
+      "id": "section_image_width",
+      "label": "t:general.settings.image_width.label",
+      "options": [
+        {
+          "value": "max-width",
+          "label": "t:general.settings.options.option_max_width.label"
+        },
+        {
+          "value": "stretch",
+          "label": "t:general.settings.options.option_stretch.label"
+        },
+        {
+          "value": "full-width",
+          "label": "t:general.settings.options.option_full_width.label"
+        }
+      ],
+      "default": "stretch"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_position",
+      "label": "t:general.settings.content_position.label",
+      "options": [
+        {
+          "value": "start-md",
+          "label": "t:general.settings.content_position.content_position_options.options_1.label"
+        },
+        {
+          "value": "center-md",
+          "label": "t:general.settings.content_position.content_position_options.options_2.label"
+        },
+        {
+          "value": "end-md",
+          "label": "t:general.settings.content_position.content_position_options.options_3.label"
+        }
+      ],
+      "default": "start-md"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left-md top-md",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center-md middle-md",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right-md bottom-md",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-left-md top-md"
+    },
+    {
+      "type": "range",
+      "id": "section_overlay_opacity",
+      "label": "t:general.settings.overlay_opacity.label",
+      "default": 30,
+      "min": 0,
+      "max": 90,
+      "step": 10,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "section_mask_overlay_color",
+      "label": "t:general.settings.custom_mask_overlay_opacity.label",
+      "visible_if": "{{ section.settings.section_overlay_opacity != 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "section_content_overlay_color",
+      "label": "t:general.settings.custom_content_overlay_opacity.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.mobile_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left top-xs",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center middle-xs",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right bottom-xs",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-left top-xs"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.hotspot.content"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_background",
+      "label": "t:general.settings.hot_spot_background.label",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_color",
+      "label": "t:general.settings.hot_spot_icon.label",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_hotspot",
+      "name": "t:sections.settings.text_hot_spot.label",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.position_on_default_image.content"
+        },
+        {
+          "type": "range",
+          "id": "top_offset",
+          "label": "t:sections.image_with_hotspot.blocks.hotspot_item.settings.top_offset.label",
+          "min": 0,
+          "max": 100,
+          "default": 60,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "left_offset",
+          "label": "t:sections.image_with_hotspot.blocks.hotspot_item.settings.left_offset.label",
+          "min": 0,
+          "max": 100,
+          "default": 60,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.position_on_mobile_image.content",
+          "info": "t:general.settings.headers.position_on_mobile_image.info"
+        },
+        {
+          "type": "range",
+          "id": "top_offset_mobile",
+          "label": "t:sections.image_with_hotspot.blocks.hotspot_item.settings.top_offset.label",
+          "min": 0,
+          "max": 100,
+          "default": 60,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "left_offset_mobile",
+          "label": "t:sections.image_with_hotspot.blocks.hotspot_item.settings.left_offset.label",
+          "min": 0,
+          "max": 100,
+          "default": 60,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.text.content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:general.settings.heading.label",
+          "default": "Feature name"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:general.settings.description.label",
+          "default": "<p>Share useful information about your product features</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.link.content"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:general.settings.label.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "Explore more"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:general.settings.link.label",
+          "visible_if": "{{ block.settings.button_label != blank }}"
+        }
+      ]
+    },
+    {
+      "type": "product_hotspot",
+      "name": "t:sections.settings.product_hot_spot.label",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.position_on_default_image.content"
+        },
+        {
+          "type": "range",
+          "id": "top_offset",
+          "label": "t:sections.image_with_hotspot.blocks.hotspot_item.settings.top_offset.label",
+          "min": 0,
+          "max": 100,
+          "default": 60,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "left_offset",
+          "label": "t:sections.image_with_hotspot.blocks.hotspot_item.settings.left_offset.label",
+          "min": 0,
+          "max": 100,
+          "default": 60,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.position_on_mobile_image.content",
+          "info": "t:general.settings.headers.position_on_mobile_image.info"
+        },
+        {
+          "type": "range",
+          "id": "top_offset_mobile",
+          "label": "t:sections.image_with_hotspot.blocks.hotspot_item.settings.top_offset.label",
+          "min": 0,
+          "max": 100,
+          "default": 60,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "left_offset_mobile",
+          "label": "t:sections.image_with_hotspot.blocks.hotspot_item.settings.left_offset.label",
+          "min": 0,
+          "max": 100,
+          "default": 60,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.product.content"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:general.settings.product.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_vendor",
+          "label": "t:general.settings.show_vendor.label",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_rating",
+          "label": "t:general.settings.show_rating.label",
+          "info": "t:general.settings.show_rating.info",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_price",
+          "label": "t:general.settings.show_price.label",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.image_with_hotspot.name",
+			"blocks": [
+        {
+					"type":"text_hotspot",
+          "settings": {
+            "top_offset": 30,
+            "left_offset": 30,
+            "top_offset_mobile": 30,
+            "left_offset_mobile": 30
+          }
+				},
+				{
+					"type":"product_hotspot",
+          "settings": {
+            "top_offset": 40,
+            "left_offset": 40,
+            "top_offset_mobile": 40,
+            "left_offset_mobile": 40
+          }
+				},
+        {
+					"type":"text_hotspot",
+          "settings": {
+            "top_offset": 50,
+            "left_offset": 50,
+            "top_offset_mobile": 50,
+            "left_offset_mobile": 50
+          }
+				}
+			]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1670 @@
+{%- liquid
+  assign content_width = section.settings.media_width | replace: '8', '4' | prepend: '--w-xs: 12; --w-md: '
+  assign media_width = section.settings.media_width | prepend: '--w-xs: 12; --w-md: '
+  assign alignment_class = section.settings.desktop_content_alignment | append: ' ' | append: section.settings.mobile_content_alignment
+  assign default_thumbnail_image     = 'hero-apparel-1' | placeholder_svg_tag: 'd-block placeholder js-image-lazy media of-cover'
+
+  assign media_ratio = section.settings.media_ratio
+  if media_ratio == 'auto'
+    if section.settings.video_source == 'video_external'
+      assign media_ratio = 1.778
+    else
+      assign media_ratio = section.settings.video_hosted.media_ratio
+    endif
+  endif
+-%}
+  {%- render 'section-padding-collapse' -%}
+  <div data-animate="regular-section" id="section-{{ section.id }}" data-ui-component="Section Video With Text" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}"
+  class="js-animate section video-with-text o-hidden background color-{{- section.settings.color_scheme }}"
+  >
+    <div class="ctnr">
+      <div class="rw media-with-text__grid center-xs fd-row-md {{ section.settings.content_ordering }} {{ section.settings.mobile_layout -}}">
+      {%- if section.blocks.size > 0 -%}
+        <div class="clm" style="{{ content_width }}">
+            <div class="media-with-text__content">
+              {%- render 'section-content-text-icon',
+              alignment_class: alignment_class
+              -%}
+            </div>
+        </div>
+      {%- endif -%}
+      <div class="clm" style="{{ media_width }}">
+        <div class="video-with-text__media">
+          <sht-video class="p-relative">
+            <div class=" inset o-hidden rad-m w-100 h-100">
+              {%- render 'video',
+              src: section.settings.video_source,
+              media_ratio: media_ratio,
+              video_thumbnail: section.settings.video_thumbnail_image,
+              video_hosted: section.settings.video_hosted,
+              external_video_link: section.settings.video_url,
+              play_icon: true,
+              mute: section.settings.enable_video_mute,
+              default_thumbnail_image: default_thumbnail_image,
+              video_class: 'image-animate'
+              -%}
+            </div>
+          </sht-video>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+{% schema %}
+{
+  "name": "t:sections.video_with_text.name",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.video.content"
+    },
+    {
+      "type": "select",
+      "id": "video_source",
+      "label": "t:general.settings.video_source.label",
+      "default": "video_external",
+      "options": [
+        {
+          "value": "video_external",
+          "label": "t:general.settings.external.label"
+        },
+        {
+          "value": "video_hosted",
+          "label": "t:general.settings.shopify_hosted.label"
+        }
+      ]
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "label": "t:general.settings.external_video.label",
+      "info": "t:general.settings.video_link.info",
+      "visible_if": "{{ section.settings.video_source == 'video_external' }}"
+    },
+    {
+      "type": "video",
+      "id": "video_hosted",
+      "label": "t:general.settings.hosted_video.label",
+      "visible_if": "{{ section.settings.video_source == 'video_hosted' }}"
+    },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "t:general.settings.video_ratio.label",
+      "options": [
+        {
+          "value": "1.333",
+          "label": "t:sections.settings.video.settings.options.option_4_3.label"
+        },
+        {
+          "value": "1.778",
+          "label": "t:sections.settings.video.settings.options.option_16_9.label"
+        },
+        {
+          "value": "auto",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        }
+      ],
+      "default": "1.778"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_thumbnail_image",
+      "label": "t:blocks.multi_columns.settings.video_thumbnail_image.label",
+      "info": "t:sections.video_with_text.settings.video_thumbnail_image.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_mute",
+      "label": "t:general.settings.enable_video_mute_video.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.desktop_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "content_ordering",
+      "label": "t:general.settings.content_ordering.label",
+      "default": "text-first",
+      "options": [
+        {
+          "value": "text-first",
+          "label": "t:general.settings.section_ordering.option_text_first.label"
+        },
+        {
+          "value": "fd-row-reverse-md",
+          "label": "t:general.settings.section_ordering.option_video_first.label"
+        }
+      ] 
+    },
+    {
+      "type": "select",
+      "id": "media_width",
+      "label": "t:sections.video.settings.video_width.label",
+      "options": [
+        {
+          "value": "6",
+          "label": "t:general.settings.block_width.options_1_2.label"
+        },
+        {
+          "value": "8",
+          "label": "2/3"
+        }
+      ],
+      "default": "8"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left-md start-md",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center-md center-md",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right-md end-md",
+          "label": "t:general.settings.option_right.label"
+        }
+      ], 
+      "default": "ta-left-md start-md"
+    },
+    { 
+      "type": "header",
+      "content": "t:general.settings.headers.mobile_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "t:sections.images_with_text.settings.content_ordering.label",
+      "options": [
+        {
+          "value": "text-first",
+          "label": "t:sections.images_with_text.settings.content_ordering.options_1.label"
+        },
+        {
+          "value": "fd-column-reverse",
+          "label": "t:general.settings.section_ordering.option_video_first.label"
+        }
+      ],
+      "default": "text-first"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left start-xs",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center center-xs",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right end-xs",
+          "label": "t:general.settings.option_right.label"
+        }
+      ], 
+      "default": "ta-left start-xs"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "t:general.settings.subheading.label",
+      "type": "subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading_text",
+          "label": "t:general.settings.text.label",
+          "default": "Add a tagline"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "t:general.settings.heading.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading_text",
+          "label": "t:general.settings.text.label",
+          "default": "Video with text"
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.text_size.label",
+          "id": "heading_size",
+          "visible_if": "{{ block.settings.heading_text != blank }}",
+          "options": [
+            {
+              "value": "headline",
+              "label": "t:general.settings.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:general.settings.heading_size.options.large.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:general.settings.heading_size.options.regular.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:general.settings.heading_size.options.small.label"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_h1_tag",
+          "label": "t:general.settings.enable_h1_tag.label",
+          "info": "t:general.settings.enable_h1_tag_info.info",
+          "default": false,
+          "visible_if": "{{ block.settings.heading_text != blank }}"
+        }
+      ]
+    },
+    {
+      "name": "t:general.settings.description.name",
+      "type": "description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "description_text",
+          "label": "t:general.settings.text.label",
+          "default": "<p>Highlight your new collection or share content related to this video</p>"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "t:general.settings.buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.button_1.content"
+        },
+        {
+          "type": "text",
+          "id": "button_primary_label",
+          "label": "t:general.settings.label.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "Explore more"
+        },
+        {
+          "type": "select",
+          "id": "button_primary_style",   
+          "label": "t:general.settings.style.label",
+          "visible_if": "{{ block.settings.button_primary_label != blank }}",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:general.settings.primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:general.settings.secondary.label"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "url",
+          "id": "button_primary_link",
+          "label": "t:general.settings.link.label",
+          "visible_if": "{{ block.settings.button_primary_label != blank }}"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.button_2.content"
+        },
+        {
+          "type": "text",
+          "id": "button_secondary_label",
+          "label": "t:general.settings.label.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "View details"
+        },
+        {
+          "type": "select",
+          "id": "button_secondary_style",
+          "label": "t:general.settings.style.label",
+          "visible_if": "{{ block.settings.button_secondary_label != blank }}",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:general.settings.primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:general.settings.secondary.label"
+            }
+          ],
+          "default": "secondary"
+        },
+        {
+          "type": "url",
+          "id": "button_secondary_link",
+          "label": "t:general.settings.link.label",
+          "visible_if": "{{ block.settings.button_secondary_label != blank }}"
+        }
+      ]
+    },
+    {
+      "type": "countdown_timer",
+      "name": "t:general.settings.countdown_timer.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:general.settings.countdown_paragraph.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_on_end",
+          "label": "t:general.settings.hide_the_countdown.label",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "end_date",
+          "label": "t:general.settings.end_date.label",
+          "info": "t:general.settings.end_date.info"
+        },
+        {
+          "type": "text",
+          "id": "end_time",
+          "label": "t:general.settings.end_time.label",
+          "info": "t:general.settings.end_time.info"
+        },
+        {
+          "type": "richtext",
+          "id": "end_text",
+          "label": "t:general.settings.end_text.label",
+          "info": "t:general.settings.end_text.info",
+          "default": "<p>Event is finished</p>"
+        },
+        {
+          "type": "color",
+          "id": "countdown_background",
+          "label": "t:general.settings.custom_background.label",
+          "default": "rgba(0,0,0,0)"
+        },
+        {
+          "type": "color",
+          "id": "countdown_number_color",
+          "label": "t:general.settings.custom_number.label",
+          "default": "rgba(0,0,0,0)"
+        }
+      ]
+    },
+    {
+      "name": "t:general.settings.text_block_with_icon.name",
+      "type": "text_block_with_icon",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.text.content"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:general.settings.heading.label",
+          "default": "Our feature"
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.heading_size.label",
+          "id": "heading_size_text_icon",
+          "visible_if": "{{ block.settings.title != blank }}",
+          "options": [
+            {
+              "value": "h3-regular",
+              "label": "t:general.settings.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:general.settings.heading_size.options.large.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:general.settings.heading_size.options.regular.label"
+            },
+            {
+              "value": "h6",
+              "label": "t:general.settings.heading_size.options.small.label"
+            }
+          ],
+          "default": "h3-regular"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:general.settings.description.name",
+          "default": "<p>Add in information or share content related to these images</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.icon.content"
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.icon_source.label",
+          "id": "icon_source",
+          "options": [
+            {
+              "value": "theme_library",
+              "label": "t:general.settings.theme_library.label"
+            },
+            {
+              "value": "image",
+              "label": "t:general.settings.image.label"
+            },
+            {
+              "value": "custom_svg",
+              "label": "t:general.settings.custom_svg.label"
+            }
+          ],
+          "default": "theme_library"
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.theme_library.label",
+          "id": "theme_library_icon",
+          "visible_if": "{{ block.settings.icon_source == 'theme_library' }}",
+          "options": [
+            {
+              "group": "Functional",
+              "value": "3d",
+              "label": "3d"
+            },
+            {
+              "group": "Functional",
+              "value": "add-03",
+              "label": "add 03"
+            },
+            {
+              "group": "Functional",
+              "value": "add-to-cart",
+              "label": "add to cart"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-down-circled",
+              "label": "arrow down circled"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-down",
+              "label": "arrow down"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-left-circled",
+              "label": "arrow left circled"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-left",
+              "label": "arrow left"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-right-circled",
+              "label": "arrow right circled"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-right",
+              "label": "arrow right"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-separate-vertical",
+              "label": "arrow separate vertical"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-separate",
+              "label": "arrow separate"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-union-vertical",
+              "label": "arrow union vertical"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-union",
+              "label": "arrow union"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-up-circled",
+              "label": "arrow up circled"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-up",
+              "label": "arrow up"
+            },
+            {
+              "group": "Functional",
+              "value": "bag-check",
+              "label": "bag check"
+            },
+            {
+              "group": "Functional",
+              "value": "bell-ringing",
+              "label": "bell ringing"
+            },
+            {
+              "group": "Functional",
+              "value": "bell",
+              "label": "bell"
+            },
+            {
+              "group": "Functional",
+              "value": "bookmark",
+              "label": "bookmark"
+            },
+            {
+              "group": "Functional",
+              "value": "calendar-1",
+              "label": "calendar 1"
+            },
+            {
+              "group": "Functional",
+              "value": "calendar",
+              "label": "calendar"
+            },
+            {
+              "group": "Functional",
+              "value": "caret-down",
+              "label": "caret down"
+            },
+            {
+              "group": "Functional",
+              "value": "caret-left",
+              "label": "caret left"
+            },
+            {
+              "group": "Functional",
+              "value": "caret-right",
+              "label": "caret right"
+            },
+            {
+              "group": "Functional",
+              "value": "caret-up",
+              "label": "caret up"
+            },
+            {
+              "group": "Functional",
+              "value": "cart",
+              "label": "cart"
+            },
+            {
+              "group": "Functional",
+              "value": "chart",
+              "label": "chart"
+            },
+            {
+              "group": "Functional",
+              "value": "chat-bubble",
+              "label": "chat bubble"
+            },
+            {
+              "group": "Functional",
+              "value": "check-circled-outline",
+              "label": "check circled outline"
+            },
+            {
+              "group": "Functional",
+              "value": "check",
+              "label": "check"
+            },
+            {
+              "group": "Functional",
+              "value": "clock",
+              "label": "clock"
+            },
+            {
+              "group": "Functional",
+              "value": "collapse",
+              "label": "collapse"
+            },
+            {
+              "group": "Functional",
+              "value": "community",
+              "label": "community"
+            },
+            {
+              "group": "Functional",
+              "value": "copy",
+              "label": "copy"
+            },
+            {
+              "group": "Functional",
+              "value": "cycle",
+              "label": "cycle"
+            },
+            {
+              "group": "Functional",
+              "value": "download",
+              "label": "download"
+            },
+            {
+              "group": "Functional",
+              "value": "drag",
+              "label": "drag"
+            },
+            {
+              "group": "Functional",
+              "value": "enlarge",
+              "label": "enlarge"
+            },
+            {
+              "group": "Functional",
+              "value": "expand",
+              "label": "expand"
+            },
+            {
+              "group": "Functional",
+              "value": "eye-solid",
+              "label": "eye solid"
+            },
+            {
+              "group": "Functional",
+              "value": "eye",
+              "label": "eye"
+            },
+            {
+              "group": "Functional",
+              "value": "filter",
+              "label": "filter"
+            },
+            {
+              "group": "Functional",
+              "value": "grabber",
+              "label": "grabber"
+            },
+            {
+              "group": "Functional",
+              "value": "group",
+              "label": "group"
+            },
+            {
+              "group": "Functional",
+              "value": "hourglass",
+              "label": "hourglass"
+            },
+            {
+              "group": "Functional",
+              "value": "infor",
+              "label": "infor"
+            },
+            {
+              "group": "Functional",
+              "value": "like",
+              "label": "like"
+            },
+            {
+              "group": "Functional",
+              "value": "link",
+              "label": "link"
+            },
+            {
+              "group": "Functional",
+              "value": "lock",
+              "label": "lock"
+            },
+            {
+              "group": "Functional",
+              "value": "mail",
+              "label": "mail"
+            },
+            {
+              "group": "Functional",
+              "value": "map-pin",
+              "label": "map pin"
+            },
+            {
+              "group": "Functional",
+              "value": "map",
+              "label": "map"
+            },
+            {
+              "group": "Functional",
+              "value": "menu",
+              "label": "menu"
+            },
+            {
+              "group": "Functional",
+              "value": "minus",
+              "label": "minus"
+            },
+            {
+              "group": "Functional",
+              "value": "notes",
+              "label": "notes"
+            },
+            {
+              "group": "Functional",
+              "value": "open-new-tab",
+              "label": "open new tab"
+            },
+            {
+              "group": "Functional",
+              "value": "page",
+              "label": "page"
+            },
+            {
+              "group": "Functional",
+              "value": "pause",
+              "label": "pause"
+            },
+            {
+              "group": "Functional",
+              "value": "play",
+              "label": "play"
+            },
+            {
+              "group": "Functional",
+              "value": "plus",
+              "label": "plus"
+            },
+            {
+              "group": "Functional",
+              "value": "question-bubble",
+              "label": "question bubble"
+            },
+            {
+              "group": "Functional",
+              "value": "question-mark",
+              "label": "question mark"
+            },
+            {
+              "group": "Functional",
+              "value": "quote-block",
+              "label": "quote block"
+            },
+            {
+              "group": "Functional",
+              "value": "reduce",
+              "label": "reduce"
+            },
+            {
+              "group": "Functional",
+              "value": "rss",
+              "label": "rss"
+            },
+            {
+              "group": "Functional",
+              "value": "scales",
+              "label": "scales"
+            },
+            {
+              "group": "Functional",
+              "value": "search",
+              "label": "search"
+            },
+            {
+              "group": "Functional",
+              "value": "send",
+              "label": "send"
+            },
+            {
+              "group": "Functional",
+              "value": "sound-high",
+              "label": "sound high"
+            },
+            {
+              "group": "Functional",
+              "value": "sound-off",
+              "label": "sound off"
+            },
+            {
+              "group": "Functional",
+              "value": "star-outlined",
+              "label": "star outlined"
+            },
+            {
+              "group": "Functional",
+              "value": "star-solid",
+              "label": "star solid"
+            },
+            {
+              "group": "Functional",
+              "value": "trashbin",
+              "label": "trashbin"
+            },
+            {
+              "group": "Functional",
+              "value": "tune-off",
+              "label": "tune off"
+            },
+            {
+              "group": "Functional",
+              "value": "tune-on",
+              "label": "tune on"
+            },
+            {
+              "group": "Functional",
+              "value": "user-circle",
+              "label": "user circle"
+            },
+            {
+              "group": "Functional",
+              "value": "view-columns-default",
+              "label": "view columns default"
+            },
+            {
+              "group": "Functional",
+              "value": "view-columns-dense",
+              "label": "view columns dense"
+            },
+            {
+              "group": "Functional",
+              "value": "view-columns-loose",
+              "label": "view columns loose"
+            },
+            {
+              "group": "Functional",
+              "value": "warning-circled",
+              "label": "warning circled"
+            },
+            {
+              "group": "Functional",
+              "value": "x-mark",
+              "label": "x mark"
+            },
+            {
+              "group": "Functional",
+              "value": "zoom-in",
+              "label": "zoom in"
+            },
+            {
+              "group": "Functional",
+              "value": "zoom-out",
+              "label": "zoom out"
+            },
+            {
+              "group": "Social media",
+              "value": "discord",
+              "label": "discord"
+            },
+            {
+              "group": "Social media",
+              "value": "facebook",
+              "label": "facebook"
+            },
+            {
+              "group": "Social media",
+              "value": "instagram",
+              "label": "instagram"
+            },
+            {
+              "group": "Social media",
+              "value": "line",
+              "label": "line"
+            },
+            {
+              "group": "Social media",
+              "value": "linkedin",
+              "label": "linkedin"
+            },
+            {
+              "group": "Social media",
+              "value": "pinterest",
+              "label": "pinterest"
+            },
+            {
+              "group": "Social media",
+              "value": "reddit",
+              "label": "reddit"
+            },
+            {
+              "group": "Social media",
+              "value": "snapchat",
+              "label": "snapchat"
+            },
+            {
+              "group": "Social media",
+              "value": "spotify",
+              "label": "spotify"
+            },
+            {
+              "group": "Social media",
+              "value": "threads",
+              "label": "threads"
+            },
+            {
+              "group": "Social media",
+              "value": "tiktok",
+              "label": "tiktok"
+            },
+            {
+              "group": "Social media",
+              "value": "tumblr",
+              "label": "tumblr"
+            },
+            {
+              "group": "Social media",
+              "value": "vimeo",
+              "label": "vimeo"
+            },
+            {
+              "group": "Social media",
+              "value": "wechat",
+              "label": "wechat"
+            },
+            {
+              "group": "Social media",
+              "value": "whatsapp",
+              "label": "whatsapp"
+            },
+            {
+              "group": "Social media",
+              "value": "x",
+              "label": "x"
+            },
+            {
+              "group": "Social media",
+              "value": "youtube",
+              "label": "youtube"
+            },
+            {
+              "group": "Fashion",
+              "value": "backpack",
+              "label": "backpack"
+            },
+            {
+              "group": "Fashion",
+              "value": "bag",
+              "label": "bag"
+            },
+            {
+              "group": "Fashion",
+              "value": "boot",
+              "label": "boot"
+            },
+            {
+              "group": "Fashion",
+              "value": "crown",
+              "label": "crown"
+            },
+            {
+              "group": "Fashion",
+              "value": "dress",
+              "label": "dress"
+            },
+            {
+              "group": "Fashion",
+              "value": "face-mask",
+              "label": "face mask"
+            },
+            {
+              "group": "Fashion",
+              "value": "glasses",
+              "label": "glasses"
+            },
+            {
+              "group": "Fashion",
+              "value": "hand-washing",
+              "label": "hand washing"
+            },
+            {
+              "group": "Fashion",
+              "value": "handbag",
+              "label": "handbag"
+            },
+            {
+              "group": "Fashion",
+              "value": "hat",
+              "label": "hat"
+            },
+            {
+              "group": "Fashion",
+              "value": "high-heel",
+              "label": "high heel"
+            },
+            {
+              "group": "Fashion",
+              "value": "hoodie",
+              "label": "hoodie"
+            },
+            {
+              "group": "Fashion",
+              "value": "pants",
+              "label": "pants"
+            },
+            {
+              "group": "Fashion",
+              "value": "ruler",
+              "label": "ruler"
+            },
+            {
+              "group": "Fashion",
+              "value": "sandals",
+              "label": "sandals"
+            },
+            {
+              "group": "Fashion",
+              "value": "scarf",
+              "label": "scarf"
+            },
+            {
+              "group": "Fashion",
+              "value": "shirt",
+              "label": "shirt"
+            },
+            {
+              "group": "Fashion",
+              "value": "short-pants",
+              "label": "short pants"
+            },
+            {
+              "group": "Fashion",
+              "value": "sneaker",
+              "label": "sneaker"
+            },
+            {
+              "group": "Fashion",
+              "value": "sock",
+              "label": "sock"
+            },
+            {
+              "group": "Fashion",
+              "value": "suitcase",
+              "label": "suitcase"
+            },
+            {
+              "group": "Fashion",
+              "value": "umbrella",
+              "label": "umbrella"
+            },
+            {
+              "group": "Fashion",
+              "value": "underwear",
+              "label": "underwear"
+            },
+            {
+              "group": "Fashion",
+              "value": "watch",
+              "label": "watch"
+            },
+            {
+              "group": "Interior",
+              "value": "angle-tool",
+              "label": "angle tool"
+            },
+            {
+              "group": "Interior",
+              "value": "archive",
+              "label": "archive"
+            },
+            {
+              "group": "Interior",
+              "value": "armchair",
+              "label": "armchair"
+            },
+            {
+              "group": "Interior",
+              "value": "bathtub",
+              "label": "bathtub"
+            },
+            {
+              "group": "Interior",
+              "value": "bed",
+              "label": "bed"
+            },
+            {
+              "group": "Interior",
+              "value": "bin",
+              "label": "bin"
+            },
+            {
+              "group": "Interior",
+              "value": "building",
+              "label": "building"
+            },
+            {
+              "group": "Interior",
+              "value": "chair",
+              "label": "chair"
+            },
+            {
+              "group": "Interior",
+              "value": "closet",
+              "label": "closet"
+            },
+            {
+              "group": "Interior",
+              "value": "crib",
+              "label": "crib"
+            },
+            {
+              "group": "Interior",
+              "value": "desk",
+              "label": "desk"
+            },
+            {
+              "group": "Interior",
+              "value": "drawer",
+              "label": "drawer"
+            },
+            {
+              "group": "Interior",
+              "value": "dresser",
+              "label": "dresser"
+            },
+            {
+              "group": "Interior",
+              "value": "flower",
+              "label": "flower"
+            },
+            {
+              "group": "Interior",
+              "value": "fridge",
+              "label": "fridge"
+            },
+            {
+              "group": "Interior",
+              "value": "garage",
+              "label": "garage"
+            },
+            {
+              "group": "Interior",
+              "value": "hammer",
+              "label": "hammer"
+            },
+            {
+              "group": "Interior",
+              "value": "home",
+              "label": "home"
+            },
+            {
+              "group": "Interior",
+              "value": "ladder",
+              "label": "ladder"
+            },
+            {
+              "group": "Interior",
+              "value": "lamp",
+              "label": "lamp"
+            },
+            {
+              "group": "Interior",
+              "value": "locker",
+              "label": "locker"
+            },
+            {
+              "group": "Interior",
+              "value": "mirror",
+              "label": "mirror"
+            },
+            {
+              "group": "Interior",
+              "value": "pillow",
+              "label": "pillow"
+            },
+            {
+              "group": "Interior",
+              "value": "sleeper-chair",
+              "label": "sleeper chair"
+            },
+            {
+              "group": "Interior",
+              "value": "toilet",
+              "label": "toilet"
+            },
+            {
+              "group": "Interior",
+              "value": "tools",
+              "label": "tools"
+            },
+            {
+              "group": "Interior",
+              "value": "two-seater-sofa",
+              "label": "two seater sofa"
+            },
+            {
+              "group": "Interior",
+              "value": "washing-machine",
+              "label": "washing machine"
+            },
+            {
+              "group": "Technology",
+              "value": "4k",
+              "label": "4k"
+            },
+            {
+              "group": "Technology",
+              "value": "airplay",
+              "label": "airplay"
+            },
+            {
+              "group": "Technology",
+              "value": "battery-charge",
+              "label": "battery charge"
+            },
+            {
+              "group": "Technology",
+              "value": "battery-charging",
+              "label": "battery charging"
+            },
+            {
+              "group": "Technology",
+              "value": "battery-empty",
+              "label": "battery empty"
+            },
+            {
+              "group": "Technology",
+              "value": "battery-full",
+              "label": "battery full"
+            },
+            {
+              "group": "Technology",
+              "value": "bluetooth",
+              "label": "bluetooth"
+            },
+            {
+              "group": "Technology",
+              "value": "cable",
+              "label": "cable"
+            },
+            {
+              "group": "Technology",
+              "value": "camera",
+              "label": "camera"
+            },
+            {
+              "group": "Technology",
+              "value": "charging-station",
+              "label": "charging station"
+            },
+            {
+              "group": "Technology",
+              "value": "code",
+              "label": "code"
+            },
+            {
+              "group": "Technology",
+              "value": "flash",
+              "label": "flash"
+            },
+            {
+              "group": "Technology",
+              "value": "game-controller",
+              "label": "game controller"
+            },
+            {
+              "group": "Technology",
+              "value": "hd",
+              "label": "hd"
+            },
+            {
+              "group": "Technology",
+              "value": "headphone",
+              "label": "headphone"
+            },
+            {
+              "group": "Technology",
+              "value": "laptop",
+              "label": "laptop"
+            },
+            {
+              "group": "Technology",
+              "value": "media-image",
+              "label": "media image"
+            },
+            {
+              "group": "Technology",
+              "value": "media-video",
+              "label": "media video"
+            },
+            {
+              "group": "Technology",
+              "value": "monitor",
+              "label": "monitor"
+            },
+            {
+              "group": "Technology",
+              "value": "movie",
+              "label": "movie"
+            },
+            {
+              "group": "Technology",
+              "value": "multi-devices",
+              "label": "multi devices"
+            },
+            {
+              "group": "Technology",
+              "value": "phone",
+              "label": "phone"
+            },
+            {
+              "group": "Technology",
+              "value": "printer",
+              "label": "printer"
+            },
+            {
+              "group": "Technology",
+              "value": "sd",
+              "label": "sd"
+            },
+            {
+              "group": "Technology",
+              "value": "smartphone",
+              "label": "smartphone"
+            },
+            {
+              "group": "Technology",
+              "value": "speaker",
+              "label": "speaker"
+            },
+            {
+              "group": "Technology",
+              "value": "tv",
+              "label": "tv"
+            },
+            {
+              "group": "Technology",
+              "value": "video-camera",
+              "label": "video camera"
+            },
+            {
+              "group": "Technology",
+              "value": "watch-1",
+              "label": "watch 1"
+            },
+            {
+              "group": "Technology",
+              "value": "wifi",
+              "label": "wifi"
+            },
+            {
+              "group": "Shopping",
+              "value": "apple-wallet",
+              "label": "apple wallet"
+            },
+            {
+              "group": "Shopping",
+              "value": "barcode",
+              "label": "barcode"
+            },
+            {
+              "group": "Shopping",
+              "value": "cash",
+              "label": "cash"
+            },
+            {
+              "group": "Shopping",
+              "value": "discount",
+              "label": "discount"
+            },
+            {
+              "group": "Shopping",
+              "value": "dollar",
+              "label": "dollar"
+            },
+            {
+              "group": "Shopping",
+              "value": "gift",
+              "label": "gift"
+            },
+            {
+              "group": "Shopping",
+              "value": "heart",
+              "label": "heart"
+            },
+            {
+              "group": "Shopping",
+              "value": "master-card",
+              "label": "master card"
+            },
+            {
+              "group": "Shopping",
+              "value": "palette",
+              "label": "palette"
+            },
+            {
+              "group": "Shopping",
+              "value": "piggy",
+              "label": "piggy"
+            },
+            {
+              "group": "Shopping",
+              "value": "qr-code",
+              "label": "qr code"
+            },
+            {
+              "group": "Shopping",
+              "value": "recycle",
+              "label": "recycle"
+            },
+            {
+              "group": "Shopping",
+              "value": "scan",
+              "label": "scan"
+            },
+            {
+              "group": "Shopping",
+              "value": "seal-check",
+              "label": "seal check"
+            },
+            {
+              "group": "Shopping",
+              "value": "shop",
+              "label": "shop"
+            },
+            {
+              "group": "Shopping",
+              "value": "wallet",
+              "label": "wallet"
+            },
+            {
+              "group": "Shipping",
+              "value": "layer-1",
+              "label": "layer 1"
+            },
+            {
+              "group": "Shipping",
+              "value": "air-plane",
+              "label": "air plane"
+            },
+            {
+              "group": "Shipping",
+              "value": "box",
+              "label": "box"
+            },
+            {
+              "group": "Shipping",
+              "value": "delivery-truck",
+              "label": "delivery truck"
+            },
+            {
+              "group": "Shipping",
+              "value": "globe",
+              "label": "globe"
+            },
+            {
+              "group": "Shipping",
+              "value": "return",
+              "label": "return"
+            },
+            {
+              "group": "Shipping",
+              "value": "rocket",
+              "label": "rocket"
+            },
+            {
+              "group": "Shipping",
+              "value": "truck",
+              "label": "truck"
+            },
+            {
+              "group": "Emoji",
+              "value": "alien",
+              "label": "alien"
+            },
+            {
+              "group": "Emoji",
+              "value": "happy",
+              "label": "happy"
+            },
+            {
+              "group": "Emoji",
+              "value": "puzzed",
+              "label": "puzzed"
+            },
+            {
+              "group": "Emoji",
+              "value": "quite",
+              "label": "quite"
+            },
+            {
+              "group": "Emoji",
+              "value": "sad",
+              "label": "sad"
+            },
+            {
+              "group": "Emoji",
+              "value": "surprise",
+              "label": "surprise"
+            }
+          ],
+          "default": "happy"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "t:general.settings.image.label",
+          "info": "t:general.settings.use_square_image.info",
+          "visible_if": "{{ block.settings.icon_source == 'image' }}"
+        },
+        {
+          "type": "html",
+          "label": "t:general.settings.custom_svg.label",
+          "id": "custom_code",
+          "info": "t:general.settings.custom_svg.info",
+          "visible_if": "{{ block.settings.icon_source == 'custom_svg' }}"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "t:general.settings.custom_icon_color.label"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.desktop_layout.content"
+        },
+        {
+          "type": "select",
+          "label": "t:sections.text_block_with_icon.settings.block_width.label",
+          "id": "block_width_desktop",
+          "info": "t:general.settings.text_block_icon.info",
+          "options": [
+            {
+              "value": "desktop-width-one-third",
+              "label": "t:general.settings.block_width.options_1_3.label"
+            },
+            {
+              "value": "desktop-width-one-two",
+              "label": "t:general.settings.block_width.options_1_2.label"
+            },
+            {
+              "value": "desktop-width-full-width",
+              "label": "t:sections.text_block_with_icon.settings.option_fullwidth.label"
+            }
+          ],
+          "default": "desktop-width-one-two"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.mobile_layout.content"
+        },
+        {
+          "type": "select",
+          "label": "t:sections.text_block_with_icon.settings.block_width.label",
+          "id": "block_width_mobile",
+          "info": "t:general.settings.text_block_icon.info",
+         "options": [
+            {
+              "value": "mobile-width-one-third",
+              "label": "t:general.settings.block_width.options_1_3.label"
+            },
+            {
+              "value": "mobile-width-one-two",
+              "label": "t:general.settings.block_width.options_1_2.label"
+            },
+            {
+              "value": "mobile-width-full-width",
+              "label": "t:sections.text_block_with_icon.settings.option_fullwidth.label"
+            }
+          ],
+          "default": "mobile-width-one-two"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.video_with_text.name",
+      "blocks": [
+        {
+          "type": "subheading"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "text_block_with_icon"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

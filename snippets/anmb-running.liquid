@@ -1,0 +1,20 @@
+{% assign running_speed = section.settings.rotating_speed %}
+<sht-marquee-section class="marquee-section container o-hidden w-100 p-relative d-block" normal-speed="{{ running_speed }}" hover-interaction="{{ section.settings.hover_interaction }}" slow-speed="1" direction="normal">
+  {% capture marquee_list %}
+    <div aria-live="polite" aria-atomic="true" class="marquee__list js-marquee-list d-flex fw-nowrap flex-auto">
+      {% for block in section.blocks %}
+        <div role="group" aria-roledescription="Running" class="marquee-item run-item anmb-item d-flex p-relative" {{ block.shopify_attributes }}>
+          {%- render 'anmb-item-content', section_id: section.id, block: block -%}
+        </div>
+      {% endfor %}
+    </div>
+  {% endcapture %}
+  <div class="marquee-container js-marquee-container d-flex">
+    {% assign num = section.blocks.size | replace: '2', '7' | replace: '3', "7" | replace: '1','12' %}
+    {%- for i in (1..num) -%}
+      <div class="d-flex fw-nowrap fs-0 marquee__items middle-xs">
+        {{ marquee_list }}
+      </div>
+    {%- endfor -%}
+  </div>
+</sht-marquee-section>

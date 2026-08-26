@@ -1,0 +1,58 @@
+<sht-variant-selects class="product__variants--selects d-flex fd-column no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" data-product-id="{{ product.id }}">
+  {%- for option in product.options_with_values -%}
+    {%- liquid
+      assign index = forloop.index0
+      assign variant_name = option.name | downcase
+      assign hide_select = ''
+      assign check_select_field = 'is-dropdown-select'
+      assign show_variant_swatches = block.settings.show_variant_swatches
+      if quick_buy_block
+        assign show_variant_swatches = settings.quick_buy_show_variant_swatches
+      endif
+      for label in variant_label
+        assign label = label | strip
+          if label == variant_name and show_variant_swatches
+            assign hide_select = "d-none-important"
+            assign check_select_field = ''
+          endif
+      endfor
+      assign size_guide_text = 'products.product.size_guide' | t
+      assign size_label_heading = block.settings.size_label_heading | default: size_guide_text | escape
+    -%}
+    <div class="product-form__input product-form__input--dropdown js-selectbox-wrapper {{ check_select_field }}">
+      <label class="form__label d-inline-block p-zero m-zero product-option__name d-flex gap-scale-3xs fw-wrap between-xs w-100 middle-xs" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+        <span class="d-flex flex-1 gap-scale-3xs middle-xs fw-wrap">
+          <span class="fs-body-l hide-empty">{{ option.name }}:</span>
+          <span class="js-variant-select-option-name fs-body-l hide-empty" data-option-index="{{ index }}" data-option-name="{{ option.name }}">
+              {{ product.selected_or_first_available_variant.options[index] }}
+          </span>
+        </span>
+        {%- if enable_size_guide and size_guide_dialog_label contains variant_name -%}
+          <button class="btn btn-plain btn-tertiary d-flex gap-3xs middle-xs ta-right js-size-guide-btn {{ size_guide_cta | replace: 'disabled', 'disable' }}" type="button" aria-haspopup="dialog" onclick="window.dialogSizeGuide{{ size_guide_dialog_id }}.showModal(this, true)" {{ size_guide_cta }}>
+            {{ size_label_heading }}
+            {%- render 'icon-ruler', class: 'icon icon-fix-l' -%}
+          </button>
+        {%- endif -%}
+      </label>
+      {% for label in variant_label %}
+        {%- assign label = label | strip -%}
+        {%- if label == variant_name and show_variant_swatches -%}
+          <fieldset class="form__fields js-variant-radio-container d-flex fw-wrap gap-scale-xs p-zero m-zero b-zero">
+            {% render 'main-product-color-swatch-w-select', product: product, option: option, section: section, product_form_id: product_form_id, index: index %}
+          </fieldset>
+        {%- endif -%}
+      {%- endfor -%}
+      <div class="{{ hide_select }} field__select p-relative p-zero d-block ">
+        <sht-select class="custom-select fs-body-m d-block">
+          <span class="toggle__icon d-flex middle-xs center-xs select__icon">
+            {% render 'icon-toggle', icon_arrow: 'icon-caret-down icon-fix-m icon p-absolute', class_first: 'toggle__icon--plus icon-fix-m icon p-absolute', class_second: 'toggle__icon--minus icon-fix-m icon p-absolute' %}
+          </span>
+          <select class="js-variant-select-item" id="Option-{{- section.id -}}-{{- forloop.index0 -}}" name="options[{{ option.name | escape }}]" form="{{ product_form_id }}">
+            {%- render 'product-variant-options', product: product, option: option, block: block, index: index -%}
+          </select>
+        </sht-select>
+      </div>
+    </div>
+  {%- endfor -%}
+  <script data-selected-variant type="application/json">{{ product.selected_or_first_available_variant | json }}</script>
+</sht-variant-selects>

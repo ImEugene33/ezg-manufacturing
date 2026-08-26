@@ -1,0 +1,150 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "cross_page_promotion": {
+      "type": "cross-page-promotions",
+      "blocks": {
+        "promotion_1": {
+          "type": "promotion",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "bag-check",
+            "custom_code": "",
+            "title": "About Normcore",
+            "description": "<p>Normcore celebrates timeless simplicity, curating essentials that elevate everyday living.</p>",
+            "label": "View more",
+            "link": ""
+          }
+        },
+        "promotion_2": {
+          "type": "promotion",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "armchair",
+            "custom_code": "",
+            "title": "Product Showcase",
+            "description": "<p>Our dedicated team provides timely assistance and is committed to addressing your queries.</p>",
+            "label": "Product Showcase",
+            "link": ""
+          }
+        },
+        "promotion_3": {
+          "type": "promotion",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "drawer",
+            "custom_code": "",
+            "title": "Thoughtful Design",
+            "description": "<p>Blending form and function, our designs offer lasting comfort and style that effortlessly fit into any space.</p>",
+            "label": "Go Wholesale Page",
+            "link": ""
+          }
+        },
+        "promotion_4": {
+          "type": "promotion",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "seal-check",
+            "custom_code": "",
+            "title": "Media Promotions",
+            "description": "<p>Invest in our furniture with absolute confidence, backed by our 30-day satisfaction guarantee.</p>",
+            "label": "Media Promotions",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "promotion_1",
+        "promotion_2",
+        "promotion_3",
+        "promotion_4"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-554f3a13-3752-4c9d-89c1-dc948a08cf1a",
+        "text_position": "fd-column",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": ""
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "contact_info": {
+          "type": "contact_info",
+          "settings": {
+            "heading": "Contact us",
+            "content": "<p><strong>Address</strong><br>1833 North Riverview Road<br>Malta, OH 43758</p><p><strong>Email</strong><br><a href=\"mailto:sales@ezgmfg.com\">sales@ezgmfg.com</a></p><p><strong>Phone</strong><br><a href=\"tel:1-888-971-6301\">1-888-971-6301</a></p>"
+          }
+        },
+        "menu_manufacturing": {
+          "type": "menu",
+          "settings": {
+            "heading": "Manufacturing",
+            "main_menu": "manufacturing"
+          }
+        },
+        "menu_equipment": {
+          "type": "menu",
+          "settings": {
+            "heading": "Equipment",
+            "main_menu": "equipment"
+          }
+        },
+        "menu_resources": {
+          "type": "menu",
+          "settings": {
+            "heading": "Resources",
+            "main_menu": "resources"
+          }
+        }
+      },
+      "block_order": [
+        "contact_info",
+        "menu_manufacturing",
+        "menu_equipment",
+        "menu_resources"
+      ],
+      "settings": {
+        "color_scheme": "scheme-9e40671e-03fb-4794-866d-f94c8ca7b57d",
+        "logo": "shopify://shop_images/EZG_Logo_W_Standard_Horizontal-1_1.png",
+        "logo_mark": "shopify://shop_images/EZG_Logo_W_Standard_Horizontal-1_2_1.png",
+        "certification_badge": "shopify://shop_images/SQA-ISO9001-Light_1.png",
+        "copyright_text": "<p>© [year]. All rights reserved.</p>",
+        "padding_top": 40,
+        "padding_bottom": 20,
+        "padding_top_mob": 20,
+        "padding_bottom_mob": 12,
+        "sect_class": ""
+      }
+    },
+    "copyright_bar": {
+      "type": "copyright-bar",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-dfd7f710-1c3c-4730-be7a-3884f4f918ee",
+        "enable_fullwidth": false,
+        "show_currency_selector": "show-full",
+        "show_language_selector": true,
+        "textarea": "<p>© [year]. All rights reserved.</p>",
+        "enable_powered_by_shopify": true,
+        "text": ""
+      }
+    }
+  },
+  "order": [
+    "cross_page_promotion",
+    "footer",
+    "copyright_bar"
+  ]
+}

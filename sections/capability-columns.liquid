@@ -1,0 +1,224 @@
+{{ 'section-capability-columns.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mob }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+    background-color: var(--color-background);
+    color: var(--color-normal-text);
+  }
+
+  @media screen and (min-width: 768px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .section-{{ section.id }} .capability-columns__grid {
+    --capability-columns-desktop: {{ section.settings.columns_desktop }};
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }} capability-columns color-{{ section.settings.color_scheme }} {{ section.settings.sect_class }}">
+  <div class="capability-columns__container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="capability-columns__heading h3">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="capability-columns__grid">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.capability_columns.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.capability_columns.settings.headers.content.content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.capability_columns.settings.heading.label",
+      "default": "Fab Capabilities"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.capability_columns.settings.headers.layout.content"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "t:sections.capability_columns.settings.columns_desktop.label",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "t:sections.capability_columns.settings.headers.colors.content"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "t:sections.capability_columns.settings.accent_color.label",
+      "info": "t:sections.capability_columns.settings.accent_color.info",
+      "default": "#5b7f95"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.capability_columns.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.capability_columns.settings.headers.padding.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.capability_columns.settings.padding_top.label",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.capability_columns.settings.padding_bottom.label",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.capability_columns.settings.padding_top_mob.label",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.capability_columns.settings.padding_bottom_mob.label",
+      "default": 32
+    },
+    {
+      "type": "text",
+      "id": "sect_class",
+      "label": "t:sections.capability_columns.settings.sect_class.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "capability-column"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.capability_columns.name",
+      "blocks": [
+        {
+          "type": "capability-column",
+          "blocks": [
+            {
+              "type": "capability-title",
+              "settings": {
+                "title": "Material Thickness"
+              }
+            },
+            {
+              "type": "capability-card",
+              "settings": {
+                "title": "Laser Plate Cutting Max.",
+                "value": "up to 1\" (25.4 mm) thick"
+              }
+            },
+            {
+              "type": "capability-card",
+              "settings": {
+                "title": "Shearing Max.",
+                "value": ".625\" (15.875 mm) x 120\" (3048.0 mm)"
+              }
+            },
+            {
+              "type": "capability-card",
+              "settings": {
+                "title": "Rolling Max.",
+                "value": ".250\" (6.35 mm) x 6' (1.82 m) wide"
+              }
+            }
+          ]
+        },
+        {
+          "type": "capability-column",
+          "blocks": [
+            {
+              "type": "capability-title",
+              "settings": {
+                "title": "Material Width"
+              }
+            },
+            {
+              "type": "capability-card",
+              "settings": {
+                "title": "Laser Plate Cutting Max.",
+                "value": "76\" (1930.4 mm)"
+              }
+            },
+            {
+              "type": "capability-card",
+              "settings": {
+                "title": "Press Brake Max.",
+                "value": "192\" (3048 mm)"
+              }
+            }
+          ]
+        },
+        {
+          "type": "capability-column",
+          "blocks": [
+            {
+              "type": "capability-title",
+              "settings": {
+                "title": "Material Length"
+              }
+            },
+            {
+              "type": "capability-card",
+              "settings": {
+                "title": "Laser Plate Cutting Max.",
+                "value": "154\" (3911.6 mm)"
+              }
+            },
+            {
+              "type": "capability-card",
+              "settings": {
+                "title": "Brake Press Tonnage",
+                "value": "350 Tons"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

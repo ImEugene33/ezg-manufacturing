@@ -1,0 +1,629 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_pGHFdh": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_qMpgny": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Normal, but hardcore",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        },
+        "description_akDtTB": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>A minimalistic and timeless solution, perfect for showcasing large catalogs and maximizing conversions through advanced customization and user-focused functionality. </p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_qMpgny",
+        "description_akDtTB"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 20,
+        "section_mask_overlay_color": "#000000",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "",
+        "section_image_width": "max-width",
+        "height_desktop": "70vh",
+        "desktop_content_position": "end-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "start-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "content_collage_TmxUC8": {
+      "type": "content-collage",
+      "blocks": {
+        "text_DYWYxz": {
+          "type": "text",
+          "settings": {
+            "heading": "Product showcasing",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>Gain access to essential tools for creating product displays that align with your business demands.</p>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-center-md middle-md",
+            "desktop_column": "4",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-center middle-xs",
+            "mobile_column": "2",
+            "mobile_row": "1",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "#f3f3f3",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_DYWYxz"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": false,
+        "desktop_row_height": 300,
+        "mobile_row_height": 130
+      }
+    },
+    "icon_with_text_FaKdkL": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_B3wFp9": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "shop",
+            "custom_code": "",
+            "title": "Effortless Navigation for Large Catalogs",
+            "description": "<p>Navigate complexity with ease. Normcore empowers buyers to move smoothly through extensive catalogs, reaching their desired products quickly and exploring further without feeling overwhelmed.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_VqJBJF": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "add-to-cart",
+            "custom_code": "",
+            "title": "Seamless B2B and B2C Support",
+            "description": "<p>Designed for flexibility, Normcore accommodates both <strong>B2B</strong> and <strong>B2C</strong> models. From bulk purchasing for B2B clients to personalized deals for individual shoppers, Normcore ensures every customer gets exactly what they need, how they need it.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_QhbAMf": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "filter",
+            "custom_code": "",
+            "title": "Conversion-Driven Tools",
+            "description": "<p>Boost sales with Normcore’s powerful conversion features. Create irresistible deals and leverage robust cross-sell capabilities to guide buyers toward confident purchasing decisions, turning browsers into loyal customers.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_wMrje8": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "seal-check",
+            "custom_code": "",
+            "title": "'Normcore' Spirit Design",
+            "description": "<p>Emphasizes minimalism, comfort, and practicality over flamboyance and intricacy. Our goal is to develop a truly 'hardcore' product for store owners, ensuring ease of use and long-term sustainability. The concept of 'Normcore' embodies this philosophy: Normal but Hardcore.</p>",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_B3wFp9",
+        "icon_with_text_item_VqJBJF",
+        "icon_with_text_item_QhbAMf",
+        "icon_with_text_item_wMrje8"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "",
+        "heading_size": "h3-regular",
+        "description": "",
+        "text_position": "fd-column",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "true",
+        "label": "",
+        "link": ""
+      }
+    },
+    "divider_4jy74d": {
+      "type": "divider",
+      "settings": {
+        "divider_color": "#d1d1d1"
+      }
+    },
+    "rich_text_tEERmh": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_pBgbFz": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Many ways to present your collections",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_pBgbFz"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "collection_list_TxEDNH": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_yhbCg9": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "custom_background": "",
+            "custom_color": ""
+          }
+        },
+        "collection_7QD9G7": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "custom_background": "",
+            "custom_color": ""
+          }
+        },
+        "collection_xkiM8q": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "custom_background": "",
+            "custom_color": ""
+          }
+        },
+        "collection_qF9MA8": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "custom_background": "#ffb82d",
+            "custom_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_yhbCg9",
+        "collection_7QD9G7",
+        "collection_xkiM8q",
+        "collection_qF9MA8"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "Showcasing collections in the traditional way",
+        "heading_size": "h4",
+        "description": "",
+        "image_ratio": "3/2",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "columns_per_row_mobile": "1",
+        "enable_button": true,
+        "button_text": "Explore more",
+        "button_position": "last-item"
+      }
+    },
+    "running_image_link_yiJw9a": {
+      "type": "running-image-link",
+      "blocks": {
+        "collection_GLaQfK": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "regular",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_ntMLMc": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "large",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_kectKQ": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "regular",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_iMt9YF": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "large",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        },
+        "collection_yrMY34": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "item_size": "small",
+            "show_collection_title": true,
+            "show_collection_quantity": true,
+            "quantity_style": "separate_line",
+            "overlay_opacity": 30,
+            "block_mask_overlay_color": "#000000",
+            "block_content_overlay_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "collection_GLaQfK",
+        "collection_ntMLMc",
+        "collection_kectKQ",
+        "collection_iMt9YF",
+        "collection_yrMY34"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "Or make it more lively by adding movement",
+        "heading_size": "h3-regular",
+        "description": "",
+        "running_direction": "animation-direction",
+        "rotating_speed": "1",
+        "list_alignment": "top-xs",
+        "item_shape": "auto",
+        "content_position": "start-xs",
+        "content_alignment": "ta-left top-xs",
+        "button_text": "",
+        "button_link": "",
+        "enable_countdown": false,
+        "hide_on_end": false,
+        "end_date": "2024-11-11",
+        "end_time": "17:00",
+        "end_text": "<p>This event is finished</p>",
+        "countdown_background": "",
+        "countdown_number_color": ""
+      }
+    },
+    "divider_Nc3Rqh": {
+      "type": "divider",
+      "settings": {
+        "divider_color": "#d1d1d1"
+      }
+    },
+    "rich_text_7jCeC9": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_WdGnQ8": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Explore various scenarios, from visual appeal to upselling/cross-selling",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_WdGnQ8"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "collection_browsing_iXcK7n": {
+      "type": "collection-browsing",
+      "blocks": {
+        "collection_GgFPtb": {
+          "type": "collection",
+          "settings": {
+            "collection_heading": "",
+            "selected_collection": ""
+          }
+        },
+        "collection_AVMC6P": {
+          "type": "collection",
+          "settings": {
+            "collection_heading": "",
+            "selected_collection": ""
+          }
+        },
+        "collection_DccYMD": {
+          "type": "collection",
+          "settings": {
+            "collection_heading": "",
+            "selected_collection": ""
+          }
+        },
+        "collection_QMVBri": {
+          "type": "collection",
+          "settings": {
+            "collection_heading": "",
+            "selected_collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_GgFPtb",
+        "collection_AVMC6P",
+        "collection_DccYMD",
+        "collection_QMVBri"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "Browse products in various collections in once",
+        "heading_size": "h6",
+        "description": "",
+        "max_items": 8,
+        "show_vendor": true,
+        "enable_quick_view": true,
+        "quick_buy": "standard",
+        "show_variant_swatches": true,
+        "show_price": true,
+        "show_badge": true,
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "false",
+        "columns_per_row_mobile": "2"
+      }
+    },
+    "featured_product_list_NiMbhz": {
+      "type": "featured-product-list",
+      "blocks": {
+        "vendor_6DXBFV": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title_zTQJ79": {
+          "type": "title",
+          "settings": {}
+        },
+        "product_type_HLVVDc": {
+          "type": "product_type",
+          "settings": {
+            "color_product_type": ""
+          }
+        },
+        "price_JyGeGA": {
+          "type": "price",
+          "settings": {
+            "color_product_price": ""
+          }
+        },
+        "product_attributes_f7GDAX": {
+          "type": "product_attributes",
+          "settings": {}
+        },
+        "variants_ynicTM": {
+          "type": "variants",
+          "settings": {
+            "card_product_variants": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor_6DXBFV",
+        "title_zTQJ79",
+        "product_type_HLVVDc",
+        "price_JyGeGA",
+        "product_attributes_f7GDAX",
+        "variants_ynicTM"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "Highlight products inside a featured collection",
+        "heading_size": "h6",
+        "description": "",
+        "collection": "",
+        "products_to_shows": 4,
+        "product_list": [],
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "true",
+        "columns_per_row_mobile": "1",
+        "button_text": "View all",
+        "button_link": "",
+        "show_quick_view": true,
+        "quick_buy": "standard",
+        "enable_countdown": false,
+        "hide_on_end": true,
+        "end_date": "2024-11-11",
+        "end_time": "17:00",
+        "end_text": "<p>This event is finished</p>",
+        "countdown_background": "",
+        "countdown_number_color": ""
+      }
+    },
+    "shop_the_look_mK3pWE": {
+      "type": "shop-the-look",
+      "blocks": {
+        "item_shop_the_look_jKKnnW": {
+          "type": "item_shop_the_look",
+          "settings": {
+            "image": "",
+            "product_list": []
+          }
+        },
+        "item_shop_the_look_XXKP6b": {
+          "type": "item_shop_the_look",
+          "settings": {
+            "image": "",
+            "product_list": []
+          }
+        },
+        "item_shop_the_look_BGd6Yi": {
+          "type": "item_shop_the_look",
+          "settings": {
+            "image": "",
+            "product_list": []
+          }
+        },
+        "item_shop_the_look_JhUrm4": {
+          "type": "item_shop_the_look",
+          "settings": {
+            "image": "",
+            "product_list": []
+          }
+        },
+        "item_shop_the_look_ycTVYQ": {
+          "type": "item_shop_the_look",
+          "settings": {
+            "image": "",
+            "product_list": []
+          }
+        }
+      },
+      "block_order": [
+        "item_shop_the_look_jKKnnW",
+        "item_shop_the_look_XXKP6b",
+        "item_shop_the_look_BGd6Yi",
+        "item_shop_the_look_JhUrm4",
+        "item_shop_the_look_ycTVYQ"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "Promote your products through real-life images",
+        "heading_size": "h6",
+        "description": "",
+        "image_ratio": "3/2",
+        "show_vendor": true,
+        "show_variant_swatches": true,
+        "show_price": true,
+        "show_badge": true,
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "true",
+        "columns_per_row_mobile": "2",
+        "enable_countdown": false,
+        "hide_on_end": true,
+        "end_date": "2025-01-01",
+        "end_time": "00:00",
+        "end_text": "<p>This event is finished</p>",
+        "countdown_background": "",
+        "countdown_number_color": ""
+      }
+    },
+    "rich_text_CCzQmW": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_4jhUXY": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Expert help & resources",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_QTPqUP": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Can't figure out something with our themes?<br/>Don't worry, our support team is just a click away.</p>"
+          }
+        },
+        "button_Eypkdz": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Read docs",
+            "button_primary_style": "secondary",
+            "button_primary_link": "",
+            "button_secondary_label": "Contact us",
+            "button_secondary_style": "primary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_4jhUXY",
+        "description_QTPqUP",
+        "button_Eypkdz"
+      ],
+      "settings": {
+        "color_scheme": "scheme-60748a9c-7363-424a-8e7c-9171c135a44e",
+        "desktop_content_alignment": "ta-center-md middle-md",
+        "mobile_content_alignment": "ta-center middle-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_pGHFdh",
+    "content_collage_TmxUC8",
+    "icon_with_text_FaKdkL",
+    "divider_4jy74d",
+    "rich_text_tEERmh",
+    "collection_list_TxEDNH",
+    "running_image_link_yiJw9a",
+    "divider_Nc3Rqh",
+    "rich_text_7jCeC9",
+    "collection_browsing_iXcK7n",
+    "featured_product_list_NiMbhz",
+    "shop_the_look_mK3pWE",
+    "rich_text_CCzQmW"
+  ]
+}

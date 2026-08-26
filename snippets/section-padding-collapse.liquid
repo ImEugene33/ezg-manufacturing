@@ -1,0 +1,23 @@
+
+{% liquid
+  assign detect_background = 1
+  if section.settings.color_scheme.settings.color_background.alpha != 0.0 or section.settings.color_scheme.settings.color_background.alpha != blank
+    assign detect_background = section.settings.color_scheme.settings.color_background | color_brightness | times: 9999
+  endif
+%}
+<style>  
+  #shopify-section-{{ section.id }} {
+    --section-background-hash: {{ detect_background }};
+  }
+  #shopify-section-{{ section.id }} + .shopify-section {
+    --previous-section-background-hash: {{ detect_background }};
+  }
+  #shopify-section-{{ section.id }}:has(.section-copyright-bar) + .shopify-section {
+    --previous-section-background-hash: 0;
+  }
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }}:has([data-animate="banner-section"]) + .shopify-section {
+      --differs-from-previous: 1;
+    }
+  }
+</style>

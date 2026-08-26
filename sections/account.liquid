@@ -1,0 +1,109 @@
+{{ 'account.css' | asset_url | stylesheet_tag: preload: true }}
+
+<div data-animate="regular-section" class="js-animate section account background color-{{- section.settings.color_scheme }}">
+  <div class="ctnr">
+    <div class="s-content">
+      <div class="d-flex fd-column gap-scale-4xl">
+        <div>
+          {%- if section.settings.enable_h1_tag -%}
+            <h1 class="promotional-heading h2 mb-scale-xl">{{ 'customer.account.title' | t }}</h1>
+          {%- else -%}
+            <span class="promotional-heading d-block h2 mb-scale-xl">{{ 'customer.account.title' | t }}</span>
+          {%- endif -%}
+          <div class="mb-scale-2xl fs-body-xl">{{ 'customer.account.welcome_message' | t }} {{ customer.name | append: '!' }}</div>
+          <a class="btn btn-m btn-secondary" href="{{ routes.account_logout_url }}">{{ 'customer.log_out' | t }}</a>
+        </div>
+        <div class="account__content">
+          <sht-tab-overflow class="p-relative tab__wrapper--underline">
+            <ul class="js-tab-container tab__header--{{- settings.tab_style }} p-relative ox-auto disable-scrollbars ls-none ws-nowrap d-flex mb-scale-2xl" role="tablist">
+              <li class="tab__item o-hidden d-inline-block" role="presentation">
+                <a
+                  class="tab__link fs-body-xl d-block p-relative ele-focus-visible  tab__link--active js-tab-link"
+                  role="tab"
+                  href="{{ routes.account_url }}">
+                  <span class="h-100 f-extra d-flex middle-xs">{{ "customer.orders.title_1" | t }}</span>
+                  <sup class="fs-body-xs ml-3xs {{ settings.numbers_style }}">{{ customer.orders_count }}</sup>
+                </a>
+              </li>
+              <li class="tab__item o-hidden d-inline-block" role="presentation">
+                <a
+                  class="tab__link fs-body-xl d-block p-relative ele-focus-visible  js-tab-link"
+                  role="tab"
+                  href="{{ routes.account_addresses_url }}">
+                  <span class="h-100 f-extra d-flex middle-xs">{{ "customer.addresses.title" | t }}</span>
+                  <sup class="fs-body-xs ml-3xs {{ settings.numbers_style }}">{{ customer.addresses_count }}</sup>
+                </a>
+              </li>
+            </ul>
+          </sht-tab-overflow>
+
+          <div class="d-block fs-body-m">
+            {% paginate customer.orders by 20 %}
+              {% if customer.orders.size > 0 %}
+                <div class="list-header gap-m d-flex middle-xs px-m">
+                  <div class="list-item">{{ 'customer.orders.order_number' | t }}</div>
+                  <div class="list-item d-block-md d-none">{{ 'customer.orders.date' | t }}</div>
+                  <div class="list-item d-block-md d-none">{{ 'customer.orders.payment_status' | t }}</div>
+                  <div class="list-item d-block-md d-none">{{ 'customer.orders.fulfillment_status' | t }}</div>
+                  <div class="list-item ta-right">{{ 'customer.orders.total' | t }}</div>
+                </div>
+                {% for order in customer.orders %}
+                  <div class="list-content gap-m d-flex middle-md top-xs p-m">
+                    <div class="list-item d-flex fd-column gap-2xs" data-name="{{ 'customer.orders.order_number' | t }}">
+                      <a
+                        href="{{ order.customer_url }}"
+                        class="tag maw-fit-content"
+                        aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">{{ order.name }}</a>
+                      <span class="d-none-md d-block color-text-60">{{ 'customer.orders.date' | t }}: {{ order.created_at | time_tag: format: 'date' }}</span>
+                      <span class="d-none-md d-block color-text-60">{{ 'customer.orders.payment_status' | t }}: {{ order.financial_status_label }}</span>
+                      <span class="d-none-md d-block color-text-60">{{ 'customer.orders.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</span>
+                    </div>
+                    <div class="list-item d-block-md d-none" data-name="{{ 'customer.orders.date' | t }}">{{ order.created_at | time_tag: format: 'date' }}</div>
+                    <div class="list-item d-block-md d-none" data-name="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</div>
+                    <div class="list-item d-block-md d-none" data-name="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</div>
+                    <div class="list-item ta-right" data-name="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</div>
+                  </div>
+                {% endfor %}
+              {% else %}
+                <div class="d-flex fd-column center-xs middle-xs flex-1 gap-scale-xl p-m">
+                  {%- render 'icon-puzzed' | class: 'icon icon-fix-8xl color-text-40' -%}
+                  <p class="m-zero fs-body-xl">{{ 'customer.orders.none' | t }}</p>
+                  <a href="{{ routes.root_url }}" class="btn btn-l btn-secondary">
+                    {%- render 'icon-shop' | class: 'icon icon-fix-xl mr-3xs' -%}
+                    {{ 'customer.orders.continue_shopping' | t }}
+                  </a>
+                </div>
+              {% endif %}
+              {%- if paginate.pages > 1 -%}
+                <div class="s-footer mt-content mt-scale-2xl">
+                  {%- render 'pagination'
+                    , paginate: paginate -%}
+                </div>
+              {%- endif -%}
+            {% endpaginate %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "t:sections.account.name",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:general.settings.color_schemes.label",
+        "default": "scheme-1"
+      }, 
+      {
+        "type": "checkbox",
+        "id": "enable_h1_tag",
+        "label": "t:general.settings.enable_h1_tag_for_heading.label",
+        "info": "t:general.settings.enable_h1_tag_for_heading.info",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

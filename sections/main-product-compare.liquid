@@ -1,0 +1,25 @@
+{%- liquid
+  assign ratio = settings.product_card_image_ratio
+  assign media = 'product-apparel-1' | placeholder_svg_tag: 'placeholder of-cover media w-100 h-100 d-block'
+  assign media = product.featured_image | image_url: width: 300 | image_tag: widths: '300', sizes: '100vw', alt: product.title, class: 'js-image-lazy media of-cover'
+%}
+<div class="product-compare__item prd-cp-item js-product-item mini-card card--border p-s rad-m o-hidden h-100 d-flex gap-xs" data-product="{{ product.id }}" data-product-id="{{ product.id }}">
+  <div class="d-flex gap-xs flex-1">
+    <div class="product-compare__media p-relative rad-s h-fit-content o-hidden">
+      {% render 'image', image_item: media, ratio: ratio %}
+    </div>
+    <div class="product-compare__info flex-1">
+      <span class="fs-body-s d-block mb-2xs color-text-60 f-extra">{{- product.vendor -}}</span>
+      <a href="{{ product.url }}" class="wb-break-word h6 d-block m-zero fs-heading-m component-heading ele-focus-visible">{{- product.title | escape -}}</a>
+      {% render 'product-price', product: product, target: product.selected_or_first_available_variant %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product compare",
+  "tag": "section",
+  "class": "section-product-compare"
+}
+{% endschema %}

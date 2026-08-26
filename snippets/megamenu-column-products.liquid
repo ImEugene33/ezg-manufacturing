@@ -1,0 +1,53 @@
+{% comment %}
+  Renders one product panel per collection-linked item in a column-style megamenu.
+  Only one panel is visible at a time (js-tab-content, toggled by the tab-component
+  wrapping this snippet and megamenu-column together) — hovering a level-2 link that
+  points to a collection swaps in that collection's first 4 products.
+
+  Accepts:
+  - block: {Object} The megamenu block
+  - links: {Array} The level-2 links (same list passed to megamenu-column)
+
+  Usage:
+    {% render 'megamenu-column-products', block: block_megamenu, links: link.links %}
+{% endcomment %}
+{%- liquid
+  assign product_placeholder = 'product-1' | placeholder_svg_tag: 'placeholder media of-cover w-100 h-100 d-block'
+-%}
+<div class="megamenu-column-products d-none d-block-lg flex-1">
+  {%- for childlink in links -%}
+    {%- liquid
+      assign target_collection = blank
+      if childlink.type == 'collection_link'
+        assign target_collection = childlink.object
+      elsif childlink.url contains '/collections/'
+        assign collection_handle = childlink.url | split: '/collections/' | last | split: '/' | first | split: '?' | first
+        assign target_collection = collections[collection_handle]
+      endif
+    -%}
+    {%- if target_collection != blank -%}
+      <div class="megamenu-column-products-panel js-tab-content d-flex " id="megamenu-products-{{ block.id }}-{{ forloop.index }}">
+        {%- for product in target_collection.products limit: 4 -%}
+          {%- liquid
+            assign product_image = product_placeholder
+            if product.featured_image
+              assign product_image = product.featured_image | image_url: width: 420 | image_tag: widths: '210, 420', sizes: '210px', alt: product.featured_image.alt | default: product.title, class: 'media of-cover w-100', loading: 'lazy'
+            endif
+          -%}
+          <a href="{{- product.url -}}" class="megamenu-product-card d-flex fd-column gap-xs flex-1" aria-label="{{ product.title | escape }}">
+            <div class="megamenu-product-card__media p-relative">
+              {%- render 'image', ratio: '1', image_item: product_image, image_wrap_classes: 'rad-s' -%}
+            </div>
+            <div class="megamenu-product-card__content d-flex fd-column gap-3xs">
+              <span class="megamenu-product-card__title fs-body-l color-text-60">{{- product.title -}}</span>
+              {%- render 'product-price', product: product, target: product, price_class: 'megamenu-product-card__price fs-body-s color-text-60' -%}
+              {%- if product.description != blank -%}
+                <p class="megamenu-product-card__description card__excerpt o-hidden hide-empty ">{{- product.description | strip_html -}}</p>
+              {%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>

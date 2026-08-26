@@ -1,0 +1,42 @@
+{%- if block.settings.title != blank -%}
+  <h3 class="capability-columns__column-title" {{ block.shopify_attributes }} style="color: {{ section.settings.accent_color | default: '#5b7f95' }};">{{ block.settings.title }}</h3>
+{%- endif -%}
+
+{% stylesheet %}
+  .capability-columns__column-title {
+    margin: 0 0 0px;
+    font-family: "Helvetica Neue";
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.15;
+    letter-spacing: 0.72px;
+    text-transform: uppercase;
+  }
+  @media screen and (min-width: 768px) {
+    .capability-columns__column-title {
+      font-size: 20px;
+      line-height: 23px;
+      letter-spacing: 0.8px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Title",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Column Title"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Title"
+    }
+  ]
+}
+{% endschema %}

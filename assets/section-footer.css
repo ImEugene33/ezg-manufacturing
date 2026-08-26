@@ -1,0 +1,331 @@
+/* Footer */
+.footer-section,
+.footer-section *,
+.footer-section *::before,
+.footer-section *::after {
+  box-sizing: border-box;
+}
+.footer-section a {
+  color: inherit;
+  text-decoration: none;
+}
+.footer-section button {
+  font: inherit;
+  color: inherit;
+}
+.footer-section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.footer-section {
+  color: var(--color-normal-text);
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.footer-section__container {
+  max-width: var(--container-width);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ---- Top area: brand (logo + certification badge) + nav (contact + menus) ---- */
+.footer-section__top {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "logo"
+    "nav"
+    "badge";
+  row-gap: 32px;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__top {
+    grid-template-columns: 280px 1fr;
+    grid-template-areas:
+      "logo nav"
+      "badge nav";
+    column-gap: 40px;
+    row-gap: 32px;
+    align-items: start;
+  }
+}
+
+.footer-section__logo {
+  grid-area: logo;
+  display: block;
+  max-width: 220px;
+  margin: 0 auto;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__logo {
+    max-width: 280px;
+    margin: 0;
+  }
+}
+.footer-section__logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.footer-section__badge {
+  grid-area: badge;
+  justify-self: center;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__badge {
+    justify-self: start;
+  }
+}
+.footer-section__badge img {
+  display: block;
+  width: 69px;
+  height: auto;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__badge img {
+    width: 52px;
+  }
+}
+
+.footer-section__nav {
+  grid-area: nav;
+  display: flex;
+  flex-direction: column;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 40px;
+    row-gap: 32px;
+  }
+}
+
+/* Column shared by contact info + menu blocks */
+.footer-section__col {
+  display: flex;
+  flex-direction: column;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__col {
+    flex: 0 1 auto;
+    min-width: 150px;
+  }
+}
+
+/* Mobile accordion look: border rows, chevron toggle */
+.footer-section__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 4px;
+  border: 0;
+  border-top: 1px solid #747474;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.footer-section__col:last-child .footer-section__trigger {
+  border-bottom: 1px solid #747474;
+}
+.footer-section__col:first-child .footer-section__trigger {
+  border-top: 0;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__trigger {
+    padding: 0;
+    border: 0 !important;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.footer-section__col--contact .footer-section__trigger {
+  display: flex;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__col--contact .footer-section__trigger {
+    display: none;
+  }
+}
+
+.footer-section__trigger .toggle__icon {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  color: inherit;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__trigger .toggle__icon {
+    display: none;
+  }
+}
+
+.footer-section__list {
+  list-style: none;
+  padding: 0 4px;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__list {
+    padding: 0;
+  }
+}
+
+.footer-section__col--contact .region-content {
+  padding: 0 4px 16px;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__col--contact .region-content {
+    padding: 0;
+  }
+}
+
+/* Mobile accordion: animate open/close, and force the panel shut while its
+   trigger says collapsed, regardless of what default state the base
+   region-content CSS provides. Self-releases the moment JS flips
+   aria-expanded to "true". Scoped to mobile only — desktop always shows
+   the content and must never be clipped. */
+@media only screen and (max-width: 1195px) {
+  .footer-section__col .region-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  }
+  .footer-section__trigger[aria-expanded="false"] + .region-content {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .footer-section__trigger[aria-expanded="true"] + .region-content {
+    max-height: 800px;
+  }
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__col .region-content {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+
+/* ---- Bottom bar: legal links, social icons, copyright ---- */
+.footer-section__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__bottom {
+    gap: 20px;
+  }
+}
+
+.footer-section__social {
+  order: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  list-style: none;
+}
+
+ul.footer-section__legal {
+  order: 2;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-section__mark {
+  order: 3;
+  margin-top: 20px;
+  display: block;
+  height: 36px;
+  width: auto;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__mark {
+    display: none;
+  }
+}
+
+.footer-section__copyright {
+  order: 4;
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.28px;
+  color: inherit;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1196px) {
+  .footer-section__bottom {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .footer-section__legal {
+    order: 1;
+    margin-top: 0;
+  }
+  .footer-section__social {
+    order: 2;
+  }
+  .footer-section__mark {
+    order: 3;
+  }
+  .footer-section__copyright {
+    order: 4;
+    flex: 0 0 100%;
+    margin-top: 0;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+}
+
+.footer-section__legal-link {
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.28px;
+  color: #796943;
+  text-decoration: underline !important;
+  transition: all 0.3s ease-in-out;
+}
+.footer-section__legal-link:hover {
+  opacity: 0.7;
+}
+@media only screen and (min-width: 1196px) {
+  .footer-section__legal-link {
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0;
+  }
+}
+
+.footer-section__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: inherit;
+  transition: all 0.3s ease-in-out;
+}
+.footer-section__social-link:hover {
+  opacity: 0.7;
+}
+.footer-section__social-link svg {
+  width: 100%;
+  height: 100%;
+}

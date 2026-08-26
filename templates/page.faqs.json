@@ -1,0 +1,173 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "faqs_NDejj9": {
+      "type": "faqs",
+      "blocks": {
+        "faq_item_GYJrRh": {
+          "type": "faq_item",
+          "repeater": "{{ page.metafields.custom.faqs.value }}",
+          "settings": {
+            "show_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "icon_color": "",
+            "heading_faq_item": "{{ block.repeater.question.value }}",
+            "description_faq_item": "{{ block.repeater.answer | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_GYJrRh"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading_text": "Find the answers you need",
+        "heading_size": "h3",
+        "description_text": "",
+        "one_item_expand": true,
+        "open_first_item": false,
+        "enable_contact_form": false,
+        "heading_contact_form": "Didn't find your answer?",
+        "description_contact_form": "<p>We're here to help! If you didn't find the answer you were looking for, feel free to reach out to our team. Contact us directly, and we'll make sure to assist you as soon as possible.</p>",
+        "button_label": "Send message",
+        "color_custom_form_background": "rgba(0,0,0,0)",
+        "color_custom_form_content": "rgba(0,0,0,0)",
+        "heading_alignment_desktop": "ta-center-md middle-md",
+        "content_ordering": "fd-row-sm",
+        "heading_alignment_mobile": "ta-left top-xs",
+        "content_ordering_mobile": "fd-column"
+      }
+    },
+    "divider_FTUtVM": {
+      "type": "divider",
+      "settings": {
+        "divider_color": "#e0e0e0"
+      }
+    },
+    "icon_with_text_tCbNFR": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_4zwnmd": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "box",
+            "custom_code": "",
+            "title": "Product",
+            "description": "<p>Everything you need to know about our clothing, quality, and care tips.</p>",
+            "label": "View details",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_PP9XdM": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "bag",
+            "custom_code": "",
+            "title": "Ordering & Delivery",
+            "description": "<p>Step-by-step guidance on placing, modifying, and tracking your orders.</p>",
+            "label": "View details",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_TtVERz": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "wallet",
+            "custom_code": "",
+            "title": "Payment",
+            "description": "<p>Details about accepted payment methods and secure checkout options.</p>",
+            "label": "View details",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_jNRnqK": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "gift",
+            "custom_code": "",
+            "title": "Vouchers & Gift Cards",
+            "description": "<p>Learn how to purchase, redeem, and use gift cards or vouchers.</p>",
+            "label": "View details",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_L6GdRD": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "cycle",
+            "custom_code": "",
+            "title": "Return & Refunds",
+            "description": "<p>Share information about your policies or services</p>",
+            "label": "View details",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_jR9cyD": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "infor",
+            "custom_code": "",
+            "title": "Company Information",
+            "description": "<p>Discover more about Normcore, our mission, and how to get in touch with us.</p>",
+            "label": "View Details",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_4zwnmd",
+        "icon_with_text_item_PP9XdM",
+        "icon_with_text_item_TtVERz",
+        "icon_with_text_item_jNRnqK",
+        "icon_with_text_item_L6GdRD",
+        "icon_with_text_item_jR9cyD"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "Help categories",
+        "heading_size": "h5",
+        "description": "",
+        "text_position": "fd-row",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "#000000",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "false",
+        "label": "",
+        "link": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faqs_NDejj9",
+    "divider_FTUtVM",
+    "icon_with_text_tCbNFR"
+  ]
+}

@@ -1,0 +1,263 @@
+{% doc %}
+  Renders a wrapper section
+
+  @param {section} section - The section object
+  @param {string} children - The children of the section
+{% enddoc %}
+
+{%- liquid
+  assign loading = 'lazy'
+  assign fetchpriority = 'auto'
+  assign decoding = 'async'
+
+  if section.index == 1
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+  endif
+
+  assign sht_mask_mb = section.settings.mobile_content_position | replace: '-xs', ''
+  assign sht_mask_desk = section.settings.desktop_content_position
+
+  assign size = '100vw'
+  if section.settings.section_image_width == 'max-width'
+    assign size = '(min-width: 1024px) calc(' | append: settings.container_max_width | append: 'px), 100vw'
+  endif
+
+  if section.settings.desktop_direction == 'fd-column-md'
+    assign desktop_direction_vertical = section.settings.desktop_direction | append: ' ' | append: section.settings.content_alignment_desktop_vertical | append: ' ' | append: section.settings.content_position_desktop_vertical
+    assign sht_mask_desk = section.settings.content_position_desktop_vertical
+    if sht_mask_desk == 'center-md'
+      if section.settings.content_alignment_desktop_vertical contains 'left'
+        assign sht_mask_desk = 'center-left-md'
+      elsif section.settings.content_alignment_desktop_vertical contains 'right'
+        assign sht_mask_desk = 'center-right-md'
+      endif
+    endif
+    if sht_mask_desk == 'between-md'
+      if section.settings.content_alignment_desktop_vertical contains 'left'
+        assign sht_mask_desk = 'between-left-md'
+      elsif section.settings.content_alignment_desktop_vertical contains 'right'
+        assign sht_mask_desk = 'between-right-md'
+      endif
+    endif
+  endif
+
+  if section.settings.mobile_direction == 'fd-column'
+    assign mobile_direction_vertical = section.settings.mobile_direction | append: ' ' | append: section.settings.content_alignment_mobile_vertical | append: ' ' | append: section.settings.content_position_mobile_vertical
+    assign sht_mask_mb = section.settings.content_position_mobile_vertical | replace: '-xs', ''
+    if sht_mask_mb == 'center'
+      if section.settings.content_alignment_mobile_vertical contains 'left'
+        assign sht_mask_mb = 'center-left'
+      elsif section.settings.content_alignment_mobile_vertical contains 'right'
+        assign sht_mask_mb = 'center-right'
+      endif
+    endif
+    if sht_mask_desk == 'between'
+      if section.settings.content_alignment_mobile_vertical contains 'left'
+        assign sht_mask_desk = 'between-left'
+      elsif section.settings.content_alignment_mobile_vertical contains 'right'
+        assign sht_mask_desk = 'between-right'
+      endif
+    endif
+  endif
+
+  if section.settings.desktop_direction == 'fd-row-md'
+    assign desktop_direction_horizontal = section.settings.desktop_direction | append: ' ' | append: section.settings.content_alignment_desktop_horizontal | append: ' ' | append: section.settings.content_position_desktop_horizontal
+    assign sht_mask_desk = section.settings.content_position_desktop_horizontal
+    if sht_mask_desk == 'middle-md'
+      if section.settings.content_alignment_desktop_horizontal contains 'left'
+        assign sht_mask_desk = 'center-left-md'
+      elsif section.settings.content_alignment_desktop_horizontal contains 'right'
+        assign sht_mask_desk = 'center-right-md'
+      endif
+    endif
+    if section.settings.content_alignment_desktop_horizontal == 'between-md'
+      if section.settings.content_position_desktop_horizontal contains 'top'
+        assign sht_mask_desk = 'top-md'
+      elsif section.settings.content_position_desktop_horizontal contains 'bottom'
+        assign sht_mask_desk = 'bottom-md'
+      endif
+    endif
+  endif
+
+  if section.settings.mobile_direction == 'fd-row'
+    assign mobile_direction_horizontal = section.settings.mobile_direction | append: ' ' | append: section.settings.content_alignment_mobile_horizontal | append: ' ' | append: section.settings.content_position_mobile_horizontal
+    assign sht_mask_mb = section.settings.content_position_mobile_horizontal | replace: '-xs', ''
+    if sht_mask_mb == 'middle'
+      if section.settings.content_alignment_mobile_horizontal contains 'left'
+        assign sht_mask_mb = 'center-left'
+      elsif section.settings.content_alignment_mobile_horizontal contains 'right'
+        assign sht_mask_mb = 'center-right'
+      endif
+    endif
+    if section.settings.content_alignment_mobile_horizontal == 'between'
+      if section.settings.content_position_mobile_horizontal contains 'top'
+        assign sht_mask_mb = 'top'
+      elsif section.settings.content_position_mobile_horizontal contains 'bottom'
+        assign sht_mask_mb = 'bottom'
+      endif
+    endif
+  endif
+
+  assign video_type = ''
+  assign video_id = ''
+  assign local_video_background = ''
+  assign class_video_local = 'w-100 h-100 of-cover'
+  assign enable_loop = section.settings.enable_video_loop
+  assign iframe_video = 'video-iframe'
+
+  if section.settings.background_media == 'video'
+    if section.settings.video_source == 'shopify_hosted' and section.settings.shopify_hosted != blank
+      assign video_type = 'local_video'
+      assign local_video_background = 'video_background'
+      assign class_video_local = 'w-100 h-100 of-cover video_local video-iframe'
+    elsif section.settings.video_source == 'external' and section.settings.external_video != blank
+      assign external_video_url = section.settings.external_video
+      if external_video_url contains 'youtube.com' or external_video_url contains 'youtu.be'
+        assign video_type = 'youtube'
+        if external_video_url contains 'youtu.be/'
+          assign video_id = external_video_url | split: 'youtu.be/' | last | split: '?' | first
+        elsif external_video_url contains 'watch?v='
+          assign video_id = external_video_url | split: 'watch?v=' | last | split: '&' | first
+        elsif external_video_url contains 'embed/'
+          assign video_id = external_video_url | split: 'embed/' | last | split: '?' | first
+        endif
+      elsif external_video_url contains 'vimeo.com'
+        assign video_type = 'vimeo'
+        assign video_id = external_video_url | split: '/' | last | split: '?' | first
+      endif
+    endif
+  endif
+
+  if section.settings.background_media == 'image'
+    assign desktop_bg_image = 'hero-apparel-1' | placeholder_svg_tag: 'placeholder w-100 h-100 of-cover'
+  endif
+
+  if section.settings.mobile_background_image and section.settings.background_media == 'image'
+    assign mobile_image_alt = section.settings.mobile_background_image.alt | default: section.settings.mobile_background_image.image | split: '/' | last
+    assign mobile_bg_image = section.settings.mobile_background_image | image_url: width: section.settings.mobile_background_image.width | image_tag: widths: '320, 450, 550, 750, 950, 1024', sizes: size, alt: mobile_image_alt, class: 'js-image-lazy-mobile d-none-md d-block w-100 h-100 of-cover p-absolute top-0', loading: loading, fetchpriority: fetchpriority
+  endif
+
+  if section.settings.desktop_background_image and section.settings.background_media == 'image'
+    assign desktop_image_alt = section.settings.desktop_background_image.alt | default: section.settings.desktop_background_image.image | split: '/' | last
+    assign desktop_bg_image = section.settings.desktop_background_image | image_url: width: section.settings.desktop_background_image.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000', sizes: size, alt: desktop_image_alt, class: 'js-image-lazy w-100 h-100 of-cover', loading: loading, fetchpriority: fetchpriority
+  endif
+
+  assign overlay_opacity = section.settings.section_overlay_opacity | divided_by: 100.0
+  unless section.settings.section_mask_overlay_color.alpha == 0.0 or section.settings.section_mask_overlay_color == blank
+    assign mask_color = section.settings.section_mask_overlay_color | replace: 'rgba(0,0,0,0)', 'inherit' | color_modify: 'alpha', overlay_opacity
+    assign overlay_mask_color = '--color-mask: ' | append: mask_color | append: ';'
+  endunless
+  unless section.settings.section_content_overlay_color.alpha == 0.0 or section.settings.section_content_overlay_color == blank
+    assign overlay_content_color = 'color: ' | append: section.settings.section_content_overlay_color | append: ';'
+  endunless
+
+  if section.settings.desktop_height == 'auto' or section.settings.desktop_height == 'adapt_img'
+    assign desktop_content_height = 'unset'
+  else
+    assign desktop_content_height = 'calc(' | append: section.settings.desktop_height | append: ' - var(--padding-top) - var(--padding-bottom))'
+  endif
+
+  if section.settings.mobile_height == 'auto' or section.settings.mobile_height == 'adapt_img'
+    assign mobile_content_height = 'unset'
+  else
+    assign mobile_content_height = 'calc(' | append: section.settings.mobile_height | append: ' - var(--padding-top) - var(--padding-bottom))'
+  endif
+
+  assign min_height_mobile = section.settings.mobile_height
+  assign min_height_desktop = section.settings.desktop_height
+
+  if min_height_mobile == 'adapt_img'
+    assign min_height_mobile = 100 | divided_by : section.settings.mobile_background_image.aspect_ratio | append: 'vw'
+    if section.settings.mobile_background_image == blank
+      assign min_height_mobile = 100 | divided_by : section.settings.desktop_background_image.aspect_ratio | append: 'vw'
+    endif
+    if section.settings.mobile_background_image == blank and section.settings.desktop_background_image == blank
+      assign min_height_mobile = '500px'
+    endif
+  endif
+
+  if min_height_desktop == 'adapt_img'
+    assign min_height_desktop = ''
+    if section.settings.section_image_width == 'full-width'
+      assign min_height_desktop = 100 | divided_by : section.settings.desktop_background_image.aspect_ratio | append: 'vw'
+    elsif section.settings.section_image_width == 'stretch'
+      assign min_height_desktop = 'calc((100vw - 2*var(--fix-m))/IMAGE_RATIO_DESK)' | replace: 'IMAGE_RATIO_DESK', section.settings.desktop_background_image.aspect_ratio
+    else
+      assign min_height_desktop = settings.container_max_width | divided_by: section.settings.desktop_background_image.aspect_ratio | append: 'px'
+    endif
+    if section.settings.desktop_background_image == blank
+      assign min_height_desktop = '500px'
+    endif
+  endif
+-%}
+<div class="section section-content ctnr m-auto color-{{- section.settings.color_scheme }} background section-promotion--{{ section.settings.section_image_width }} sht-mask sht-mask--{{ sht_mask_desk }} sht-mask--{{ sht_mask_mb }} p-relative o-hidden"
+      data-ui-component="Custom Section" role="region"
+      style="{{ overlay_mask_color }}
+            {{ overlay_content_color }}
+            --overlay: {{ overlay_opacity }};
+            --mh-xs: {{- min_height_mobile -}};
+            --mh-md: {{- min_height_desktop -}};
+            --padding-top: {{- section.settings.padding_top -}}px;
+            --padding-bottom: {{- section.settings.padding_bottom -}}px;">
+  <div class="section-content__background p-absolute inset o-hidden">
+    {% if section.settings.background_media == 'image' %}
+      {{ mobile_bg_image }}
+      {{ desktop_bg_image }}
+    {% elsif section.settings.background_media == 'video' and video_type != blank %}
+      <sht-load-video class="promotion-section__background {{ local_video_background }} inset p-absolute w-100 h-100 js-animate" data-video-type="{{ video_type }}" data-video-id="{{ video_id }}" data-video-play="true" data-video-mute="true">
+        {%- if section.settings.video_source == 'shopify_hosted' and section.settings.shopify_hosted != blank -%}
+          {%- liquid
+            capture local_video
+              echo section.settings.shopify_hosted | video_tag: autoplay: true, controls: false, loop: enable_loop, preload: 'none', class: class_video_local, loading: loading, fetchpriority: fetchpriority, decoding: decoding, image_size: '1920x'
+            endcapture
+            assign preview_image = section.settings.shopify_hosted.preview_image
+            assign preview_alt_text = preview_image.src | split: '/' | last | split: '.' | first | default: 'Video preview'
+            assign preview_image_text = '<img loading="lazy" decoding="async" fetchpriority="low" alt="' | append: preview_alt_text | append: '"'
+          -%}
+          {{- local_video | replace: '<source src="', '<source data-src="' | replace: '<img', preview_image_text -}}
+        {%- elsif section.settings.video_source == 'external' and video_id != blank -%}
+          <iframe tabindex="-1" title="{{ video_type | capitalize }} video" 
+            class="pe-none {{ iframe_video }} js-local-video w-100 h-100" 
+            allow="autoplay; encrypted-media"
+            loading="{{ loading }}"
+            fetchpriority="{{ fetchpriority }}"
+            decoding="{{ decoding }}"
+            data-src="
+            {%- if video_type == 'youtube' -%}
+              https://www.youtube.com/embed/{{ video_id }}?version=3&loop={{ enable_loop }}&controls=0&rel=0&showinfo=0&autoplay=1&enablejsapi=1&mute=1&playlist={{ video_id }}
+            {%- elsif video_type == 'vimeo' -%}
+              https://player.vimeo.com/video/{{ video_id }}?api=1&background=1&autoplay=1&loop={{ enable_loop }}&title=0&byline=0&portrait=0&controls=0&muted=1
+            {%- endif -%}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        {%- endif -%}
+        
+        {% if section.settings.show_video_controllers and video_type != blank %}
+          <div class="js-video-controller video-controller p-absolute zi-2 d-flex gap-3xs middle-xs rad-p video-controller--{{ section.settings.video_controller_color }}">
+            <button class="btn btn-icon-m bg-transparent js-btn-play" aria-label="Play or Pause">
+              {% render 'icon-pause', class: 'icon-control icon-pause' %}
+              {% render 'icon-play', class: 'icon-control icon-play' %}
+            </button>
+            <button class="btn btn-icon-m bg-transparent js-btn-mute" aria-label="Mute or Unmute">
+              {% render 'icon-sound-off', class: 'icon-control icon-sound-off' %}
+              {% render 'icon-sound-high', class: 'icon-control icon-sound-high' %}
+            </button>
+          </div>
+        {% endif %}
+      </sht-load-video>
+    {% endif %}
+  </div>
+  <div class="section-content__inner-wrapper p-relative zi-1"
+        style="--mh-xs: {{- mobile_content_height -}};
+              --mh-md: {{- desktop_content_height -}};">
+    <div class="section-content__inner w-100 h-100 d-flex {{ desktop_direction_vertical }} {{ mobile_direction_vertical }} {{ desktop_direction_horizontal }} {{ mobile_direction_horizontal }}"
+        style="--gap-md: {{- section.settings.desktop_gap -}}px;
+              --gap: {{- section.settings.mobile_gap -}}px;"
+    >
+      {{ children }}
+    </div>
+  </div>
+</div>

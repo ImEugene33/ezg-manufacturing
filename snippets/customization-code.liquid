@@ -1,0 +1,36 @@
+{%- liquid
+  assign type = block.settings.type
+  assign value = 'general.label.yes' | t
+  assign selected_value = block.settings.value_when_selected |  escape |  default: value
+-%}
+{%- if block.settings.label != blank -%}
+  <div class="customization-code-container js-customization-code-type" data-customization-code-type="{{ type }}">
+    {%- if type == 'text' -%}
+      <label class="field__label d-block p-relative fs-body-m js-customization-code-label" for="customCodeField-{{ section.id }}-{{ block.id }}">{{- block.settings.label |  escape -}}</label>
+      {%- if block.settings.use_as_textarea -%}
+        <textarea
+          rows="5"
+          id="customCodeField-{{ section.id }}-{{ block.id }}"
+          class="textarea field__text field--focus field--hover fs-body-m w-100 js-customization-code-input"
+          name="customCodeText-{{ section.id }}-{{ block.id }}"></textarea>
+      {%- else -%}
+        <input
+        class="field__text field--focus field--hover fs-body-m w-100 js-customization-code-input"
+        type="text"
+        id="customCodeField-{{ section.id }}-{{ block.id }}"
+        name="customCodeText-{{ section.id }}-{{ block.id }}">
+      {%- endif -%}
+    {%- else -%}
+      <span class="field__checkbox fs-body-m d-flex middle-xs p-relative w-fit-content">
+        <span class="customization-code-icon p-absolute inset"></span>
+        <input id="customCodeField-{{ section.id }}-{{ block.id }}" class="input__checkbox js-customization-code-input p-absolute visually-hidden" type="checkbox" name="customCodeCheckbox-{{ section.id }}-{{ block.id }}" data-selected-value="{{ selected_value }}">
+        <span class="checkbox-icon d-flex middle-xs center-xs p-absolute inset">
+          {%- render 'icon-check', class: 'icon icon-fix-m input__checkbox__icon' -%}
+        </span>
+        <label class="us-none pl-2xl zi-1 c-pointer js-customization-code-label" for="customCodeField-{{ section.id }}-{{ block.id }}">
+          {{- block.settings.label |  escape -}}
+        </label>
+      </span>
+    {%- endif -%}
+  </div>
+{%- endif -%}

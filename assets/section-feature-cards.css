@@ -1,0 +1,120 @@
+/* Feature Cards */
+.feature-cards,
+.feature-cards *,
+.feature-cards *::before,
+.feature-cards *::after {
+  box-sizing: border-box;
+}
+.feature-cards {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.feature-cards__container {
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 16px;
+}
+@media screen and (min-width: 768px) {
+  .feature-cards__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .feature-cards__grid {
+    grid-template-columns: repeat(var(--feature-cards-columns-desktop, 3), 1fr);
+    gap: 24px;
+  }
+}
+
+.feature-cards__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+  padding: 16px;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  text-align: left;
+}
+
+.feature-cards__card--image {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.feature-cards__image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--feature-cards-aspect-ratio, 1.1);
+  overflow: hidden;
+  background-color: #ececec;
+}
+.feature-cards__image-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.feature-cards__icon {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 16px;
+  color: var(--color-normal-text);
+}
+.feature-cards__icon svg {
+  display: block;
+  width: auto;
+  height: 29px;
+  max-width: 100%;
+}
+
+.feature-cards__title {
+  margin: 0 0 8px;
+  color: var(--color-normal-text);
+  font-family: "Helvetica Neue";
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: 0.72px;
+  text-transform: uppercase;
+}
+@media screen and (min-width: 768px) {
+  .feature-cards__title {
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.8px;
+  }
+}
+
+.feature-cards__text {
+  margin: 0;
+  color: var(--color-normal-text);
+  font-family: "Helvetica Neue";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.28px;
+}
+.feature-cards__text p {
+  margin: 0;
+}
+.feature-cards__text p + p {
+  margin-top: 8px;
+}
+.feature-cards__text a {
+  color: inherit;
+}

@@ -1,0 +1,31 @@
+{%- liquid
+  assign image_loading = image_loading | default: 'lazy'
+  assign fetchpriority = fetchpriority | default: 'low'
+-%}
+<sht-lazy-loader class="card mini-card card-animate card--border w-100 p-relative p-xs rad-m o-hidden d-flex gap-xs h-100" data-loading="{{ image_loading }}">
+  {%- liquid
+    assign image_width = '320, 450, 550, 750'
+    assign sizes = sizes | default: '(min-width: 769px) calc(' | append:  settings.container_max_width | append: 'px / 4), (min-width: 459px) calc(100vw/2), 100vw'
+    assign article_placeholder = 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder media of-cover h-100 w-100 d-block'
+    assign article_image = article_placeholder
+    assign article_image = article.image.src | image_url: width: article.image.width | image_tag: widths: image_width, sizes: sizes, alt: article.title, class: 'js-image-lazy media of-cover w-100', loading: image_loading, fetchpriority: fetchpriority
+  -%}
+  <a aria-label="{{ article.title | escape }}" href="{{ article.url }}" class="p-absolute w-100 h-100 zi-3 inset ele-focus-visible"></a>
+  <div class="p-relative card__media mini-card-article__media ratio o-hidden">
+    {% render 'image', ratio: image_ratio, image_item: article_image, image_wrap_classes: 'rad-s' %}
+  </div>
+  <div class="card__content wb-break-word flex-1">
+    <div class="d-grid gap-2xs flex-1 ta-left">
+      <ul class="ls-none d-flex gap-3xs mini-card-article__tag fw-wrap hide-empty p-zero">
+        {%- for tag in article.tags -%}
+          <li class="fs-heading-xs component-heading f-extra">
+            {{- tag | link_to_tag: tag | replace: '<a', '<a class="tag"' -}}
+          </li>
+        {%- endfor -%}
+      </ul>
+      <h3 class="fs-heading-s component-heading m-zero">
+        <a aria-label="{{ article.title | escape }}" class="ele-focus-visible" href="{{ article.url }}">{{ article.title }}</a>
+      </h3>
+    </div>
+  </div>
+</sht-lazy-loader>

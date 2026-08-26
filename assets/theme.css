@@ -1,0 +1,81 @@
+/* Cart Discount Component */
+.sht-cart-discount {
+  width: 100%;
+}
+
+.sht-cart-discount__form {
+  position: relative;
+}
+
+.sht-cart-discount__form.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  bottom: 0;
+  background-color: rgba(var(--color-base-background-rgb), 0.5);
+  z-index: 1;
+}
+
+.sht-cart-discount__input {
+  min-height: 4.4rem;
+  padding-inline-end: 10rem;
+}
+
+.sht-cart-discount__button {
+  position: absolute;
+  top: 0.4rem;
+  inset-inline-end: 0.4rem;
+  z-index: 2;
+}
+
+.sht-cart-discount__error {
+  color: rgb(var(--color-error-message-rgb));
+  margin-top: 0.5rem;
+  font-size: var(--font-size-body-xs);
+}
+
+.sht-cart-discount__pills {
+  margin-top: 1rem;
+}
+
+.sht-cart-discount__pill {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(var(--color-base-accent-rgb), 0.1);
+  color: rgb(var(--color-foreground-rgb));
+  border-radius: var(--radius-small);
+  padding: 0.5rem 1rem;
+}
+
+.sht-cart-discount__code {
+  font-size: var(--font-size-body-xs);
+  margin-inline-end: 0.5rem;
+}
+
+/* Cart Summary Discounts */
+.sht-cart-summary__discounts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sht-cart-summary__discount-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-m);
+}
+
+.sht-cart-summary__discount-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3xs);
+  font-size: var(--font-size-body-s);
+  color: rgba(var(--color-foreground-rgb), 0.8);
+}
+
+.sht-cart-summary__discount-icon {
+  display: flex;
+  font-size: 0;
+} 

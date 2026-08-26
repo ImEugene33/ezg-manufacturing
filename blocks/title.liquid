@@ -1,0 +1,30 @@
+{%- liquid
+  assign title_html = block.settings.title
+  if title_html != blank
+    assign title_html = title_html | replace: '<p>', '' | replace: '</p>', ''
+  endif
+-%}
+
+{%- if title_html != blank -%}
+  <h2 class="title-block__heading h2" {{ block.shopify_attributes }}>{{ title_html }}</h2>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:general.settings.title.label",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:general.settings.title.label",
+      "default": "Add a title"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.settings.title.label",
+      "category": "t:general.typography"
+    }
+  ]
+}
+{% endschema %}

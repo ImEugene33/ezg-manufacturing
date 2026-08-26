@@ -1,0 +1,123 @@
+{%- capture sizes -%}
+  (min-width: 1024px) calc({{ settings.container_max_width | minus: 100 | times: 0.7 | round }}px), 100vw
+{%- endcapture -%}
+
+{%- liquid
+
+  assign loading = "lazy"
+  assign fetchpriority = "auto"
+
+  if is_layout_grid and current_index <= 5 or is_first_image and section.index == 1
+    assign loading = "eager"
+    assign fetchpriority = "high"
+  endif
+
+  assign image_element = place_holder
+  assign image_element = media | image_url: width: media.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000, 2400', sizes: sizes , alt: media.alt, class: 'js-image-lazy media of-cover w-100 h-100 js-media-image', loading: loading, fetchpriority: fetchpriority
+  assign hide_variant_image_class = ''
+  if hide_variant_image
+    assign hide_variant_image_class = 'd-none'
+  endif
+
+  assign model_ratio = ratio
+  assign image_classes = 'w-100 h-100'
+  if ratio == 'auto'
+    assign ratio = media.aspect_ratio
+    assign image_classes = 'w-100 h-100 mah-60v mah-unset-sm ratio-auto'
+    assign model_ratio = '1'
+    assign option_adapt_image = 'option_adapt_image'
+
+  endif
+-%}
+
+{%- capture icon_play -%}
+  <button aria-label="{{ 'accessibility.play_button' | t }}" class="btn btn-outline c-pointer p-absolute center-middle zi-1 btn-state-media">
+    {% render 'icon-play', class: 'icon icon-fix-3xl' %}
+  </button>
+{%- endcapture -%}
+<sht-carousel-itm class="js-carousel-item p-relative rad-l scrollable-aln-start fg-1 fs-0 p-zero product-slideshow__item product-slideshow__item--{{ media.media_type }} js-product-slideshow-item {{ option_adapt_image }} {% if is_first_image %} d-block {% else %} {{ hide_variant_image_class }} {% endif %}" data-media-id="{{ section.id }}-{{ media.id }}" role="listitem" tabindex="-1">
+  <sht-prd-slideshow-itm class="w-100 h-100 o-hidden d-block-md" data-hide-variant-image="{{ hide_variant_image }}"
+    {% if media.media_type == 'model' %}
+      style="aspect-ratio: {{ model_ratio }};"
+    {% else %}
+      style="--ratio: {{ ratio }}"
+    {% endif %}>
+    {%- case media.media_type -%}
+      {%- when 'image' -%}
+        <sht-zoom-media class="d-block media-zoom-container {% if section.settings.zoom_images %}open-zoom{% endif %}">
+          {%- if open_zoom_modal -%}
+            <button class="js-product-media-open-gallery-btn ele-focus-visible c-zoom-in p-relative d-block h-100 w-100 p-zero product-media-open-gallery-btn" data-gallery-dialog-id="dialogProductGallery{{ rand }}" data-dialog-media-id="{{ section.id }}-{{ media.id }}" type="button" aria-haspopup="dialog" aria-label="{{ 'accessibility.open_media_modal' | t: index: product_media_index }}" style="background-color: {{ media_background }};">
+              <span class="p-absolute zi-1 open-gallery-icon js-gallery-icon">
+                <span class="btn btn-icon-m btn-secondary">
+                  {% render 'icon-expand', class: 'icon icon-fix-m' %}
+                </span>
+              </span>
+                {% render 'image', image_item: image_element, ratio: ratio, image_wrap_classes: 'w-100 h-100 js-media-wrapper', image_classes: image_classes, class: img_class %}
+            </button>
+          {%- else -%}
+            <div style="background-color: {{ media_background }};">
+              {% render 'image', image_item: image_element, ratio: ratio, image_wrap_classes: 'w-100 h-100', image_classes: image_classes, class: img_class %}
+            </div>
+          {%- endif -%}
+          <div class="js-zoom-wrapper zoom-wrapper rad-l d-none">
+            <div class="js-zoom-view media-zoom-view" style="background-color: {{ media_background }};">
+              {% render 'image', image_item: image_element, ratio: ratio, image_wrap_classes: 'w-100 h-100', image_classes: 'w-100 h-100', class: 'of-cover w-100 h-100' %}
+            </div>
+          </div>
+        </sht-zoom-media>
+      {%- when 'external_video' -%}
+        <sht-prd-media-itm-deferred-video data-section-id="{{ section.id }}" data-id-video="{{ media.external_id }}" data-type="external_video" class="js-product-media-deferred-video media-type--video w-100 h-100 d-flex middle-xs center-xs">
+          <div class="js-product-media-item-deferred-video-image w-100 h-100 p-relative">
+            {{ icon_play }}
+            {% render 'image', image_item: image_element, ratio: ratio, image_wrap_classes: 'w-100 h-100', image_classes: 'w-100 h-100' %}
+          </div>
+          <div class="js-media-item external-video h-100 w-100 d-none middle-xs center-xs" data-type={{ media.host }} id="shtVideo-{{ section.id }}-{{ media.external_id }}" style="aspect-ratio: {{ ratio }};"></div>
+        </sht-prd-media-itm-deferred-video>
+      {%- when 'video' -%}
+        {%- liquid
+          assign internal_class = 'w-100 js-media-item-video media-wrapper background-video'
+          if media.aspect_ratio <= 1
+            assign internal_class = 'h-100 w-100 js-media-item-video media-wrapper background-video'
+          endif
+        -%}
+        <sht-prd-media-itm-deferred-video class="js-product-media-deferred-video media-type--video w-100 h-100 d-flex middle-xs center-xs">
+          <div class="js-product-media-item-deferred-video-image w-100 h-100 p-relative">
+            {{ icon_play }}
+            {% render 'image', image_item: image_element, ratio: ratio, image_wrap_classes: 'w-100 h-100', image_classes: 'w-100 h-100' %}
+          </div>
+          <template>
+            {{- media | video_tag: autoplay: true, muted: false, controls: true, preload: 'none', class: internal_class -}}
+          </template>
+        </sht-prd-media-itm-deferred-video>
+      {%- when 'model' -%}
+        <sht-prd-media-itm-model class="js-product-media-deferred-model w-100 h-100 d-flex middle-xs center-xs">
+          <div class="js-product-media-item-model-image w-100 h-100 d-flex center-xs middle-xs">
+            {% render 'image', image_item: image_element, ratio: ratio, image_wrap_classes: 'w-100' %}
+          </div>
+          <template>
+            {%- liquid
+              echo media | media_tag: image_size: '1024x', toggleable: true
+            -%}
+          </template>
+        </sht-prd-media-itm-model>
+        {% if xr_button %}
+          <button
+            class="btn btn-secondary js-btn-xr btn-l no-js-hidden middle-x p-absolute product__xr-btn"
+            type="button"
+            aria-label="{{ 'products.product.xr_button_label' | t }}"
+            data-shopify-xr
+            data-shopify-model3d-id="{{ media.id }}"
+            data-shopify-title="title"
+            data-shopify-xr-hidden
+          >
+            {{ 'products.product.xr_button' | t }}
+          </button>
+        {% endif %}
+
+        <button aria-label="{{ 'products.product.play_xr_button' | t }}" class="btn btn-outline btn-icon-3d js-btn-icon-3d c-pointer p-absolute center-middle zi-1 btn-state-media">
+          {% render 'icon-3d', class: 'icon icon-fix-3xl' %}
+        </button>
+
+    {%- endcase -%}
+  </sht-prd-slideshow-itm>
+</sht-carousel-itm>

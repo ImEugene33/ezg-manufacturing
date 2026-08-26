@@ -1,0 +1,41 @@
+{%- comment -%}
+    Renders linear progress bar for graph
+
+    Accepts:
+    - label: {String} Name of the graph.
+    - maximum_value: {Number - min: 1 - max: 10} Maximum value of the graph.
+    - product_value: {Number - min: 1 - max: 10} Product value for the graph.
+    - class: {String} Custom wrap css class.
+
+    Example usage:
+    {% render 'progress-linear',
+      label: Durability,
+      maximum_value: 5,
+      product_value: 2,
+      class: 'custom-graph'
+    %}
+{%- endcomment -%}
+{%- liquid
+  if product_value > maximum_value
+    assign product_value = maximum_value
+  endif
+  assign percentage = product_value | times: 100 | divided_by: maximum_value
+  assign custom_class = ''
+  unless custom_color.alpha == 0.0 or custom_color == blank
+    assign custom_color_background = custom_color | color_modify: 'alpha', 0.1
+    assign custom_color_fill = custom_color | color_to_rgb
+    assign custom_class = 'custom-color-progress'
+  endunless
+-%}
+<sht-progress-linear class="d-block w-100 {{ custom_class }} {{ class }}" style="--graph-color-background: {{ custom_color_background }}; --graph-color-fill: {{ custom_color_fill }};">
+  <span class="progress-linear-background d-block p-relative o-hidden rad-p">
+    <span class="progress-linear-value d-block js-progress" data-progress="{{ percentage }}"></span>
+  </span>
+  <span class="progress-content d-flex between-xs mt-2xs color-text gap-xs ta-left">
+    <span class="d-flex fs-body-m gap-3xs flex-1">
+      <p class="progress-label m-zero fw-500">{{ label }}</p>
+      {%- render 'icon-infor' | class: "progress-icon icon icon-fix-m" -%}
+    </span>
+    <span class="fs-body-s ws-nowrap">{{ product_value }}/{{ maximum_value }}</span>
+  </span>
+</sht-progress-linear>

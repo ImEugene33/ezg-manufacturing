@@ -1,0 +1,1022 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_G8JjUG": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_VPL7kW": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "EZG EQUIPMENT RESOURCES",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "subheading_xYLMar": {
+          "type": "subheading",
+          "settings": {
+            "subheading_text": "EQUIPMENT MANUALS AND LITERATURE"
+          }
+        },
+        "description_XWYrVF": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>We offer manuals on all of our equipment and accessories. We also have info sheets available for download. Below are the most up-to-date manuals. If a manual below is not applicable to your model number, please contact us at <a href=\"tel:18889716301\" title=\"tel:18889716301\">1-888-971-6301</a> for an earlier version of the manual.<br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_VPL7kW",
+        "subheading_xYLMar",
+        "description_XWYrVF"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 50,
+        "section_mask_overlay_color": "#000000",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/Hogtrax_action_final_2023-35-Large.jpg",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "adapt_img",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "multi_columns_DPdWrT": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_ddpVKj": {
+          "type": "image_column",
+          "settings": {
+            "title": "Masonry",
+            "description": "<p>Equipment Catalog</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_LPFaKG": {
+          "type": "image_column",
+          "settings": {
+            "title": "Fence",
+            "description": "<p>Equipment Catalog</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_dCMgni": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hardscape",
+            "description": "<p>Equipment Catalog</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_9jNbtR": {
+          "type": "image_column",
+          "settings": {
+            "title": "Precast",
+            "description": "<p>Equipment Catalog</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_YqrH63": {
+          "type": "image_column",
+          "settings": {
+            "title": "Refractory",
+            "description": "<p>Equipment Catalog</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_ddpVKj",
+        "image_column_LPFaKG",
+        "image_column_dCMgni",
+        "image_column_9jNbtR",
+        "image_column_YqrH63"
+      ],
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-dfd7f710-1c3c-4730-be7a-3884f4f918ee",
+        "heading": "EQUIPMENT CATALOGS",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-center center-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "multi_columns_LCEwhY": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_dLehzK": {
+          "type": "image_column",
+          "settings": {
+            "title": "Fencer's Cement Hog",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/06/18-210-FCH100rev060618.pdf\">FCH100 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/06/18-200-FCH50rev060618.pdf\">FCH50 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00641_FNC_Cement-Hog_Specification-Sheet_2024_vf.pdf\">Fencer’s Cement Hog Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_KbYzBr": {
+          "type": "image_column",
+          "settings": {
+            "title": "Fence Hog",
+            "description": "<ul><li><a href=\"http://ezgmfg.com/wp-content/uploads/2026/04/18-300-Fence-Hog-Manual-rev-003.pdf\" target=\"_blank\">FH08-36 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2026/04/18-300-Fence-Hog-Manual-rev-003.pdf\" target=\"_blank\">FH08-24 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2026/04/18-310-FHW-Fence-Hog%C2%AE-Manual-Rev-000.pdf\">FHW – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00631_FNC_FenceHog_Specification-Sheet_2024_vf.pdf\">Fence Hog Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_ryXTDk": {
+          "type": "image_column",
+          "settings": {
+            "title": "Mobile Mud Hog®",
+            "description": "<p>Mobile Mud Hog®</p><ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/09/18-745-MMH4-Mud-Hog.pdf\">MMH4 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-750-MMH9-Mud-Hog.pdf\">MMH9 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/12/18-740-MMH12-Manual-rev006.pdf\">MMH12 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-755-MMH20-Manual-rev004.pdf\">MMH20 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00642_FNC_Mobile-Mud-Hog_Specification-Sheet_2024_vf.pdf\">Mobile Mud Hogs Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_ynEJNf": {
+          "type": "image_column",
+          "settings": {
+            "title": "Barbwire Hog",
+            "description": "<p>Highlight your values, products, or services</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_34hTrb": {
+          "type": "image_column",
+          "settings": {
+            "title": "Stretch-N-Go Hog",
+            "description": "<p>Highlight your values, products, or services</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_dLehzK",
+        "image_column_KbYzBr",
+        "image_column_ryXTDk",
+        "image_column_ynEJNf",
+        "image_column_34hTrb"
+      ],
+      "disabled": true,
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "heading": "Fencing Equipment",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "multi_columns_gKrxA8": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_xnBafq": {
+          "type": "image_column",
+          "settings": {
+            "title": "Grout Hog® Info Sheet",
+            "description": "<p>Highlight your values, products, or services</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "text_only_column_Cp6BMH": {
+          "type": "text_only_column",
+          "settings": {
+            "title": "Grout Hog Manuals",
+            "description": "<ul><li>Grout Hog Info Sheet</li><li>GH75 - Manual</li><li>GPH75 - Manual</li><li>UGH75 - Manual</li><li>UGPH75 - Manual</li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_tcjUrF": {
+          "type": "image_column",
+          "settings": {
+            "title": "Mud Hog® Info Sheet",
+            "description": "",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "text_only_column_4nCGdf": {
+          "type": "text_only_column",
+          "settings": {
+            "title": "Mud Hog® Manuals",
+            "description": "<ul><li>MH9 - Manual</li><li>MH12 - Manual</li><li>MH20 - Manual</li></ul>",
+            "btn_label": "Explore more",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_xnBafq",
+        "text_only_column_Cp6BMH",
+        "image_column_tcjUrF",
+        "text_only_column_4nCGdf"
+      ],
+      "disabled": true,
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "Masonry Equipment",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "multi_columns_KixRRR": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_qxKPYJ": {
+          "type": "image_column",
+          "settings": {
+            "title": "Grout Hog®",
+            "description": "<ul><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/11/Grout-Hog-Spec-Sheet.pdf.pdf\">Grout Hog Info Sheet</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2019/04/GH75-Manual.pdf\">GH75 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2019/04/GPH75-GPHC75-Manual.pdf\">GPH75 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2019/05/UGH75-Manual.pdf\">UGH75- Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2019/05/UGPH75-UGPHC75-Manual.pdf\">UGPH75 – Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_3Q89Je": {
+          "type": "image_column",
+          "settings": {
+            "title": "Mud Hog®",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/05/00627_MAS_Mud-Hog_Sheet_2024_v2.pdf\">Mud Hog Info Sheet</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2018/06/18-610-MH-9-Manual-rev002.pdf\">MH9 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/02/18-700-MH12-Manual-rev013.pdf\">MH12 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/02/18-760-MH-20-Manual-rev012.pdf\">MH20 – Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_dzcW8y": {
+          "type": "image_column",
+          "settings": {
+            "title": "EZG Mixers®",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/05/00617_MAS_EZG-Mixer_Sheet_2024_v1.pdf\">EZG Mixer Info Sheet</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/09/18-100-EZG7_EZGE7-Manual-rev006.pdf\">EZG7 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/09/18-150-EZG9_EZGE9-Manual-rev004.pdf\">EZG9 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2018/02/EZG12-Manual.pdf\">EZG12 – Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_acpAhM": {
+          "type": "image_column",
+          "settings": {
+            "title": "Mobile Mud Hog®",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2018/07/Mobile-Mud-Hog-Mixers-June-2018-web.pdf\">Mobile Mud Hog Info Sheet</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/09/18-745-MMH4-Mud-Hog.pdf\">MMH4 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-750-MMH9-Mud-Hog.pdf\">MMH9 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/12/18-740-MMH12-Manual-rev006.pdf\">MMH12 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-755-MMH20-Manual-rev004.pdf\">MMH20 – Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_Pr6LG7": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hog Crusher®",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2018/07/Hog-Crusher-June-2018-web.pdf\">Hog Crusher Info Sheet</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2019/04/Hog-Crusher-Manual.pdf\">HCR – Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_LyMmnf": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hog Legs®",
+            "description": "<ul><li><a href=\"http://ezgmfg.com/wp-content/uploads/2025/02/00662_MAS_HogLeg_2024_vf1-1.pdf\">Hog Legs Info Sheet</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2017/02/Hog-Leg-Manual.pdf\">Hog Legs® – Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_qxKPYJ",
+        "image_column_3Q89Je",
+        "image_column_dzcW8y",
+        "image_column_acpAhM",
+        "image_column_Pr6LG7",
+        "image_column_LyMmnf"
+      ],
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "MASONRY EQUIPMENT",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "multi_columns_JtnWqX": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_9xWKPX": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hog Pump® HP-20",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/06/00461_MAS_HP_Spec-Sheet_v1.pdf\">HP-20T4 – Info Sheet</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/11/18-1000-Operations-Manual-HP-20T4-rev001_Web.pdf\">HP-20T4 – Operations Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/11/18-1001-Parts-Manual-for-HP-20T4-rev002.pdf\">HP-20T4 – Parts Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_8aHqFd": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hog Pump® 3/8 Special",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/06/00461_MAS_HP_Spec-Sheet_v1.pdf\">HP-38 – Info Sheet</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/11/18-1100-HP-38-Operations-Manual-rev000.pdf\">HP-38 – Operations Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2025/03/18-1101-HP-38-Parts-Manual-rev000_Web.pdf\">HP-38 – Parts Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2026/04/18-1103-HP-38-Pressure-Test-Manual-rev001_Web.pdf\">HP-38 – Pressure Test Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_yi4Pwr": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hog Troughs®",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2018/07/Hog-Trough-June-2018-web.pdf\">Hog Troughs – Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_xHCJEy": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hog Waller®",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/11/18-830-Operation-Manual-for-HW3000_rev002.pdf\">HW3000 - Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_78ygKz": {
+          "type": "image_column",
+          "settings": {
+            "title": "Booger Hog®",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2016/09/Booger-Hog-Manual.pdf\">Booger Hog – Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_7VBPAp": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hoist Hog®",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2016/09/Hoist-Hog.pdf\">Hoist Hog®</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/05/Hoist-Hog-Manual-Rev002.pdf\">Hoist Hog® Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2018/06/Hoist-Hog-June-2018.pdf\">Hoist Hog® – Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_8NwNWV": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hog Support",
+            "description": "<p><a href=\"http://ezgmfg.com/wp-content/uploads/2024/12/00651_MAS_Hog-Support-Spec-Sheet_vf1Web.pdf\">Hog Support - Info Sheet</a></p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_9xWKPX",
+        "image_column_8aHqFd",
+        "image_column_yi4Pwr",
+        "image_column_xHCJEy",
+        "image_column_78ygKz",
+        "image_column_7VBPAp",
+        "image_column_8NwNWV"
+      ],
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "multi_columns_FfXede": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_RDz4zz": {
+          "type": "image_column",
+          "settings": {
+            "title": "Fencer's Cement Hog",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/06/18-210-FCH100rev060618.pdf\">FCH100 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/06/18-200-FCH50rev060618.pdf\">FCH50 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00641_FNC_Cement-Hog_Specification-Sheet_2024_vf.pdf\">Fencer’s Cement Hog Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_3Ftk3F": {
+          "type": "image_column",
+          "settings": {
+            "title": "Fence Hog",
+            "description": "<ul><li><a href=\"http://ezgmfg.com/wp-content/uploads/2026/04/18-300-Fence-Hog-Manual-rev-003.pdf\" target=\"_blank\">FH08-36 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2026/04/18-300-Fence-Hog-Manual-rev-003.pdf\" target=\"_blank\">FH08-24 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2026/04/18-310-FHW-Fence-Hog%C2%AE-Manual-Rev-000.pdf\">FHW – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00631_FNC_FenceHog_Specification-Sheet_2024_vf.pdf\">Fence Hog Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_RKXidW": {
+          "type": "image_column",
+          "settings": {
+            "title": "Mobile Mud Hog®",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/09/18-745-MMH4-Mud-Hog.pdf\">MMH4 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-750-MMH9-Mud-Hog.pdf\">MMH9 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/12/18-740-MMH12-Manual-rev006.pdf\">MMH12 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-755-MMH20-Manual-rev004.pdf\">MMH20 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00642_FNC_Mobile-Mud-Hog_Specification-Sheet_2024_vf.pdf\">Mobile Mud Hogs Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_xVUFp6": {
+          "type": "image_column",
+          "settings": {
+            "title": "Grip Hog Lifters & Placers",
+            "description": "<p></p><ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/09/18-745-MMH4-Mud-Hog.pdf\">MMH4 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-750-MMH9-Mud-Hog.pdf\">MMH9 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/12/18-740-MMH12-Manual-rev006.pdf\">MMH12 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-755-MMH20-Manual-rev004.pdf\">MMH20 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00642_FNC_Mobile-Mud-Hog_Specification-Sheet_2024_vf.pdf\">Mobile Mud Hogs Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_W9wKMr": {
+          "type": "image_column",
+          "settings": {
+            "title": "Barbwire Hog",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2019/05/Barbwire-Hog-Manual.pdf\">BWH – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00639_FNC_Barbwire-Hog_Specification-Sheet_2024_vf.pdf\">Barbwire Hog Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_Pfnn6F": {
+          "type": "image_column",
+          "settings": {
+            "title": "Stretch-N-Go Hog",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2017/02/18-350-SNGH.pdf\">SNG4 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00640_FNC_Stretch-N-Go_Specification-Sheet_2024_vf.pdf\">Stretch-N-Go Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_RDz4zz",
+        "image_column_3Ftk3F",
+        "image_column_RKXidW",
+        "image_column_xVUFp6",
+        "image_column_W9wKMr",
+        "image_column_Pfnn6F"
+      ],
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "heading": "FENCING EQUIPMENT",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "multi_columns_Qx4XVJ": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_QbgQER": {
+          "type": "image_column",
+          "settings": {
+            "title": "Krack Hog Precision Splitter",
+            "description": "<ul><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/10/00660_HSC_KrackHog_Sheet_2024_vfWEB.pdf\">Krack Hog Literature</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/10/18-840-Krack-Hog-KHBS18-Manual_rev003.pdf\" target=\"_blank\">Krack Hog Precision Splitter – Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_QKU8Vm": {
+          "type": "image_column",
+          "settings": {
+            "title": "Grip Hog Lifters & Placers",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/00468_1_HSC_Grip-Hog-Brochure-Update_2023_vf_WEB.pdf\">Grip Hog Literature</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/01/18-2000-PM-1AIR.pdf\">PM-1AIR – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/01/18-2001-PM-3AIR-rev-002.pdf\">PM-3AIR – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/01/18-2002-PM-4AIR-rev-002.pdf\">PM-4AIR – Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_3RFQGY": {
+          "type": "image_column",
+          "settings": {
+            "title": "Grip Hog Lifters & Placers",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/11/18-2005-Grip-Hog-PPB_rev-000.pdf\">GRIP-HOG-PPB - Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/11/18-2003-Grip-Hog-PPC_rev-000.pdf\">GRIP-HOG-PPC - Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/11/18-2004-Grip-Hog-PPV_rev-000.pdf\">GRIP-HOG-PPV - Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_RcdiTr": {
+          "type": "image_column",
+          "settings": {
+            "title": "Grip Hog Lifters & Placers",
+            "description": "<p></p><ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/09/18-745-MMH4-Mud-Hog.pdf\">MMH4 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-750-MMH9-Mud-Hog.pdf\">MMH9 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/12/18-740-MMH12-Manual-rev006.pdf\">MMH12 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-755-MMH20-Manual-rev004.pdf\">MMH20 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00642_FNC_Mobile-Mud-Hog_Specification-Sheet_2024_vf.pdf\">Mobile Mud Hogs Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_f99eE4": {
+          "type": "image_column",
+          "settings": {
+            "title": "Roller Paver Compactor",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/06/00472_HSC_EVPC_SpecSheet_2023_WEB.pdf\">Roller Paver Compactor Literature</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/03/EZG-EVPC120-RollerCompactorManual-rev-005.pdf\">Roller Paver Compactor - Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_BzQQbn": {
+          "type": "image_column",
+          "settings": {
+            "title": "Forward Plate Compactors",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/08/00473_HSC_EFPC_SpecSheet_2023WEB.pdf\">Forward Compactor Literature</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/03/EZG-VibPlateCompactorManual.pdf\">EFPC60W, EFPC70W & EFPC90 - Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_cF8wPy": {
+          "type": "image_column",
+          "settings": {
+            "title": "Reversible Plate Compactors",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/08/00474_HSC_ERPC_SpecSheet_2023WEB.pdf\">Reversible Compactor Literature</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/03/EZG-ReversiblePlateCompactorManual-150-200.pdf\">ERPC150 & ERPC200 - Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_QbgQER",
+        "image_column_QKU8Vm",
+        "image_column_3RFQGY",
+        "image_column_RcdiTr",
+        "image_column_f99eE4",
+        "image_column_BzQQbn",
+        "image_column_cF8wPy"
+      ],
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "heading": "HARDSCAPE EQUIPMENT",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "multi_columns_jGrzDC": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_LxkPxG": {
+          "type": "image_column",
+          "settings": {
+            "title": "Precast Hog®",
+            "description": "<p><a href=\"https://ezgmfg.com/wp-content/uploads/2016/09/Precast-Hog.pdf\">Precast Hog®</a></p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_qxajpy": {
+          "type": "image_column",
+          "settings": {
+            "title": "Refractory Mud Hog®",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/10/18-900-RMH12.pdf\">RMH12 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/09/18-550-RMHE20-Rev001.pdf\">RMH20 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/10/18-500-RMH29-Mud-Hog-Manual.pdf\">RMH29 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/10/18-560-RMH36.pdf\">RMH36 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/10/00599_REF_Refractory-Product_Brochure_2024_vfWEB.pdf\">Refractory Catalog</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_pnjUJy": {
+          "type": "image_column",
+          "settings": {
+            "title": "Refractory Mixer Pump Combo",
+            "description": "<ul><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/04/00466_PMP_HPMC-220_Mixer_Sheet_v3.pdf\">HPMC-220 Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_mxBg4B": {
+          "type": "image_column",
+          "settings": {
+            "title": "Grip Hog Lifters & Placers",
+            "description": "<p></p><ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/09/18-745-MMH4-Mud-Hog.pdf\">MMH4 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-750-MMH9-Mud-Hog.pdf\">MMH9 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/12/18-740-MMH12-Manual-rev006.pdf\">MMH12 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-755-MMH20-Manual-rev004.pdf\">MMH20 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00642_FNC_Mobile-Mud-Hog_Specification-Sheet_2024_vf.pdf\">Mobile Mud Hogs Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_34jFhD": {
+          "type": "image_column",
+          "settings": {
+            "title": "Barbwire Hog",
+            "description": "<p>Highlight your values, products, or services</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_JceDLw": {
+          "type": "image_column",
+          "settings": {
+            "title": "Stretch-N-Go Hog",
+            "description": "<p>Highlight your values, products, or services</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_LxkPxG",
+        "image_column_qxajpy",
+        "image_column_pnjUJy",
+        "image_column_mxBg4B",
+        "image_column_34jFhD",
+        "image_column_JceDLw"
+      ],
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-5",
+        "heading": "PRECAST / REFRACTORY EQUIPMENT",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "multi_columns_rD7afq": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_xeenXM": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hog Pump® HP-20",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/11/18-1000-Operations-Manual-HP-20T4-rev001_Web.pdf\">HP-20T4 – Operations Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/11/18-1001-Parts-Manual-for-HP-20T4-rev002.pdf\">HP-20T4 – Parts Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_Ye4fLQ": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hog Pump® 3/8 Special",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/03/00227_MAS_HP_Spec-Sheet_vf1_web.pdf\">HP-38 Info Sheet</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/11/18-1100-HP-38-Operations-Manual-rev000.pdf\">HP-38 – Operations Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/11/18-1101-HP-38-Parts-Manual-rev000_Web.pdf\">HP-38 – Parts Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/11/18-1103-HP-38-Pressure-Test-Manual-rev000_Web.pdf\">HP-38 – Pressure Test Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_qfnfxK": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hog Pump Mixer Combo",
+            "description": "<ul><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/04/00466_PMP_HPMC-220_Mixer_Sheet_v3.pdf\">HPMC-220 Info Sheet</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2024/03/00589_PMP_Continuious_Mixer_Pump_Sheet_vf1_WEB-3.pdf\">MPC-240 Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_N9UkhP": {
+          "type": "image_column",
+          "settings": {
+            "title": "Grip Hog Lifters & Placers",
+            "description": "<p></p><ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/09/18-745-MMH4-Mud-Hog.pdf\">MMH4 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-750-MMH9-Mud-Hog.pdf\">MMH9 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/12/18-740-MMH12-Manual-rev006.pdf\">MMH12 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-755-MMH20-Manual-rev004.pdf\">MMH20 – Manual</a></li><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00642_FNC_Mobile-Mud-Hog_Specification-Sheet_2024_vf.pdf\">Mobile Mud Hogs Info Sheet</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_JjKgEd": {
+          "type": "image_column",
+          "settings": {
+            "title": "Barbwire Hog",
+            "description": "<p>Highlight your values, products, or services</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_MdHrGt": {
+          "type": "image_column",
+          "settings": {
+            "title": "Stretch-N-Go Hog",
+            "description": "<p>Highlight your values, products, or services</p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_xeenXM",
+        "image_column_Ye4fLQ",
+        "image_column_qfnfxK",
+        "image_column_N9UkhP",
+        "image_column_JjKgEd",
+        "image_column_MdHrGt"
+      ],
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "",
+        "heading": "PUMPS",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "multi_columns_a7ABfq": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_wtDNAm": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hog Guard Rail System & Stocking Bracket",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/04/00452_MAS_Hog-Guard-Spec-Sheet_vf.pdf\">Hog Guard Literature</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/04/HGS-A-1_2_3_Manual_4-15-2023.pdf\">Hog Guard + Stocking Bracket – Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_pVXnaL": {
+          "type": "image_column",
+          "settings": {
+            "title": "EZG Outrigger Pads",
+            "description": "<p><a href=\"https://ezgmfg.com/wp-content/uploads/2023/11/EZG-Outrigger-Pad-Sheet_vf.pdf\">Outrigger Pad Literature</a></p>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_n7nnPk": {
+          "type": "image_column",
+          "settings": {
+            "title": "Hogtrax Ground Protection",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/11/Hogtrax-Ground-Protection-Sheet_2025_vf.pdf\">Hogtrax Literature</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "image_column_d9t6WA": {
+          "type": "image_column",
+          "settings": {
+            "title": "Fork-N-Hog (Discontinued)",
+            "description": "<ul><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/10/EZG_FNHManual_vf.pdf\">Fork-N-Hog – Manual</a></li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_column_wtDNAm",
+        "image_column_pVXnaL",
+        "image_column_n7nnPk",
+        "image_column_d9t6WA"
+      ],
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-5",
+        "heading": "SPECIALTY EQUIPMENT",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "multi_columns_9KqtEn": {
+      "type": "multi-columns",
+      "blocks": {
+        "text_only_column_YGjGiL": {
+          "type": "text_only_column",
+          "settings": {
+            "title": "Grout Hog®",
+            "description": "<ul><li>Grout Hog Info Sheet</li><li>GH75 - Manual</li><li>GPH75 - Manual</li><li>UGH75 - Manual</li><li>UGPH75 - Manual</li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "text_only_column_fR9g8F": {
+          "type": "text_only_column",
+          "settings": {
+            "title": "Mud Hog®",
+            "description": "<ul><li>Mud Hog Info Sheet</li><li>MH9 - Manual</li><li>MH12 - Manual</li><li>MH20 - Manual</li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        },
+        "text_only_column_UFqpnD": {
+          "type": "text_only_column",
+          "settings": {
+            "title": "EZG Mixers®",
+            "description": "<ul><li>EZG Mixer Info Sheet</li><li>EZG7 - Manual</li><li>EZG9 - Manual</li><li>EZG12 - Manual</li></ul>",
+            "btn_label": "",
+            "btn_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_only_column_YGjGiL",
+        "text_only_column_fR9g8F",
+        "text_only_column_UFqpnD"
+      ],
+      "disabled": true,
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-3f4c8100-ca3e-4785-b643-ae504ada6343",
+        "heading": "Masonry Equipment - Info Sheets and Manuals",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "3/2",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "content_collage_UXnpfd": {
+      "type": "content-collage",
+      "blocks": {
+        "text_86WGLM": {
+          "type": "text",
+          "settings": {
+            "heading": "Fence Hog",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<ul><li>FCH100 - Manual</li><li>FCH50 - Manual</li><li>Fencer's Cement Hog Info Shet</li></ul>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_86WGLM"
+      ],
+      "disabled": true,
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": true,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "icon_with_text_bP6Mg4": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_MUbjJE": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "title": "Fencer's Cement Hog",
+            "description": "<ul><li>FCH</li><li>FCH</li><li>FCH</li></ul>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_qkWRnt": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "title": "Fence Hog",
+            "description": "<ul><li>Info Sheet</li><li>FH08</li><li>FH</li><li>FH</li></ul>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_9zPhmC": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "title": "Mobile Mud Hog®",
+            "description": "<ul><li><a href=\"http://ezgmfg.com/wp-content/uploads/2024/07/00642_FNC_Mobile-Mud-Hog_Specification-Sheet_2024_vf.pdf\">Mobile Mud Hogs Info Sheet</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/09/18-745-MMH4-Mud-Hog.pdf\">MMH4 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-750-MMH9-Mud-Hog.pdf\">MMH9 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2022/12/18-740-MMH12-Manual-rev006.pdf\">MMH12 – Manual</a></li><li><a href=\"https://ezgmfg.com/wp-content/uploads/2023/05/18-755-MMH20-Manual-rev004.pdf\">MMH20 – Manual</a></li></ul>",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_MUbjJE",
+        "icon_with_text_item_qkWRnt",
+        "icon_with_text_item_9zPhmC"
+      ],
+      "name": "t:sections.icon_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "heading": "FENCING EQUIPMENT",
+        "heading_size": "h5",
+        "description": "",
+        "text_position": "fd-row",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "label": "",
+        "link": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_G8JjUG",
+    "multi_columns_DPdWrT",
+    "multi_columns_LCEwhY",
+    "multi_columns_gKrxA8",
+    "multi_columns_KixRRR",
+    "multi_columns_JtnWqX",
+    "multi_columns_FfXede",
+    "multi_columns_Qx4XVJ",
+    "multi_columns_jGrzDC",
+    "multi_columns_rD7afq",
+    "multi_columns_a7ABfq",
+    "multi_columns_9KqtEn",
+    "content_collage_UXnpfd",
+    "icon_with_text_bP6Mg4"
+  ]
+}

@@ -1,0 +1,35 @@
+{%- liquid
+assign bgc_color = 'background: var(--color-normal-text);'
+if section.settings.section_content_overlay_color != blank
+  assign bgc_color = 'background: ' | append: section.settings.section_content_overlay_color | append: ';'
+endif
+unless block.settings.divider_color.alpha == 0.0 or block.settings.divider_color == blank
+  assign bgc_color = 'background: ' | append: block.settings.divider_color | append: ';'
+endunless
+-%}
+<div id="block-{{ block.id }}"
+  class="block-content block-divider w-100"
+  data-ui-component="Block Divider"
+  style="{{ bgc_color }}"
+  {{ block.shopify_attributes }}
+></div>
+
+{%- schema -%}
+  {
+    "name": "t:sections.divider.name",
+    "tag": null,
+    "settings": [
+      {
+        "type": "color",
+        "id": "divider_color",
+        "label": "t:general.settings.color.label"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.divider.name",
+        "category": "t:general.settings.headers.layout.content"
+      }
+    ]
+  }
+{%- endschema -%}

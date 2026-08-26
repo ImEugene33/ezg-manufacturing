@@ -1,0 +1,189 @@
+{{ 'account.css' | asset_url | stylesheet_tag: preload: true }}
+
+<div data-animate="regular-section" class="js-animate section account-login background color-{{- section.settings.color_scheme }}">
+	<div class="ctnr">
+    <div id="recover" class="d-none fd-column middle-xs gap-scale-4xl" tabindex="-1">
+      <div class="ta-center">
+        {%- if section.settings.enable_h1_tag -%}
+          <h1 class="promotional-heading h2">{{ 'customer.reset_password.title' | t }}</h1>
+        {%- else -%}
+          <span class="promotional-heading d-block h2">{{ 'customer.reset_password.title' | t }}</span>
+        {%- endif -%}
+        <span class="fs-body-xl d-block mt-scale-xl">{{ 'customer.reset_password.description' | t }}</span>
+      </div>
+      {%- form 'recover_customer_password', class: 'form form__customer form--recover d-flex center-xs fd-column' -%}
+        {%- if form.errors -%}
+          <div class="d-flex top-xs start-xs mb-scale-2xl" tabindex="-1" autofocus>
+            {% render 'icon-infor', class: 'icon-fix-m icon color-error' %}
+            <div class="ml-3xs flex-1 fs-body-s color-text-80">
+              {% for error in form.errors %}
+                <div>
+                  {% if error == 'form' %}
+                    {{ form.errors.messages[error] }}
+                  {% else %}
+                    {{ form.errors.translated_fields[error] | capitalize }} {{ form.errors.messages[error] }}
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {%- endif -%}
+        {% assign recover_success = form.posted_successfully? %}
+        <div class="mb-scale-2xl">
+          <label for="recoverEmail" class="field__label fs-body-m p-relative d-block">
+            {{ 'customer.login_page.email' | t }}<sup class="ml-4xs color-danger p-absolute top-0">*</sup>
+          </label>
+          <input
+            type="email"
+            value=""
+            name="email"
+            id="recoverEmail"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            {% if form.errors %}
+              aria-invalid="true"
+              aria-describedby="recoverEmailError"
+              autofocus
+            {% endif %}
+            placeholder="{{ 'customer.placeholder.email' | t }}"
+            required="required"
+            aria-required="true"
+            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+            class="field__text{% if form.errors contains 'email' %} field--error{% endif %} w-100"
+          >
+          <input type="hidden" name="recover_email" id="storedRecoverEmail">
+        </div>
+        <div>
+          <button class="btn btn-l btn-primary mb-xs w-100">
+            {{ 'customer.login_page.send' | t }}
+          </button>
+          <a href="{{ routes.account_login_url }}" class="btn btn-l btn-secondary w-100">
+            {{ 'customer.login_page.cancel' | t }}
+          </a>
+        </div>
+      {%- endform -%} 
+    </div>
+
+    <div id="login" class="d-flex fd-column middle-xs gap-scale-4xl">
+      <div class="ta-center">
+        {%- if section.settings.enable_h1_tag -%}
+          <h1 class="promotional-heading h2">{{ 'customer.login_page.title' | t }}</h1>
+        {%- else -%}
+          <span class="promotional-heading d-block h2">{{ 'customer.login_page.title' | t }}</span>
+        {%- endif -%}
+      </div>
+      <div class="w-100 form__customer m-auto">
+        {%- if recover_success == true -%}
+          <div class="d-flex top-xs start-xs mb-scale-2xl" tabindex="-1" role="alert" aria-atomic="true">
+            {% render 'icon-check', class: 'icon-fix-m icon color-success' %}
+            <span class="ml-3xs flex-1 fs-body-s">
+              {{ 'customer.reset_password.success' | t }}
+            </span>
+          </div>
+        {%- endif -%}
+        {%- form 'customer_login', class: 'form form--customer-login' -%}
+          {%- if form.errors -%}
+            <div class="d-flex top-xs start-xs mb-scale-2xl" tabindex="-1" autofocus>
+              {% render 'icon-infor', class: 'icon-fix-m icon color-error' %}
+              <span class="ml-3xs flex-1 fs-body-s color-text-80">
+                {% for error in form.errors %}
+                  {% if error == 'form' %}
+                    {{ form.errors.messages[error] }}
+                  {% else %}
+                    {{ form.errors.translated_fields[error] | capitalize }} {{ form.errors.messages[error] }}
+                  {% endif %}
+                {% endfor %}
+              </span>
+            </div>
+          {%- endif -%}
+          <div class="mb-scale-xl">
+            <label for="customerEmail" class="field__label fs-body-m p-relative d-block">
+              {{ 'customer.login_page.email' | t }}<sup class="ml-4xs color-error p-absolute top-0">*</sup>
+            </label>
+            <input
+              type="email"
+              name="customer[email]"
+              id="customerEmail"
+              autocomplete="email"
+              autocorrect="off"
+              autocapitalize="off"
+              class="field__text w-100"
+              {% if form.errors contains 'form' %}
+                aria-invalid="true"
+              {% endif %}
+              placeholder="{{ 'customer.placeholder.email' | t }}"
+              required="required"
+              pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+              aria-required="true"
+            >
+          </div>
+          {%- if form.password_needed -%}
+            <div class="mb-scale-2xl">
+              <div class="d-flex mb-2xs between-xs middle-xs gap-scale-m">
+                <label for="customerPassword" class="field__label m-zero fs-body-m p-relative">
+                  {{ 'customer.login_page.password' | t }}<sup class="ml-4xs color-error p-absolute top-0">*</sup>
+                </label>
+                <a class="btn btn-s btn-tertiary" href="#recover">
+                  {{ 'customer.login_page.forgot_password' | t }}
+                </a>
+              </div>
+              <input
+                type="password"
+                value=""
+                name="customer[password]"
+                id="customerPassword"
+                autocomplete="current-password"
+                class="field__text w-100"
+                {% if form.errors contains 'form' %}
+                  aria-invalid="true"
+                {% endif %}
+                placeholder="{{ 'customer.placeholder.password' | t }}"
+                required="required"
+                aria-required="true"
+              >
+            </div>
+          {%- endif -%}
+          <div>
+            <button class="btn btn-l btn-primary mb-xs w-100">
+              {{ 'customer.login_page.login' | t }}
+            </button>
+            <a href="{{ routes.account_register_url }}" class="btn btn-l btn-secondary w-100">
+              {{ 'customer.login_page.create_account' | t }}
+            </a>
+          </div>
+        {%- endform -%}
+        {%- if shop.checkout.guest_login -%}
+          <h2>{{ 'customer.login_page.guest_title' | t }}</h2>
+          <div id="guestLoginForm">
+            {%- form 'guest_login', class: 'form' -%}
+              <button class="btn btn--large btn-primary ">
+                {{ 'customer.login_page.guest_continue' | t }}
+              </button>
+            {%- endform -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+	</div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.account_login.name",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_h1_tag",
+      "label": "t:general.settings.enable_h1_tag_for_heading.label",
+      "info": "t:general.settings.enable_h1_tag_for_heading.info",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

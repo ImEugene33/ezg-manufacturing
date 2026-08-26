@@ -1,0 +1,1887 @@
+{% liquid
+  assign section_id = section.id | md5 | truncate: 12, ""
+
+  assign loading = "lazy"
+  assign decoding ="async"
+  assign fetchpriority = "low"
+
+  if section.index == 1
+    assign loading = "eager"
+    assign fetchpriority = "high"
+  endif
+%}
+{%- if section.blocks.size > 0 -%}
+  {%- render 'section-padding-collapse' -%}
+  <sht-content-collage data-animate="banner-section" id="section-{{ section.id }}" class="js-animate section section--vertical background color-{{- section.settings.color_scheme }} d-block p-relative" data-ui-component="Section Content Collage">
+    {%- render 'layout-grid-content-collage-placeholder' -%}
+    <div class="{{ section.settings.enable_fullwidth | default: 'ctnr' | replace: 'true', '' }} w-100 d-grid content-collage js-content-collage gap-xs" style="--desktop-grid-auto-row: {{ section.settings.desktop_row_height | append: 'px' }}; --mobile-grid-auto-row: {{ section.settings.mobile_row_height | append: 'px' }};">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign media_classes = 'h-100 w-100 of-cover'
+          assign placeholder_index = forloop.index | minus: 1 | modulo: 3 | plus: 1
+          assign placeholder_image = 'blog-apparel-' | append: placeholder_index | placeholder_svg_tag: 'placeholder w-100 h-100 of-cover'
+          assign collage_layout = '--desktop-grid-row: ' | append: block.settings.desktop_row | append: '; --mobile-grid-row: ' | append: block.settings.mobile_row | append:'; --desktop-grid-column: ' | append: block.settings.desktop_column | append:'; --mobile-grid-column:' | append: block.settings.mobile_column | append:';'
+          assign media_widths = '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000'
+          assign mobile_media_widths = '320, 450, 550, 750, 950, 1024, 1200'
+          assign desktop_media_sizes = 'calc(25vw * COLUMN_DESKTOP )' | replace: 'COLUMN_DESKTOP', block.settings.desktop_column
+          assign mobile_media_sizes = 'calc(25vw * COLUMN_MOBILE )' | replace: 'COLUMN_MOBILE', block.settings.mobile_column
+          assign media_sizes = '(min-width: 1025px)' | append: desktop_media_sizes | append: ', ' | append: mobile_media_sizes
+
+          assign desktop_content_alignment = block.settings.desktop_content_alignment
+          assign mobile_content_alignment = block.settings.mobile_content_alignment
+          assign desktop_content_position = block.settings.desktop_content_position
+          assign mobile_content_position = block.settings.mobile_content_position
+
+          assign sht_mask_md = desktop_content_position
+          assign sht_mask_xs = mobile_content_position | replace: '-xs', ''
+          if sht_mask_md == 'center-md'
+            if desktop_content_alignment contains 'left'
+              assign sht_mask_md = 'center-left-md'
+            elsif desktop_content_alignment contains 'right'
+              assign sht_mask_md = 'center-right-md'
+            endif
+          endif
+          if sht_mask_xs == 'center'
+            if mobile_content_alignment contains 'left'
+              assign sht_mask_xs = 'center-left'
+            elsif mobile_content_alignment contains 'right'
+              assign sht_mask_xs = 'center-right'
+            endif
+          endif
+
+          assign overlay_opacity = block.settings.overlay_opacity | divided_by: 100.0
+          assign overlay_color = 'inherit'
+          unless block.settings.mask_overlay_color.alpha == 0.0 or block.settings.mask_overlay_color == blank
+            assign overlay_color = block.settings.mask_overlay_color | color_modify: 'alpha', overlay_opacity
+          endunless
+          assign content_color = 'color: inherit;'
+          assign description_color = 'rgba(var(--color-normal-text-rgb),0.6)'
+          assign content_color_description = 'color: rgba(var(--color-normal-text-rgb),0.6);'
+
+          assign block_loading = loading
+          assign block_fetchpriority = fetchpriority
+          assign block_preload = false
+          if forloop.first and section.index == 1
+            assign block_loading = 'eager'
+            assign block_fetchpriority = 'high'
+            assign block_preload = true
+          endif
+          case block.type
+            when 'text'
+              unless block.settings.text_color.alpha == 0.0 or block.settings.text_color == blank
+                assign content_color = 'color:' | append: block.settings.text_color | append: ';'
+                assign description_color = block.settings.text_color | color_modify: 'alpha', 0.6
+                assign description_color_hover = block.settings.text_color | color_modify: 'alpha', 0.8
+              endunless
+            when 'image','video','product','collection'
+              unless block.settings.content_overlay_color.alpha == 0.0 or block.settings.content_overlay_color == blank
+                assign content_color = 'color:' | append: block.settings.content_overlay_color | append: ';'
+                assign description_color = block.settings.content_overlay_color | color_modify: 'alpha', 0.6
+                assign description_color_hover = block.settings.content_overlay_color | color_modify: 'alpha', 0.8
+              endunless
+          endcase
+          assign content_color_description = 'color:' | append: description_color | append: ';'
+        -%}
+        {%- capture content_collage_content -%}
+          <div class="banner-content__animate p-relative zi-1 h-100 w-100 p-m d-flex fd-column {{ desktop_content_position }} {{ mobile_content_position }} {{ desktop_content_alignment }} {{ mobile_content_alignment }}">
+            <div class="block__content d-flex fd-column gap-s o-hidden">
+              <div class="promotion__text d-flex fd-column gap-xs {{ desktop_content_alignment }} {{ mobile_content_alignment }}">
+                {%- if block.settings.enable_h1_tag -%}
+                  <h1 class="promotion__heading promotional-heading {{ block.settings.heading_size }} hide-empty">{{- block.settings.heading | escape -}}</h1>
+                {%- else -%}
+                  <span class="promotion__heading promotional-heading {{ block.settings.heading_size }} hide-empty">{{- block.settings.heading | escape -}}</span>
+                {%- endif -%}
+                <div class="promotion__description fs-body-l rte o-hidden hide-empty" style="{{ content_color_description }} --desc-color-hover: {{ description_color_hover }}">{{- block.settings.description -}}</div>
+              </div>
+              <div class="promotion__button">
+                <a href="{{- block.settings.button_link | default: '#' -}}" {{ block.settings.button_link | default: 'tabindex="-1"' | replace: block.settings.button_link , '' }} class="btn btn-m btn-{{- block.settings.button_style }} hide-empty {{ block.settings.button_link | default: 'disable' | replace: block.settings.button_link , '' }}">{{- block.settings.button_label -}}</a>
+              </div>
+            </div>
+            {% if block.settings.button_link != blank and block.settings.button_label == blank %}
+              <a href="{{- block.settings.button_link -}}" class="p-absolute inset zi-2 ele-focus-visible" aria-label="{{- block.settings.heading | escape -}}"></a>
+            {% endif %}
+          </div>
+        {%- endcapture -%}
+        {%- case block.type -%}
+          {%- when 'image' -%}
+            {%- liquid
+              assign desktop_image = placeholder_image
+              assign desktop_image_alt = block.settings.desktop_image.alt | default: block.settings.desktop_image.image | split: '/' | last
+              assign desktop_image = block.settings.desktop_image | image_url: width: block.settings.desktop_image.width | image_tag: widths: media_widths, sizes: desktop_media_sizes, alt: desktop_image_alt, class: media_classes, loading: block_loading, fetchpriority: block_fetchpriority, decoding: decoding, preload: block_preload
+              assign mobile_image = desktop_image
+              if block.settings.mobile_image
+                assign mobile_image_alt  = block.settings.mobile_image.alt | default: block.settings.mobile_image.image | split: '/' | last
+                assign mobile_image = block.settings.mobile_image | image_url: width: block.settings.mobile_image.width | image_tag: widths: mobile_media_widths, sizes: mobile_media_sizes, alt: mobile_image_alt, class: 'd-none-md d-block w-100 h-100 of-cover p-absolute top-0', loading: block_loading, fetchpriority: block_fetchpriority, decoding: decoding, preload: block_preload
+              endif
+            -%}
+            <div class="content-collage__block content-collage__block-{{- block.type }} p-relative o-hidden rad-m border"
+              style="{{ collage_layout }} --color-mask: {{ overlay_color }}; --overlay: {{ overlay_opacity }}; {{ content_color }}"
+              {{ block.shopify_attributes }}
+            > 
+              <div class="h-100 w-100 o-hidden sht-mask sht-mask--{{ sht_mask_md }} sht-mask--{{ sht_mask_xs }}">
+                <div class="banner-media__animate promotion-section__background inset p-absolute h-100 w-100">
+                  {%- render 'image', image_item: desktop_image, image_wrap_classes: "h-100 w-100 image-animate d-none d-block-lg", image_classes: "h-100 w-100" -%}
+                  {%- render 'image', image_item: mobile_image, image_wrap_classes: "h-100 w-100 image-animate d-block d-none-lg", image_classes: "h-100 w-100" -%}
+                </div>
+                {{ content_collage_content }}
+              </div>
+            </div>
+          {%- when 'video' -%}
+            {%- liquid
+              assign video_type = block.settings.video_url.type
+              if block.settings.video_hosted != blank and block.settings.video_source == 'video_hosted'
+                assign video_type = 'local_video'
+                assign local_video_background = 'video_background'
+              endif
+            -%}
+            <div class="content-collage__block content-collage__block-{{- block.type }} p-relative o-hidden rad-m border"
+              style="{{ collage_layout }} --color-mask: {{ overlay_color }}; --overlay: {{ overlay_opacity }}; {{ content_color }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="h-100 w-100 o-hidden sht-mask sht-mask--{{ sht_mask_md }} sht-mask--{{ sht_mask_xs }}">
+                <sht-load-video class="banner-media__animate promotion-section__background {{ local_video_background }} inset p-absolute w-100 h-100 js-animate" data-video-type="{{ video_type }}" data-video-id="{{ block.settings.video_url.id }}" data-video-play="true" data-video-mute="true">
+                  {%- if block.settings.video_source == 'video_hosted' -%}
+                    {%- if block.settings.video_hosted == blank-%}
+                      {%- render 'image', image_item: placeholder_image, image_wrap_classes: "h-100 w-100 image-animate", image_classes: "h-100 w-100" -%}
+                    {%- else -%}
+                      {%- liquid
+                        capture local_video
+                          echo block.settings.video_hosted | video_tag: autoplay: true, controls: false, loop: true , preload: 'none', class: 'pe-none js-local-video w-100 h-100 of-cover', poster: '', loading: block_loading, fetchpriority: block_fetchpriority, decoding: decoding, image_size: '1024x'
+                        endcapture
+                        assign preview_image = block.settings.video_hosted.preview_image
+                        assign preview_alt_text = preview_image.src | split: '/' | last | split: '.' | first
+                        assign preview_image_text = '<img loading="lazy" decoding="async" fetchpriority="low" alt="alt_text"' | replace: 'alt_text', preview_alt_text
+                      -%}
+                      {{- local_video | replace: '<source src="', '<source data-src="' | replace: '<img',  preview_image_text -}}
+                    {%- endif -%}
+                  {%- else %}
+                    {%- if block.settings.video_url == blank-%}
+                      {{ placeholder_image }}
+                    {%- else -%}
+                      <iframe tabindex="-1" title="{{ block.settings.video_url.type }}" 
+                        class="pe-none js-local-video iframe-banner" 
+                        allow="autoplay; encrypted-media"
+                        loading="{{ block_loading }}"
+                        fetchpriority="{{ block_fetchpriority }}"
+                        decoding="{{ decoding }}"
+                        data-src="
+                        {%- if block.settings.video_url.type == 'youtube' -%}
+                          https://www.youtube.com/embed/{{ block.settings.video_url.id }}?version=3&loop=1&controls=0&rel=0&showinfo=0&autoplay=1&enablejsapi=1&mute=1&fs=0&playlist={{ block.settings.video_url.id }}
+                        {%- elsif block.settings.video_url.type == 'vimeo' -%}
+                          https://player.vimeo.com/video/{{ block.settings.video_url.id }}?api=1&background=1&autoplay=1&loop=1&title=0&byline=0&portrait=0&controls=0&muted=1
+                        {%- endif -%}">
+                      </iframe>
+                    {%- endif -%}
+                  {% endif %}
+                </sht-load-video>
+                {{ content_collage_content }}
+              </div>
+            </div>
+          {%- when 'text' -%}
+            {%- liquid
+              assign custom_background_color = 'inherit'
+              unless block.settings.background_color.alpha == 0.0 or block.settings.background_color == blank
+                assign custom_background_color = block.settings.background_color
+              endunless
+            -%}
+            <div class="content-collage__block content-collage__block-{{- block.type }} p-relative o-hidden rad-m border"
+              style="{{ collage_layout }} --custom-background: {{ custom_background_color }}; {{ content_color }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="text-only h-100 w-100">
+                {{ content_collage_content }}
+              </div>
+            </div>
+          {%- when 'product' -%}
+            {%- liquid
+              assign product = block.settings.product
+              assign image_name = block.settings.background_image.image | split: '/' | last | split: '.' | first
+              assign media_alt = block.settings.background_image.alt | default: image_name | default: product.title
+              assign product_media = block.settings.background_image | default: product.featured_media
+              assign random_number =  'now' | date: '%N' | append: section_id | append: product.id
+              assign product_image_id = random_number | prepend: 'cardProductImage-'
+              if product_media != blank
+                assign media = product_media | image_url: width: product_media.width | image_tag: widths: media_widths, sizes: media_sizes, alt: media_alt, class: media_classes, loading: block_loading, fetchpriority: block_fetchpriority, decoding: decoding, preload: block_preload
+              else
+                assign media = placeholder_image
+              endif
+
+              assign product_placeholder_name = 'sections.running_image_link.product' | t
+              assign product_title = product.title | default: product_placeholder_name
+              assign money_price = 5300 | money
+              assign money_price_sale = 6000 | money
+
+              assign price_style = 'fs-heading-m component-heading'
+              assign price_color = content_color
+              unless block.settings.price_color.alpha == 0.0 or block.settings.price_color == blank
+                assign price_color = 'color: ' | append: block.settings.price_color | append: ';'
+              endunless
+
+              if desktop_content_alignment contains 'left'
+                assign desktop_convert_alignment = 'start-md'
+              elsif desktop_content_alignment contains 'right'
+                assign desktop_convert_alignment = 'end-md'
+              else
+                assign desktop_convert_alignment = 'center-md'
+              endif
+              if mobile_content_alignment contains 'left'
+                assign mobile_convert_alignment = 'start-xs'
+              elsif mobile_content_alignment contains 'right'
+                assign mobile_convert_alignment = 'end-xs'
+              else
+                assign mobile_convert_alignment = 'center-xs'
+              endif
+              assign convert_alignment = desktop_convert_alignment | append: ' ' | append: mobile_convert_alignment
+            -%}
+            <div class="content-collage__block content-collage__block-{{- block.type }} p-relative o-hidden rad-m border"
+              style="{{ collage_layout }} --color-mask: {{ overlay_color }}; --overlay: {{ overlay_opacity }}; {{ content_color }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="h-100 w-100 sht-mask o-hidden sht-mask--{{ sht_mask_md }} sht-mask--{{ sht_mask_xs }}">
+                <div class="banner-media__animate promotion-section__background inset p-absolute h-100 w-100">
+                  {%- render 'image', image_item: media, image_wrap_classes: "h-100 w-100 image-animate", image_classes: "h-100 w-100" -%}
+                </div>
+                <div class="banner-content__animate p-relative zi-1 h-100 w-100 p-m d-flex fd-column {{ desktop_content_position }} {{ mobile_content_position }}">
+                  <div class="promotion__text o-hidden d-flex fd-column {{ desktop_content_alignment }} {{ mobile_content_alignment }}">
+                    {%- if block.settings.show_title == true -%}
+                      <span class="promotion__heading promotional-heading d-block mb-2xs {{ block.settings.title_size }} hide-empty">{{- product_title -}}</span>
+                    {%- endif -%}
+                    {%- if block.settings.show_rating -%}
+                      {%- render 'product-rating', product: product -%}
+                    {%- endif -%}
+                    {%- if block.settings.product != blank -%}
+                      {%- if block.settings.show_price == true-%}
+                        <span class="promotion__price d-block mb-xs">
+                          {%- render 'product-price' product: product, target: product, price_class: 'd-block', price_style: price_style, content_align: convert_alignment, price_style_custom: price_color, sub_price_style: content_color_description -%}
+                        </span>
+                      {%- endif -%}
+                      {%- if block.settings.show_variant_swatches -%}
+                        <div class="promotion-card__variant-swatches hide-empty">
+                          {%- render 'promotion-card-product-variant-swatches', block: block, product: product, product_image_id: product_image_id, content_align: convert_alignment, card_variant_labels: settings.variant_option_name -%}
+                        </div>
+                      {%- endif -%}
+                    {%- else -%}
+                      {%- if block.settings.show_price == true-%}
+                        <span class="promotion__price price d-block mb-xs">
+                          <span class="price__regular d-none {{ mobile_content_position }} {{ desktop_content_position }}">
+                            <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                            <span class="price-item price-item--regular price-item--last d-inline-block {{ price_style | default: settings.product_card_price_text_size }}" style="{{ price_color }}">{{ money_price }}</span>
+                          </span>
+                          <span class="price__sale fw-wrap d-flex middle-xs gap-3xs {{ mobile_content_position }} {{ desktop_content_position }} {{ price_style | default: settings.product_card_price_text_size }}">
+                            <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                            <span class="price-item price-item--last d-inline-block" style="{{ price_color }}">{{ money_price }}</span>
+                            <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                            <span class="d-inline-block">
+                              <s class="price-item price-item--regular fs-body-xl" style="{{ content_color_description }}">{{ money_price_sale }}</s>
+                            </span>
+                          </span>
+                        </span>
+                      {%- endif -%}
+                    {%- endif -%}
+                  </div>
+                  {%- if block.settings.product != blank -%}
+                    <a href="{{- product.url -}}" class="p-absolute inset zi-2 ele-focus-visible" aria-label="{{- product.title | escape -}}"></a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- when 'collection' -%}
+            {%- liquid
+              assign collection = block.settings.collection
+              assign image_name = block.settings.background_image | split: '/' | last | split: '.' | first
+              assign media_alt = block.settings.background_image.alt | default: image_name | default: collection.title
+              assign collection_media = block.settings.background_image | default: collection.image | default: collection.products.first.featured_image
+              if collection_media != blank
+                assign media = collection_media | image_url: width: product_media.width | image_tag: widths: media_widths, sizes: media_sizes, alt: media_alt, class: media_classes, loading: block_loading, fetchpriority: block_fetchpriority, decoding: decoding, preload: block_preload
+              else
+                assign media = placeholder_image
+              endif
+
+              assign collection_placeholder_name = 'sections.running_image_link.collection' | t
+              assign collection_title = collection.title | default: collection_placeholder_name
+              assign collection_count = block.settings.collection.products_count | default: 99
+            -%}
+            <div class="content-collage__block content-collage__block-{{- block.type }} p-relative o-hidden rad-m border"
+              style="{{ collage_layout }} --color-mask: {{ overlay_color }}; --overlay: {{ overlay_opacity }}; {{ content_color }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="h-100 w-100 sht-mask o-hidden sht-mask--{{ sht_mask_md }} sht-mask--{{ sht_mask_xs }}">
+                <div class="banner-media__animate promotion-section__background inset p-absolute h-100 w-100">
+                  {%- render 'image', image_item: media, image_wrap_classes: "h-100 w-100 image-animate", image_classes: "h-100 w-100" -%}
+                </div>
+                <div class="banner-content__animate p-relative zi-1 h-100 w-100 p-m d-flex fd-column {{ desktop_content_position }} {{ mobile_content_position }}">
+                  <div class="promotion__text o-hidden d-flex fd-column gap-2xs {{ desktop_content_alignment }} {{ mobile_content_alignment }}">
+                    {%- if block.settings.show_title -%}
+                      <span class="promotion__heading promotional-heading d-block {{ block.settings.title_size }} hide-empty">
+                        {{- collection_title -}}
+                        {%- if block.settings.quantity_style == 'superscript' and block.settings.show_collection_quantity -%}
+                          <sup class="filter__counter fs-body-xl ml-3xs f-extra {{ settings.numbers_style | replace: 'number', '' }}" style="{{ content_color_description }}">
+                            {{- collection_count -}}
+                          </sup>
+                        {%- endif -%}
+                      </span>
+                    {%- endif -%}
+                    {%- if block.settings.quantity_style == 'separate_line' and block.settings.show_collection_quantity -%}
+                      <span class="promotion__count d-block fs-body-xl wb-break-word" style="{{ content_color_description }}">
+                        {{- 'general.collection.view_collection' | t: count: collection_count -}}
+                      </span>
+                    {%- endif -%}
+                  </div>
+                  {%- if block.settings.collection != blank -%}
+                    <a href="{{- collection.url -}}" class="p-absolute inset zi-2 ele-focus-visible" aria-label="{{- collection.title | escape -}}"></a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </sht-content-collage>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.content_collage.name",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_fullwidth",
+      "label": "t:general.settings.enable_fullwidth_content.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_layout_grid",
+      "label": "t:sections.header.settings.show_layout_grid.label",
+      "default": true,
+      "info": "t:sections.header.settings.show_layout_grid.info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.desktop_layout.content"
+    },
+    {
+      "type": "range",
+      "unit": "px",
+      "max": 400,
+      "min": 150,
+      "step": 10,
+      "default": 300,
+      "id": "desktop_row_height",
+      "label": "t:general.settings.row_height.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.mobile_layout.content"
+    },
+    {
+      "type": "range",
+      "unit": "px",
+      "max": 300,
+      "min": 100,
+      "step": 10,
+      "default": 300,
+      "id": "mobile_row_height",
+      "label": "t:general.settings.row_height.label"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "t:general.settings.image.name",
+      "type": "image",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.text.content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:general.settings.heading.label",
+          "default": "Image heading"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_h1_tag",
+          "visible_if": "{{ block.settings.heading != blank }}",
+          "label": "t:general.settings.enable_h1_tag.label",
+          "info": "t:general.settings.enable_h1_tag_info.info",
+          "default": false
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.heading_size.label",
+          "visible_if": "{{ block.settings.heading != blank }}",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "headline",
+              "label": "t:general.settings.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:general.settings.heading_size.options.large.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:general.settings.heading_size.options.regular.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:general.settings.heading_size.options.small.label"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:general.settings.description.label",
+          "default": "<p>Highlight your new collection or share content related to this image</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.image.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "t:general.settings.background_image.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "t:general.settings.mobile_background_image.label"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.desktop_layout.content"
+        },
+        {
+          "type": "select",
+          "id": "desktop_content_position",
+          "label": "t:general.settings.content_position.label",
+          "options": [
+            {
+              "value": "start-md",
+              "label": "t:general.settings.content_position.content_position_options.options_1.label"
+            },
+            {
+              "value": "center-md",
+              "label": "t:general.settings.content_position.content_position_options.options_2.label"
+            },
+            {
+              "value": "end-md",
+              "label": "t:general.settings.content_position.content_position_options.options_3.label"
+            }
+          ],
+          "default": "start-md"
+        },
+        {
+          "type": "select",
+          "id": "desktop_content_alignment",
+          "label": "t:general.settings.content_alignment.label",
+          "options": [
+            {
+              "value": "ta-left-md top-md",
+              "label": "t:general.settings.option_left.label"
+            },
+            {
+              "value": "ta-center-md middle-md",
+              "label": "t:general.settings.option_center.label"
+            },
+            {
+              "value": "ta-right-md bottom-md",
+              "label": "t:general.settings.option_right.label"
+            }
+          ],
+          "default": "ta-left-md top-md"
+        },
+        {
+          "type": "select",
+          "id": "desktop_column",
+          "label": "t:general.settings.column.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            },
+            {
+              "value": "4",
+              "label": "t:general.settings.columns_per_row.options_4.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "id": "desktop_row",
+          "label": "t:general.settings.row.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.mobile_layout.content",
+          "info": "t:general.settings.headers.mobile_layout.info"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_position",
+          "label": "t:general.settings.content_position.label",
+          "options": [
+            {
+              "value": "start-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_1.label"
+            },
+            {
+              "value": "center-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_2.label"
+            },
+            {
+              "value": "end-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_3.label"
+            }
+          ],
+          "default": "center-xs"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_alignment",
+          "label": "t:general.settings.content_alignment.label",
+          "options": [
+            {
+              "value": "ta-left top-xs",
+              "label": "t:general.settings.option_left.label"
+            },
+            {
+              "value": "ta-center middle-xs",
+              "label": "t:general.settings.option_center.label"
+            },
+            {
+              "value": "ta-right bottom-xs",
+              "label": "t:general.settings.option_right.label"
+            }
+          ],
+          "default": "ta-left top-xs"
+        },
+        {
+          "type": "select",
+          "id": "mobile_column",
+          "label": "t:general.settings.column.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "id": "mobile_row",
+          "label": "t:general.settings.row.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.button.content"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:general.settings.button_label.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "Explore more"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "t:general.settings.button_style.label",
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:general.settings.primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:general.settings.secondary.label"
+            }
+          ]
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:general.settings.link.label",
+          "info": "t:general.settings.blocks.link.info"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.overlay_color.content"
+        },
+        {
+          "type": "range",
+          "unit": "%",
+          "max": 90,
+          "min": 0,
+          "step": 10,
+          "default": 30,
+          "id": "overlay_opacity",
+          "label": "t:general.settings.overlay_opacity.label"
+        },
+        {
+          "type": "color",
+          "id": "mask_overlay_color",
+          "label": "t:general.settings.custom_mask_overlay_opacity.label",
+          "visible_if": "{{ block.settings.overlay_opacity != 0 }}"
+        },
+        {
+          "type": "color",
+          "id": "content_overlay_color",
+          "label": "t:general.settings.custom_content_overlay_opacity.label"
+        }
+      ]
+    },
+    {
+      "name": "t:general.settings.video.name",
+      "type": "video",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.text.content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:general.settings.heading.label",
+          "default": "Video heading"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_h1_tag",
+          "visible_if": "{{ block.settings.heading != blank }}",
+          "label": "t:general.settings.enable_h1_tag.label",
+          "info": "t:general.settings.enable_h1_tag_info.info",
+          "default": false
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.heading_size.label",
+          "id": "heading_size",
+          "visible_if": "{{ block.settings.heading != blank }}",
+          "options": [
+            {
+              "value": "headline",
+              "label": "t:general.settings.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:general.settings.heading_size.options.large.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:general.settings.heading_size.options.regular.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:general.settings.heading_size.options.small.label"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:general.settings.description.label",
+          "default": "<p>Highlight your new collection or share content related to this video</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.background_video.label"
+        },
+        {
+          "type": "select",
+          "id": "video_source",
+          "label": "t:general.settings.video_source.label",
+          "options": [
+            {
+              "value": "video_external",
+              "label": "t:general.settings.external.label"
+            },
+            {
+              "value": "video_hosted",
+              "label": "t:general.settings.shopify_hosted.label"
+            }
+          ],
+          "default": "video_external"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "t:general.settings.external_video.label",
+          "info": "t:general.settings.video_link.info",
+          "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+          "accept": [
+            "youtube",
+            "vimeo"
+          ],
+          "visible_if": "{{ block.settings.video_source == 'video_external' }}"
+        },
+        {
+          "type": "video",
+          "id": "video_hosted",
+          "label": "t:general.settings.hosted_video.label",
+          "visible_if": "{{ block.settings.video_source == 'video_hosted' }}"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.desktop_layout.content"
+        },
+        {
+          "type": "select",
+          "id": "desktop_content_position",
+          "label": "t:general.settings.content_position.label",
+          "options": [
+            {
+              "value": "start-md",
+              "label": "t:general.settings.content_position.content_position_options.options_1.label"
+            },
+            {
+              "value": "center-md",
+              "label": "t:general.settings.content_position.content_position_options.options_2.label"
+            },
+            {
+              "value": "end-md",
+              "label": "t:general.settings.content_position.content_position_options.options_3.label"
+            }
+          ],
+          "default": "start-md"
+        },
+        {
+          "type": "select",
+          "id": "desktop_content_alignment",
+          "label": "t:general.settings.content_alignment.label",
+          "options": [
+            {
+              "value": "ta-left-md top-md",
+              "label": "t:general.settings.option_left.label"
+            },
+            {
+              "value": "ta-center-md middle-md",
+              "label": "t:general.settings.option_center.label"
+            },
+            {
+              "value": "ta-right-md bottom-md",
+              "label": "t:general.settings.option_right.label"
+            }
+          ],
+          "default": "ta-left-md top-md"
+        },
+        {
+          "type": "select",
+          "id": "desktop_column",
+          "label": "t:general.settings.column.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            },
+            {
+              "value": "4",
+              "label": "t:general.settings.columns_per_row.options_4.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "id": "desktop_row",
+          "label": "t:general.settings.row.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.mobile_layout.content",
+          "info": "t:general.settings.headers.mobile_layout.info"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_position",
+          "label": "t:general.settings.content_position.label",
+          "options": [
+            {
+              "value": "start-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_1.label"
+            },
+            {
+              "value": "center-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_2.label"
+            },
+            {
+              "value": "end-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_3.label"
+            }
+          ],
+          "default": "center-xs"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_alignment",
+          "label": "t:general.settings.content_alignment.label",
+          "options": [
+            {
+              "value": "ta-left top-xs",
+              "label": "t:general.settings.option_left.label"
+            },
+            {
+              "value": "ta-center middle-xs",
+              "label": "t:general.settings.option_center.label"
+            },
+            {
+              "value": "ta-right bottom-xs",
+              "label": "t:general.settings.option_right.label"
+            }
+          ],
+          "default": "ta-left top-xs"
+        },
+        {
+          "type": "select",
+          "id": "mobile_column",
+          "label": "t:general.settings.column.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "id": "mobile_row",
+          "label": "t:general.settings.row.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.button.content"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:general.settings.button_label.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "Explore more"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "label": "t:general.settings.button_style.label",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:general.settings.primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:general.settings.secondary.label"
+            }
+          ]
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:general.settings.link.label",
+          "info": "t:general.settings.blocks.link.info"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.overlay_color.content"
+        },
+        {
+          "type": "range",
+          "unit": "%",
+          "max": 90,
+          "min": 0,
+          "step": 10,
+          "default": 30,
+          "id": "overlay_opacity",
+          "label": "t:general.settings.overlay_opacity.label"
+        },
+        {
+          "type": "color",
+          "id": "mask_overlay_color",
+          "label": "t:general.settings.custom_mask_overlay_opacity.label",
+          "visible_if": "{{ block.settings.overlay_opacity != 0 }}"
+        },
+        {
+          "type": "color",
+          "id": "content_overlay_color",
+          "label": "t:general.settings.custom_content_overlay_opacity.label"
+        }
+      ]
+    },
+    {
+      "name": "t:general.settings.text_only.name",
+      "type": "text",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.text.content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:general.settings.heading.label",
+          "default": "Text heading"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_h1_tag",
+          "label": "t:general.settings.enable_h1_tag.label",
+          "info": "t:general.settings.enable_h1_tag_info.info",
+          "default": false,
+          "visible_if": "{{ block.settings.heading != blank }}",
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.heading_size.label",
+          "id": "heading_size",
+          "visible_if": "{{ block.settings.heading != blank }}",
+          "options": [
+            {
+              "value": "headline",
+              "label": "t:general.settings.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:general.settings.heading_size.options.large.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:general.settings.heading_size.options.regular.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:general.settings.heading_size.options.small.label"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:general.settings.description.label",
+          "default": "<p>A description for your collection, product or other</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.desktop_layout.content"
+        },
+        {
+          "type": "select",
+          "id": "desktop_content_position",
+          "label": "t:general.settings.content_position.label",
+          "options": [
+            {
+              "value": "start-md",
+              "label": "t:general.settings.content_position.content_position_options.options_1.label"
+            },
+            {
+              "value": "center-md",
+              "label": "t:general.settings.content_position.content_position_options.options_2.label"
+            },
+            {
+              "value": "end-md",
+              "label": "t:general.settings.content_position.content_position_options.options_3.label"
+            }
+          ],
+          "default": "start-md"
+        },
+        {
+          "type": "select",
+          "id": "desktop_content_alignment",
+          "label": "t:general.settings.content_alignment.label",
+          "options": [
+            {
+              "value": "ta-left-md top-md",
+              "label": "t:general.settings.option_left.label"
+            },
+            {
+              "value": "ta-center-md middle-md",
+              "label": "t:general.settings.option_center.label"
+            },
+            {
+              "value": "ta-right-md bottom-md",
+              "label": "t:general.settings.option_right.label"
+            }
+          ],
+          "default": "ta-left-md top-md"
+        },
+        {
+          "type": "select",
+          "id": "desktop_column",
+          "label": "t:general.settings.column.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            },
+            {
+              "value": "4",
+              "label": "t:general.settings.columns_per_row.options_4.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "id": "desktop_row",
+          "label": "t:general.settings.row.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.mobile_layout.content",
+          "info": "t:general.settings.headers.mobile_layout.info"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_position",
+          "label": "t:general.settings.content_position.label",
+          "options": [
+            {
+              "value": "start-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_1.label"
+            },
+            {
+              "value": "center-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_2.label"
+            },
+            {
+              "value": "end-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_3.label"
+            }
+          ],
+          "default": "center-xs"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_alignment",
+          "label": "t:general.settings.content_alignment.label",
+          "options": [
+            {
+              "value": "ta-left top-xs",
+              "label": "t:general.settings.option_left.label"
+            },
+            {
+              "value": "ta-center middle-xs",
+              "label": "t:general.settings.option_center.label"
+            },
+            {
+              "value": "ta-right bottom-xs",
+              "label": "t:general.settings.option_right.label"
+            }
+          ],
+          "default": "ta-left top-xs"
+        },
+        {
+          "type": "select",
+          "id": "mobile_column",
+          "label": "t:general.settings.column.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "id": "mobile_row",
+          "label": "t:general.settings.row.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.button.content"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:general.settings.button_label.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "Explore more"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "t:general.settings.button_style.label",
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:general.settings.primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:general.settings.secondary.label"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:general.settings.link.label",
+          "info": "t:general.settings.blocks.link.info"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.custom_color.content"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "t:general.settings.background.label"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "t:general.settings.text.label"
+        }
+      ]
+    },
+    {
+      "name": "t:general.settings.product.name",
+      "type": "product",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.general.content"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:general.settings.product.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.settings.content.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_title",
+          "label": "t:general.settings.show_product_title.label",
+          "default": true
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.product_title_size.label",
+          "id": "title_size",
+          "visible_if": "{{ block.settings.show_title == true }}",
+          "options": [
+            {
+              "value": "headline",
+              "label": "t:general.settings.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:general.settings.heading_size.options.large.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:general.settings.heading_size.options.regular.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:general.settings.heading_size.options.small.label"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_rating",
+          "label": "t:general.settings.show_rating.label",
+          "info": "t:general.settings.show_rating.info",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_price",
+          "label": "t:general.settings.show_price.label",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_variant_swatches",
+          "label": "t:general.settings.show_variant_swatches.label",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "limited_variants_to_show",
+          "label": "t:general.settings.limit_option_values_to_show.label",
+          "info": "t:general.settings.limit_option_values_to_show.info",
+          "min": 0,
+          "max": 8,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "t:general.settings.custom_background_image.label",
+          "info": "t:general.settings.custom_background_image_product.info"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.desktop_layout.content"
+        },
+        {
+          "type": "select",
+          "id": "desktop_content_position",
+          "label": "t:general.settings.content_position.label",
+          "options": [
+            {
+              "value": "start-md",
+              "label": "t:general.settings.content_position.content_position_options.options_1.label"
+            },
+            {
+              "value": "center-md",
+              "label": "t:general.settings.content_position.content_position_options.options_2.label"
+            },
+            {
+              "value": "end-md",
+              "label": "t:general.settings.content_position.content_position_options.options_3.label"
+            }
+          ],
+          "default": "start-md"
+        },
+        {
+          "type": "select",
+          "id": "desktop_content_alignment",
+          "label": "t:general.settings.content_alignment.label",
+          "options": [
+            {
+              "value": "ta-left-md top-md",
+              "label": "t:general.settings.option_left.label"
+            },
+            {
+              "value": "ta-center-md middle-md",
+              "label": "t:general.settings.option_center.label"
+            },
+            {
+              "value": "ta-right-md bottom-md",
+              "label": "t:general.settings.option_right.label"
+            }
+          ],
+          "default": "ta-left-md top-md"
+        },
+        {
+          "type": "select",
+          "id": "desktop_column",
+          "label": "t:general.settings.column.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            },
+            {
+              "value": "4",
+              "label": "t:general.settings.columns_per_row.options_4.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "id": "desktop_row",
+          "label": "t:general.settings.row.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.mobile_layout.content",
+          "info": "t:general.settings.headers.mobile_layout.info"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_position",
+          "label": "t:general.settings.content_position.label",
+          "options": [
+            {
+              "value": "start-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_1.label"
+            },
+            {
+              "value": "center-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_2.label"
+            },
+            {
+              "value": "end-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_3.label"
+            }
+          ],
+          "default": "center-xs"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_alignment",
+          "label": "t:general.settings.content_alignment.label",
+          "options": [
+            {
+              "value": "ta-left top-xs",
+              "label": "t:general.settings.option_left.label"
+            },
+            {
+              "value": "ta-center middle-xs",
+              "label": "t:general.settings.option_center.label"
+            },
+            {
+              "value": "ta-right bottom-xs",
+              "label": "t:general.settings.option_right.label"
+            }
+          ],
+          "default": "ta-left top-xs"
+        },
+        {
+          "type": "select",
+          "id": "mobile_column",
+          "label": "t:general.settings.column.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "id": "mobile_row",
+          "label": "t:general.settings.row.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.overlay_color.content"
+        },
+        {
+          "type": "range",
+          "unit": "%",
+          "max": 90,
+          "min": 0,
+          "step": 10,
+          "default": 30,
+          "id": "overlay_opacity",
+          "label": "t:general.settings.overlay_opacity.label"
+        },
+        {
+          "type": "color",
+          "id": "mask_overlay_color",
+          "label": "t:general.settings.custom_mask_overlay_opacity.label",
+          "visible_if": "{{ block.settings.overlay_opacity != 0 }}"
+        },
+        {
+          "type": "color",
+          "id": "content_overlay_color",
+          "label": "t:general.settings.custom_content_overlay_opacity.label"
+        },
+        {
+          "type": "color",
+          "id": "price_color",
+          "label": "t:general.settings.custom_price_overlay_color.label"
+        }
+      ]
+    },
+    {
+      "name": "t:general.settings.collection.name",
+      "type": "collection",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.general.content"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:general.settings.collection.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.settings.content.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_title",
+          "label": "t:general.settings.show_collection_title.label",
+          "default": true
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.collection_title_size.label",
+          "id": "title_size",
+          "visible_if": "{{ block.settings.show_title == true }}",
+          "options": [
+            {
+              "value": "headline",
+              "label": "t:general.settings.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:general.settings.heading_size.options.large.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:general.settings.heading_size.options.regular.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:general.settings.heading_size.options.small.label"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_collection_quantity",
+          "label": "t:general.settings.show_collection_quantity.label",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "quantity_style",
+          "label": "t:general.settings.quantity_style.label",
+          "default": "superscript",
+          "visible_if": "{{ block.settings.show_collection_quantity == true }}",
+          "options": [
+            {
+              "value": "superscript",
+              "label": "t:general.settings.option_title_supplement.label"
+            },
+            {
+              "value": "separate_line",
+              "label": "t:general.settings.option_separate_line.label"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "t:general.settings.custom_background_image.label",
+          "info": "t:general.settings.custom_background_image_collection.info"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.desktop_layout.content"
+        },
+        {
+          "type": "select",
+          "id": "desktop_content_position",
+          "label": "t:general.settings.content_position.label",
+          "options": [
+            {
+              "value": "start-md",
+              "label": "t:general.settings.content_position.content_position_options.options_1.label"
+            },
+            {
+              "value": "center-md",
+              "label": "t:general.settings.content_position.content_position_options.options_2.label"
+            },
+            {
+              "value": "end-md",
+              "label": "t:general.settings.content_position.content_position_options.options_3.label"
+            }
+          ],
+          "default": "start-md"
+        },
+        {
+          "type": "select",
+          "id": "desktop_content_alignment",
+          "label": "t:general.settings.content_alignment.label",
+          "options": [
+            {
+              "value": "ta-left-md top-md",
+              "label": "t:general.settings.option_left.label"
+            },
+            {
+              "value": "ta-center-md middle-md",
+              "label": "t:general.settings.option_center.label"
+            },
+            {
+              "value": "ta-right-md bottom-md",
+              "label": "t:general.settings.option_right.label"
+            }
+          ],
+          "default": "ta-left-md top-md"
+        },
+        {
+          "type": "select",
+          "id": "desktop_column",
+          "label": "t:general.settings.column.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            },
+            {
+              "value": "4",
+              "label": "t:general.settings.columns_per_row.options_4.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "id": "desktop_row",
+          "label": "t:general.settings.row.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.mobile_layout.content",
+          "info": "t:general.settings.headers.mobile_layout.info"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_position",
+          "label": "t:general.settings.content_position.label",
+          "options": [
+            {
+              "value": "start-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_1.label"
+            },
+            {
+              "value": "center-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_2.label"
+            },
+            {
+              "value": "end-xs",
+              "label": "t:general.settings.content_position.content_position_options.options_3.label"
+            }
+          ],
+          "default": "center-xs"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_alignment",
+          "label": "t:general.settings.content_alignment.label",
+          "options": [
+            {
+              "value": "ta-left top-xs",
+              "label": "t:general.settings.option_left.label"
+            },
+            {
+              "value": "ta-center middle-xs",
+              "label": "t:general.settings.option_center.label"
+            },
+            {
+              "value": "ta-right bottom-xs",
+              "label": "t:general.settings.option_right.label"
+            }
+          ],
+          "default": "ta-left top-xs"
+        },
+        {
+          "type": "select",
+          "id": "mobile_column",
+          "label": "t:general.settings.column.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "select",
+          "id": "mobile_row",
+          "label": "t:general.settings.row.label",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "t:general.settings.columns_per_row.options_3.label"
+            }
+          ],
+          "default": "2"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.overlay_color.content"
+        },
+        {
+          "type": "range",
+          "unit": "%",
+          "max": 90,
+          "min": 0,
+          "step": 10,
+          "default": 30,
+          "id": "overlay_opacity",
+          "label": "t:general.settings.overlay_opacity.label"
+        },
+        {
+          "type": "color",
+          "id": "mask_overlay_color",
+          "label": "t:general.settings.custom_mask_overlay_opacity.label",
+          "visible_if": "{{ block.settings.overlay_opacity != 0 }}"
+        },
+        {
+          "type": "color",
+          "id": "content_overlay_color",
+          "label": "t:general.settings.custom_content_overlay_opacity.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.content_collage.name",
+      "blocks": [
+        {
+					"type": "video"
+				},
+        {
+					"type": "text",
+          "settings": {
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_column": "1",
+            "mobile_row": "2"
+          }
+				},
+        {
+					"type": "image",
+          "settings": {
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_column": "1",
+            "mobile_row": "2"
+          }
+				},
+        {
+          "type": "product"
+				},
+        {
+          "type": "collection"
+				}
+			]
+    }
+  ]
+}
+{% endschema %}

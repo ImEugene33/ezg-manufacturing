@@ -1,0 +1,824 @@
+{%- liquid
+  assign section_id = section.id | md5 | truncate: 12, ""
+
+  assign loading = 'lazy'
+  assign decoding ='async'
+  assign fetchpriority = 'auto'
+  assign preload = false
+  if section.index == 1
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+    assign preload = true
+  endif
+
+  assign running_speed = section.settings.rotating_speed
+  assign loop = 5
+  case section.blocks.size
+    when 1, 2
+      assign loop = 10
+    when 3, 4
+      assign loop = 8
+    else
+      assign loop = 5
+  endcase
+
+  assign list_alignment = section.settings.list_alignment
+  assign content_position = section.settings.content_position
+  assign content_alignment = section.settings.content_alignment
+  assign sht_mask = content_position | replace: '-xs', ''
+  if sht_mask == 'center'
+    if content_alignment contains 'left'
+      assign sht_mask = 'center-left'
+    elsif content_alignment contains 'right'
+      assign sht_mask = 'center-right'
+    endif
+  endif
+
+  if content_alignment contains 'left'
+    assign price_alignment = 'start-xs'
+  elsif content_alignment contains 'right'
+    assign price_alignment = 'end-xs'
+  else
+    assign price_alignment = 'center-xs'
+  endif
+
+-%}
+{%- render 'section-padding-collapse' -%}
+<div data-animate="regular-section" class="js-animate section section--vertical section--running color-{{- section.settings.color_scheme }} background hide-empty" data-ui-component="Section Running Image Link">
+  {%- if section.settings.heading != blank or section.settings.description != blank or section.settings.button_text != blank or section.settings.enable_countdown == true -%}
+    <div class="section__header">
+      <div class="ctnr">
+        {% render 'section-content-horizontal',
+          section: section,
+          class: 'section__text--horizontal p-relative zi-1 gap-scale-xl',
+          heading_size: section.settings.heading_size,
+          button_main_text: section.settings.button_text,
+          button_main_link: section.settings.button_link,
+          button_main_style: 'btn-s btn-tertiary btn-horizontal',
+          enable_button: true,
+          enable_countdown: section.settings.enable_countdown
+        %}
+      </div>
+    </div>
+  {%- endif -%}
+  {%- if section.blocks.size > 0 -%}
+    <div class="section__content">
+      <sht-marquee-section class="marquee-section o-hidden w-100 p-relative d-block color-{{- section.settings.color_scheme }} background" role="region" normal-speed="{{ running_speed }}" hover-interaction="{{ section.settings.hover_interaction }}" slow-speed="1" direction="{{ section.settings.running_direction }}" size="{{ section.blocks.size }}">
+        {% capture marquee_list %}
+          <div aria-live="polite" aria-atomic="true" class="js-marquee-list d-flex fw-nowrap flex-auto center-xs {{ list_alignment }}">
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign item_size = 'running-item__' | append: block.settings.item_size
+                assign item_shape = section.settings.item_shape
+                assign image_ratio = item_shape
+                case block.type
+                  when 'image'
+                    assign image_name = block.settings.image | split: '/' | last | split: '.' | first
+                    assign image_alt = block.settings.image.alt | default: image_name | default: block.settings.heading
+                    assign media = block.settings.image
+                    assign original_ratio = block.settings.image.aspect_ratio
+                  when 'product'
+                    assign product = block.settings.product
+                    assign image_name = block.settings.image | split: '/' | last | split: '.' | first
+                    assign image_alt = block.settings.image.alt | default: image_name | default: product.title
+                    assign media = block.settings.image | default: product.featured_media
+                    assign original_ratio = block.settings.image.aspect_ratio | default: product.featured_media.aspect_ratio
+                    assign random_number =  'now' | date: '%N' | append: section_id | append: product.id
+                    assign product_image_id = random_number | prepend: 'cardProductImage-'
+                    assign variants_alignment = section.settings.content_alignment | replace: 'top', 'start' | replace: 'middle', 'center' | replace: 'bottom', 'end'
+                  when 'collection'
+                    assign collection = block.settings.collection
+                    assign image_name = block.settings.image | split: '/' | last | split: '.' | first
+                    assign image_alt = block.settings.image.alt | default: image_name | default: collection.title
+                    assign media = block.settings.image | default: collection.image | default: collection.products.first.featured_image
+                    assign original_ratio = block.settings.image.aspect_ratio | default: collection.image.aspect_ratio | default: collection.products.first.featured_image.aspect_ratio
+                endcase
+                if media != blank
+                  assign media = media | image_url: width: media.width | image_tag: widths: '480, 720, 1080', sizes: '350px', alt: image_alt, class: 'media of-cover h-100 w-100', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+                  if item_shape == 'auto'
+                    assign image_ratio = original_ratio
+                  endif
+                else
+                  assign media = 'blog-apparel-3' | placeholder_svg_tag: 'placeholder media of-cover h-100 w-100 js-image-lazy'
+                  if item_shape == 'auto'
+                    assign image_ratio = '1/1'
+                  endif
+                endif
+
+                assign running_image_class = ' p-relative o-hidden rad-m ratio sht-mask sht-mask--' | append: sht_mask | append: ' '| append: item_size
+
+                assign overlay_opacity = block.settings.overlay_opacity | divided_by: 100.0
+                assign overlay_color = 'inherit'
+                unless block.settings.block_mask_overlay_color.alpha == 0.0 or block.settings.block_mask_overlay_color == blank
+                  assign overlay_color = block.settings.block_mask_overlay_color | color_modify: 'alpha', overlay_opacity
+                endunless
+                assign content_color = 'color: inherit'
+                assign description_color_overlay = 'rgba(var(--color-normal-text-rgb),0.6)'
+                unless block.settings.block_content_overlay_color.alpha == 0.0 or block.settings.block_content_overlay_color == blank
+                  assign content_color = 'color:' | append: block.settings.block_content_overlay_color
+                  assign description_color_overlay = block.settings.block_content_overlay_color | color_modify: 'alpha', 0.6
+                  assign description_color_hover = block.settings.block_content_overlay_color | color_modify: 'alpha', 0.8
+                endunless
+                assign description_color = 'color:' | append: description_color_overlay
+                assign price_color = 'inherit'
+                unless block.settings.price_color.alpha == 0.0 or block.settings.price_color == blank
+                  assign price_color = 'color: ' | append: block.settings.price_color
+                endunless
+              -%}
+              <div role="group" class="marquee-item js-marquee-item d-flex flex-auto ml-scale-m" style="--ratio: {{ image_ratio }}; --color-mask: {{ overlay_color }}; --overlay: {{ overlay_opacity }}; {{ content_color }}">
+                <div class="running-content-item card-animate running-content-{{ block.type }} ta-center d-flex border center-xs middle-xs {{ running_image_class }}" {{ block.shopify_attributes }}>
+                  <div class="card-animate-image inset p-absolute">
+                    {%- render 'image', image_item: media, ratio: section.settings.item_shape , image_wrap_classes: "h-100 ", image_classes: "h-100 w-100" -%}
+                  </div>
+                  <div class="p-relative zi-1 h-100 w-100 p-m d-flex fd-column {{ content_position }} {{ content_alignment }}">
+                    {%- case block.type -%}
+                      {%- when 'image' -%}
+                        <div class="block__content d-flex fd-column gap-xs o-hidden">
+                          <span class="fs-heading-m component-heading d-block hide-empty">{{- block.settings.heading -}}</span>
+                          <div class="promotion__description fs-body-l hide-empty rte" style="{{ description_color }}; --desc-color-hover: {{ description_color_hover }}">{{- block.settings.description -}}</div>
+                        </div>
+                        {%- if block.settings.link != blank -%}
+                          <a href="{{- block.settings.link -}}" class="d-block w-100 h-100 p-absolute inset zi-2 ele-focus-visible" aria-label="{{- block.settings.heading | escape -}}"></a>
+                        {%- endif -%}
+                      {%- when 'product' -%}
+                        <div class="block__content d-flex fd-column o-hidden">
+                          {%- if block.settings.product != blank -%}
+                            {%- if block.settings.show_product_title -%}
+                              <span class="fs-heading-m component-heading d-block hide-empty mb-2xs">{{- product.title -}}</span>
+                            {%- endif -%}
+                            {%- if block.settings.show_rating -%}
+                              {%- render 'product-rating', product: product -%}
+                            {%- endif -%}
+                            {%- if block.settings.show_price == true -%}
+                              {%- render 'product-price' product: product, target: product, price_class: 'd-block mb-xs', price_style: 'fs-heading-m component-heading', content_align: price_alignment, price_style_custom: price_color, sub_price_style: description_color -%}
+                            {%- endif -%}
+                            {%- if block.settings.show_variant_swatches -%}
+                              <div class="product-card__variant-swatches hide-empty">
+                                {%- render 'promotion-card-product-variant-swatches', block: block, product: product, product_image_id: product_image_id, content_align: variants_alignment, card_variant_labels: settings.variant_option_name -%}
+                              </div>
+                            {%- endif -%}
+                          {%- else -%}
+                            {%- if block.settings.show_product_title -%}
+                              <span class="fs-heading-m component-heading d-block hide-empty mb-2xs">{{- 'sections.running_image_link.product' | t -}}</span>
+                            {%- endif -%}
+                            {%- if block.settings.show_price == true -%}
+                              {%- liquid
+                                assign money_price = 5300 | money
+                                assign money_price_sale = 6000 | money
+                              -%}
+                              <span class="price d-block mb-xs">
+                                <span class="price__regular d-none {{ section.settings.content_position }}">
+                                  <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                                  <span class="price-item price-item--regular price-item--last d-inline-block" style="{{ price_color }}">{{ money_price }}</span>
+                                </span>
+                                <span class="price__sale fw-wrap d-flex middle-xs gap-3xs {{ section.settings.content_position }} fs-body-xl">
+                                  <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                                  <span class="price-item price-item--last d-inline-block" style="{{ price_color }}">{{ money_price }}</span>
+                                  <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                                  <span class="d-inline-block">
+                                    <s class="price-item price-item--regular" style="{{ description_color }}">{{ money_price_sale }}</s>
+                                  </span>
+                                </span>
+                              </span>
+                            {%- endif -%}
+                          {%- endif -%}
+                        </div>
+                        {%- if block.settings.product != blank -%}
+                          <a href="{{- product.url -}}" class="d-block w-100 h-100 p-absolute inset zi-2 ele-focus-visible" aria-label="{{- product.title | escape -}}"></a>
+                        {%- endif -%}
+                      {%- when 'collection' -%}
+                        <div class="block__content d-flex fd-column gap-2xs o-hidden">
+                          <span class="fs-heading-m component-heading d-block hide-empty">
+                            {%- if block.settings.show_collection_title -%}
+                              {%- if block.settings.collection != blank -%}
+                                {{- block.settings.collection.title -}}
+                              {%- else -%}
+                                {{- 'sections.running_image_link.collection' | t -}}
+                              {%- endif -%}
+                            {%- endif -%}
+                            {%- if block.settings.quantity_style == 'superscript' and block.settings.show_collection_quantity -%}
+                              <sup class="filter__counter fs-body-xs ml-3xs f-extra {{ settings.numbers_style | replace: 'number', '' }}">
+                                {{- block.settings.collection.products_count | default: '99' -}}
+                              </sup>
+                            {%- endif -%}
+                          </span>
+                          {%- if block.settings.quantity_style == 'separate_line' and block.settings.show_collection_quantity -%}
+                            <span class="fs-heading-xs component-heading wb-break-word" style="{{ description_color }}">
+                              {%- if block.settings.collection != blank -%}
+                                {{- 'general.collection.view_collection' | t: count: block.settings.collection.products_count -}}
+                              {%- else -%}
+                                {{- 'general.collection.view_collection' | t: count: 99 -}}
+                              {%- endif -%}
+                            </span>
+                          {%- endif -%}
+                        </div>
+                        {%- if block.settings.collection != blank -%}
+                          <a href="{{- collection.url -}}" class="d-block w-100 h-100 p-absolute inset zi-2 ele-focus-visible" aria-label="{{- collection.title | escape -}}"></a>
+                        {%- endif -%}
+                    {%- endcase -%}
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {% endcapture %}
+        <div class="marquee-container d-flex js-marquee-container" loop-marquee="{{ loop }}">
+          {%- for i in (1..loop) -%}
+            <div class="d-flex fw-nowrap fs-0 marquee__items js-marquee-items middle-xs">
+              {{ marquee_list }}
+            </div>
+          {%- endfor -%}
+        </div>
+      </sht-marquee-section>
+    </div>
+  {%- endif -%}
+</div>
+
+
+{% schema %}
+{
+  "name": "t:sections.running_image_link.name",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.section_heading.label",
+      "default": "Running image link"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.heading_size.label",
+      "id": "heading_size",
+      "visible_if": "{{ section.settings.heading != blank }}",
+      "default": "h5",
+      "options": [
+        {
+          "value": "h3-regular",
+          "label": "t:general.settings.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:general.settings.heading_size.options.large.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:general.settings.heading_size.options.regular.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:general.settings.heading_size.options.small.label"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:general.settings.section_description.label",
+      "default": "<p>Highlight important links you want with images</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.running_method.content"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.running_direction.label",
+      "id": "running_direction",
+      "default": "animation-direction",
+      "options": [
+        {
+          "value": "animation-direction",
+          "label": "t:general.settings.running_direction.option_1.label"
+        },
+        {
+          "value": "animation-reverse",
+          "label": "t:general.settings.running_direction.option_2.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "rotating_speed",
+      "label": "t:general.settings.rotating_speed.label",
+      "default": "3",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:general.settings.very_slow.label"
+        },
+        {
+          "value": "2",
+          "label": "t:general.settings.slow.label"
+        },
+        {
+          "value": "3",
+          "label": "t:general.settings.regular.label"
+        },
+        {
+          "value": "4",
+          "label": "t:general.settings.fast.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.hover_interaction.label",
+      "id": "hover_interaction",
+      "options": [
+        {
+          "value": "slow_down",
+          "label": "t:general.settings.slow_down.label"
+        },
+        {
+          "value": "pause",
+          "label": "t:general.settings.pause.label"
+        }
+      ],
+      "default": "slow_down"
+    },
+    {
+      "type": "select",
+      "id": "list_alignment",
+      "label": "t:general.settings.list_alignment.label",
+      "info": "t:general.settings.list_alignment.info",
+      "default": "top-xs",
+      "options": [
+        {
+          "value": "top-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_1.label"
+        },
+        {
+          "value": "middle-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_2.label"
+        },
+        {
+          "value": "bottom-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_3.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.list_item.content"
+    },
+    {
+      "type": "select",
+      "id": "item_shape",
+      "label": "t:general.settings.item_shape.label",
+      "default": "auto",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "t:general.settings.image_ratio.options.option_square.label"
+        },
+        {
+          "value": "3/2",
+          "label": "t:general.settings.image_ratio.options.option_landscape.label"
+        },
+        {
+          "value": "2/3",
+          "label": "t:general.settings.image_ratio.options.option_portrait.label"
+        },
+        {
+          "value": "auto",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "t:general.settings.content_position.label",
+      "default": "start-xs",
+      "options": [
+        {
+          "value": "start-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_1.label"
+        },
+        {
+          "value": "center-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_2.label"
+        },
+        {
+          "value": "end-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_3.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "default": "ta-left top-xs",
+      "options": [
+        {
+          "value": "ta-left top-xs",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center middle-xs",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right bottom-xs",
+          "label": "t:general.settings.option_right.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.button.content"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:general.settings.label.label",
+      "info": "t:general.settings.hide_if_empty.info",
+      "default": "Explore more"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:general.settings.link.label",
+      "visible_if": "{{ section.settings.button_text != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.countdown_timer.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_countdown",
+      "label": "t:general.settings.enable_countdown_timer.label",
+      "info": "t:general.settings.headers.countdown_timer.info",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_end",
+      "label": "t:general.settings.hide_the_countdown.label",
+      "default": true,
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "t:general.settings.end_date.label",
+      "info": "t:general.settings.end_date.info",
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "t:general.settings.end_time.label",
+      "info": "t:general.settings.end_time.info",
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    },
+    {
+      "type": "richtext",
+      "id": "end_text",
+      "label": "t:general.settings.end_text.label",
+      "info": "t:general.settings.end_text.info",
+      "default": "<p>This event is finished</p>",
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    },
+    {
+      "type": "color",
+      "id": "countdown_background",
+      "label": "t:general.settings.custom_background.label",
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    },
+    {
+      "type": "color",
+      "id": "countdown_number_color",
+      "label": "t:general.settings.custom_number.label",
+      "visible_if": "{{ section.settings.enable_countdown == true }}"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "t:sections.running_image_link.blocks.image_link.name",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.general.content"
+        },
+        {
+          "type": "url",
+          "label": "t:general.settings.link.label",
+          "id": "link"
+        },
+        {
+          "type": "select",
+          "id": "item_size",
+          "label": "t:general.settings.item_size.label",
+          "default": "large",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:general.settings.option_small.label"
+            },
+            {
+              "value": "regular",
+              "label": "t:general.settings.option_regular.label"
+            },
+            {
+              "value": "large",
+              "label": "t:general.settings.option_large.label"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.settings.content.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:general.settings.background_image.label"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:general.settings.heading.label",
+          "default": "Image heading"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:general.settings.description.label",
+          "default": "<p>Highlight your new collection or share content related to this image</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.overlay_color.content"
+        },
+        {
+          "type": "range",
+          "max": 90,
+          "min": 0,
+          "step": 10,
+          "default": 30,
+          "id": "overlay_opacity",
+          "label": "t:general.settings.overlay_opacity.label",
+          "unit": "%"
+        },
+        {
+          "type": "color",
+          "id": "block_mask_overlay_color",
+          "label": "t:general.settings.custom_mask_overlay_opacity.label",
+          "visible_if": "{{ block.settings.overlay_opacity != 0 }}"
+        },
+        {
+          "type": "color",
+          "id": "block_content_overlay_color",
+          "label": "t:general.settings.custom_content_overlay_opacity.label"
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "t:sections.running_image_link.blocks.product_link.name",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.general.content"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:general.settings.product.label"
+        },
+        {
+          "type": "select",
+          "id": "item_size",
+          "label": "t:general.settings.item_size.label",
+          "default": "large",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:general.settings.option_small.label"
+            },
+            {
+              "value": "regular",
+              "label": "t:general.settings.option_regular.label"
+            },
+            {
+              "value": "large",
+              "label": "t:general.settings.option_large.label"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.settings.content.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_title",
+          "label": "t:general.settings.show_product_title.label",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_rating",
+          "label": "t:general.settings.show_rating.label",
+          "info": "t:general.settings.show_rating.info",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_price",
+          "label": "t:general.settings.show_price.label",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_variant_swatches",
+          "label": "t:general.settings.show_variant_swatches.label",
+          "info": "t:general.settings.show_variant_swatches.info",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "limited_variants_to_show",
+          "label": "t:general.settings.limit_option_values_to_show.label",
+          "info": "t:general.settings.limit_option_values_to_show.info",
+          "min": 0,
+          "max": 8,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:general.settings.custom_background_image.label",
+          "info": "t:general.settings.custom_background_image_product.info"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.overlay_color.content"
+        },
+        {
+          "type": "range",
+          "max": 90,
+          "min": 0,
+          "step": 10,
+          "default": 30,
+          "id": "overlay_opacity",
+          "label": "t:general.settings.overlay_opacity.label",
+          "unit": "%"
+        },
+        {
+          "type": "color",
+          "id": "block_mask_overlay_color",
+          "label": "t:general.settings.custom_mask_overlay_opacity.label",
+          "visible_if": "{{ block.settings.overlay_opacity != 0 }}"
+        },
+        {
+          "type": "color",
+          "id": "block_content_overlay_color",
+          "label": "t:general.settings.custom_content_overlay_opacity.label"
+        },
+        {
+          "type": "color",
+          "id": "price_color",
+          "label": "t:general.settings.custom_price_overlay_color.label"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "name": "t:sections.running_image_link.blocks.collection_link.name",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.general.content"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:general.settings.collection.label"
+        },
+        {
+          "type": "select",
+          "id": "item_size",
+          "label": "t:general.settings.item_size.label",
+          "default": "large",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:general.settings.option_small.label"
+            },
+            {
+              "value": "regular",
+              "label": "t:general.settings.option_regular.label"
+            },
+            {
+              "value": "large",
+              "label": "t:general.settings.option_large.label"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.settings.content.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_collection_title",
+          "label": "t:general.settings.show_collection_title.label",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_collection_quantity",
+          "label": "t:general.settings.show_product_quantity.label",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "quantity_style",
+          "label": "t:general.settings.quantity_style.label",
+          "default": "separate_line",
+          "options": [
+            {
+              "value": "superscript",
+              "label": "t:general.settings.option_superscript.label"
+            },
+            {
+              "value": "separate_line",
+              "label": "t:general.settings.option_separate_line.label"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:general.settings.custom_background_image.label",
+          "info": "t:general.settings.custom_background_image_collection.info"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.overlay_color.content"
+        },
+        {
+          "type": "range",
+          "max": 90,
+          "min": 0,
+          "step": 10,
+          "default": 30,
+          "id": "overlay_opacity",
+          "label": "t:general.settings.overlay_opacity.label",
+          "unit": "%"
+        },
+        {
+          "type": "color",
+          "id": "block_mask_overlay_color",
+          "label": "t:general.settings.custom_mask_overlay_opacity.label",
+          "visible_if": "{{ block.settings.overlay_opacity != 0 }}"
+        },
+        {
+          "type": "color",
+          "id": "block_content_overlay_color",
+          "label": "t:general.settings.custom_content_overlay_opacity.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.running_image_link.name",
+      "blocks": [
+				{
+					"type":"image"
+				},
+        {
+					"type":"product"
+				},
+        {
+					"type":"collection"
+				}
+			]
+    }
+  ]
+}
+{% endschema %}

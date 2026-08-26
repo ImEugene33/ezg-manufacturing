@@ -1,0 +1,86 @@
+/* CTA Section */
+.cta,
+.cta *,
+.cta *::before,
+.cta *::after {
+  box-sizing: border-box;
+}
+.cta {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.cta__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (min-width: 1024px) {
+  .cta__container {
+    gap: 32px;
+  }
+}
+
+.cta__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cta__heading {
+  margin: 0;
+  color: #ffffff;
+}
+
+.cta__heading--h3 {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+}
+@media screen and (min-width: 768px) {
+  .cta__heading--h3 {
+    font-size: 26px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .cta__heading--h3 {
+    font-size: 30px;
+    letter-spacing: 0.6px;
+  }
+}
+
+.cta__text {
+  margin: 0;
+  max-width: 655px;
+  color: #ffffff;
+  font-family: "Helvetica Neue";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.32px;
+}
+@media screen and (min-width: 768px) {
+  .cta__text {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.36px;
+  }
+}
+.cta__text p {
+  margin: 0;
+}
+.cta__text p + p {
+  margin-top: 8px;
+}
+.cta__text a {
+  color: inherit;
+}
+
+.cta__btn {
+  white-space: nowrap;
+}

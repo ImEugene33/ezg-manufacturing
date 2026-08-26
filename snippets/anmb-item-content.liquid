@@ -1,0 +1,38 @@
+{% liquid
+    assign popup_content_dialog_id = block.id | append: section_id | md5 | truncate: 12, ""
+    assign no_action = " disable disable-link"
+    if block.settings.message_link != blank or block.settings.select_page != blank
+      assign no_action = ""
+    endif
+    if block.settings.icon_before_message
+      capture block_icon
+        render 'icon', size: 'icon icon-fix-2xl', icon_source: block.settings.icon_source, theme_library_icon: block.settings.theme_library_icon, icon_image: block.settings.icon_image, icon_alt:block.settings.message_text, custom_code: block.settings.custom_code
+      endcapture
+    endif
+  %}
+{%- if block.settings.message_action == "open_link" and block.settings.message_link != blank -%}
+  <a href="{{ block.settings.message_link | default: "#" }}" class="{{ anmb_class }} anmb-item__wrapper ele-focus-visible w-100 d-flex gap-s m-zero {{ section.settings.text_size }}{{ no_action }} rtl-flip-x">
+    {{ block_icon }}
+    <div class="content-anmb d-flex center-xs middle-xs gap-xs">
+      <span class=" ta-left">{{ block.settings.message_text }}</span>
+      <span class="action-anmb {{ section.settings.show_icon_link | replace: false, 'd-none' }}">
+        {% render 'icon-arrow-right', class: "icon icon-fix-xl" %}
+      </span>
+    </div>
+  </a>
+{%- elsif block.settings.message_action == "open_popup" and block.settings.select_page != blank -%}
+  <button class="{{ anmb_class }} anmb-item__wrapper ele-focus-visible w-100 btn bg-transparent d-flex gap-s m-zero {{ section.settings.text_size }}{{ no_action }}" onclick="window.dialogAnnouncementPopup{{ popup_content_dialog_id }}.showModal(this, true);">
+    {{ block_icon }}
+    <div class="content-anmb d-flex center-xs middle-xs gap-xs">
+      <span class="ta-left">{{ block.settings.message_text }}</span>
+      <span class="action-anmb {{ section.settings.show_icon_popup | replace: false, 'd-none' }}">
+        {% render 'icon-infor' | class: "icon icon-fix-xl" %}
+      </span>
+    </div>
+  </button>
+{%- else -%}
+  <div class="{{ anmb_class }} anmb-item__wrapper ele-focus-visible w-100 d-flex gap-s m-zero {{ section.settings.text_size }}" tabindex="-1">
+    {{ block_icon }}
+    <span class="content-anmb ta-left">{{ block.settings.message_text }}</span>
+  </div>
+{%- endif -%}

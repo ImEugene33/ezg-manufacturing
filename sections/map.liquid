@@ -1,0 +1,331 @@
+{%- liquid
+  assign loading = "lazy"
+  assign decoding ="async"
+  assign fetchpriority = "auto"
+
+  if section.index == 1
+    assign loading = "eager"
+    assign fetchpriority = "high"
+  endif
+  assign map_address = section.settings.map_address
+  assign map_media = 'hero-apparel-1' | placeholder_svg_tag: 'placeholder media of-cover w-100 h-100'
+  assign media_alt = section.settings.map_image.alt | default: section.settings.map_image.image | split: '/' | last
+  assign map_media = section.settings.map_image | image_url: width: section.settings.map_image.width, height: section.settings.map_image.height | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000', sizes: '(min-width: 769px) calc(100vw / 12 * 7), 100vw', alt: media_alt, class: 'js-image-lazy media of-cover w-100 h-100', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+  assign default_heading = "section.map.heading_info" | t
+  assign default_button = "section.map.button_text" | t
+-%}
+{%- unless section.settings.map_width == 'full-width' -%}
+	{%- render 'section-padding-collapse' -%}
+{%- endunless -%}
+<div data-animate="regular-section" id="section-{{ section.id }}" data-ui-component="Section Map" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}"
+  class="js-animate section map o-hidden background promotion-section color-{{- section.settings.color_scheme }} section-promotion--{{ section.settings.map_width }}"
+>
+  <div class="ctnr {% unless section.settings.map_width == 'full-width' %}rad-l-md o-hidden{%- endunless -%}">
+    <div class="map-media p-relative media-md w-100" style="--ratio-md: {{ section.settings.map_ratio }}; --mh-xs: {{ section.settings.map_height }}; --mh-md: unset">
+      {%- if section.blocks.size != 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="banner-content__animate map-content p-xs d-flex p-absolute h-100 w-100 zi-1 color-{{- section.settings.color_scheme }} {{ block.settings.desktop_content_position }} {{ block.settings.mobile_content_position }}" {{ section.shopify_attributes }}>
+            <sht-accordion class="accordion rad-l border map-content__info disable-scrollbars d-flex fd-column d-none-md">
+              <div class="accordion__item background js-accordion-item p-m">
+                <button class="region-trigger accordion__header accordion__button w-100 p-zero js-accordion-trigger d-flex middle-xs p-relative c-pointer" id="collapsible-control-{{- block.id -}}" aria-expanded="false" aria-controls="collapsible-content-{{- block.id -}}">
+                  <span class="m-zero flex-1 ta-left">
+                    <span class="map-content__heading mb-xs regular-heading {{ block.settings.heading_size }}">{{- block.settings.heading | escape | default: default_heading -}}</span>
+                  </span>
+                  <span class="toggle__icon btn-icon-m d-flex middle-xs center-xs p-relative">
+                    {% render 'icon-toggle', icon_arrow: 'icon-caret-down', class_first: 'toggle__icon--plus p-absolute', class_second: 'toggle__icon--minus p-absolute' %}
+                  </span>
+                </button>
+                <div class="accordion__content o-hidden js-accordion-content accordion-content" id="collapsible-content-{{- block.id -}}" role="region" aria-describedby="collapsible-control-{{- block.id -}}" tabindex="-1" style="max-height: 0">
+                  {%- if block.settings.description != blank %}
+                    <div class="map-content__desc mt-xs fs-body-l color-text-60 rte hide-empty w-100">{{- block.settings.description -}}</div>
+                  {% endif -%}
+                  {%- if map_address != blank -%}
+                    <div class="s-footer-sm mt-s ">
+                      <a href="{{ map_address | url_encode | prepend: 'https://www.google.com/maps/search/?api=1&query=' }}" target="_blank" class="btn btn-{{- block.settings.button_primary_style }} btn-m ta-center">
+                        {{- block.settings.button_text | escape | default: default_button -}}
+                      </a>
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </sht-accordion>
+            <div class="d-none d-block-md rad-l border w-100 map-content__info disable-scrollbars p-m background">
+              <h3 class="map-content__heading mb-xs regular-heading {{ block.settings.heading_size }}">{{- block.settings.heading | escape | default: default_heading -}}</h3>
+              {%- if block.settings.description != blank %}
+                <div class="map-content__desc mb-s fs-body-l rte color-text-60 hide-empty w-100">{{- block.settings.description -}}</div>
+              {% endif -%}
+              {%- if map_address != blank -%}
+                <div class="s-footer-sm">
+                  <a href="{{ map_address | url_encode | prepend: 'https://www.google.com/maps/search/?api=1&query=' }}" target="_blank" class="btn btn-{{- block.settings.button_primary_style }} btn-m ta-center w-100 w-md-auto">
+                    {{- block.settings.button_text | escape | default: default_button -}}
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+      <div class="map-map h-100 p-absolute w-100">
+        {%- if section.settings.map_image != blank or map_address == blank -%}
+          <div class="h-100 o-hidden">
+            {% render 'image', image_item: map_media, image_wrap_classes: 'h-100', image_classes: 'h-100 map_animation' %}
+          </div>
+        {%- else -%}
+          <sht-map class="banner-media__animate" data-zoom="14" data-type="roadmap" data-location="{{ map_address }}">
+            <iframe defer class="js-map-iframe w-100 h-100 d-block" loading="lazy" scrolling="no" title="Google Map" src="" srcdoc="loading..."></iframe>
+          </sht-map>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+	{
+    "name": "t:sections.map.name",
+    "disabled_on": {
+      "groups": [
+        "header",
+        "footer",
+        "custom.overlay"
+      ]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.general.content"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:general.settings.color_schemes.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.map.settings.headers.map.content"
+      },
+      {
+        "type": "text", 
+        "id": "map_address",
+        "info": "t:sections.map.settings.google_map_address.info",
+        "label": "t:sections.map.settings.google_map_address.label",
+        "default": "Brooklyn, NY, USA"
+      },
+      {
+        "type": "image_picker",
+        "id": "map_image",
+        "label": "t:sections.map.settings.custom_map_image.label",
+        "info": "t:sections.map.settings.custom_map_image.info"
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.desktop_layout.content"
+      },
+      {
+        "type": "select",
+        "label": "t:sections.map.settings.map_width.label",
+        "id": "map_width",
+        "default": "stretch",
+        "options": [
+          {
+            "value": "max-width",
+            "label": "t:general.settings.options.option_max_width.label"
+          },
+          {
+            "value": "stretch",
+            "label": "t:general.settings.options.option_stretch.label"
+          },
+          {
+            "value": "full-width",
+            "label": "t:general.settings.options.option_full_width.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "label": "t:sections.map.settings.map_ratio.label",
+        "id": "map_ratio",
+        "default": "1.778",
+        "options": [
+          {
+           "value": "1.333",
+            "label": "4:3" 
+          },
+          {
+            "value": "1.778",
+            "label": "16:9"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.mobile_layout.content"
+      },
+      {
+        "type": "select",
+        "label": "t:sections.map.settings.map_height.label",
+        "id": "map_height",
+        "default": "70vh",
+        "info": "t:sections.map.settings.map_height.info",
+        "options": [
+          {
+            "value": "50vh",
+            "label": "t:general.settings.options.option_50_percent_screen.label"
+          },
+          {
+            "value": "70vh",
+            "label": "t:general.settings.options.option_70_percent_screen.label"
+          },
+          {
+            "value": "100vh",
+            "label": "t:general.settings.options.option_fill_screen.label"
+          }
+        ]
+      }
+    ],
+		"blocks": [
+      {
+        "type": "map_content",
+        "name": "t:general.settings.content.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "t:general.settings.headers.text.content"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "t:general.settings.heading.label",
+            "default": "Visit our store"
+          },
+          {
+            "type": "select",
+            "label": "t:general.settings.heading_size.label",
+            "id": "heading_size",
+            "visible_if": "{{ block.settings.heading != blank }}",
+            "options": [
+              {
+                "value": "headline",
+                "label": "t:general.settings.heading_size.options.extra_large.label"
+              },
+              {
+                "value": "h1",
+                "label": "t:general.settings.heading_size.options.large.label"
+              },
+              {
+                "value": "h2",
+                "label": "t:general.settings.heading_size.options.regular.label"
+              },
+              {
+                "value": "h3",
+                "label": "t:general.settings.heading_size.options.small.label"
+              }
+            ],
+            "default": "h2"
+          },
+          {
+            "type": "richtext",
+            "id": "description",
+            "label": "t:general.settings.description.label",
+            "default": "<p>Write something about your physical store, working hours, parking instructions</p>"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.map.settings.headers.get_direction_button.content"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "t:general.settings.label.label",
+            "default": "Get direction",
+            "info": "t:sections.map.settings.get_direction_button.info"
+          },
+          {
+            "type": "select",
+            "id": "button_primary_style",
+            "visible_if": "{{ block.settings.button_text != blank }}",
+            "label": "t:general.settings.style.label",
+            "options": [
+              {
+                "value": "primary",
+                "label": "t:general.settings.primary.label"
+              },
+              {
+                "value": "secondary",
+                "label": "t:general.settings.secondary.label"
+              }
+            ],
+            "default": "primary"
+          },
+          {
+            "type": "header",
+            "content": "t:general.settings.headers.desktop_layout.content"
+          },
+          {
+            "type": "select",
+            "id": "desktop_content_position",
+            "label": "t:general.settings.content_position.label",
+            "default": "top-md start-md",
+            "options": [
+              {
+                "value": "top-md start-md",
+                "label": "t:sections.map.blocks.top_left.label"
+              },
+              {
+                "value": "top-md end-md",
+                "label": "t:sections.map.blocks.top_right.label"
+              },
+              {
+                "value": "bottom-md start-md",
+                "label": "t:sections.map.blocks.bottom_left.label"
+              },
+              {
+                "value": "bottom-md end-md",
+                "label": "t:sections.map.blocks.bottom_right.label"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:general.settings.headers.mobile_layout.content"
+          },
+          {
+            "type": "select",
+            "id": "mobile_content_position",
+            "label": "t:general.settings.content_position.label",
+            "default": "top-xs start-xs",
+            "options": [
+              {
+                "value": "top-xs start-xs",
+                "label": "t:sections.map.blocks.top_left.label"
+              },
+              {
+                "value": "top-xs end-xs",
+                "label": "t:sections.map.blocks.top_right.label"
+              },
+              {
+                "value": "bottom-xs start-xs",
+                "label": "t:sections.map.blocks.bottom_left.label"
+              },
+              {
+                "value": "bottom-xs end-xs",
+                "label": "t:sections.map.blocks.bottom_right.label"
+              }
+            ]
+          }
+        ]
+      }
+		],
+    "presets": [
+      {
+        "name": "t:sections.map.name",
+        "blocks": [
+          {
+            "type": "map_content"
+          }
+        ]
+      }
+    ]
+	}
+{% endschema %}

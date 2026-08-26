@@ -1,0 +1,81 @@
+{% liquid
+  assign gap_graph = 'gap-scale-xl'
+  if block.settings.graphs_style == 'circular'
+    assign gap_graph = 'gap-scale-2xl gap-scale-4xl-md'
+  endif
+  if graph_values.count == 1 or block.settings.use_list_of_graphs == false
+    assign gap_graph = gap_graph | append: ' single-graph'
+  endif
+%}
+
+<div class="product__info-wrapper d-grid {{ block.settings.graphs_style }}-graphs {{ gap_graph }}">
+  {%- if block.settings.use_list_of_graphs -%}
+    {%- for graph_value in graph_values -%}
+      {%- liquid
+        assign graph_popup_id = graph_popup_id | append: forloop.index
+        if graph_value.description != blank
+          assign no_action = ''
+          assign has_link = 'graph-has-link'
+        else
+          assign no_action = 'disable disable-link'
+          assign has_link = 'graph-no-link'
+        endif
+        if dialog_quickview
+          assign no_action_quickview = 'disable disable-link'
+        endif
+      -%}
+      <div class="graph-item-{{ block.settings.graphs_style }}">
+        <button class="w-100 btn bg-transparent d-flex gap-s m-zero p-zero {{ no_action }} {{ no_action_quickview }}" onclick="window.dialogGraphPopup{{ graph_popup_id }}.showModal(this, true);">
+          {%- if block.settings.graphs_style == 'linear' -%}
+            {% render 'progress-linear',
+              label: graph_value.label,
+              maximum_value: graph_value.maximum_value,
+              product_value: graph_value.product_value,
+              custom_color: block.settings.custom_graphs_color,
+              class: has_link
+            %}
+          {%- else -%}
+            {% render 'progress-circular',
+              label: graph_value.label,
+              maximum_value: graph_value.maximum_value,
+              product_value: graph_value.product_value,
+              custom_color: block.settings.custom_graphs_color,
+              class: has_link
+            %}
+          {%- endif -%}
+        </button>
+      </div>
+    {%- endfor -%}
+  {%- else -%}
+    {%- liquid
+      if block.settings.description != blank
+        assign no_action = ''
+        assign has_link = 'graph-has-link'
+      else
+        assign no_action = 'disable disable-link'
+        assign has_link = 'graph-no-link'
+      endif
+    -%}
+    <div class="graph-item-{{ block.settings.graphs_style }}">
+      <button class="w-100 btn bg-transparent d-flex gap-s m-zero p-zero {{ no_action }} {{ has_link }} {{ no_action_quickview }}" onclick="window.dialogGraphPopup{{ graph_popup_id }}.showModal(this, true);">
+        {%- if block.settings.graphs_style == 'linear' -%}
+          {% render 'progress-linear',
+            label: block.settings.label,
+            maximum_value: block.settings.graph_max_value,
+            product_value: block.settings.product_value,
+            custom_color: block.settings.custom_graphs_color,
+            class: has_link
+          %}
+        {%- else -%}
+          {% render 'progress-circular',
+            label: block.settings.label,
+            maximum_value: block.settings.graph_max_value,
+            product_value: block.settings.product_value,
+            custom_color: block.settings.custom_graphs_color,
+            class: has_link
+          %}
+        {%- endif -%}
+      </button>
+    </div>
+  {%- endif -%}
+</div>

@@ -1,0 +1,506 @@
+{{ 'section-popup.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign overlay_opacity = section.settings.overlay_opacity | divided_by: 100.0
+  assign overlay_color = 'inherit'
+  unless section.settings.mask_overlay_color.alpha == 0.0 or section.settings.mask_overlay_color == blank
+    assign overlay_color = section.settings.mask_overlay_color | color_modify: 'alpha', overlay_opacity
+  endunless
+  unless section.settings.content_overlay_color.alpha == 0.0 or section.settings.content_overlay_color == blank
+    assign content_color = 'color:' | append: section.settings.content_overlay_color | append: '; --color-normal-text-rgb:' | append: section.settings.content_overlay_color.red | append: ',' | append: section.settings.content_overlay_color.green | append: ',' | append: section.settings.content_overlay_color.blue
+  endunless
+  assign background_image_alt = section.settings.background_image.alt | default: section.settings.background_image.image | split: '/' | last
+  assign mobile_background_image = section.settings.mobile_background_image | default: section.settings.background_image
+  assign mobile_background_image_alt = mobile_background_image.alt | default: mobile_background_image.image | split: '/' | last
+  assign gap_content = section.settings.popup_size | replace: 'size-small', 'p-scale-m-md popup-size' | replace: 'size-regular', 'p-scale-2xl-md popup-size popup-size--regular' | replace: 'size-large', 'p-scale-4xl-md popup-size popup-size--large'
+  assign media_image_background = section.settings.background_image | image_url: width: section.settings.background_image.width | image_tag: widths: '450, 550', sizes: '(min-width: 361px) calc(100vw/2), calc(100vw/3)', class: 'w-100 h-100 of-cover d-none d-block-md js-image-lazy media' , alt: background_image_alt
+  assign image_wrap_classes = 'rad-m o-hidden w-100 h-fit-content image-animate'
+  assign image_classes = ''
+  assign content_padding = ''
+
+  if section.settings.image != blank and section.settings.image_ratio == 'fill'
+    assign content_padding = gap_content
+    assign gap_content = 'gap-0-important p-zero'
+    assign image_wrap_classes = 'w-100 h-100'
+    assign image_classes = 'h-100 w-100'
+  endif
+  assign social_media_position = section.settings.content_alignment | append: ' mt-scale-m'
+-%}
+{% if section.blocks.size > 0 or section.settings.image != blank%}
+  <sht-time-delay-popup tabindex="-1" class="popup sht-dialog js-sht-popup w-100 h-100 p-fixed zi-10 left-0 top-0 hidden-xs" data-section-id="{{ section.id }}" data-ui-component="Section Time Delay Popup" data-enabled-overlay="{{ section.settings.enable_overlay_background_mask }}" data-delay-time="{{ section.settings.delay_time }}" data-delay-until="{{ section.settings.delay_until }}">
+    {%- if section.settings.enable_overlay_background_mask -%}
+      <div class="sht-dialog-overlay js-dialog-overlay zi-1"></div>
+    {%- endif -%}
+    <div class="drawer-content-container js-drawer-content-container w-100 d-flex bottom-xs end-xs {{ section.settings.popup_display }} zi-1">
+      <div class="popup__container js-popup-container o-hidden p-relative rad-l p-scale-m gap-scale-m color-{{- section.settings.color_scheme }} background {{ gap_content }} {{ section.settings.image_position }} {{section.settings.image_position_mobile}}" role="region" aria-labelledby="popup-time-delay-{{ section.id }}" style=" --color-mask: {{ overlay_color }}; --overlay: {{ overlay_opacity }}; {{ content_color }}">
+        {% if section.settings.background_image != blank %}
+          <div class="popup__background-image d-none d-block-md zi-1 sht-mask sht-mask--center">
+            {{ media_image_background }}
+          </div>
+        {% endif %}
+        {% if mobile_background_image != blank %}
+          <div class="popup__background-image d-none-md d-block zi-1 sht-mask sht-mask--center">
+            {{ mobile_background_image | image_url: width: mobile_background_image.width | image_tag: widths: '450, 550', sizes: '(min-width: 361px) calc(100vw/2), calc(100vw/3)', class: 'w-100 h-100 of-cover d-none-md d-block js-image-lazy media', alt: mobile_background_image_alt }}
+          </div>
+        {% endif %}
+        {% if section.settings.image != blank %}
+          <div class="popup__image zi-2 d-flex middle-sm o-hidden {{ section.settings.popup_size }}">
+            {% liquid
+              assign media_alt = section.settings.image.alt | default: section.settings.image.image | split: '/' | last
+              assign media_image = section.settings.image | image_url: width: section.settings.image.width | image_tag: widths: '450, 550', sizes: '(min-width: 361px) calc(100vw/2), calc(100vw/3)', class: 'w-100 h-100 of-cover js-image-lazy media' , alt: media_alt
+              render 'image', image_wrap_classes: image_wrap_classes, image_item: media_image, ratio: section.settings.image_ratio, image_classes: image_classes
+            %}
+          </div>
+        {% endif %}
+        {% if section.blocks.size > 0 %}
+          <div class="popup__content zi-2 disable-scrollbars {{ section.settings.popup_size }} {{ content_padding }}">
+            {%- render 'section-content',
+              subheading_type: 'subheading',
+              heading_type: 'regular-heading',
+              class: section.settings.content_alignment,
+              button_position_md: section.settings.content_alignment,
+              social_media_position: social_media_position
+            -%}
+          </div>
+        {% endif %}
+        <div class="p-absolute zi-3 mt-s mr-s top-0 right-0">
+          <button class="btn btn-icon-l btn-secondary js-popup-btn-close" type="button" aria-label="{{ 'accessibility.close' | t }}">
+            {% render 'icon-x-mark' %}
+          </button>
+        </div>
+      </div>
+    </div>
+  </sht-time-delay-popup>
+{% endif %}
+{% schema %}
+{ 
+  "name": "t:sections.time_delay_popup.name",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.time_delay_popup.settings.paragraph.content"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:general.settings.popup_paragraph.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "popup_display",
+      "label": "t:general.settings.popup_display.label", 
+      "options": [
+        {
+          "value": "center-md middle-md",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "bottom-md start-md",
+          "label": "t:general.settings.option_bottom_left.label"
+        },
+        {
+          "value": "bottom-md center-md",
+          "label": "t:general.settings.option_bottom_center.label"
+        },
+        {
+          "value": "bottom-md end-md",
+          "label": "t:general.settings.option_bottom_right.label"
+        }
+      ],
+      "default": "center-md middle-md"
+    },
+    {
+      "type": "range",
+      "id": "delay_until",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "s",
+      "default": 0,
+      "label": "t:general.settings.delay_until_the_popup_appears.label"
+    },
+    {
+      "type": "range",
+      "id": "delay_time",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 0,
+      "label": "t:general.settings.day_to_remain_dismissed.label",
+      "info": "t:general.settings.day_to_remain_dismissed.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_overlay_background_mask",
+      "label": "t:general.settings.enable_overlay_background_mask.label",
+      "default": true,
+	    "info": "t:general.settings.enable_overlay_background_mask.info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.layout.content"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left top-xs start-xs",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center middle-xs center-xs",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right bottom-xs end-xs",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-left top-xs start-xs"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.popup_size.label",
+      "id": "popup_size",
+      "options": [
+        {
+          "value": "size-small",
+          "label": "t:general.settings.option_small.label"
+        },
+        {
+          "value": "size-regular",
+          "label": "t:general.settings.option_regular.label"
+        },
+        {
+          "value": "size-large",
+          "label": "t:general.settings.option_large.label"
+        }
+      ],
+      "default": "size-small"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.image.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image.label",
+      "info": "t:general.settings.background_image.info"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "visible_if": "{{ section.settings.image != blank }}",
+      "label": "t:general.settings.image_position_desktop.label",
+      "options": [
+        {
+          "value": "image-left",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "image-right",
+          "label": "t:general.settings.option_right.label"
+        },
+        {
+          "value": "image-top",
+          "label": "t:general.settings.option_top.label"
+        }
+      ],
+      "default": "image-left"
+    },
+    {
+      "type": "select",
+      "id": "image_position_mobile",
+      "visible_if": "{{ section.settings.image != blank }}",
+      "label": "t:general.settings.image_position_mobile.label",
+      "options": [
+        {
+          "value": "image-top-mb",
+          "label": "t:general.settings.option_top.label"
+        },
+        {
+          "value": "image-hidden-mb",
+          "label": "t:general.settings.option_hidden.label"
+        }
+      ],
+      "default": "image-top-mb"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "visible_if": "{{ section.settings.image != blank }}",
+      "label": "t:general.settings.image_ratio.label",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "t:general.settings.image_ratio.options.option_square.label"
+        },
+        {
+          "value": "3/2",
+          "label": "t:general.settings.image_ratio.options.option_landscape.label"
+        },
+        {
+          "value": "2/3",
+          "label": "t:general.settings.image_ratio.options.option_portrait.label"
+        },
+        {
+          "value": "auto",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        },
+        {
+          "value": "fill",
+          "label": "t:general.settings.image_ratio.options.option_fill_available_space.label"
+        }
+      ],
+      "default": "1/1"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.background_image_optional.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:general.settings.image.label",
+      "info": "t:general.settings.background_image.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background_image",
+      "label": "t:general.settings.mobile_image.label",
+      "info": "t:general.settings.mobile_background_image.info"
+    },
+    {
+      "type": "range",
+      "max": 90,
+      "min": 0,
+      "step": 10,
+      "default": 30,
+      "id": "overlay_opacity",
+      "label": "t:general.settings.overlay_opacity.label",
+      "unit": "%",
+      "visible_if": "{{ section.settings.background_image != blank or section.settings.mobile_background_image != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "mask_overlay_color",
+      "label": "t:general.settings.custom_mask_overlay_opacity.label",
+      "visible_if": "{{ section.settings.background_image != blank or section.settings.mobile_background_image != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "content_overlay_color",
+      "label": "t:general.settings.custom_content_overlay_opacity.label",
+      "visible_if": "{{ section.settings.background_image != blank or section.settings.mobile_background_image != blank }}"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "t:general.settings.subheading.label",
+      "type": "subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading_text",
+          "label": "t:general.settings.text.label",
+          "default": "Add a tagline"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "t:general.settings.heading.label",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading_text",
+          "label": "t:general.settings.text.label",
+          "default": "Popup heading"
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.text_size.label",
+          "id": "heading_size",
+          "visible_if": "{{ block.settings.heading_text != blank }}",
+          "options": [
+            {
+              "value": "h3-regular",
+              "label": "t:general.settings.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:general.settings.heading_size.options.large.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:general.settings.heading_size.options.regular.label"
+            },
+            {
+              "value": "h6",
+              "label": "t:general.settings.heading_size.options.small.label"
+            }
+          ],
+          "default": "h5"
+        }
+      ]
+    },
+    {
+      "name": "t:general.settings.description.name",
+      "type": "description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "description_text",
+          "label": "t:general.settings.text.label",
+          "default": "<p>Receive special offers and first look at new products.</p>"
+        }
+      ]
+    },
+    {
+      "type": "newsletter_form",
+      "name": "t:general.newsletter_form.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.popup.blocks.newsletter.settings.paragraph.content"
+        },
+        {
+          "type": "text",
+          "id": "submit_button",
+          "label": "t:general.settings.submit_button_text.label",
+          "default": "Subscribe"
+        }
+      ]
+    },
+    {
+      "type": "countdown_timer",
+      "name": "t:general.settings.countdown_timer.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.countdown_timer.content",
+          "info": "t:general.settings.headers.countdown_timer.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_on_end",
+          "label": "t:general.settings.hide_the_countdown.label",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "end_date",
+          "label": "t:general.settings.end_date.label",
+          "info": "t:general.settings.end_date.info"
+        },
+        {
+          "type": "text",
+          "id": "end_time",
+          "label": "t:general.settings.end_time.label",
+          "info": "t:general.settings.end_time.info"
+        },
+        {
+          "type": "richtext",
+          "id": "end_text",
+          "label": "t:general.settings.end_text.label",
+          "info": "t:general.settings.end_text.info",
+          "default": "<p>Event is finished</p>"
+        },
+        {
+          "type": "color",
+          "id": "countdown_background",
+          "label": "t:general.settings.custom_background.label"
+        },
+        {
+          "type": "color",
+          "id": "countdown_number_color",
+          "label": "t:general.settings.custom_number.label"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "t:general.settings.headers.button.content",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_primary_label",
+          "label": "t:general.settings.label.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "Explore more"
+        },
+        {
+          "type": "select",
+          "id": "button_primary_style",
+          "label": "t:general.settings.style.label",
+          "visible_if": "{{ block.settings.button_primary_label != blank }}",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:general.settings.primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:general.settings.secondary.label"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "url",
+          "id": "button_primary_link",
+          "label": "t:general.settings.link.label",
+          "visible_if": "{{ block.settings.button_primary_label != blank }}"
+        }
+      ]
+    }, 
+    {
+      "type": "discount_code",
+      "name": "t:general.settings.blocks.discount_code.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "code",
+          "label": "t:general.settings.code.label",
+          "default": "WELCOME"
+        },
+        {
+          "type": "text",
+          "id": "discount_help_text",
+          "label": "t:general.settings.discount_help_text.label",
+          "default": "Provide instructions on how to use this code",
+          "visible_if": "{{ block.settings.code != blank }}"
+        }
+      ]
+    },
+    {
+      "type": "social_media",
+      "name": "t:general.settings.social_media.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:general.settings.no_customization.label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

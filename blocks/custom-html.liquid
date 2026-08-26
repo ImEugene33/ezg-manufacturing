@@ -1,0 +1,23 @@
+<div class="block-content block-custom-html" data-ui-component="Block Custom HTML" {{ block.shopify_attributes }}>
+  {{- block.settings.html_code -}}
+</div>
+{%- schema -%} 
+  {
+    "name": "t:sections.custom_html_section.name",
+    "tag": null,
+    "settings": [
+      {
+        "type": "html",
+        "id": "html_code",
+        "label": "t:general.settings.html_code.label",
+        "default": "<p style=\"text-align: center\">Write or copy/paste HTML code</p>"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.custom_html_section.name",
+        "category": "t:general.custom"
+      }
+    ]
+  }
+{%- endschema -%}

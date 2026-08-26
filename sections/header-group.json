@@ -1,0 +1,190 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "message_zcPYxL": {
+          "type": "message",
+          "settings": {
+            "message_text": "Discover our latest home décor collection – Transform your space today!",
+            "message_action": "open_link",
+            "select_page": "",
+            "message_link": "",
+            "icon_before_message": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "discount",
+            "custom_code": ""
+          }
+        },
+        "message_9XxtHQ": {
+          "type": "message",
+          "settings": {
+            "message_text": "New arrivals in furniture and home accessories – Explore our collections now.",
+            "message_action": "open_link",
+            "select_page": "",
+            "message_link": "",
+            "icon_before_message": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": ""
+          }
+        }
+      },
+      "block_order": [
+        "message_zcPYxL",
+        "message_9XxtHQ"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-554f3a13-3752-4c9d-89c1-dc948a08cf1a",
+        "enable_fullwidth": false,
+        "section_style": "slide",
+        "rotating_speed": "5",
+        "hover_interaction": "slow_down",
+        "show_navigation": true,
+        "text_size": "fs-body-m",
+        "show_icon_link": true,
+        "show_icon_popup": true
+      }
+    },
+    "utility_bar_iD6bDb": {
+      "type": "utility-bar",
+      "name": "Utility Bar",
+      "settings": {
+        "menu": "main-menu",
+        "login_label": "Log In",
+        "show_signup_link": true,
+        "signup_label": "Sign Up",
+        "account_label": "Account",
+        "color_scheme": "scheme-9e40671e-03fb-4794-866d-f94c8ca7b57d",
+        "padding_top": 8,
+        "padding_bottom": 8,
+        "padding_top_mob": 8,
+        "padding_bottom_mob": 8,
+        "sect_class": ""
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "horizontal_menu_gHDqAq": {
+          "type": "horizontal_menu",
+          "settings": {
+            "main_menu": "industries-menu-2",
+            "text_size": "fs-menu-item-regular",
+            "block_width": "11",
+            "block_alignment": "start-lg ta-left-lg",
+            "show_in_menu_drawer": true
+          }
+        },
+        "megamenu_wWQ4zq": {
+          "type": "megamenu",
+          "settings": {
+            "color_scheme": "scheme-1",
+            "menu_item_name": "Masonry",
+            "mega_menu_style": "column",
+            "apply_image_to": "level_3",
+            "type_of_link_support": "product",
+            "menu_level_two_image_size": "regular",
+            "menu_level_three_image_size": "regular",
+            "promotion_display_style": "collage",
+            "image_ratio": "1",
+            "content_position": "top-xs",
+            "content_alignment": "ta-center middle-xs",
+            "promotion_1_heading": "STAFF Picks®",
+            "promotion_1_description": "<p>Curated with care. Loved by our team.</p>",
+            "promotion_1_button_label": "",
+            "promotion_1_link": "",
+            "promotion_1_mask_overlay_opacity": 30,
+            "promotion_1_custom_mask_overlay_color": "#000000",
+            "promotion_1_custom_content_overlay_color": "#ffffff",
+            "promotion_2_heading": "",
+            "promotion_2_description": "",
+            "promotion_2_button_label": "",
+            "promotion_2_link": "",
+            "promotion_2_mask_overlay_opacity": 0,
+            "promotion_2_custom_mask_overlay_color": "",
+            "promotion_2_custom_content_overlay_color": "",
+            "promotion_3_heading": "",
+            "promotion_3_description": "",
+            "promotion_3_button_label": "",
+            "promotion_3_link": "",
+            "promotion_3_mask_overlay_opacity": 0,
+            "promotion_3_custom_mask_overlay_color": "",
+            "promotion_3_custom_content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "horizontal_menu_gHDqAq",
+        "megamenu_wWQ4zq"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "header_layout_mobile": "logo-center",
+        "dropdown_menu_open_type": "hover",
+        "logo_image": "shopify://shop_images/Screenshot_2026-03-09_at_9.07.14_PM_2.png",
+        "enable_h1_tag": true,
+        "logo_width_desktop": "5",
+        "logo_max_width_desktop": 80,
+        "logo_max_width_mobile": 50,
+        "banner_text": "Contract Manufacturing",
+        "banner_link": "",
+        "banner_bg_color": "#5b7f95",
+        "utilities_width_desktop": "2",
+        "button_style_desktop": "header__style-icon",
+        "button_style_mobile": "header__style-icon-mb",
+        "button_text_size": "fs-menu-item-small",
+        "show_currency_selector": "show-full",
+        "show_language_selector": false,
+        "support_label": "Need Help?",
+        "support_phone": "",
+        "support_color": "#51534a",
+        "header_sticky": "true",
+        "sticky_color_scheme": "scheme-1",
+        "sticky_background_opacity": 80,
+        "sticky_enable_glass_effects": false,
+        "sticky_logo_max_width_desktop": 60,
+        "sticky_logo_max_width_mobile": 50,
+        "transparent_color_scheme": "scheme-dfd7f710-1c3c-4730-be7a-3884f4f918ee",
+        "transparent_background_opacity": 0,
+        "transparent_enable_glass_effects": false,
+        "transparent_logo_max_width_desktop": 270,
+        "transparent_logo_max_width_mobile": 140,
+        "mobile_nav_tab_1_label": "Equipment",
+        "mobile_nav_tab_1_icon": "{% render 'icon-tool' %}",
+        "mobile_nav_tab_1_menu": "industries-menu-3",
+        "mobile_nav_tab_1_last_link_label": "Shop Replacement Parts",
+        "mobile_nav_tab_1_last_link_link": "shopify://collections/blades",
+        "mobile_nav_tab_2_label": "Manufacturing",
+        "mobile_nav_tab_2_icon": "{% render 'icon-tool' %}",
+        "mobile_nav_tab_2_menu": "footer",
+        "mobile_nav_cta_label": "Questions?",
+        "mobile_nav_cta_button_label": "Contact Our Team",
+        "mobile_nav_cta_button_link": "",
+        "mobile_nav_footer_link_1_label": "Contact",
+        "mobile_nav_footer_link_1_link": "",
+        "mobile_nav_footer_link_2_label": "Resources",
+        "mobile_nav_footer_link_2_link": ""
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "utility_bar_iD6bDb",
+    "header"
+  ]
+}

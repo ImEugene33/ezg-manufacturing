@@ -1,0 +1,23 @@
+<div class="section__text--horizontal {{ class }}" role="region" >
+  <div class="section__text-text hide-empty">
+    {%- if section.settings.heading != blank -%}
+        <h2 class="section__heading regular-heading {{ heading_size }}">{{- section.settings.heading | escape -}}</h2>
+    {%- endif -%}
+    {%- if section.settings.description != blank -%}
+        <div class="section__description rte">{{- section.settings.description -}}</div>
+    {%- endif -%}
+  </div>
+  {%- if enable_countdown == true -%}
+    {%- render 'countdown', block: section, class: 'section__countdown-timer', countdown_type: 'small' -%}
+  {%- endif -%}
+
+  {%- if enable_button == true and button_main_text != blank -%}
+    <div class="section__button-group {{ hidden_button }} d-flex middle-xs">
+      <a href="{{- button_main_link | default: '#' -}}" {{ button_main_link | default: 'tabindex="-1"' | replace: button_main_link , '' }} class="btn gap-3xs {{ button_main_style }} hide-empty {{ button_main_link | default: 'disable' | replace: button_main_link , '' }}">
+        {{- button_main_text -}}
+        {%- render 'icon-caret-right', size: 16, class: 'rtl-flip-x' -%}
+      </a>
+    </div>
+  {%- endif -%}
+
+</div>

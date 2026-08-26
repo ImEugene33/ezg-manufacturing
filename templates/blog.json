@@ -1,0 +1,311 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_e88AJq": {
+      "type": "image-banner",
+      "blocks": {
+        "subheading_JkcHX8": {
+          "type": "subheading",
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading_Aifk4k": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Image banner",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_xNLt76": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Highlight your new collection or share content related to this image</p>"
+          }
+        },
+        "button_9ETTDQ": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Explore more",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "View details",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_JkcHX8",
+        "heading_Aifk4k",
+        "description_xNLt76",
+        "button_9ETTDQ"
+      ],
+      "disabled": true,
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 30,
+        "section_mask_overlay_color": "",
+        "section_content_overlay_color": "",
+        "section_image_width": "max-width",
+        "height_desktop": "adapt_img",
+        "desktop_content_position": "start-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "tags": {
+          "type": "tags",
+          "settings": {}
+        },
+        "additional_information": {
+          "type": "additional_information",
+          "settings": {
+            "info_to_show": "published_date"
+          }
+        },
+        "excerpt": {
+          "type": "excerpt",
+          "settings": {
+            "truncate_text": true
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "tags",
+        "additional_information",
+        "excerpt"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3f4c8100-ca3e-4785-b643-ae504ada6343",
+        "items_per_load": "16",
+        "blogs_load_method": "showmore",
+        "show_rss": true,
+        "enable_tags_filter": true,
+        "heading_size": "h3-regular",
+        "enable_h1_tag": true,
+        "show_featured_image": true,
+        "blog_image_ratio": "3/2",
+        "columns_per_row_desktop": "3"
+      }
+    },
+    "collection_browsing_jfTE3j": {
+      "type": "collection-browsing",
+      "blocks": {
+        "collection_FFgVfD": {
+          "type": "collection",
+          "settings": {
+            "collection_heading": "Masonry",
+            "selected_collection": "concrete-pumps"
+          }
+        },
+        "collection_kN9N77": {
+          "type": "collection",
+          "settings": {
+            "collection_heading": "Fencing",
+            "selected_collection": "fencing"
+          }
+        },
+        "collection_6PAeMe": {
+          "type": "collection",
+          "settings": {
+            "collection_heading": "Hardscape",
+            "selected_collection": "hardscape"
+          }
+        }
+      },
+      "block_order": [
+        "collection_FFgVfD",
+        "collection_kN9N77",
+        "collection_6PAeMe"
+      ],
+      "name": "t:sections.collection_browsing.name",
+      "settings": {
+        "color_scheme": "",
+        "heading": "Related Equipment",
+        "heading_size": "h5",
+        "description": "",
+        "max_items": 8,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_view": true,
+        "quick_buy": "standard",
+        "show_variant_swatches": true,
+        "show_price": true,
+        "show_badge": true,
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "false",
+        "columns_per_row_mobile": "2"
+      }
+    },
+    "newsletter_hqWjBX": {
+      "type": "newsletter",
+      "blocks": {
+        "subheading_cf4GHN": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading_ckeJct": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Newsletter heading",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_iDFAcM": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Write a short sentence describing what customers can expect from your newsletter</p>"
+          }
+        },
+        "newsletter_form_WrLQ9G": {
+          "type": "newsletter_form",
+          "settings": {
+            "submit_button": "Subscribe"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_cf4GHN",
+        "heading_ckeJct",
+        "description_iDFAcM",
+        "newsletter_form_WrLQ9G"
+      ],
+      "disabled": true,
+      "name": "t:sections.footer.blocks.newsletter.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "enable_transparent_header": false,
+        "overlay_opacity": 30,
+        "section_mask_overlay_color": "",
+        "section_content_overlay_color": "",
+        "banner_width": "stretch",
+        "image_height": "70vh",
+        "content_position": "middle-md",
+        "content_alignment": "ta-center-md middle-md",
+        "mobile_image_height": "70vh",
+        "mobile_content_position": "middle-xs",
+        "mobile_content_alignment": "ta-center middle-xs"
+      }
+    },
+    "rich_text_KBafcD": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_Y69xgt": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading_WPee8W": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Find the Manual for Your Product",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_N74GUF": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>All of our product manuals are designed to help you make the correct decision before and after buying your equipment.</p>"
+          }
+        },
+        "button_gh6xbi": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "Downloads",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_Y69xgt",
+        "heading_WPee8W",
+        "description_N74GUF",
+        "button_gh6xbi"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "faqs_FACd9y": {
+      "type": "faqs",
+      "blocks": {
+        "faq_item_3q9Lxr": {
+          "type": "faq_item",
+          "repeater": "{{ blog.metafields.custom.faqs.value }}",
+          "settings": {
+            "heading_faq_item": "{{ block.repeater.question.value }}",
+            "description_faq_item": "{{ block.repeater.answer | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_3q9Lxr"
+      ],
+      "name": "t:sections.faqs.name",
+      "settings": {
+        "color_scheme": "",
+        "heading_text": "Frequently asked questions",
+        "heading_size": "h3",
+        "description_text": "",
+        "one_item_expand": true,
+        "open_first_item": true,
+        "enable_contact_form": false,
+        "heading_contact_form": "Didn’t find your answer?",
+        "description_contact_form": "<p>Link to some useful pages that your customers might want to know about.</p>",
+        "button_label": "Send message",
+        "color_custom_form_background": "rgba(0,0,0,0)",
+        "color_custom_form_content": "rgba(0,0,0,0)",
+        "heading_alignment_desktop": "ta-center-md middle-md",
+        "content_ordering": "fd-row-sm",
+        "heading_alignment_mobile": "ta-left top-xs",
+        "content_ordering_mobile": "fd-column"
+      }
+    }
+  },
+  "order": [
+    "image_banner_e88AJq",
+    "main",
+    "collection_browsing_jfTE3j",
+    "newsletter_hqWjBX",
+    "rich_text_KBafcD",
+    "faqs_FACd9y"
+  ]
+}

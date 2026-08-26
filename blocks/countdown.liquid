@@ -1,0 +1,56 @@
+{% render 'countdown', block: block, countdown_type: 'regular' %}
+
+{% schema %}
+{
+  "name": "t:general.countdown",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:general.settings.countdown_paragraph.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_end",
+      "label": "t:general.settings.hide_the_countdown.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "t:general.settings.end_date.label",
+      "info": "t:general.settings.end_date.info"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "t:general.settings.end_time.label",
+      "info": "t:general.settings.end_time.info"
+    },
+    {
+      "type": "richtext",
+      "id": "end_text",
+      "label": "t:general.settings.end_text.label",
+      "info": "t:general.settings.end_text.info",
+      "default": "<p>Event is finished</p>"
+    },
+    {
+      "type": "color",
+      "id": "countdown_background",
+      "label": "t:general.settings.custom_background.label",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "color",
+      "id": "countdown_number_color",
+      "label": "t:general.settings.custom_number.label",
+      "default": "rgba(0,0,0,0)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.countdown",
+      "category": "t:general.basic"
+    }
+  ]
+}
+{% endschema %}

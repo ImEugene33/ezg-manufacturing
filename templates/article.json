@@ -1,0 +1,101 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "blog-post-banner",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 0,
+        "section_mask_overlay_color": "",
+        "section_content_overlay_color": "",
+        "section_image_width": "stretch",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-center-md middle-md",
+        "height_mobile": "50vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-center middle-xs"
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "custom_css": [
+        "h1 {font-size: 3.5rem;}"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "show_blog_post_title": true,
+        "enable_h1_tag": true,
+        "show_author_name": true,
+        "show_published_date": true,
+        "show_featured_image": false,
+        "show_tag": true,
+        "paragraph_size_desktop": 18,
+        "paragraph_size_mobile": 16,
+        "enable_share": true
+      }
+    },
+    "blog_post_list_pURifD": {
+      "type": "blog-post-list",
+      "blocks": {
+        "additional_information_JKjeCh": {
+          "type": "additional_information",
+          "settings": {
+            "info_to_show": "published_date"
+          }
+        },
+        "excerpt_Q7GaEq": {
+          "type": "excerpt",
+          "settings": {
+            "truncate_text": true
+          }
+        },
+        "title_pkXPr6": {
+          "type": "title",
+          "settings": {}
+        },
+        "tags_hH9fNx": {
+          "type": "tags",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "additional_information_JKjeCh",
+        "excerpt_Q7GaEq",
+        "title_pkXPr6",
+        "tags_hH9fNx"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "blog": "ezg-blog",
+        "heading": "Latest Articles",
+        "heading_size": "h5",
+        "description": "",
+        "items_to_show": 5,
+        "show_featured_image": true,
+        "image_ratio": "3/2",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "5",
+        "carousel_mobile": "true",
+        "enable_button": true,
+        "button_text": "Explore more",
+        "button_position": "above-listing"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main",
+    "blog_post_list_pURifD"
+  ]
+}

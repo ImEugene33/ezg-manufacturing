@@ -1,0 +1,364 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_e88AJq": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_Aifk4k": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Maintenance Tips",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_xNLt76": {
+          "type": "description",
+          "settings": {
+            "description_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_Aifk4k",
+        "description_xNLt76"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 30,
+        "section_mask_overlay_color": "#000000",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/stud-insertion-callout.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "auto",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "rich_text_44rm4x": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_QLmqpY": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "For Equipment that lasts",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_DT3PTH": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>After delivering your equipment, EZG is committed to remaining your trusted partner. We offer the following information on equipment upkeep to ensure your satisfaction with EZG equipment throughout product lifetimes.<br/>At EZG Manufacturing, we take pride in fabricating quality products that last several years. However, there is one way to extend your product’s lifespan: maintenance. <br/>Safe storage and proper equipment maintenance prevent corrosion and keep equipment in good working order. Let EZG help you take care of your fleet with these helpful tips. <br/><br/>Contact our Parts Department: <a href=\"mailto:parts@ezgmfg.com\" title=\"mailto:parts@ezgmfg.com\">parts@ezgmfg.com</a> or shop online for spare parts. </p>"
+          }
+        },
+        "button_7MXyrm": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "SHOP SPARE PARtS",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_QLmqpY",
+        "description_DT3PTH",
+        "button_7MXyrm"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-3f4c8100-ca3e-4785-b643-ae504ada6343",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "image_with_text_GMgY3x": {
+      "type": "image-with-text",
+      "blocks": {
+        "description_6ThQ3K": {
+          "type": "description",
+          "settings": {
+            "description_text": "<h4>“When lead times are long, keeping the equipment you have in good working order is essential.”</h4><p>- Kevin Brooker</p>"
+          }
+        }
+      },
+      "block_order": [
+        "description_6ThQ3K"
+      ],
+      "name": "t:sections.images_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "image_alignment": "on_scroll",
+        "image_1": "shopify://shop_images/Kevin_Brooker_Hog_Handler.png",
+        "image_1_link": "",
+        "image_2_link": "",
+        "image_3_link": "",
+        "image_4_link": "",
+        "desktop_layout": "text_first",
+        "desktop_media_width": "8",
+        "desktop_content_alignment": "ta-right-md end-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "tags": {
+          "type": "tags",
+          "settings": {}
+        },
+        "additional_information": {
+          "type": "additional_information",
+          "settings": {
+            "info_to_show": "published_date"
+          }
+        },
+        "excerpt": {
+          "type": "excerpt",
+          "settings": {
+            "truncate_text": true
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "tags",
+        "additional_information",
+        "excerpt"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3f4c8100-ca3e-4785-b643-ae504ada6343",
+        "items_per_load": "16",
+        "blogs_load_method": "showmore",
+        "show_rss": true,
+        "enable_tags_filter": true,
+        "heading_size": "h3-regular",
+        "enable_h1_tag": true,
+        "show_featured_image": true,
+        "blog_image_ratio": "3/2",
+        "columns_per_row_desktop": "3"
+      }
+    },
+    "collection_browsing_jfTE3j": {
+      "type": "collection-browsing",
+      "blocks": {
+        "collection_FFgVfD": {
+          "type": "collection",
+          "settings": {
+            "collection_heading": "Masonry",
+            "selected_collection": "concrete-pumps"
+          }
+        },
+        "collection_kN9N77": {
+          "type": "collection",
+          "settings": {
+            "collection_heading": "Fencing",
+            "selected_collection": "fencing"
+          }
+        },
+        "collection_6PAeMe": {
+          "type": "collection",
+          "settings": {
+            "collection_heading": "Hardscape",
+            "selected_collection": "hardscape"
+          }
+        }
+      },
+      "block_order": [
+        "collection_FFgVfD",
+        "collection_kN9N77",
+        "collection_6PAeMe"
+      ],
+      "name": "t:sections.collection_browsing.name",
+      "settings": {
+        "color_scheme": "",
+        "heading": "Related Equipment",
+        "heading_size": "h5",
+        "description": "",
+        "max_items": 8,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_view": true,
+        "quick_buy": "standard",
+        "show_variant_swatches": true,
+        "show_price": true,
+        "show_badge": true,
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "false",
+        "columns_per_row_mobile": "2"
+      }
+    },
+    "newsletter_hqWjBX": {
+      "type": "newsletter",
+      "blocks": {
+        "subheading_cf4GHN": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading_ckeJct": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Newsletter heading",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_iDFAcM": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Write a short sentence describing what customers can expect from your newsletter</p>"
+          }
+        },
+        "newsletter_form_WrLQ9G": {
+          "type": "newsletter_form",
+          "settings": {
+            "submit_button": "Subscribe"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_cf4GHN",
+        "heading_ckeJct",
+        "description_iDFAcM",
+        "newsletter_form_WrLQ9G"
+      ],
+      "disabled": true,
+      "name": "t:sections.footer.blocks.newsletter.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "enable_transparent_header": false,
+        "overlay_opacity": 30,
+        "section_mask_overlay_color": "",
+        "section_content_overlay_color": "",
+        "banner_width": "stretch",
+        "image_height": "70vh",
+        "content_position": "middle-md",
+        "content_alignment": "ta-center-md middle-md",
+        "mobile_image_height": "70vh",
+        "mobile_content_position": "middle-xs",
+        "mobile_content_alignment": "ta-center middle-xs"
+      }
+    },
+    "rich_text_KBafcD": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_Y69xgt": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading_WPee8W": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Find the Manual for Your Product",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_N74GUF": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>All of our product manuals are designed to help you make the correct decision before and after buying your equipment.</p>"
+          }
+        },
+        "button_gh6xbi": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "Downloads",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_Y69xgt",
+        "heading_WPee8W",
+        "description_N74GUF",
+        "button_gh6xbi"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "faqs_H7Hede": {
+      "type": "faqs",
+      "blocks": {
+        "faq_item_z6Ahdj": {
+          "type": "faq_item",
+          "repeater": "{{ blog.metafields.custom.faqs.value }}",
+          "settings": {
+            "heading_faq_item": "{{ block.repeater.question.value }}",
+            "description_faq_item": "{{ block.repeater.answer | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_z6Ahdj"
+      ],
+      "name": "t:sections.faqs.name",
+      "settings": {
+        "color_scheme": "scheme-554f3a13-3752-4c9d-89c1-dc948a08cf1a",
+        "heading_text": "Frequently asked questions",
+        "heading_size": "h2",
+        "description_text": "<p>Write some useful information about your business, contact information or links to various FAQ pages.</p>",
+        "one_item_expand": true,
+        "open_first_item": true,
+        "enable_contact_form": false,
+        "heading_contact_form": "Didn’t find your answer?",
+        "description_contact_form": "<p>Link to some useful pages that your customers might want to know about.</p>",
+        "button_label": "Send message",
+        "color_custom_form_background": "rgba(0,0,0,0)",
+        "color_custom_form_content": "rgba(0,0,0,0)",
+        "heading_alignment_desktop": "ta-center-md middle-md",
+        "content_ordering": "fd-row-sm",
+        "heading_alignment_mobile": "ta-left top-xs",
+        "content_ordering_mobile": "fd-column"
+      }
+    }
+  },
+  "order": [
+    "image_banner_e88AJq",
+    "rich_text_44rm4x",
+    "image_with_text_GMgY3x",
+    "main",
+    "collection_browsing_jfTE3j",
+    "newsletter_hqWjBX",
+    "rich_text_KBafcD",
+    "faqs_H7Hede"
+  ]
+}

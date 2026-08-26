@@ -1,0 +1,12 @@
+{%- if section.settings.mobile_nav_cta_label != blank or section.settings.mobile_nav_cta_button_label != blank -%}
+  <div class="mobile-nav-drawer__cta">
+    {%- if section.settings.mobile_nav_cta_label != blank -%}
+      <p class="mobile-nav-drawer__cta-label">{{ section.settings.mobile_nav_cta_label }}</p>
+    {%- endif -%}
+    {%- if section.settings.mobile_nav_cta_button_label != blank -%}
+      <a href="{{ section.settings.mobile_nav_cta_button_link | default: '#' }}" class="btn btn--accent mobile-nav-drawer__cta-btn">
+        {{- section.settings.mobile_nav_cta_button_label -}}
+      </a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

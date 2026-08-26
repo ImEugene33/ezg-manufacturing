@@ -1,0 +1,95 @@
+{%- liquid
+  assign template = template | split: '.' | first
+
+  capture separate
+    echo '<li>'
+    echo '<span class="">•</span>'
+    echo '</li>'
+  endcapture
+
+  assign container = 'ctnr'
+  if template == 'collection' or template == 'article' or template == 'product' and section.settings.enable_fullwidth == true
+    assign container = 'w-100'
+  endif
+-%}
+
+<div class="breadcrumb f-extra {{ class }}" aria-label="Breadcrumb">
+  <nav class="{{ container }}">
+    <ul class="breadcrumb__list ls-none d-flex middle-xs fw-wrap wb-break-word gap-3xs color-text tt-up">
+      <li>
+        <a class="breadcrumb__link ele-focus-visible" href="{{ routes.root_url }}">{{ "accessibility.home" | t }}</a>
+      </li>
+      {{ separate }}
+      {%- case template -%}
+        {%- when 'page' -%}
+          <li>
+            <span class="color-text-60" aria-current="page">{{ page.title }}</span>
+          </li>
+        {%- when 'product' -%}
+          {%- if collection.url -%}
+            <li>
+              {{ collection.title | link_to: collection.url, class: '' }}
+            </li>
+            {{ separate }}
+          {%- endif -%}
+          <li>
+            <span class="color-text-60" aria-current="page">{{ product.title }}</span>
+          </li>
+        {%- when 'collection' and collection.handle -%}
+          {%- if current_tags -%}
+            <li>
+              <a class="breadcrumb__link ele-focus-visible" href="{{ routes.collections_url }}" aria-current="page">{{ 'templates.breadcrumb.collections' | t }}</a>
+            </li>
+            {{ separate }}
+            <li>
+              {{ collection.title | link_to: collection.url, class: 'breadcrumb__link' }}
+            </li>
+            {{ separate }}
+            <li>
+              {%- capture tag_url -%}{{- collection.url -}}/{{- current_tags | join: "+" }}{%- endcapture -%}
+              <a class="breadcrumb__link ele-focus-visible color-text-60" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+            </li>
+          {%- else -%}
+            <li>
+              <a class="breadcrumb__link ele-focus-visible " href="{{ routes.collections_url }}" aria-current="page">{{ 'templates.breadcrumb.collections' | t }}</a>
+            </li>
+            {{ separate }}
+            <li>
+              <span class="color-text-60" aria-current="page">{{ collection.title }}</span>
+            </li>
+          {%- endif -%}
+        {%- when 'blog' -%}
+          {%- if current_tags -%}
+            <li>
+              {{ blog.title | link_to: blog.url, class: 'breadcrumb__link' }}
+            </li>
+            {{ separate }}
+            <li>
+              {%- capture tag_url -%}{{- blog.url -}}/tagged/{{- current_tags | join: "+" }}{%- endcapture -%}
+              <a class="breadcrumb__link ele-focus-visible color-text-60" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+            </li>
+          {%- else -%}
+            <li>
+              <span class="color-text-60" aria-current="page">{{ blog.title }}</span>
+            </li>
+          {%- endif -%}
+        {%- when 'article' -%}
+          <li>
+            {{ blog.title | link_to: blog.url, class: 'breadcrumb__link' }}
+          </li>
+          {{ separate }}
+          <li>
+            <span class="color-text-60" aria-current="page">{{ article.title }}</span>
+          </li>
+        {%- when 'search' -%}
+          <li>
+            <span class="color-text-60" aria-current="page">{{ 'templates.breadcrumb.search' | t }}</span>
+          </li>
+        {%- else -%}
+          <li>
+            <span class="color-text-60" aria-current="page">{{ page_title }}</span>
+          </li>
+      {%- endcase -%}
+    </ul>
+  </nav>
+</div>

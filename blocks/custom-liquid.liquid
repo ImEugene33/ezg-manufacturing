@@ -1,0 +1,23 @@
+<div class="block-content block-custom-liquid" data-ui-component="Block Custom Liquid" {{ block.shopify_attributes }}>
+  {{- block.settings.liquid_code -}}
+</div>
+{%- schema -%} 
+  {
+    "name": "t:sections.custom_liquid.name",
+    "tag": null,
+    "settings": [
+      {
+        "type": "liquid",
+        "id": "liquid_code",
+        "label": "t:general.settings.liquid_code.label",
+        "default": "<p style=\"text-align: center\">Write or copy/paste Liquid code</p>"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.custom_liquid.name",
+        "category": "t:general.custom"
+      }
+    ]
+  }
+{%- endschema -%}

@@ -1,0 +1,154 @@
+
+{%- liquid
+    assign menu_apply_image = block.settings.apply_image_to
+    assign menu_link_apply_image = block.settings.type_of_link_support
+    assign enable_menu_product_image = false
+    assign enable_menu_collection_image = false
+    unless menu_apply_image == 'none'
+        assign menu_level_two_image = false
+        assign menu_level_three_image = false
+
+        if menu_link_apply_image == 'product'
+            assign enable_menu_product_image = true
+        endif
+        if menu_link_apply_image == 'collection'
+            assign enable_menu_collection_image = true
+        endif
+        if menu_link_apply_image == 'both'
+            assign enable_menu_product_image = true
+            assign enable_menu_collection_image = true
+        endif
+
+        assign menu_level_two_image_size = 'megamenu-item-card__media ratio--square of-cover rad-s megamenu-item-card__media--' | append: block.settings.menu_level_two_image_size
+        if menu_apply_image == 'level_2'
+            assign menu_level_two_image = true
+        endif
+
+        assign menu_level_three_image_size = 'megamenu-item-card__media ratio--square of-cover rad-s megamenu-item-card__media--' | append: block.settings.menu_level_three_image_size
+        if menu_apply_image == 'level_3'
+            assign menu_level_three_image = true
+        endif
+        
+        if menu_apply_image == 'both'
+            assign menu_level_two_image = true
+            assign menu_level_three_image = true
+        endif
+    endunless
+%}
+<div class="megamenu-sidebar fw-wrap d-none d-flex-lg">
+    <tab-component class="megamenu-tab d-flex flex-1" data-toggle-mode="{{- data-toggle-tab | replace: 'hover', 'mouseover' -}}">
+        <div class="tab-header megamenu-tab-header">
+        {%- for childlink in links -%}
+            {% capture menu_item_media %}
+                {%- if childlink.object.featured_image and menu_level_two_image and enable_menu_product_image and childlink.type == 'product_link' -%}
+                    {{- childlink.object.featured_image | image_url: width: 200 |  image_tag: class: menu_level_two_image_size, loading: 'lazy' -}}
+                {%- elsif childlink.object.featured_image and menu_level_two_image and enable_menu_collection_image and childlink.type == 'collection_link' -%}
+                    {{- childlink.object.featured_image | image_url: width: 200 | image_tag: class: menu_level_two_image_size, loading: 'lazy' -}}
+                {%- endif -%}
+            {% endcapture %}
+            {%- if childlink.links != blank -%}
+                <button class="js-tab-header-button megamenu-tab-header-button megamenu-tablink megamenu-tab-header--{{- settings.tab_style }} megamenu-item-card d-flex gap-2xs start-xs middle-xs rtl-flip-x" data-code="Header-megamnu-sidebar-{{- block.id | append: forloop.index -}}" style="--delay-time: {{ forloop.index | times: 70}}ms">
+                    {{menu_item_media}}
+                    <div class="d-flex gap-3xs w-100">
+                        <span class="link__title flex-1 wb-break-word fs-menu-item-regular {{ menu_open_type | replace: 'click', 'd-block' | replace: 'hover', 'd-none' }}">{{ childlink.title }}</span>
+                        {% render 'icon-caret-right', class: "icon icon-fix-xl" %}
+                    </div>
+                </button>
+            {%- else -%}
+                <a href="{{ childlink.url }}" class="megamenu-tab-header-button megamenu-tablink megamenu-tab-header--{{- settings.tab_style }} menu__link-lv2 d-flex gap-2xs middle-xs {{ block.settings.text_size }} {{ menu_color }} {{ childlink.current | default: '' | replace: 'true', 'active' }}" style="--delay-time: {{ forloop.index | times: 70}}ms">
+                    {{ menu_item_media }}
+                    <span class="link__title flex-1 wb-break-word fs-menu-item-regular  {{ menu_open_type | replace: 'click', 'd-block' | replace: 'hover', 'd-none' }}">{{ childlink.title }}</span>
+                </a>
+            {%- endif -%}
+        {%- endfor -%}
+        </div>
+        <div class="tab-content megamenu-tab-content ta-center">
+            {%- for childlink in links -%}
+                {%- if childlink.links != blank -%}
+                    <div class="js-tab-content tab-content-item" id="Header-megamnu-sidebar-{{- block.id | append: forloop.index -}}">
+                        <ul class="menu-dropdown__grandchild disable-scrollbars m-zero p-zero ls-none d-flex {% if childlink.links.size <= 4 %} megamenu-grid-4 {% endif %} {% if childlink.links.size == 5 %} megamenu-grid-5 {% endif %} {% if childlink.links.size >= 6 %} megamenu-grid-6 {% endif %}">
+                            {%- for grandchildlink in childlink.links -%}
+                                <li class="megamenu-grid__item submenu__item menu__item__grandchild {{ grandchildlink.current | default: '' | replace: 'true', 'menu__item--current' }}" style="--delay-time: {{ forloop.index | times: 70}}ms">
+                                    {%- if grandchildlink.object.featured_image and menu_level_three_image and enable_menu_product_image and grandchildlink.type == 'product_link' -%}
+                                        <a class="menu__link megamenu-item-card megamenu-column-menu-link d-flex gap-s middle-xs fd-column {{ grandchildlink.current | default: '' | replace: 'true', 'menu__link--active' }}" href="{{- grandchildlink.url -}}">
+                                            {{- grandchildlink.object.featured_image | image_url: width: 200 |  image_tag: class: menu_level_three_image_size, loading: 'lazy' -}}
+                                            <span class="d-flex megamenu-link-label flex-1 fs-menu-item-regular ">{{- grandchildlink.title -}}</span>
+                                        </a>
+                                    {%- elsif grandchildlink.object.featured_image and menu_level_three_image and enable_menu_collection_image and grandchildlink.type == 'collection_link' -%}
+                                        <a class="menu__link megamenu-item-card megamenu-column-menu-link d-flex gap-s middle-xs fd-column {{ grandchildlink.current | default: '' | replace: 'true', 'menu__link--active' }}" href="{{- grandchildlink.url -}}">
+                                            {{- grandchildlink.object.featured_image | image_url: width: 200 | image_tag: class: menu_level_three_image_size, loading: 'lazy' -}}
+                                            <span class="d-flex megamenu-link-label flex-1 fs-menu-item-regular ">{{- grandchildlink.title -}}</span>
+                                        </a>
+                                    {%- else -%}
+                                        <a href="{{- grandchildlink.url -}}" class="menu__link d-flex megamenu-column-menu-link megamenu-link-level-3 fs-menu-item-regular {{ grandchildlink.current | default: '' | replace: 'true', 'menu__link--active' }}">{{- grandchildlink.title -}}</a>
+                                    {%- endif -%}
+                                </li>
+                            {%- endfor -%}
+                        </ul>
+                    </div>
+                {% endif %}
+            {%- endfor -%}
+        </div>
+    </tab-component>
+</div>
+
+<div class="megamenu-column-mobile flex-1 w-100 d-block d-none-lg">
+    <ul class="submenu-dropdown m-zero ls-none d-flex fd-column w-100 pl-0" id="menuHeaderMenuList-{{ forloop.index }}">
+        {%- for childlink in links -%}
+            {% capture menu_item_media %}
+                <span class="megamenu-item-card megamenu-column-menu-link d-flex fd-column gap-2xs start-xs">
+                    {%- if childlink.object.featured_image and menu_level_two_image and enable_menu_product_image and childlink.type == 'product_link' -%}
+                        {{- childlink.object.featured_image | image_url: width: 200 |  image_tag: class: menu_level_two_image_size, loading: 'lazy' -}}
+                    {%- elsif childlink.object.featured_image and menu_level_two_image and enable_menu_collection_image and childlink.type == 'collection_link' -%}
+                        {{- childlink.object.featured_image | image_url: width: 200 | image_tag: class: menu_level_two_image_size, loading: 'lazy' -}}
+                    {%- endif -%}
+                    <span class="link__title flex-1 wb-break-word {{ menu_open_type | replace: 'click', 'd-block' | replace: 'hover', 'd-none' }}">{{ childlink.title }}</span>
+                </span>
+            {% endcapture %}
+        <li class="submenu__item">
+            {%- if childlink.links != blank -%}
+            <details data-level="2">
+                <summary class="menu__link menu__link-lv2 between-xs d-flex middle-xs gap-3xs {{ block.settings.text_size }} {{ menu_color }}" aria-expanded="false" aria-controls="menuHeaderSubMenuList-{{ forloop.index }}">
+                    {{ menu_item_media }}
+                    <span class="toggle__icon d-flex middle-xs center-xs p-relative">
+                        {% render 'icon-toggle', icon_arrow: 'icon-caret-right icon icon-fix-xl', class_first: 'toggle__sub-icon--plus p-absolute icon icon-fix-xl', class_second: 'toggle__sub-icon--minus p-absolute icon icon-fix-xl' %}
+                    </span>
+                </summary>
+                <div class="menu-dropdown-lv3 disable-scrollbars">
+                    <button class="js-menu-header-back-btn menu-drawer__close w-100 d-none middle-xs ta-left m-zero c-pointer" type="button" data-level="3">
+                        <span class="toggle__icon d-flex middle-xs center-xs p-relative">
+                        {% render 'icon-toggle', icon_arrow: 'icon-caret-left icon icon-fix-xl', class_first: 'toggle__icon--plus p-absolute icon icon-fix-xl', class_second: 'toggle__icon--minus p-absolute icon icon-fix-xl' %}
+                        </span>
+                        <span class="color-text-60">{{ childlink.title }}</span>
+                    </button>
+                    <ul class="menu-dropdown__grandchild disable-scrollbars m-zero p-zero ls-none d-flex fd-column">
+                    {%- for grandchildlink in childlink.links -%}
+                        <li class="submenu__item menu__item__grandchild {{ grandchildlink.current | default: '' | replace: 'true', 'menu__item--current' }}">
+                            {%- if grandchildlink.object.featured_image and menu_level_three_image and enable_menu_product_image and grandchildlink.type == 'product_link' -%}
+                                <a class="menu__link megamenu-item-card megamenu-column-menu-link d-flex gap-s middle-xs {{ grandchildlink.current | default: '' | replace: 'true', 'menu__link--active' }}" href="{{- grandchildlink.url -}}">
+                                    {{- grandchildlink.object.featured_image | image_url: width: 200 |  image_tag: class: menu_level_three_image_size, loading: 'lazy' -}}
+                                    <span class="d-flex megamenu-link-label flex-1 fs-menu-item-regular ">{{- grandchildlink.title -}}</span>
+                                </a>
+                            {%- elsif grandchildlink.object.featured_image and menu_level_three_image and enable_menu_collection_image and grandchildlink.type == 'collection_link' -%}
+                                <a class="menu__link megamenu-item-card megamenu-column-menu-link d-flex gap-s middle-xs {{ grandchildlink.current | default: '' | replace: 'true', 'menu__link--active' }}" href="{{- grandchildlink.url -}}">
+                                    {{- grandchildlink.object.featured_image | image_url: width: 200 | image_tag: class: menu_level_three_image_size, loading: 'lazy' -}}
+                                    <span class="d-flex megamenu-link-label flex-1 fs-menu-item-regular ">{{- grandchildlink.title -}}</span>
+                                </a>
+                            {%- else -%}
+                                <a href="{{- grandchildlink.url -}}" class="menu__link d-flex megamenu-column-menu-link megamenu-link-level-3 fs-menu-item-regular">{{- grandchildlink.title -}}</a>
+                            {%- endif -%}
+                        </li>
+                    {%- endfor -%}
+                    </ul>
+                </div>
+            </details>
+            {%- else -%}
+            <a href="{{ childlink.url }}" class="megamenu-tablink menu__link menu__link-lv2 d-flex gap-2xs middle-xs {{ block.settings.text_size }} {{ menu_color }} {{ childlink.current | default: '' | replace: 'true', 'menu__link--active' }}">
+                {{ menu_item_media }}
+            </a>
+            {%- endif -%}
+        </li>
+        {%- endfor -%}
+    </ul>
+</div>
+

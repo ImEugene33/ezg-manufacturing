@@ -1,0 +1,61 @@
+
+{%- for value in option.values -%}
+  {%- liquid
+    assign option_disabled = true
+    if value.available
+      assign option_disabled = false
+    endif
+
+    assign swatches_variant_image = false
+    assign selected_variant = ''
+    if settings.variant_display_type == 'variant_image'
+      for variant in product.variants
+        if variant.title contains value and variant.image
+          assign selected_variant = variant
+          if selected_variant.image
+            assign swatches_variant_image = true
+          endif
+        endif
+      endfor
+    endif
+
+    assign swatch_value = null
+    if value.swatch.color != blank or value.swatch.image != blank
+      if value.swatch.image
+        assign swatch_value = value.swatch.image | image_url
+      elsif value.swatch.color
+        assign swatch_value = value.swatch.color
+      else
+        assign swatch_value = null
+      endif
+    endif
+    assign data_value = value | escape
+    assign unavailable_text = 'products.product.unavailable' | t
+    assign data_value = data_value | replace: unavailable_text, ''
+    if option_disabled
+      unless data_value contains unavailable_text
+        assign data_value = value | append: ' - ' | append: unavailable_text
+      endunless
+    endif
+  -%}
+
+  <div class="product-swatches__item js-variant-option-value product-option__value {% if option_disabled %}product-option--unavailable{% endif %}" data-value="{{ value | escape }}-{{ index }}">
+    <input type="radio" aria-label="{{ option.name }}" class="input--variant form__control js-variant-item {{ input_class | default: 'js-variant-radio-item' }} visually-hidden"
+      id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+      name="{{ option.name }}"
+      data-name="{{ option.name }}"
+      value="{{ value | escape }}"
+      data-option-value="{{ data_value }}"
+      data-option-value-id="{{ value.id }}"
+      data-variant-value="{{ value | escape }}-{{ index }}"
+      {% if option.selected_value == value %}checked{% endif %}>
+    <label class="form__label form__label--{{- settings.variant_display_type }} d-block rad-p product-swatches-form" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" tabindex="-1" title="{{ value | escape }}">
+      <span class="product-swatches product-option__label product-swatches--{{- settings.variant_display_type }} product-variant-label f-extra o-hidden js-variant-swatch-item p-relative c-pointer rad-p o-hidden d-flex center-xs middle-xs ta-center {% if swatches_variant_image %}clr-swh__has-value{% endif %}" aria-hidden="true" data-option-value="{{ value | downcase | escape | remove: " " }}" data-swatch-option-value="{{ swatch_value }}" data-swatch-source="{{ settings.variant_display_type }}">
+        {%- if settings.variant_display_type == 'variant_image' and selected_variant.image -%}
+          {{ selected_variant.image | image_url: width: 200 | image_tag: widths: '200', class: 'product-swatches-image absolute zi-1 top-0 left-0 w-100 h-100 of-cover' }}
+        {%- endif -%}
+        <span class="variant-option-label js-variant-option-label">{{ value }}</span>
+      </span>
+    </label>
+  </div>
+{%- endfor -%}

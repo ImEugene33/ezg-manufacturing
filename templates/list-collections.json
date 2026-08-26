@@ -1,0 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "color_scheme": "",
+        "item_per_page": "24",
+        "collections_load_method": "pagination",
+        "heading": "Our collections",
+        "enable_h1_tag": true,
+        "heading_size": "h4",
+        "collection_image_ratio": "3/2",
+        "columns_per_row_desktop": "6",
+        "columns_per_row_mobile": "2"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

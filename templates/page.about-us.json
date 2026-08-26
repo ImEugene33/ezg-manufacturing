@@ -1,0 +1,875 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "video_with_text_VXUpcM": {
+      "type": "video-with-text",
+      "blocks": {
+        "subheading_QnGcH9": {
+          "type": "subheading",
+          "settings": {
+            "subheading_text": "Our Story"
+          }
+        },
+        "heading_cED4pm": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "About EZG Manufacturing",
+            "heading_size": "h1",
+            "enable_h1_tag": false
+          }
+        },
+        "description_bEaA3n": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>We are innovators. Whether you’re a contractor in need of new equipment or an organization seeking a qualified team to bring your plans to reality, EZG has your back. Starting from the need for more efficient masonry equipment, our portfolio has exploded to contain equipment in the fencing, hardscape, precast/refractory and contractor manufacturing markets.</p><p>By employing state-of-the-art manufacturing equipment, we design and construct all of our equipment and customer projects to ensure they exceed expectations.</p>"
+          }
+        },
+        "text_block_with_icon_4VrCwX": {
+          "type": "text_block_with_icon",
+          "disabled": true,
+          "settings": {
+            "title": "Our feature",
+            "heading_size_text_icon": "h3-regular",
+            "description": "<p>Add in information or share content related to these images</p>",
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "icon_color": "",
+            "block_width_desktop": "desktop-width-one-two",
+            "block_width_mobile": "mobile-width-one-two"
+          }
+        },
+        "button_yzkbq3": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Explore more",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "View details",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_QnGcH9",
+        "heading_cED4pm",
+        "description_bEaA3n",
+        "text_block_with_icon_4VrCwX",
+        "button_yzkbq3"
+      ],
+      "name": "t:sections.video_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "video_source": "video_external",
+        "video_url": "youtube.com/watch?v=KROI4DnVS4w&time_continue=0&source_ve_path=NzY3NTg&embeds_referring_euri=https%3A%2F%2Fezgmfg.com%2F",
+        "media_ratio": "auto",
+        "enable_video_mute": true,
+        "content_ordering": "fd-row-reverse-md",
+        "media_width": "8",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "rich_text_3VpAzA": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_j77Q3w": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "We Put Our Customers First",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_AeM7BH": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Our customers are #1 in our book. Our representatives are extremely responsive and attentive to detail. We complete orders quickly and efficiently while addressing all of your needs. This emphasis on the customer is ingrained in our company culture thanks to the vision of our Founder and CEO, Damian Lang.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_j77Q3w",
+        "description_AeM7BH"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "rich_text_Dt8YNB": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_FBCm4R": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Improving profitability and efficiencies for contractors since 1998.",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_FBCm4R"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "image_with_text_brw4TD": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_kxLdBJ": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading_9T8mTV": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading_text": "Humble Beginnings",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_EkwQVe": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>EZG Manufacturing started as EZ Grout and was born from the desire of one man to improve the quality of masonry equipment. In 1998, founder and CEO Damian Lang sought to help contractors increase efficiency and profitability with American made products built from hands-on experience. Masonry equipment available at the time lacked sturdiness and reliability, causing operators to experience systemic machine clogs and mechanical failures.</p><p>Damian developed the first Grout Hog® after numerous prototypes. Over time, he perfected models by patenting new features specific only to the EZ Grout line, like clog-prevention mechanisms and an innovative delivery system.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_kxLdBJ",
+        "heading_9T8mTV",
+        "description_EkwQVe"
+      ],
+      "disabled": true,
+      "name": "t:sections.images_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "image_alignment": "on_scroll",
+        "image_1_link": "",
+        "image_2_link": "",
+        "image_3_link": "",
+        "image_4_link": "",
+        "desktop_layout": "text_first",
+        "desktop_media_width": "8",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "image_with_text_GzAekK": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_8Yah8f": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading_aXPTFd": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Successful Expansion",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_LiLpi4": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Once Damian’s invention proved useful, he turned his creative focus to other areas of construction and masonry markets, eventually releasing the Mud Hog®, Uphill Grout Hog®, Hog Slopper®, Hog Legs®, Hog Trough® and Booger Hog®. In the early 2000’s Damian broke into the fencing industry with the introduction of the Fence Hog® – which now includes several models designed to save contractors thousands of dollars and man hours required to complete jobs.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_8Yah8f",
+        "heading_aXPTFd",
+        "description_LiLpi4"
+      ],
+      "disabled": true,
+      "name": "t:sections.images_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "image_alignment": "on_scroll",
+        "image_1_link": "",
+        "image_2_link": "",
+        "image_3_link": "",
+        "image_4_link": "",
+        "desktop_layout": "fd-row-reverse-md",
+        "desktop_media_width": "8",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "content_collage_4NX7Pg": {
+      "type": "content-collage",
+      "blocks": {
+        "text_Jhwj6m": {
+          "type": "text",
+          "settings": {
+            "heading": "Improving profitability and efficiencies for contractors since 1998.",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>EZG Manufacturing started as EZ Grout and was born from the desire of one man to improve the quality of masonry equipment. In 1998, founder and CEO Damian Lang sought to help contractors increase efficiency and profitability with American made products built from hands-on experience. Masonry equipment available at the time lacked sturdiness and reliability, causing operators to experience systemic machine clogs and mechanical failures.</p><p>Damian developed the first Grout Hog® after numerous prototypes. Over time, he perfected models by patenting new features specific only to the EZ Grout line, like clog-prevention mechanisms and an innovative delivery system.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_QbYr84": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "image_b6eXhi": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_Fn866e": {
+          "type": "text",
+          "settings": {
+            "heading": "Successful Expansion",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>Once Damian’s invention proved useful, he turned his creative focus to other areas of construction and masonry markets, eventually releasing the Mud Hog®, Uphill Grout Hog®, Hog Slopper®, Hog Legs®, Hog Trough® and Booger Hog®. In the early 2000’s Damian broke into the fencing industry with the introduction of the Fence Hog® – which now includes several models designed to save contractors thousands of dollars and man hours required to complete jobs.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "text_dRmTqR": {
+          "type": "text",
+          "settings": {
+            "heading": "EZG Manufacturing",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>EZ Grout’s reputation as an industry leader in the masonry, fencing and construction markets grew and soon products were found on construction sites across the globe. As Damian and his team learned more about each industry, they began to develop custom solutions for specific contracting problems. This led to the formation of EZG Manufacturing, which offers an extensive range of services, from laser cutting to machining, powder coat painting and more.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_Re4fMn": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "image_4XczCR": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_6qwE8y": {
+          "type": "text",
+          "settings": {
+            "heading": "EZG Today",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>EZ Grout’s reputation as an industry leader in the masonry, fencing and construction markets grew and soon products were found on construction sites across the globe. As Damian and his team learned more about each industry, they began to develop custom solutions for specific contracting problems. This led to the formation of EZG Manufacturing, which offers an extensive range of services, from laser cutting to machining, powder coat painting and more.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_Jhwj6m",
+        "image_QbYr84",
+        "image_b6eXhi",
+        "text_Fn866e",
+        "text_dRmTqR",
+        "image_Re4fMn",
+        "image_4XczCR",
+        "text_6qwE8y"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": true,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "divider_H4raLA": {
+      "type": "divider",
+      "disabled": true,
+      "settings": {
+        "divider_color": "#f9f9f9"
+      }
+    },
+    "rich_text_XEkVL8": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_gey8fn": {
+          "type": "subheading",
+          "settings": {
+            "subheading_text": "Product DNA"
+          }
+        },
+        "heading_CjC9gf": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Crafted for Quality and Sustainability",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_khNwpk": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Sustainability is at the heart of everything we do. From the materials we choose to the packaging we use, every detail is designed with the planet in mind.</p><p>We prioritize responsibly sourced materials, work with ethical suppliers, and constantly seek ways to reduce waste in our processes. By creating durable, timeless pieces, we aim to minimize the need for replacements and promote a culture of mindful consumption.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_gey8fn",
+        "heading_CjC9gf",
+        "description_khNwpk"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "custom_section_aBJjCt": {
+      "type": "custom-section",
+      "blocks": {
+        "heading_GQ64Ey": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Committed to Safety",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          },
+          "blocks": {}
+        },
+        "description_MYyz68": {
+          "type": "description",
+          "settings": {
+            "description": "<p>The safety of our employees and customers is our company’s greatest responsibilities. We complete projects at a fast rate, but never at the expense of our employees’ safety. We always adhere to the following policies:</p><ul><li>We are committed to providing a safe work environment for all of our employees.</li><li>We expect each employee to be responsible for their safety and to be held accountable for the safety of the people and equipment around them.</li><li>We expect each employee to: promote safety to others, report all hazards to a supervisor, use appropriate protective equipment and follow established production procedures at all times.</li></ul><p>At EZG we hold quarterly safety meetings and have third parties provide us with shop inspections and auto metric testing. We also have random in-house safety audits by our safety team.All equipment is reviewed by a safety standards check to make sure every part is accurate and each piece of equipment has all of the correct warning labels. All equipment includes a manual with safety procedures and warnings for our customers.</p>"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading_GQ64Ey",
+        "description_MYyz68"
+      ],
+      "name": "t:general.custom_section",
+      "settings": {
+        "color_scheme": "scheme-554f3a13-3752-4c9d-89c1-dc948a08cf1a",
+        "section_overlay_opacity": 30,
+        "section_mask_overlay_color": "",
+        "section_content_overlay_color": "",
+        "background_media": "none",
+        "video_source": "external",
+        "external_video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "show_video_controllers": true,
+        "enable_video_loop": true,
+        "video_controller_color": "transparent",
+        "section_image_width": "stretch",
+        "desktop_height": "auto",
+        "desktop_direction": "fd-column-md",
+        "content_alignment_desktop_vertical": "ta-left-md top-md",
+        "content_position_desktop_vertical": "start-md",
+        "content_alignment_desktop_horizontal": "ta-left-md start-md",
+        "content_position_desktop_horizontal": "top-md",
+        "desktop_gap": 24,
+        "mobile_height": "70vh",
+        "mobile_direction": "fd-column",
+        "content_alignment_mobile_vertical": "ta-center middle-xs",
+        "content_position_mobile_vertical": "center-xs",
+        "content_alignment_mobile_horizontal": "ta-left start-xs",
+        "content_position_mobile_horizontal": "top-xs",
+        "mobile_gap": 24,
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "icon_with_text_PQFR4K": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_8aKnpL": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "title": "Teamwork",
+            "description": "",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_xhnE7t": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "title": "Best In-Class Equipment",
+            "description": "",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_VHcDqN": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "title": "Trust and Respect",
+            "description": "",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_gcYtiQ": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "title": "Safety",
+            "description": "",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_rNb9fW": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "title": "Innovation",
+            "description": "",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_XtqHBT": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "title": "Satisfied Customers",
+            "description": "",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_8aKnpL",
+        "icon_with_text_item_xhnE7t",
+        "icon_with_text_item_VHcDqN",
+        "icon_with_text_item_gcYtiQ",
+        "icon_with_text_item_rNb9fW",
+        "icon_with_text_item_XtqHBT"
+      ],
+      "name": "t:sections.icon_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "heading": "EZG Safety Information",
+        "heading_size": "h5",
+        "description": "",
+        "text_position": "fd-row",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "label": "",
+        "link": ""
+      }
+    },
+    "rich_text_6eV9Vw": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_VtdJ3y": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Industries We Serve",
+            "heading_size": "h1",
+            "enable_h1_tag": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_VtdJ3y"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-center-md middle-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "content_collage_7x96cy": {
+      "type": "content-collage",
+      "blocks": {
+        "image_3RdhYc": {
+          "type": "image",
+          "settings": {
+            "heading": "Image heading",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>Highlight your new collection or share content related to this image</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "1",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "image_8hf4yy": {
+          "type": "image",
+          "settings": {
+            "heading": "Image heading",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>Highlight your new collection or share content related to this image</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "1",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "image_rnCWBm": {
+          "type": "image",
+          "settings": {
+            "heading": "Image heading",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>Highlight your new collection or share content related to this image</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "1",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "image_fTcthj": {
+          "type": "image",
+          "settings": {
+            "heading": "Image heading",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>Highlight your new collection or share content related to this image</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "1",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "image_WpUWdU": {
+          "type": "image",
+          "settings": {
+            "heading": "Image heading",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>Highlight your new collection or share content related to this image</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "image_yV3mJK": {
+          "type": "image",
+          "settings": {
+            "heading": "Image heading",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>Highlight your new collection or share content related to this image</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_3RdhYc",
+        "image_8hf4yy",
+        "image_rnCWBm",
+        "image_fTcthj",
+        "image_WpUWdU",
+        "image_yV3mJK"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "enable_fullwidth": true,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "rich_text_3Ge8FM": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_EhpMkb": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Question?",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_zM7DmN": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>We’ve got answers. Visit our Customer Support for our most Frequently Asked Questions, detailed info on how Normcore works, or you can get in touch directly with our Community Support Team.</p>"
+          }
+        },
+        "button_ye783j": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Customer Support",
+            "button_primary_style": "secondary",
+            "button_primary_link": "",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_EhpMkb",
+        "description_zM7DmN",
+        "button_ye783j"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "video_with_text_VXUpcM",
+    "rich_text_3VpAzA",
+    "rich_text_Dt8YNB",
+    "image_with_text_brw4TD",
+    "image_with_text_GzAekK",
+    "content_collage_4NX7Pg",
+    "divider_H4raLA",
+    "rich_text_XEkVL8",
+    "custom_section_aBJjCt",
+    "icon_with_text_PQFR4K",
+    "rich_text_6eV9Vw",
+    "content_collage_7x96cy",
+    "rich_text_3Ge8FM"
+  ]
+}

@@ -1,0 +1,12 @@
+<sht-infinity-scroll class="d-flex center-xs middle-xs {{ class }}"
+  data-next-url="{{ paginate.next.url }}"
+  data-current-page="{{ paginate.current_page }}"
+  data-total-pages="{{ paginate.pages }}"
+  data-page-size="{{ paginate.page_size }}"
+  data-total-items="{{ paginate.items }}"
+  data-label="{{ "sections.product_grid.load_more.end_text" | t }}"
+>
+  <div class="js-loading-overlay-wrapper hidden">
+    {% render 'icon-spinner', size: '24px' %}
+  </div>
+</sht-infinity-scroll>

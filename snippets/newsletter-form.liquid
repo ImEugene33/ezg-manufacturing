@@ -1,0 +1,66 @@
+{%- comment -%}
+Usage:
+{%- render 'newsletter-form',
+    block: block,
+    alignment_class: content_position,
+    button_label: button_label,
+    alignment_class: alignment_class-%}
+{%- endcomment -%}
+{%- liquid
+  assign form_id = 'newsletterForm-' | append: section.id
+  assign alignment_class = alignment_class | replace: 'top', 'start' | replace: 'middle', 'center' | replace: 'bottom', 'end'
+  if button_label != blank
+    assign button_label = button_label
+  else
+    assign button_label = 'general.newsletter.button_label' | t
+  endif
+-%}
+{%- form 'customer', id: form_id, class: 'w-100' -%}
+  <input type="hidden" name="contact[tags]" value="newsletter">
+  <div class="form__field d-flex gap-xs fw-wrap {{ alignment_class }}">
+    <label class="field__label visually-hidden" for="newsletterForm-{{ section.id }}-{{- block.id -}}">
+    {{ 'general.newsletter.label' | t }}
+    </label>
+    <input id="newsletterForm-{{ section.id }}-{{- block.id -}}" type="email" name="contact[email]"
+    class="field__text form__newsletter--input fs-body-m fg-1" value="{{ form.email }}" aria-required="true"
+    autocorrect="off" autocapitalize="off" autocomplete="email" {% if form.errors %} autofocus
+    aria-invalid="true" aria-describedby="NewsletterForm-error" {% elsif form.posted_successfully? %}
+    aria-describedby="NewsletterForm-success" {% endif %}
+    placeholder="{{ 'templates.contact.form.email' | t }}"
+    pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required>
+    <button type="submit" class="btn btn-primary btn-m ta-center js-subscribe-btn " name="commit" id="subscribe-form-{{ section.id }}" aria-label="{{ button_label }}">
+      {{ button_label }}
+    </button>
+  </div>
+  {%- if form.posted_successfully? or form.errors -%}
+    <sht-noti section-id="{{ section.id }}" class="d-none-important">
+      <div class="d-flex middle-xs gap-xs">
+        <div class="icon-success p-relative">
+          <svg class="h-100 w-100">
+            <circle cx="12" cy="12" r="11"></circle>
+            <circle cx="12" cy="12" r="11" class="progress"></circle>
+          </svg>
+          {%- if form.posted_successfully? -%}
+            <div class="p-absolute d-flex middle-xs center-xs inset">
+              {% render 'icon-check' | class: 'icon icon-fix-m' %}
+            </div>
+          {%- elsif form.errors -%}
+            <div class="p-absolute d-flex middle-xs center-xs inset">
+              {% render 'icon-x-mark' | class: 'icon icon-fix-m' %}
+            </div>
+          {%- endif -%}
+        </div>
+        {%- if form.posted_successfully? -%}
+          <span class="flex-1">
+            {{ 'general.newsletter.success' | t }}
+          </span>
+        {%- elsif form.errors -%}
+          <span class="flex-1">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</span>
+        {%- endif -%}
+        <div class="btn btn-icon-m js-icon-cancel">
+          {% render 'icon-x-mark' | class: 'icon icon-fix-m' %}
+        </div>
+      </div>
+    </sht-noti>
+  {%- endif -%}
+{%- endform -%}

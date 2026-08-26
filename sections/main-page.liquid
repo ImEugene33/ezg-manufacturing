@@ -1,0 +1,52 @@
+<div data-animate="regular-section" class="js-animate section color-{{ section.settings.color_scheme }} background" data-ui-component="Main Page Section">
+    <div class="ctnr--small">
+      {%- if section.settings.show_page_title -%}
+        <{{- section.settings.enable_h1_tag | replace: true, 'h1' | replace: false, 'h2' }} class="mb-scale-4xl">
+            {{- page.title -}}    
+        </{{- section.settings.enable_h1_tag | replace: true, 'h1' | replace: false, 'h2'-}}>
+      {%- endif -%}
+    {%- if section.settings.show_page_content -%}
+      <div class="s-content page__content rte">
+        {{- page.content -}}
+      </div>
+    {%- endif -%}
+    </div>
+</div>
+
+  {% schema %}
+  {
+    "name": "t:sections.main_page.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.general.content"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:general.settings.color_schemes.label",
+        "default": "scheme-1" 
+      },
+      {
+        "type": "checkbox",
+        "id": "show_page_title",
+        "label": "t:sections.main_page.settings.show_page_title.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_h1_tag",
+        "label": "t:general.settings.enable_h1_tag.label",
+        "info": "t:general.settings.enable_h1_tag_info_title.info",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_page_content",
+        "label": "t:sections.main_page.settings.show_page_content.label",
+        "default": true
+      }
+    ]
+  }
+  {% endschema %}
+  

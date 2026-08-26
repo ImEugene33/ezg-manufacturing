@@ -1,0 +1,127 @@
+{% comment %}
+  Renders video with thumbnail image
+
+  Accepts:
+  - src: {Object}
+  - media_ratio: {String}
+  - media_ratio_mobile: {String}
+  - video_thumbnail: {Object}
+  - video_hosted: {Object}
+  - external_video_link: {Object}
+  - play_icon: {Boolean}
+  - default_thumbnail_image: {Object}
+  - image_sizes: {String}
+  - mute: {Boolean}
+
+  Example usage:
+  {% render 'video',
+    src: block.settings.video,
+    media_ratio: '3/2',
+    media_ratio_mobile: '3/2',
+    video_thumbnail: block.settings.video_thumbnail_image,
+    video_hosted: video_hosted,
+    external_video_link: external_video_link,
+    play_icon: true,
+    nute: true,
+    default_thumbnail_image: default_thumbnail_image,
+    image_sizes: image_sizes 
+  %}
+{% endcomment %}
+{%- liquid
+    assign loading = 'lazy'
+    assign decoding = 'async'
+    assign fetchpriority = 'auto'
+    if section.index == 1
+      assign loading = 'eager'
+      assign fetchpriority = 'high'
+    endif
+  assign image_name = video_thumbnail.src | split: '/' | last | split: '.' | first
+  assign alt_text = video_thumbnail.alt | default: image_name
+  assign video_thumbnail_image = video_thumbnail | image_url: width: video_thumbnail.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000', sizes: image_sizes, alt: alt_text, class: 'media-md media of-cover w-100 h-100', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+  assign ratio = ratio | default: 'auto'
+  assign thumbnail_placeholder = 'blog-apparel-2' | placeholder_svg_tag: 'placeholder w-100 h-100 media d-block'
+  assign video_placeholder = default_thumbnail_image | default: thumbnail_placeholder
+  assign video_type = ''
+  assign video_id = ''
+  assign video_hosted_thumbnail_image = ''
+  assign image_class = image_class | default: 'w-100 h-100'
+  if src == 'video_hosted'
+    assign video_type = 'video_hosted'
+    assign video_id = src | append: '-' | append: video_hosted.id
+    assign video_hosted_src = video_hosted.preview_image
+    assign hosted_image_name = video_hosted_src.src | split: '/' | last | split: '.' | first
+    assign hosted_alt_text = video_thumbnail.alt | default: hosted_image_name
+    assign video_hosted_thumbnail_image = video_hosted_src | image_url: width: video_hosted_src.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000', sizes: image_sizes, alt: hosted_alt_text, class: 'media-md media of-cover w-100 h-100', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+  else
+    assign video_type = external_video_link.type
+    assign video_id = external_video_link.id
+  endif
+-%}
+<div class="o-hidden" loaded="true">
+  <sht-load-media
+    data-section-id="{{ section.id }}"
+    data-mute-video="{{ mute }}"
+    data-id-video="{{ video_id }}"
+    data-type="{{ video_type }}"
+    class="d-block p-relative rounded-2x background-video media js-product-media-deferred-video"
+    style="--ratio: {{ media_ratio}}; --video-width: {{ video_width | default: '100%' }};">
+    <button class="w-100 h-100 btn-load-video p-zero c-pointer js-load-media-trigger  d-block ele-focus-visible"
+      type="button"
+      aria-label="{{ 'accessibility.load_video' | t: video: video_id }}">
+      {%- liquid
+      if video_thumbnail.size > 0
+        render 'image', image_item: video_thumbnail_image, ratio: media_ratio, image_wrap_classes: video_class, image_classes: image_class
+      elsif src == 'video_hosted' and video_hosted != blank
+        render 'image', image_item: video_hosted_thumbnail_image, ratio: media_ratio, image_wrap_classes: video_class, image_classes: image_class
+      else
+        render 'image', image_item: video_placeholder, ratio: media_ratio, image_wrap_classes: video_class, image_classes: image_class
+      endif
+      -%}
+      {%- if play_icon -%}
+        <div class="p-absolute center-middle">
+          <span class="btn btn-outline btn-state-media p-relative">
+            {%- render 'icon-play', class: 'icon icon-fix-3xl' -%}
+          </span>
+        </div>
+      {%- endif -%}
+    </button>
+    {%- if src == 'video_hosted' and video_hosted != blank -%}
+      <template>
+        {{
+          video_hosted
+          | video_tag:
+            autoplay: true,
+            muted: mute,
+            controls: true,
+            preload: 'none',
+            class: 'ratio-media w-100 h-100 d-block js-media-item-video',
+            loading: 'lazy',
+            fetchpriority: 'low'
+        }}
+      </template>
+    {%- else -%}
+    {%- liquid
+      if block != blank
+        assign external_video_id = 'shtVideo-' | append: section.id | append: '-' | append: block.id | append: '-' | append: video_id
+      else 
+        assign external_video_id ='shtVideo-' | append: section.id | append: '-' | append: video_id
+      endif
+    -%}
+      <div
+        class="js-media-item js-video-media-item external-video ratio-media h-100 w-100 d-none middle-xs center-xs"
+        data-type="{{ external_video_link.type }}"
+        id="{{ external_video_id }}"
+      >
+      <iframe 
+        src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1&muted={{ mute | default: '0' | replace: 'true', '1' }}"
+        class="js-vimeo-media d-none"
+        allow="autoplay; encrypted-media"
+        loading="lazy"
+        fetchpriority="low"
+        decoding="async"
+        allowfullscreen
+      ></iframe>
+      </div>
+    {%- endif -%}
+  </sht-load-media>
+</div>

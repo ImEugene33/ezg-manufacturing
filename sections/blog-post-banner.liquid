@@ -1,0 +1,447 @@
+
+{%- liquid
+  assign loading = 'lazy'
+  assign decoding ='async'
+  assign fetchpriority = 'auto'
+  assign preload = false
+
+  if section.index == 1
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+    assign preload = true
+  endif
+
+  assign desktop_content_alignment = section.settings.desktop_content_alignment
+  assign mobile_content_alignment = section.settings.mobile_content_alignment
+  assign desktop_content_position = section.settings.desktop_content_position
+  assign mobile_content_position = section.settings.mobile_content_position
+
+  assign sht_mask_mb = mobile_content_position | replace: '-xs', ''
+  assign sht_mask_desk = desktop_content_position
+
+  assign size = '100vw'
+  if section.settings.section_image_width == 'max-width'
+    assign size = settings.container_max_width | append: 'px'
+  endif
+
+  if sht_mask_desk == 'center-md'
+    if desktop_content_alignment contains 'left'
+      assign sht_mask_desk = 'center-left-md'
+    elsif desktop_content_alignment contains 'right'
+      assign sht_mask_desk = 'center-right-md'
+    endif
+  endif
+
+  if sht_mask_mb == 'center'
+    if mobile_content_alignment contains 'left'
+      assign sht_mask_mb = 'center-left'
+    elsif mobile_content_alignment contains 'right'
+      assign sht_mask_mb = 'center-right'
+    endif
+  endif
+
+  assign image_alt = article.title
+  assign desktop_image_width = '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000'
+  assign mobile_image_width = '320, 450, 550, 750, 950, 1024, 1200'
+  assign desktop_image = blank
+
+  if section.settings.desktop_image
+    assign desktop_image_source = section.settings.desktop_image
+  elsif article.image
+    assign desktop_image_source = article.image
+  endif
+  assign desktop_image = desktop_image_source | image_url: width: section.settings.desktop_image.width | image_tag: widths: desktop_image_width, sizes: size, alt: image_alt, class: 'w-100 h-100 of-cover', loading: loading, fetchpriority: fetchpriority, decoding: decoding, preload: preload
+
+  if section.settings.mobile_image
+    assign mobile_image_source = section.settings.mobile_image
+  else
+    assign mobile_image_source = desktop_image_source
+  endif
+  assign mobile_image = mobile_image_source | image_url: width: section.settings.mobile_image.width | image_tag: widths: mobile_image_width, sizes: size, alt: image_alt, class: 'd-none-md d-block w-100 h-100 of-cover p-absolute top-0', loading: loading, fetchpriority: fetchpriority, decoding: decoding, preload: preload
+
+  assign overlay_opacity = section.settings.section_overlay_opacity | divided_by: 100.0
+
+  assign overlay_color = 'inherit'
+  unless section.settings.section_mask_overlay_color.alpha == 0.0 or section.settings.section_mask_overlay_color == blank
+    assign overlay_color = section.settings.section_mask_overlay_color | color_modify: 'alpha', overlay_opacity
+  endunless
+  unless section.settings.section_content_overlay_color.alpha == 0.0 or section.settings.section_content_overlay_color == blank
+    assign content_color = 'color:' | append: section.settings.section_content_overlay_color
+  endunless
+
+  assign min_height_mobile = section.settings.height_mobile
+  assign min_height_desktop = section.settings.height_desktop
+
+  if min_height_desktop == "adapt_img"
+    if section.settings.section_image_width == 'full-width'
+      assign min_height_desktop = 100 | divided_by : desktop_image_source.aspect_ratio | append: 'vw'
+    elsif section.settings.section_image_width == 'stretch'
+      assign min_height_desktop = 'calc((100vw - 2*var(--fix-m))/IMAGE_RATIO_DESK)' | replace: 'IMAGE_RATIO_DESK', desktop_image_source.aspect_ratio
+    else
+      assign min_height_desktop = settings.container_max_width | divided_by: desktop_image_source.aspect_ratio | append: 'px'
+    endif
+  endif
+
+  if min_height_mobile == "adapt_img"
+    assign min_height_mobile = 100 | divided_by : mobile_image_source.aspect_ratio | append: 'vw'
+    if mobile_image_source == blank
+      assign min_height_mobile = 100 | divided_by : desktop_image_source.aspect_ratio | append: 'vw'
+    endif
+  endif
+
+  if mobile_image_source == blank and desktop_image_source == blank
+    assign min_height_mobile = "auto"
+    assign min_height_desktop = 'auto'
+  endif
+
+  assign section_content_class = 'promotion-section__content zi-1 d-flex fd-column h-100 w-100' | append: ' ' | append: section.settings.desktop_content_position | append: ' ' | append: section.settings.mobile_content_position | append: ' ' | append: desktop_content_alignment | append: ' ' | append: mobile_content_alignment
+  assign section_content_style = '--mh-xs: MIN_HEIGHT_MOBILE ;--mh-md: MIN_HEIGHT_DESKTOP;' | replace: 'MIN_HEIGHT_MOBILE', min_height_mobile | replace: 'MIN_HEIGHT_DESKTOP', min_height_desktop | append: content_color
+-%}
+{%- unless section.settings.section_image_width == 'full-width' -%}
+	{%- render 'section-padding-collapse' -%}
+{%- endunless -%}
+
+{%- if section.settings.enable_transparent_header -%}
+  {%- render 'transparent-header-style' -%}
+{%- endif -%}
+
+<div data-animate="banner-section" id="section-{{ section.id }}" data-ui-component="Section Article Banner" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}"
+  class="js-animate section section-promotion--{{- section.settings.section_image_width }} promotion-section background color-{{- section.settings.color_scheme }}"
+  {% if section.settings.enable_transparent_header %} enable-transparent-header {% endif %}
+  style=" --color-mask: {{ overlay_color }}; --overlay: {{ overlay_opacity }}; {{ content_color }}"
+>
+  <div class="ctnr rad-l-md o-hidden section-promotion__wrapper p-relative sht-mask sht-mask--{{ sht_mask_desk }} sht-mask--{{ sht_mask_mb }}">
+    <div class="banner-media__animate promotion-section__background inset p-absolute">
+      {{ desktop_image }}
+      {{ mobile_image }}
+    </div>
+    <div class="promotion-section-container {{ settings.enable_breadcrumb_collections | default: '' | replace: 'true', 'breadcrumb-banner' }} p-relative zi-1">
+      {%- if settings.enable_breadcrumb_blog_posts -%}
+        {%- render 'breadcrumb', page: page, routes: routes, class: 'background p-3xs mb-m maw-fit-content rad-xs' -%}
+      {%- endif -%}
+      <div class="banner-content__animate section__text {{ section_content_class }}" style="{{ section_content_style }}">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'heading' -%}
+              {%- if block.settings.enable_h1_tag -%}
+                <h1 class="section__heading promotional-heading {{ block.settings.heading_size }} hide-empty" {{ block.shopify_attributes }}>{{- article.title -}}</h1>
+              {%- else -%}
+                <h2 class="section__heading promotional-heading {{ block.settings.heading_size }} hide-empty" {{ block.shopify_attributes }}>{{- article.title -}}</h2>
+              {%- endif -%}
+            {%- when 'additional_information' -%}
+              <div class="section__additional-information w-fit-content fs-body-l {{ section.settings.desktop_content_alignment }} {{ section.settings.mobile_content_alignment }}" {{ block.shopify_attributes }}>
+                <span class="d-none {% if block.settings.info_to_show == 'author_name' or block.settings.info_to_show == 'both' %}d-inline-block{% endif %}">
+                  {{- article.author -}}
+                </span>
+                {% if block.settings.info_to_show == 'both' %}
+                  <span class="">•</span>
+                {% endif %}
+                <span class="d-none {% if block.settings.info_to_show == 'published_date' or block.settings.info_to_show == 'both' %}d-inline-block{% endif %}">
+                  {{- article.published_at | date: format: 'abbreviated_date' -}}
+                </span>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.blog_post_banner.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_transparent_header",
+      "label": "t:general.settings.enable_transparent_header.label",
+      "info": "t:general.settings.enable_transparent_header.info",
+      "default": false
+    },
+    {
+      "type": "range",
+      "unit": "%",
+      "max": 90,
+      "min": 0,
+      "step": 10,
+      "default": 30,
+      "id": "section_overlay_opacity",
+      "label": "t:general.settings.overlay_opacity.label"
+    },
+    {
+      "type": "color",
+      "id": "section_mask_overlay_color",
+      "label": "t:general.settings.custom_mask_overlay_opacity.label",
+      "visible_if": "{{ section.settings.section_overlay_opacity != 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "section_content_overlay_color",
+      "label": "t:general.settings.custom_content_overlay_opacity.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.custom_background_image.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:general.settings.custom_background_image_paragraph.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "t:general.settings.background_image.label",
+      "info": "t:general.settings.background_image.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "t:general.settings.mobile_background_image.label",
+      "info": "t:general.settings.mobile_background_image.info"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.desktop_layout.label"
+    },
+    {
+      "type": "select",
+      "id": "section_image_width",
+      "label": "t:general.settings.banner_width.label",
+      "options": [
+        {
+          "value": "max-width",
+          "label": "t:general.settings.options.option_max_width.label"
+        },
+        {
+          "value": "stretch",
+          "label": "t:general.settings.options.option_stretch.label"
+        },
+        {
+          "value": "full-width",
+          "label": "t:general.settings.options.option_full_width.label"
+        }
+      ],
+      "default": "stretch"
+    },
+    {
+      "type": "select",
+      "id": "height_desktop",
+      "label": "t:general.settings.banner_height.label",
+      "info": "t:general.settings.image_height.info",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:general.settings.options.option_adapt_to_content.label"
+        },
+        {
+          "value": "50vh",
+          "label": "t:general.settings.options.option_50_percent_screen.label"
+        },
+        {
+          "value": "70vh",
+          "label": "t:general.settings.options.option_70_percent_screen.label"
+        },
+        {
+          "value": "100vh",
+          "label": "t:general.settings.options.option_fill_screen.label"
+        },
+        {
+          "value": "adapt_img",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        }
+      ],
+      "default": "70vh"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_position",
+      "label": "t:general.settings.content_position.label",
+      "options": [
+        {
+          "value": "start-md",
+          "label": "t:general.settings.content_position.content_position_options.options_1.label"
+        },
+        {
+          "value": "center-md",
+          "label": "t:general.settings.content_position.content_position_options.options_2.label"
+        },
+        {
+          "value": "end-md",
+          "label": "t:general.settings.content_position.content_position_options.options_3.label"
+        }
+      ],
+      "default": "center-md"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left-md top-md",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center-md middle-md",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right-md bottom-md",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-center-md middle-md"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.mobile_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "t:general.settings.banner_height.label",
+      "info": "t:general.settings.image_height.info",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:general.settings.options.option_hug_content.label"
+        },
+        {
+          "value": "50vh",
+          "label": "t:general.settings.options.option_50_percent_screen.label"
+        },
+        {
+          "value": "70vh",
+          "label": "t:general.settings.options.option_70_percent_screen.label"
+        },
+        {
+          "value": "100vh",
+          "label": "t:general.settings.options.option_fill_screen.label"
+        },
+        {
+          "value": "adapt_img",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        }
+      ],
+      "default": "70vh"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_position",
+      "label": "t:general.settings.content_position.label",
+      "options": [
+        {
+          "value": "start-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_1.label"
+        },
+        {
+          "value": "center-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_2.label"
+        },
+        {
+          "value": "end-xs",
+          "label": "t:general.settings.content_position.content_position_options.options_3.label"
+        }
+      ],
+      "default": "center-xs"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "t:general.settings.content_alignment.label",
+      "options": [
+        {
+          "value": "ta-left top-xs",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center middle-xs",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right bottom-xs",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-center middle-xs"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "t:general.settings.title.label",
+      "type": "heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "label": "t:general.settings.heading_size.label",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "headline",
+              "label": "t:general.settings.heading_size.options.extra_large.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:general.settings.heading_size.options.large.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:general.settings.heading_size.options.regular.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:general.settings.heading_size.options.small.label"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_h1_tag",
+          "label": "t:general.settings.enable_h1_tag.label",
+          "info": "t:general.settings.enable_h1_tag_info.info",
+          "default": true
+        }
+      ]
+    },
+    {
+      "name": "t:sections.blog_post_list.blocks.additional_information.name",
+      "type": "additional_information",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "info_to_show",
+          "label": "t:general.settings.info_to_show.name",
+          "options": [
+            {
+              "value": "author_name",
+              "label": "t:general.settings.info_to_show.options.option_author_name.label"
+            },
+            {
+              "value": "published_date",
+              "label": "t:general.settings.info_to_show.options.option_published_date.label"
+            },
+            {
+              "value": "both",
+              "label": "t:general.settings.info_to_show.options.option_both.label"
+            }
+          ],
+          "default": "published_date"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

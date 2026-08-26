@@ -1,0 +1,24 @@
+{%- liquid
+  assign loading = "lazy"
+  assign decoding ="async"
+  assign fetchpriority = "auto"
+
+  if section.index == 1
+    assign loading = "eager"
+    assign fetchpriority = "high"
+  endif
+  assign adjusted_index = index | modulo: 4
+  if adjusted_index == 0
+    assign adjusted_index = 4
+  endif
+
+	assign media = 'product-apparel-' | append: adjusted_index | placeholder_svg_tag: 'js-image-lazy placeholder media w-auto h-100 of-cover'
+  assign media_alt  = logo_image.alt | default: logo_image.image | split: '/' | last
+  assign media = logo_image | image_url: width: logo_image.width | image_tag: widths: '350', sizes: '(min-width: 361px) calc(100vw/2), calc(100vw/3)', alt: media_alt, class: 'js-image-lazy of-contain media w-auto h-100', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+-%}
+<div class="p-relative d-inline-block logo-list__image o-hidden" style="--logo-size: {{ logo_size }}">
+  {%-  if logo_link -%}
+    <a href="{{ logo_link | default: '#' }}" {{ logo_link | default: 'tabindex="-1"' | replace: logo_link , '' }} class="d-block p-absolute w-100 h-100 zi-1 ele-focus-visible" aria-label="{{ media_alt }}"></a>
+  {%- endif -%}
+  {% render 'image', image_item: media %}
+</div>

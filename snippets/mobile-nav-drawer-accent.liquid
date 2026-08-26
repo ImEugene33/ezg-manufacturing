@@ -1,0 +1,23 @@
+{%- comment -%}
+  Resolves the mobile nav accent color for a top-level item.
+  Params: title (link.title), index (forloop.index0, used as a fallback for titles not in the map)
+{%- endcomment -%}
+{%- liquid
+  assign accent_colors = '#ffa400,#74531c,#789d4a,#a8a99e,#7e7f74' | split: ','
+  assign key = title | downcase | strip
+  case key
+    when 'masonry'
+      echo '#ffa400'
+    when 'fence'
+      echo '#74531c'
+    when 'hardscape'
+      echo '#789d4a'
+    when 'precast'
+      echo '#a8a99e'
+    when 'refractory'
+      echo '#7e7f74'
+    else
+      assign fallback_index = index | default: 0 | modulo: 5
+      echo accent_colors[fallback_index]
+  endcase
+-%}

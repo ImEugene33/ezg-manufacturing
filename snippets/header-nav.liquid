@@ -1,0 +1,181 @@
+<nav class="header__nav js-header-navigation w-100 {{ block.settings.show_in_menu_drawer | default: "d-none d-flex-lg" | replace: true, "" }}" aria-label="header-navigation">
+    <ul class="main__menu d-flex {{ main_list_class }} fw-wrap w-100 m-zero ls-none {{ block.settings.block_alignment }} disable-scrollbars w-100">
+        {%- for link in block.settings.main_menu.links -%}
+            {% assign mega_menu = false %}
+            {%- for block_megamenu in section.blocks -%}
+                {%- case block_megamenu.type -%}
+                    {%- when 'megamenu' -%}
+                        {%- liquid
+                            assign enable_megamenu_promotion = false
+                            assign megamenu_promo_class = ''
+                            assign mega_menu_name = block_megamenu.settings.menu_item_name | downcase | strip
+                            assign link_anchor_name = link.title | downcase | strip
+                            if mega_menu_name == link_anchor_name
+                                assign mega_menu = true
+                                assign block_megamenu = block_megamenu
+                            endif
+                        -%}
+                {%- endcase -%}
+            {%- endfor -%}
+        <li class="menu__item">
+            {%- if link.links.size > 0 -%}
+                <sht-menu-header class="d-block {% unless mega_menu %} menu-header--dropdownmenu {% else %} menu-header--megamenu {% endunless %}" {% if mega_menu and block_megamenu.settings.mega_menu_style != 'drawer' %} data-menu-dropdown-type="Megamenu" {% endif %}>
+                    <details data-level="1">
+                    <summary class="menu__link-megamenu menu__link menu__link-lv1 d-flex between-xs middle-xs gap-3xs {{ block.settings.text_size }} {{ menu_color }}" aria-expanded="false" aria-controls="menuHeaderMenuList-{{- forloop.index -}}">
+                        <a class="menu__link__link js-menu-link flex-1 wb-break-word {{ menu_open_type | replace: 'hover', 'd-block' | replace: 'click', 'd-none' }}" href="{{- link.url -}}">
+                            {{ link.title }}</a>
+                        <span class="link__title js-menu-link-title flex-1 wb-break-word {{ menu_open_type | replace: 'click', 'd-block' | replace: 'hover', 'd-none' }}">{{- link.title -}}</span>
+                        <span class="toggle__icon d-flex middle-xs center-xs p-relative">
+                        {% render 'icon-toggle', icon_arrow: 'icon-caret-down fs-icon', class_first: 'toggle__icon--plus p-absolute fs-icon', class_second: 'toggle__icon--minus p-absolute fs-icon' %}
+                        </span>
+                    </summary>
+                    {%- if mega_menu -%}
+                        {% liquid
+                            if block_megamenu.settings.promotion_1_image != blank or block_megamenu.settings.promotion_2_image or block_megamenu.settings.promotion_3_image
+                                assign  megamenu_promo_class = block_megamenu.settings.mega_menu_style | prepend: 'megamenu--' | append: '-megamenu--promo megamenu--promo'
+                                assign enable_megamenu_promotion = true
+                            endif
+                        %}
+                        <div class="mega-menu-wrapper menu-dropdown menu-dropdown-lv2 js-mega-menu-wrapper js-header-menu-wrapper disable-scrollbars w-100 color-{{- block_megamenu.settings.color_scheme }} background {% if block_megamenu.settings.mega_menu_style == 'drawer' %} open-drawer {% endif %}" 
+                            data-mega-menu-type="{{- block_megamenu.settings.mega_menu_style -}}"
+                            data-mega-menu-color-scheme="color-{{- block_megamenu.settings.color_scheme }}">
+                            <div class="mega-menu-wrapper-inner disable-scrollbars">
+                              <button class="js-menu-header-back-btn menu-drawer__close w-100 d-none middle-xs ta-left m-zero c-pointer" type="button" data-level="1">
+                                  <span class="toggle__icon d-flex middle-xs center-xs p-relative">
+                                  {% render 'icon-toggle', icon_arrow: 'icon-caret-down fs-icon', class_first: 'toggle__icon--plus p-absolute fs-icon', class_second: 'toggle__icon--minus p-absolute fs-icon' %}
+                                  </span>
+                                  {{- link.title -}}
+                              </button>
+                              <div class="megamenu--wrapper js-menu-overlay {{ section.settings.enable_fullwidth | default: ' ctnr' | replace: 'true', 'megamenu--full-width' }} disable-scrollbars">
+                                  <div class="megamenu-container js-megamenu-container disable-scrollbars megamenu--{{- block_megamenu.settings.mega_menu_style }} d-flex  {{ megamenu_promo_class }} fd-column fd-row-lg w-100 h-100">
+                                  {%- case block_megamenu.settings.mega_menu_style -%}
+                                      {%- when 'column' -%}
+                                          {%- liquid
+                                              assign has_collection_children = false
+                                              for cl in link.links
+                                                  if cl.type == 'collection_link'
+                                                      assign has_collection_children = true
+                                                      break
+                                                  endif
+                                                  if cl.url contains '/collections/'
+                                                      assign has_collection_children = true
+                                                      break
+                                                  endif
+                                              endfor
+                                          -%}
+                                          <tab-component class="megamenu-column-tabs d-flex fd-column fd-row-lg w-100 h-100" data-toggle-mode="mouseover">
+                                              {%- render 'megamenu-column', block: block_megamenu, links: link.links -%}
+                                              {%- if has_collection_children -%}
+                                                  <div class="megamenu-divider d-none d-block-lg" aria-hidden="true"></div>
+                                                  {%- render 'megamenu-column-products', block: block_megamenu, links: link.links -%}
+                                              {%- endif -%}
+                                          </tab-component>
+                                          {%- if enable_megamenu_promotion -%}
+                                              <div class="megamenu-promotion megamenu-promotion--{{- block_megamenu.settings.promotion_display_style }} gap-scale-m w-100">
+                                                  {%- render 'megamenu-promotion',
+                                                      block: block_megamenu,
+                                                      promotion_ratio: promotion_ratio,
+                                                      promotion_content_position: promotion_content_position
+                                                  -%}
+                                              </div>
+                                          {%- endif -%}
+                                      {%- when 'sidebar' -%}
+                                          {%- render 'megamenu-sidebar', block: block_megamenu, links: link.links, data-toggle-tab: section.settings.dropdown_menu_open_type -%}
+                                          {% if enable_megamenu_promotion %}
+                                              <div class="megamenu-promotion megamenu-promotion--{{- block_megamenu.settings.promotion_display_style }} gap-scale-m w-100">
+                                                  {%- render 'megamenu-promotion',
+                                                      block: block_megamenu,
+                                                      promotion_ratio: promotion_ratio,
+                                                      promotion_content_position: promotion_content_position
+                                                  -%}
+                                              </div>
+                                          {% endif %}
+                                      {%- when 'drawer' -%}
+                                          <sht-mega-menu-drawer aria-hidden="true" class="js-menu-drawer drawer inset p-fixed-lg drawer--left no-focus-visible mega-menu-drawer h-100 d-none d-block-lg" hidden tabindex="-1">
+                                              <div class="drawer-overlay js-menu-drawer-overlay js-drawer-overlay p-fixed w-100v h-100v inset d-none d-block-lg"></div>
+                                              <sht-scroll-gradient-overlay class="drawer-wrapper js-menu-drawer-wrapper js-drawer-wrapper p-relative zi-2 h-100v gradient-overlay--bottom gradient-overlay">
+                                                  <div class="drawer__header d-flex-lg d-none middle-xs between-xs gap-xs">
+                                                  <h2 class="drawer__heading h4 m-zero hidden-xs">{{ 'sections.header.drawer.title' | t }}</h2>
+                                                  <button class="drawer__btn-close js-menu-drawer-btn-close js-drawer-btn-close btn btn-icon btn-icon-l btn-tertiary" type="button" aria-label="{{ 'accessibility.close' | t }}">
+                                                      {%- render 'icon-x-mark', class: 'icon icon-fix-xl' -%}
+                                                  </button>
+                                                  </div>
+                                                  <div class="drawer__body o-hidden  disable-scrollbars p-relative">
+                                                      <div class="megamenu-drawer-body disable-scrollbars oy-auto js-scroll-element h-100">
+                                                          <div class="d-flex fd-column between-xs p-scale-xl-lg h-100 oy-scroll disable-scrollbars">
+                                                              {%- render 'megamenu-drawer', block: block_megamenu, links: link.links -%}
+                                                              {%- if enable_megamenu_promotion -%}
+                                                                  <div class="megamenu-promotion megamenu-promotion--{{- block_megamenu.settings.promotion_display_style }} gap-scale-m w-100">
+                                                                      {%- render 'megamenu-promotion',
+                                                                          block: block_megamenu,
+                                                                          promotion_ratio: promotion_ratio,
+                                                                          promotion_content_position: promotion_content_position
+                                                                      -%}
+                                                                  </div>
+                                                              {%- endif -%}
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </sht-scroll-gradient-overlay>
+                                          </sht-mega-menu-drawer>
+                                          {%- render 'megamenu-drawer-mobile', block: block_megamenu, links: link.links -%}
+                                  {%- endcase -%}
+                                  </div>
+                              </div>
+                              <overlay class="color-{{- block_megamenu.settings.color_scheme }} background"></overlay>
+                            </div>
+                        </div>
+                    {%- else -%}
+                        <div class="menu-dropdown menu-dropdown-lv2 disable-scrollbars header-menu-dropdown js-header-menu-wrapper">
+                        <button class="js-menu-header-back-btn menu-drawer__close w-100 d-none middle-xs ta-left m-zero c-pointer" type="button" data-level="1">
+                            <span class="toggle__icon d-flex middle-xs center-xs p-relative">
+                            {%- render 'icon-toggle', icon_arrow: 'icon-caret-down fs-icon', class_first: 'toggle__icon--plus p-absolute fs-icon', class_second: 'toggle__icon--minus p-absolute fs-icon' -%}
+                            </span>
+                            {{- link.title -}}
+                        </button>
+                        <ul class="submenu-dropdown m-zero ls-none d-flex fd-column w-100 pl-0 header-submenu-dropdown js-submenu-dropdown" id="menuHeaderMenuList-{{ forloop.index }}">
+                            {%- for childlink in link.links -%}
+                            <li class="submenu__item">
+                                {%- if childlink.links != blank -%}
+                                <details data-level="2">
+                                    <summary class="menu__link menu__link-lv2 between-xs d-flex middle-xs gap-3xs {{ block.settings.text_size }} {{ menu_color }}" aria-expanded="false" aria-controls="menuHeaderSubMenuList-{{ forloop.index }}">
+                                    <a href="{{- childlink.url -}}" class="menu__link__link flex-1 wb-break-word  {{ menu_open_type | replace: 'hover', 'd-block' | replace: 'click', 'd-none' }}">{{- childlink.title -}}</a>
+                                    <span class="link__title flex-1 wb-break-word {{ menu_open_type | replace: 'click', 'd-block' | replace: 'hover', 'd-none' }}">{{ childlink.title }}</span>
+                                    <span class="toggle__icon d-flex middle-xs center-xs p-relative">
+                                        {%- render 'icon-toggle', icon_arrow: 'icon-caret-right icon icon-fix-xl rtl-flip-x', class_first: 'toggle__sub-icon--plus p-absolute icon icon-fix-xl', class_second: 'toggle__sub-icon--minus p-absolute icon icon-fix-xl' -%}
+                                    </span>
+                                    </summary>
+                                    <div class="menu-dropdown-lv3 disable-scrollbars js-header-menu-wrapper">
+                                        <button class="js-menu-header-back-btn menu-drawer__close w-100 d-none middle-xs ta-left m-zero c-pointer" type="button" data-level="3">
+                                            <span class="toggle__icon d-flex middle-xs center-xs p-relative">
+                                            {% render 'icon-toggle', icon_arrow: 'icon-caret-down icon icon-fix-xl', class_first: 'toggle__icon--plus p-absolute icon icon-fix-xl', class_second: 'toggle__icon--minus p-absolute icon icon-fix-xl' %}
+                                            </span>
+                                            {{- childlink.title -}}
+                                        </button>
+                                        <ul class="menu-dropdown__grandchild disable-scrollbars m-zero p-zero ls-none d-flex fd-column">
+                                        {%- for grandchildlink in childlink.links -%}
+                                            <li class="submenu__item menu__item__grandchild {{ grandchildlink.current | default: '' | replace: 'true', 'menu__item--current' }}">
+                                            <a href="{{ grandchildlink.url }}" class="menu__link ls-none d-block {{ block.settings.text_size }} {{ menu_color }} {{ grandchildlink.current | default: '' | replace: 'true', 'menu__link--active' }}">{{ grandchildlink.title }}</a>
+                                            </li>
+                                        {%- endfor -%}
+                                        </ul>
+                                    </div>
+                                </details>
+                                {%- else -%}
+                                <a href="{{ childlink.url }}" class="menu__link menu__link-lv2 d-block wb-break-word {{ block.settings.text_size }} {{ menu_color }} {{ childlink.current | default: '' | replace: 'true', 'menu__link--active' }}">{{ childlink.title }}</a>
+                                {%- endif -%}
+                            </li>
+                            {%- endfor -%}
+                        </ul>
+                        </div>
+                    {%- endif -%}
+                    <!-- endif megamenu -->
+                    </details>
+                </sht-menu-header>
+            {%- else -%}
+            <a href="{{- link.url -}}" class="menu__link menu__link-lv1 m-zero d-block {{ block.settings.text_size }} {{ menu_color }} {{ link.current | default: '' | replace: 'true', 'menu__link--active' }}">{{- link.title -}}</a>
+            {%- endif -%}
+        </li>
+        {%- endfor -%}
+    </ul>
+</nav>

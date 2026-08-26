@@ -1,0 +1,177 @@
+{{ 'section-rich-text-custom.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mob }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+    background-color: var(--color-background);
+    color: var(--color-normal-text);
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }} rich-text-custom color-{{ section.settings.color_scheme }} {{ section.settings.sect_class }}">
+  <div class="rich-text-custom__container rich-text-custom__container--{{ section.settings.text_align }}">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'heading' -%}
+          {%- liquid
+            assign heading_html = block.settings.heading
+            if heading_html != blank
+              assign heading_html = heading_html | replace: '<p>', '' | replace: '</p>', ''
+            endif
+          -%}
+          {%- if heading_html != blank -%}
+            {%- case block.settings.heading_tag -%}
+              {%- when 'h1' -%}
+                <h1 class="rich-text-custom__heading h1" {{ block.shopify_attributes }}>{{ heading_html }}</h1>
+              {%- when 'h3' -%}
+                <h3 class="rich-text-custom__heading rich-text-custom__heading--h3" {{ block.shopify_attributes }}>{{ heading_html }}</h3>
+              {%- else -%}
+                <h2 class="rich-text-custom__heading h2" {{ block.shopify_attributes }}>{{ heading_html }}</h2>
+            {%- endcase -%}
+          {%- endif -%}
+
+        {%- when 'text' -%}
+          {%- if block.settings.text != blank -%}
+            <div class="rich-text-custom__text" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+          {%- endif -%}
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.rich_text_custom.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.layout.content"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "t:general.settings.text_alignment.label",
+      "options": [
+        { "value": "left", "label": "t:general.left" },
+        { "value": "center", "label": "t:general.center" },
+        { "value": "right", "label": "t:general.right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.rich_text_custom.settings.headers.padding.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.rich_text_custom.settings.padding_top.label",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.rich_text_custom.settings.padding_bottom.label",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.rich_text_custom.settings.padding_top_mob.label",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.rich_text_custom.settings.padding_bottom_mob.label",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "t:sections.rich_text_custom.settings.headers.background.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.rich_text_custom.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "sect_class",
+      "label": "t:sections.rich_text_custom.settings.sect_class.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "t:general.settings.heading.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "t:sections.rich_text_custom.blocks.heading.settings.heading_tag.label",
+          "options": [
+            { "value": "h1", "label": "t:general.settings.heading_size.options.h1.label" },
+            { "value": "h2", "label": "t:general.settings.heading_size.options.h2.label" },
+            { "value": "h3", "label": "t:general.settings.heading_size.options.h3.label" }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "t:general.settings.heading.label",
+          "info": "t:sections.rich_text_custom.blocks.heading.settings.heading.info",
+          "default": "<p>Our Capabilities</p>"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:general.text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:general.settings.text.label",
+          "default": "<p>With a team of engineers, project managers, and contract manufacturers, our machine shop offers unmatched innovation. We take on jobs that require tight tolerances, large-scale material handling, or rapid product development, and we adapt to your unique needs.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.rich_text_custom.name",
+      "blocks": [
+        { "type": "heading" },
+        { "type": "text" }
+      ]
+    }
+  ]
+}
+{% endschema %}

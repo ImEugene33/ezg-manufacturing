@@ -1,0 +1,45 @@
+{% comment %}
+	Accepts:
+    - paginate: {Object} Paginate object.
+    - anchor: {String} custom ID.
+
+Example usage:
+	{% render 'pagination',
+		paginate: paginate,
+		anchor: '#yourID'
+	%}
+{% endcomment %}
+{%- if paginate.parts.size > 0 -%}
+<div class="js-pagination-wrapper d-flex fw-wrap center-xs gap-3xs f-extra" role="navigation" aria-label="{{ 'general.pagination.label' | t }}" data-page="{{ paginate.current_page }}">
+	{%- if paginate.previous -%}
+		<a href="{{ paginate.previous.url }}{{ anchor }}" rel="prev" class="btn-pagination js-pagination-item pagination-icon btn rtl-flip-x" aria-label="{{ 'general.pagination.previous' | t }}">
+			{%- render 'icon-caret-left', class: 'icon icon-fix-m' -%}
+		</a>
+	{%- else -%}
+		<span class="btn-pagination js-pagination-item pagination-icon btn rtl-flip-x" disabled>
+			{%- render 'icon-caret-left', class: 'icon icon-fix-m' -%}
+		</span>
+	{%- endif -%}
+	{%- for part in paginate.parts -%}
+		{%- if part.is_link -%}
+		  <a href="{{ part.url }}{{ anchor }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}" class="btn-pagination js-pagination-item btn ">{{ part.title }}</a>
+		{%- else -%}
+      {%- if part.title == paginate.current_page -%}
+        <span aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}" class="btn-pagination js-pagination-item btn pagination-active">{{ part.title }}</span>
+      {%- else -%}
+        <span class="b-zero btn pagination-dots">{{ part.title }}</span>
+      {%- endif -%}
+		{%- endif -%}
+	{%- endfor -%}
+
+	{%- if paginate.next -%}
+		<a href="{{ paginate.next.url }}{{ anchor }}" rel="next" class="btn-pagination js-pagination-item btn pagination-icon btn-tertiary rtl-flip-x" aria-label="{{ 'general.pagination.next' | t }}">
+			{%- render 'icon-caret-right', size: 16 -%}
+		</a>
+	{%- else -%}
+		<span class="btn-pagination js-pagination-item pagination-icon btn rtl-flip-x" disabled>
+    {%- render 'icon-caret-right', size: 16 -%}
+		</span>
+	{%- endif -%}
+</div>
+{%- endif -%}

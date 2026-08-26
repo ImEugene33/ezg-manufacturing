@@ -1,0 +1,417 @@
+{%- liquid
+  assign xs = 12.0 | divided_by: section.settings.columns_per_row_mobile
+  assign md = 12.0 | divided_by: section.settings.columns_per_row_desktop
+
+  assign items_per_row_on_desktop = section.settings.columns_per_row_desktop | plus: 0
+  assign items_per_row_on_mobile = section.settings.columns_per_row_mobile | plus: 0
+
+  assign carousel_style = 'js-carousel-items ox-auto p-relative scrollable scrollable-x disable-scrollbars'
+  assign carousel_item = 'js-carousel-item p-relative scrollable-aln-start'
+
+  assign data_step_desktop = items_per_row_on_desktop
+  assign data_step_mobile = items_per_row_on_mobile
+
+  if settings.carousel_slide == 'single_item'
+    assign data_step_desktop = 1
+    assign data_step_mobile = 1
+  endif
+
+  assign default = 'general.search.view_all' | t
+  assign button_label = section.settings.button_text | default: default
+  assign collection_list_link = routes.collections_url
+  assign enabel_button = section.settings.enable_button
+  assign button_position = section.settings.button_position
+  if button_position == 'last-item'
+    assign hidden_button = 'd-none-important'
+  endif
+
+  assign total_items = section.blocks.size | plus: 0
+  if button_position == 'last-item'
+    assign total_items = section.blocks.size | plus: 1
+  endif
+-%}
+
+{%- if section.blocks.size > 0 or section.settings.heading != blank or section.settings.description != blank or section.settings.enable_button == true -%}
+  {%- render 'section-padding-collapse' -%}
+  <div data-animate="regular-section" class="section js-animate section--vertical o-hidden color-{{- section.settings.color_scheme }} background" data-ui-component="Section Collection List" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}">
+    {%- if section.settings.heading != blank or section.settings.description != blank or section.settings.enable_button == true -%}
+      <div class="section__header">
+        <div class="ctnr">
+          {% render 'section-content-horizontal',
+            class: 'section__text--horizontal p-relative zi-1',
+            heading_size: section.settings.heading_size,
+            button_main_text: button_label,
+            button_main_link: collection_list_link,
+            button_main_style: 'btn-s btn-tertiary',
+            enable_button: enabel_button,
+            hidden_button: hidden_button,
+            enable_countdown: false
+          %}
+        </div>
+      </div>
+    {%- endif -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="section__content">
+        <div class="ctnr">
+          <sht-carousel class="sht-carousel p-relative d-block" data-enable="{{ section.settings.carousel_desktop }}" data-enable-mobile="{{ section.settings.carousel_mobile }}">
+            <div aria-atomic="true" class="rw section-content-style o-hidden r-gap-scale-xl {{ carousel_style }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel-md' }}" style="--carousel-xs:{{- xs -}}; --carousel-sm:{{- xs -}}; --carousel-md: {{- md -}};">
+              {%- liquid
+                  assign index = 1
+                  assign index_accessibility = 1
+              -%}
+              {%- for block in section.blocks -%}
+                {%- liquid
+                  assign color_bgc_style = ''
+                  assign color_content_style = ''
+                  unless block.settings.custom_background.alpha == 0.0 or block.settings.custom_background == blank
+                    assign color_bgc_style = ';--color-background: ' | append: block.settings.custom_background
+                  endunless
+                  unless block.settings.custom_color.alpha == 0.0 or block.settings.custom_color == blank
+                    assign color_content_style = '; --color-normal-text-rgb: ' | append: block.settings.custom_color.red | append: ',' | append: block.settings.custom_color.green | append: ',' | append: block.settings.custom_color.blue | append: ';'
+                  endunless
+                  
+                  assign image_loading = 'lazy'
+                  assign fetchpriority = 'auto'
+                  if section.index == 1 and forloop.first
+                    assign image_loading = 'eager'
+                    assign fetchpriority = 'high'
+                  endif
+                -%}
+                {% if block.settings.collection != blank %}
+                  <sht-carousel-itm class="carousel__item clm {{ carousel_item }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel__item-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel__item-md' }}" style="--w-xs:{{- xs -}};--w-md: {{- md -}}; {{ color_bgc_style }} {{ color_content_style }}" role="group" aria-roledescription="Slide" aria-label="{{ 'accessibility.slide' | t }} {{ index_accessibility }} {{ 'accessibility.of' | t }} {{ total_items }}" data-item-index="{{ index_accessibility }}" {{ block.shopify_attributes }}>
+                    {% render 'card-collection',
+                      collection: block.settings.collection,
+                      ratio: section.settings.image_ratio,
+                      custom_media: block.settings.collection_image,
+                      image_loading: image_loading,
+                      fetchpriority: fetchpriority
+                    %}
+                  </sht-carousel-itm>
+                {% else %}
+                  <sht-carousel-itm data-attribute-placeholder="1" aria-hidden="true" aria-disabled="true" class="clm carousel__item {{ carousel_item }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel__item-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel__item-md' }}" style="--w-xs:{{- xs -}};--w-md: {{- md -}}; {{ color_bgc_style }} {{ color_content_style }}" role="group" aria-roledescription="Slide" aria-label="{{ 'accessibility.slide' | t }} {{ index_accessibility }} {{ 'accessibility.of' | t }} {{ total_items }}" data-item-index="{{ index_accessibility }}" {{ block.shopify_attributes }}>
+                    {% render 'card-collection-placeholder',
+                      collection_placeholder: index,
+                      ratio: section.settings.image_ratio,
+                      custom_media: block.settings.collection_image
+                    %}
+                  </sht-carousel-itm>
+                {% endif %}
+
+                {% liquid
+                  assign index = index | plus: 1
+                  assign index_accessibility = index_accessibility | plus: 1
+                  if index == 5
+                    assign index = 1
+                  endif
+                %}
+              {%- endfor %}
+
+              {% if button_position == 'last-item' and enabel_button == true %}
+                {%- liquid assign total_items = section.blocks.size | plus: 1 -%}
+                <sht-carousel-itm class="clm carousel__item d-flex middle-xs center-xs {{ carousel_item }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel__item-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel__item-md' }}" style="--w-xs:{{- xs -}};--w-md: {{- md -}};" role="group" aria-roledescription="Slide" aria-label="{{ 'accessibility.slide' | t }} {{ index_accessibility }} {{ 'accessibility.of' | t }} {{ total_items }}" data-item-index="{{ index_accessibility }}">
+                  <div class="card card-collection card-animate card--border w-100 p-relative d-flex fd-column h-100 p-s rad-m o-hidden">
+                    <a href="{{- collection_list_link -}}" class="btn gap-3xs btn-s w-100 h-100 hide-empty btn-tertiary">
+                      {{- button_label -}}
+                      {% render 'icon-caret-right', class: 'rtl-flip-x' %}
+                    </a>
+                  </div>
+                </sht-carousel-itm>
+              {% endif %}
+            </div>
+            <div class="carousel-pagination middle-y w-100 p-absolute no-js-hidden zi-3">
+              <button type="button" data-step="{{ data_step_desktop }}" data-step-mb="{{ data_step_mobile }}" class="js-carousel-prev-btn btn-carousel-prev btn btn-icon-l btn-secondary middle-y p-absolute left-0 rtl-flip-x" aria-label="{{ 'accessibility.previous_slide' | t }}" name="previous" disabled>{% render 'icon-caret-left' %}</button>
+              <button type="button" data-step="{{ data_step_desktop }}" data-step-mb="{{ data_step_mobile }}" class="js-carousel-next-btn btn-carousel-next btn btn-icon-l btn-secondary middle-y p-absolute right-0 rtl-flip-x" aria-label="{{ 'accessibility.next_slide' | t }}" name="next" disabled>{% render 'icon-caret-right' %}</button>
+            </div>
+
+            <div class="carousel-overflow {{ section.settings.carousel_mobile | replace: 'true', '' | replace: 'false', 'd-none' }} {{ section.settings.carousel_desktop | replace: 'true', 'd-block-md' | replace: 'false', 'd-none-md' }}"></div>
+
+            {% if settings.show_progress_indicator %}
+              {% liquid
+                assign show_on_desktop = false
+                assign show_on_mobile = false
+                if section.settings.carousel_desktop == 'true' and items_per_row_on_desktop < total_items
+                    assign show_on_desktop = true
+                endif
+                if section.settings.carousel_mobile == 'true' and items_per_row_on_mobile < total_items
+                    assign show_on_mobile = true
+                endif
+              %}
+              <div class="slider-scrollbar p-2xl {% if show_on_desktop %} d-flex-md {% else %} d-none-md {% endif %} {% if show_on_mobile %} d-flex {% else %} d-none {% endif %}">
+                <div class="scrollbar-track js-scrollbar-track" data-thumb-mobile="{{ items_per_row_on_mobile }}" data-thumb-tablet="{{ items_per_row_on_mobile }}" data-thumb-desk="{{ items_per_row_on_desktop }}" data-thumb-total="{{ total_items }}" style="--width-thumb-desktop: {{ items_per_row_on_desktop | times: 100.0 | divided_by: total_items }}%; --width-thumb-tablet: {{ 2 | times: 100.0 | divided_by: total_items }}%; --width-thumb-mobile: {{ 1 | times: 100.0 | divided_by: total_items }}%">
+                  <div class="scrollbar-thumb js-scrollbar-thumb"></div>
+                </div>
+              </div>
+            {% endif %}
+          </sht-carousel>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.collection_list.name",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.section_heading.label",
+      "default": "Collection list"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.heading_size.label",
+      "id": "heading_size",
+      "visible_if": "{{ section.settings.heading != blank }}",
+      "options": [
+        {
+          "value": "h3-regular",
+          "label": "t:general.settings.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:general.settings.heading_size.options.large.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:general.settings.heading_size.options.regular.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:general.settings.heading_size.options.small.label"
+        }
+      ],
+      "default": "h5"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:general.settings.section_description.label",
+      "default": "<p>Show your store catalog</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.collection_item.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:general.settings.image_ratio.label",
+      "default": "1/1",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "t:general.settings.image_ratio.options.option_square.label"
+        },
+        {
+          "value": "2/3",
+          "label": "t:general.settings.image_ratio.options.option_portrait.label"
+        },
+        {
+          "value": "3/2",
+          "label": "t:general.settings.image_ratio.options.option_landscape.label"
+        },
+        {
+          "value": "auto",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.desktop_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "carousel_desktop",
+      "label": "t:general.settings.list_style.label",
+      "default": "true",
+      "options": [
+        {
+          "value": "false",
+          "label": "t:general.settings.option_grid.label"
+        },
+        {
+          "value": "true",
+          "label": "t:general.settings.option_carousel.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_per_row_desktop",
+      "label": "t:general.settings.columns_per_row.label",
+      "default": "6",
+      "options": [
+        {
+          "value": "3",
+          "label": "t:general.settings.columns_per_row.options_3.label"
+        },
+        {
+          "value": "4",
+          "label": "t:general.settings.columns_per_row.options_4.label"
+        },
+        {
+          "value": "5",
+          "label": "t:general.settings.columns_per_row.options_5.label"
+        },
+        {
+          "value": "6",
+          "label": "t:general.settings.columns_per_row.options_6.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.mobile_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "carousel_mobile",
+      "label": "t:general.settings.list_style.label",
+      "default": "true",
+      "options": [
+        {
+          "value": "false",
+          "label": "t:general.settings.option_grid.label"
+        },
+        {
+          "value": "true",
+          "label": "t:general.settings.option_carousel.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_per_row_mobile",
+      "label": "t:general.settings.columns_per_row.label",
+      "default": "2",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.button.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_button",
+      "label": "t:general.settings.enable_view_all_button.label",
+      "info": "t:sections.collection_list.settings.enable_view_all_button.info",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:general.settings.label.label",
+      "default": "View all",
+      "visible_if": "{{ section.settings.enable_button == true }}"
+    },
+    {
+      "type": "select",
+      "id": "button_position",
+      "label": "t:general.settings.position.label",
+      "default": "above-listing",
+      "visible_if": "{{ section.settings.enable_button == true }}",
+      "options": [
+        {
+          "value": "last-item",
+          "label": "t:general.settings.last_item.label"
+        },
+        {
+          "value": "above-listing",
+          "label": "t:general.settings.above_listing.label"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "t:sections.collections_list.blocks.collection.name",
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.general.content"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:general.settings.collection.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "collection_image",
+          "label": "t:general.settings.custom_image.label",
+          "info": "t:sections.collection_list.blocks.collection.settings.collection_image.info"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.custom_color.content"
+        },
+        {
+          "type": "color",
+          "id": "custom_background",
+          "label": "t:general.settings.custom_background.label"
+        },
+        {
+          "type": "color",
+          "id": "custom_color",
+          "label": "t:general.settings.custom_content_color.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.collection_list.name",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

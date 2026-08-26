@@ -1,0 +1,165 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "divider_bLBweT": {
+      "type": "divider",
+      "name": "t:sections.divider.name",
+      "settings": {
+        "divider_color": "#f3f3f3"
+      }
+    },
+    "rich_text_CT334t": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_ra4KJc": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "EZG Manufacturing Equipment Warranty",
+            "heading_size": "h2",
+            "enable_h1_tag": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_ra4KJc"
+      ],
+      "custom_css": [
+        "h1 {max-width: 950px;}"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "desktop_content_alignment": "ta-center-md middle-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "rich_text_VhJmNa": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Gcx7A3": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Limited Warranty",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_Gd7ecn": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>EZG Manufacturing (“EZG”) warrants its products to be free of defects in material or workmanship that develop under normal use for two years.<br/><br/>Warranty period begins on the IN-SERVICE date (date of purchase by the end user of the product, date placed in service by a rental operator, or date of any utilization). All warranty is based on the following limited warranty terms and conditions, including the disclaimer of implied warranties and consequential damages. Warranty registration is required to establish the in-service date and for the warranty to become effective.<br/><br/>EZG Limited Warranty & Limitation of Liability Terms:<br/><br/>EZG obligation and liability under this warranty is limited to repairing or replacing parts if, after EZG’s inspection, there is determined to be a defect in material or workmanship. EZG reserves the choice to repair or replace.<br/><br/>If EZG chooses to replace the part, it will be at no cost to the customer and will be made available to the EZG Distributor, Dealer, or Rental Center from whom the End User purchased the product.<br/><br/>Replacement or repair parts, installed in the product, are warranted only for the remainder of warranty period of the product as though they were the original parts.<br/><br/>EZG does not warranty engines. Engine warranty claims should be made directly to an authorized factory service center for the particular engine manufacturer.<br/><br/>EZG’s warranty does not cover the normal maintenance of products or its components (such as engine tune-ups and oil & filter changes). The warranty also excludes normal replaceable wear items, i.e. gaskets, wear parts, seals, O-rings, belts, drive chains, clutches, etc. unless such items are deemed to fail due to defective material or workmanship.<br/><br/>EZGs warranty will be void if it is determined that the defect resulted from operator abuse, failure to perform normal maintenance on the product, use of non-manufacturer parts, or failure to follow documented service instructions, alterations or modifications made to the product without the written approval of EZG.<br/><br/>EZG will pay shop labor on warranty items at the EZG Shop Labor Rate in existence on the date of the warranty claim. EZG technician will determine the time allowed to complete a repair which will govern the shop labor hours to be allowed.<br/><br/>EZG will pay freight on warranty replacement parts at worldwide standard ground rates. No warranty replacement parts will be shipped air freight at the expense of EZG. EZG only pays outbound freight charges when sending warranty replacement parts to the customer via ground service. EZG does not pay any inbound freight. However, if EZG determines this to be a warranted item, EZG will then reimburse the customer for inbound freight at standard ground rates.<br/><br/>The EZG WARRANTY POLICY WILL NOT COVER THE FOLLOWING: TAXES; SHOP SUPPLIES; ENVIRONMENTAL SURCHARGES; AIR FREIGHT; TRAVEL TIME; LOSS OF TIME; INCONVENIENCE; LOSS OF RENTAL REVENUE; RENTAL COSTS OF EQUIPMENT USED TO REPLACE THE PRODUCT BEING REPAIRED; LOSS OF USE OF THE PRODUCT; COMMERCIAL LOSS; OR ANY OTHER CHARGES WHATSOEVER OR ANY LIABILITIES FOR DIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGE OR DELAY.<br/><br/>EZG MANUFACTURING MAKES NO OTHER WARRANTY, EXPRESSED OR IMPLIED. THIS LIMITED WARRANTY IS IN LIEU OF THE WARRANTY OF MERCHANTABILITY AND FITNESS. THERE ARE NO OTHER WARRANTIES THAT EXTEND BEYOND THE DESCRIPTION ON THIS DOCUMENT.<br/><br/>No EZG Manufacturing employee or representative is authorized to change this warranty in any way or grant any other warranty unless such change is made in writing and signed by an officer of EZG Manufacturing.<br/>WARRANTY REGISTRATION IS REQUIRED TO ESTABLISH THE IN-SERVICE DATE AND FOR THE WARRANTY TO BE EFFECTIVE. (some specialty equipment is exempted, or limitations may apply)<br/><br/>No claim will be allowed for products lost or damaged in transit. Such claims should be filed with the carrier within fifteen days.</p>"
+          }
+        },
+        "button_UVwHzC": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Register Here",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_Gcx7A3",
+        "description_Gd7ecn",
+        "button_UVwHzC"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": false,
+        "enable_h1_tag": false,
+        "show_page_content": true
+      }
+    },
+    "icon_with_text_GJHHF6": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_NcC9HM": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "Coverage is automatic and lasts two years from the date of purchase.",
+            "description": "",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_qXDEKi": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "Our warranty guarantees that all equipment shipped to you is free of defect.",
+            "description": "",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_Fa4Ad3": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "We cover equipment that breaks through normal use for two years.",
+            "description": "",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_NcC9HM",
+        "icon_with_text_item_qXDEKi",
+        "icon_with_text_item_Fa4Ad3"
+      ],
+      "name": "t:sections.icon_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-554f3a13-3752-4c9d-89c1-dc948a08cf1a",
+        "heading": "General EZG Warranty Provisions:",
+        "heading_size": "h5",
+        "description": "",
+        "text_position": "fd-row",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "label": "",
+        "link": ""
+      }
+    }
+  },
+  "order": [
+    "divider_bLBweT",
+    "rich_text_CT334t",
+    "rich_text_VhJmNa",
+    "main",
+    "icon_with_text_GJHHF6"
+  ]
+}

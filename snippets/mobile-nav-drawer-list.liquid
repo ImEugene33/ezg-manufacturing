@@ -1,0 +1,110 @@
+{%- comment -%}
+  Renders one level of the mobile nav drawer. The chevron only shows on rows that
+  actually have a submenu (push to a screen, or an inline accordion).
+  Params: links (linklist links), level (0 = top tab list, 1 = sub-list inside a pushed screen), tab_index (required when level == 0),
+  extra_link_label / extra_link_url (optional, level 0 only: appends a highlighted row after the menu's own items, always last)
+{%- endcomment -%}
+{%- capture chevron_icon -%}
+  <svg class="mobile-nav-drawer__chevron" width="6" height="10" viewBox="0 0 6 10" fill="none" aria-hidden="true" focusable="false"><path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+{%- endcapture -%}
+<ul class="mobile-nav-drawer__list{% if level > 0 %} mobile-nav-drawer__list--sub{% endif %}">
+  {%- for link in links -%}
+    {%- capture accent -%}
+      {%- render 'mobile-nav-drawer-accent', title: link.title, index: forloop.index0 -%}
+    {%- endcapture -%}
+    {%- assign accent = accent | strip -%}
+    {%- liquid
+      assign accent_key = link.title | downcase | strip
+      assign is_known_accent = false
+      case accent_key
+        when 'masonry', 'fence', 'hardscape', 'precast', 'refractory'
+          assign is_known_accent = true
+      endcase
+    -%}
+    {%- if level == 0 -%}
+      {%- if link.links.size > 0 -%}
+        <li class="mobile-nav-drawer__item">
+          <button type="button" class="mobile-nav-drawer__row mobile-nav-drawer__row--accent" style="--mnd-item-accent: {{ accent }};" data-mnd-open="{{ tab_index }}-{{ forloop.index0 }}">
+            <span class="mobile-nav-drawer__row-label">{{ link.title }}</span>
+            {{- chevron_icon -}}
+          </button>
+        </li>
+      {%- elsif is_known_accent -%}
+        <li class="mobile-nav-drawer__item">
+          <a href="{{ link.url }}" class="mobile-nav-drawer__row mobile-nav-drawer__row--accent" style="--mnd-item-accent: {{ accent }};">
+            <span class="mobile-nav-drawer__row-label">{{ link.title }}</span>
+          </a>
+        </li>
+      {%- else -%}
+        <li class="mobile-nav-drawer__item">
+          <a href="{{ link.url }}" class="mobile-nav-drawer__row mobile-nav-drawer__row--plain">
+            <span class="mobile-nav-drawer__row-label">{{ link.title }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+    {%- else -%}
+      {%- if link.links.size > 0 -%}
+        <li class="mobile-nav-drawer__item">
+          <details class="mobile-nav-drawer__accordion">
+            <summary class="mobile-nav-drawer__row mobile-nav-drawer__row--plain">
+              <span class="mobile-nav-drawer__row-label">{{ link.title }}</span>
+              {{- chevron_icon -}}
+            </summary>
+            <ul class="mobile-nav-drawer__grandchild-list">
+              {%- for grandchild in link.links -%}
+                {%- assign gc_menu_handle = grandchild.title | strip | handleize -%}
+                {%- assign gc_menu = linklists[gc_menu_handle] -%}
+                <!-- mnd-debug title="{{ grandchild.title }}" handle="[{{ gc_menu_handle }}]" gc_menu_handle_from_shopify="{{ gc_menu.handle }}" gc_menu_links_size="{{ gc_menu.links.size }}" -->
+                {%- if gc_menu != blank and gc_menu.links.size > 0 -%}
+                  <li class="mobile-nav-drawer__grandchild-item">
+                    <details class="mobile-nav-drawer__sub-accordion">
+                      <summary class="mobile-nav-drawer__grandchild-link">
+                        <span>{{ grandchild.title }}</span>
+                        {%- render 'icon-plus2', size: 10, class: 'mobile-nav-drawer__plus-icon' -%}
+                        {%- render 'icon-minus2', size: 10, class: 'mobile-nav-drawer__minus-icon' -%}
+                      </summary>
+                      <ul class="mobile-nav-drawer__great-grandchild-list">
+                        {%- for greatgrandchild in gc_menu.links -%}
+                          <li class="mobile-nav-drawer__great-grandchild-item">
+                            <a href="{{ greatgrandchild.url }}" class="mobile-nav-drawer__great-grandchild-link">{{ greatgrandchild.title }}</a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    </details>
+                  </li>
+                {%- else -%}
+                  <li class="mobile-nav-drawer__grandchild-item">
+                    <a href="{{ grandchild.url }}" class="mobile-nav-drawer__grandchild-link">
+                      <span>{{ grandchild.title }}</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </details>
+        </li>
+      {%- elsif forloop.last and link.type == 'collection_link' -%}
+        <li class="mobile-nav-drawer__item">
+          <a href="{{ link.url }}" class="mobile-nav-drawer__row mobile-nav-drawer__row--view-all">
+            <span class="mobile-nav-drawer__row-label">{{ link.title }}</span>
+            {%- render 'icon-arrow-up-right', size: 18 -%}
+          </a>
+        </li>
+      {%- else -%}
+        <li class="mobile-nav-drawer__item">
+          <a href="{{ link.url }}" class="mobile-nav-drawer__row mobile-nav-drawer__row--plain">
+            <span class="mobile-nav-drawer__row-label">{{ link.title }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if level == 0 and extra_link_label != blank -%}
+    <li class="mobile-nav-drawer__item">
+      <a href="{{ extra_link_url | default: '#' }}" class="mobile-nav-drawer__row mobile-nav-drawer__row--featured"{% if extra_link_url contains '://' %} target="_blank" rel="noopener"{% endif %}>
+        <span class="mobile-nav-drawer__row-label">{{ extra_link_label }}</span>
+        {%- render 'icon-arrow-up-right', size: 18 -%}
+      </a>
+    </li>
+  {%- endif -%}
+</ul>

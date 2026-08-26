@@ -1,0 +1,11 @@
+<sht-dialog-product-bundle class="sht-dialog no-focus-visible bottom-xs end-xs p-fixed left-0 top-0 h-100 w-100 o-hidden zi-10 hidden-xs" hidden tabindex="-1">
+  <div class="sht-dialog-overlay js-dialog-overlay"></div>
+  <div class="js-dialog-container drawer-content-container popup-content background color-{{- settings.quick_buy_color_scheme }} dialog disable-scrollbars js-product-container" role="dialog" aria-labelledby="dialogTitleBundleProduct" aria-modal="true">
+    <div class="dialog__content d-flex fd-column h-100 p-relative">
+      <button class="drawer__btn-close btn btn btn-icon-l btn-tertiary js-dialog-close-btn quick-buy-dialog-close" type="button" aria-label="{{ 'accessibility.close' | t }}">
+        {% render 'icon-x-mark', class: 'icon icon-fix-m' %}
+      </button>
+      <div class="quick-buy-dialog-content js-dialog-body js-quick-buy-dialog-content d-flex fd-column"></div>
+    </div>
+  </div>
+</sht-dialog-product-bundle>

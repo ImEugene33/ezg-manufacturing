@@ -1,0 +1,290 @@
+{%- liquid
+  assign xs = 12.0 | divided_by: section.settings.columns_per_row_mobile
+  assign md = 12.0 | divided_by: section.settings.columns_per_row_desktop
+
+  assign items_per_row_on_desktop = section.settings.columns_per_row_desktop | plus: 0
+  assign items_per_row_on_mobile = section.settings.columns_per_row_mobile | plus: 0
+
+  assign carousel_style = 'js-carousel-items ox-auto p-relative scrollable scrollable-x disable-scrollbars'
+
+  assign data_step_desktop = items_per_row_on_desktop
+  assign data_step_mobile = items_per_row_on_mobile
+
+  if settings.carousel_slide == 'single_item'
+    assign data_step_desktop = 1
+    assign data_step_mobile = 1
+  endif
+
+-%}
+{%- render 'section-padding-collapse' -%}
+
+<div data-animate="regular-section" id="{{ section.id }}" class="js-animate section section--vertical o-hidden color-{{- section.settings.color_scheme }} background {% unless content_for_header contains 'Shopify.designMode' %}js-recently-viewed-section{% endunless %}">
+  {%- if content_for_header contains 'Shopify.designMode' -%}
+    <div class="ctnr w-100 recently-editor rad-m d-flex center-xs middle-xs fs-body-l color-text-80">
+      The 'Recently viewed products' section functions only on the live store. Please refer to the live store for an accurate preview. This message is only visible in the theme editor.
+    </div>
+  {%- else -%}
+    {%- if section.settings.heading != blank or section.settings.description != blank -%}
+      <div class="section__header js-recently-viewed-section">
+        <div class="ctnr">
+          {% render 'section-content-horizontal',
+            section: section,
+            class: 'section__text--horizontal p-relative zi-1',
+            heading_size: section.settings.heading_size
+          %}
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+  <div class="section__content js-recently-viewed-section">
+    <div class="ctnr">
+      <sht-recently-viewed class="sht-carousel p-relative d-block"
+        data-enable="{{ section.settings.carousel_desktop }}"
+        data-enable-mobile="{{ section.settings.carousel_mobile }}"
+        data-limit="{{- section.settings.products_to_show -}}"
+        data-width-mobile="{{- xs -}}"
+        data-width-desktop="{{- md -}}"
+        data-item-per-row-mobile="{{ items_per_row_on_mobile }}"
+        data-item-per-row-desktop="{{ items_per_row_on_desktop }}"
+        data-enable-vendor="{{- section.settings.show_vendor -}}"
+        data-enable-badge="{{- section.settings.show_badge -}}"
+        data-enable-quick-view="{{- section.settings.enable_quick_view -}}"
+        data-enable-variant-swatches="{{- section.settings.show_variant_swatches -}}"
+        data-enable-price="{{- section.settings.show_price -}}"
+        data-option-quick-buy="{{- section.settings.quick_buy -}}"
+        data-enable-rating="{{- section.settings.show_rating -}}"
+      >
+        <div aria-atomic="true" class="js-product-recently-viewed rw o-hidden section-content-style r-gap-scale-xl {{ carousel_style }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel-md' }}" style="--carousel-xs:{{- xs -}}; --carousel-sm:{{- xs -}}; --carousel-md: {{- md -}};">
+        </div>
+        <div class="carousel-pagination middle-y w-100 p-absolute no-js-hidden zi-3">
+          <button type="button" data-step="{{ data_step_desktop }}" data-step-mb="{{ data_step_mobile }}" class="js-carousel-prev-btn btn-carousel-prev btn btn-icon-l btn-secondary middle-y p-absolute left-0 rtl-flip-x" aria-label="{{ 'accessibility.previous_slide' | t }}" name="previous" disabled>{% render 'icon-caret-left' %}</button>
+          <button type="button" data-step="{{ data_step_desktop }}" data-step-mb="{{ data_step_mobile }}" class="js-carousel-next-btn btn-carousel-next btn btn-icon-l btn-secondary middle-y p-absolute right-0 rtl-flip-x" aria-label="{{ 'accessibility.next_slide' | t }}" name="next" disabled>{% render 'icon-caret-right' %}</button>
+        </div>
+        <div class="carousel-overflow {{ section.settings.carousel_mobile | replace: 'true', '' | replace: 'false', 'd-none' }} {{ section.settings.carousel_desktop | replace: 'true', 'd-block-md' | replace: 'false', 'd-none-md' }}"></div>
+
+        {% if settings.show_progress_indicator %}
+          <div class="js-slider-scrollbar slider-scrollbar p-2xl d-none">
+            <div class="scrollbar-track js-scrollbar-track" data-thumb-mobile="{{ items_per_row_on_mobile }}" data-thumb-tablet="{{ items_per_row_on_mobile }}" data-thumb-desk="{{ items_per_row_on_desktop }}">
+              <div class="scrollbar-thumb js-scrollbar-thumb"></div>
+            </div>
+          </div>
+        {% endif %}
+      </sht-recently-viewed>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "t:sections.recently_viewed_products.name",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.section_heading.label",
+      "default": "Recently viewed products"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.heading_size.label",
+      "id": "heading_size",
+      "visible_if": "{{ section.settings.heading != blank }}",
+      "options": [
+        {
+          "value": "h3-regular",
+          "label": "t:general.settings.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:general.settings.heading_size.options.large.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:general.settings.heading_size.options.regular.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:general.settings.heading_size.options.small.label"
+        }
+      ],
+      "default": "h5"
+    },
+    {
+      "type": "range",
+      "max": 10,
+      "min": 1,
+      "step": 1,
+      "default": 8,
+      "id": "products_to_show",
+      "label": "t:general.settings.max_items_to_show.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.product_card.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "t:general.settings.show_vendor.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "t:general.settings.show_rating.label",
+      "info": "t:general.settings.show_rating.info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_view",
+      "label": "t:general.settings.show_quick_view.label",
+      "info": "t:general.settings.show_quick_view.info",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "quick_buy",
+      "label": "t:general.settings.quick_buy.label",
+      "info": "t:general.settings.quick_buy.info",
+      "options": [
+        {
+          "value": "not_use",
+          "label": "t:general.settings.not_use.label"
+        },
+        {
+          "value": "standard",
+          "label": "t:general.settings.standard.label"
+        },
+        {
+          "value": "bulk",
+          "label": "t:general.settings.bulk.label"
+        }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_swatches",
+      "label": "t:general.settings.show_variant_swatch.label",
+      "info": "t:general.settings.show_variant_swatch.info",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "t:general.settings.show_price.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "t:general.settings.show_badge.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.desktop_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "carousel_desktop",
+      "label": "t:general.settings.list_style.label",
+      "default": "true",
+      "options": [
+        {
+          "value": "false",
+          "label": "t:general.settings.option_grid.label"
+        },
+        {
+          "value": "true",
+          "label": "t:general.settings.option_carousel.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_per_row_desktop",
+      "label": "t:general.settings.columns_per_row.label",
+      "default": "4",
+      "options": [
+        {
+          "value": "3",
+          "label": "t:general.settings.columns_per_row.options_3.label"
+        },
+        {
+          "value": "4",
+          "label": "t:general.settings.columns_per_row.options_4.label"
+        },
+        {
+          "value": "5",
+          "label": "t:general.settings.columns_per_row.options_5.label"
+        },
+        {
+          "value": "6",
+          "label": "t:general.settings.columns_per_row.options_6.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.mobile_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "carousel_mobile",
+      "label": "t:general.settings.list_style.label",
+      "default": "true",
+      "options": [
+        {
+          "value": "false",
+          "label": "t:general.settings.option_grid.label"
+        },
+        {
+          "value": "true",
+          "label": "t:general.settings.option_carousel.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_per_row_mobile",
+      "label": "t:general.settings.columns_per_row.label",
+      "default": "2",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.recently_viewed_products.name"
+    }
+  ]
+}
+{% endschema %}

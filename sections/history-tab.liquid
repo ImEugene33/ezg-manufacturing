@@ -1,0 +1,321 @@
+{{ 'section-history-tab.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign heading = section.settings.heading
+  assign heading_before = heading
+  assign heading_accent = ''
+  assign heading_after = ''
+
+  assign heading_parts = heading | split: '('
+  if heading_parts.size > 1
+    assign heading_before = heading_parts[0]
+    assign heading_remainder = heading | slice: heading_before.size, heading.size | remove_first: '('
+    assign heading_remainder_parts = heading_remainder | split: ')'
+    assign heading_accent = heading_remainder_parts[0]
+    assign heading_after = heading_remainder | slice: heading_accent.size, heading_remainder.size | remove_first: ')'
+  endif
+-%}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mob }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+    --history-tab-heading-accent-color: {{ section.settings.heading_accent_color }};
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }} history-tab color-{{ section.settings.color_scheme }} {{ section.settings.sect_class }}" data-history-tab>
+  <div class="history-tab__container">
+    {%- if section.settings.eyebrow != blank or heading != blank -%}
+      <div class="history-tab__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="history-tab__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if heading != blank -%}
+          <h2 class="history-tab__heading">{{- heading_before -}}{%- if heading_accent != blank -%}<span class="history-tab__heading-accent">{{- heading_accent -}}</span>{%- endif -%}{{- heading_after -}}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="history-tab__tabs" role="tablist" aria-label="{{ heading | strip_html | default: 'History' }}">
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="history-tab__tab{% if forloop.first %} history-tab__tab--active{% endif %}"
+            id="history-tab-trigger-{{ block.id }}"
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-controls="history-tab-panel-{{ block.id }}"
+            data-history-tab-trigger
+            {{ block.shopify_attributes }}
+          >{{ block.settings.tab_label }}</button>
+        {%- endfor -%}
+      </div>
+
+      <div class="history-tab__panels">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign image = block.settings.image
+            assign image_alt = image.alt | default: block.settings.title | default: 'History'
+            assign image_position = block.settings.image_position | default: 'left'
+            assign image_px_width = settings.container_max_width | times: 0.595 | round
+            assign sizes = '(min-width: 1024px) ' | append: image_px_width | append: 'px, 100vw'
+          -%}
+          <div
+            class="history-tab__panel{% if forloop.first %} history-tab__panel--active{% endif %}{% if image_position == 'right' %} history-tab__panel--image-right{% endif %}"
+            id="history-tab-panel-{{ block.id }}"
+            role="tabpanel"
+            aria-labelledby="history-tab-trigger-{{ block.id }}"
+            {% unless forloop.first %}hidden{% endunless %}
+            data-history-tab-panel
+            {{ block.shopify_attributes }}
+          >
+            <div class="history-tab__media">
+              {%- if image != blank -%}
+                {{ image | image_url: width: image.width | image_tag:
+                  widths: '375, 550, 750, 1000, 1200, 1600',
+                  sizes: sizes,
+                  alt: image_alt,
+                  loading: 'lazy',
+                  class: 'history-tab__media-img'
+                }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'history-tab__media-img' }}
+              {%- endif -%}
+            </div>
+            <div class="history-tab__content">
+              {%- if block.settings.date_label != blank or block.settings.title != blank -%}
+                <div class="history-tab__copy">
+                  {%- if block.settings.date_label != blank -%}
+                    <p class="history-tab__date">{{ block.settings.date_label }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.title != blank -%}
+                    <p class="history-tab__title">{{ block.settings.title }}</p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="history-tab__text">{{ block.settings.text }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    const roots = document.querySelectorAll('[data-history-tab]');
+
+    roots.forEach(function (root) {
+      const triggers = root.querySelectorAll('[data-history-tab-trigger]');
+      const panels = root.querySelectorAll('[data-history-tab-panel]');
+
+      triggers.forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+          if (trigger.classList.contains('history-tab__tab--active')) return;
+
+          triggers.forEach(function (item) {
+            item.classList.remove('history-tab__tab--active');
+            item.setAttribute('aria-selected', 'false');
+          });
+          panels.forEach(function (panel) {
+            panel.classList.remove('history-tab__panel--active');
+            panel.setAttribute('hidden', '');
+          });
+
+          trigger.classList.add('history-tab__tab--active');
+          trigger.setAttribute('aria-selected', 'true');
+
+          const panel = root.querySelector('#' + trigger.getAttribute('aria-controls'));
+          if (panel) {
+            panel.classList.add('history-tab__panel--active');
+            panel.removeAttribute('hidden');
+          }
+
+          trigger.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.history_tab.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.history_tab.settings.headers.content.content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "t:sections.history_tab.settings.eyebrow.label",
+      "default": "Built from the ground up"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.history_tab.settings.heading.label",
+      "info": "t:sections.history_tab.settings.heading.info",
+      "default": "Our (History)"
+    },
+    {
+      "type": "color",
+      "id": "heading_accent_color",
+      "label": "t:sections.history_tab.settings.heading_accent_color.label",
+      "info": "t:sections.history_tab.settings.heading_accent_color.info",
+      "default": "#ff8f1c"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.history_tab.settings.headers.colors.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.history_tab.settings.color_scheme.label",
+      "default": "scheme-dfd7f710-1c3c-4730-be7a-3884f4f918ee"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.history_tab.settings.headers.padding.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.history_tab.settings.padding_top.label",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.history_tab.settings.padding_bottom.label",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.history_tab.settings.padding_top_mob.label",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.history_tab.settings.padding_bottom_mob.label",
+      "default": 40
+    },
+    {
+      "type": "text",
+      "id": "sect_class",
+      "label": "t:sections.history_tab.settings.sect_class.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "t:sections.history_tab.blocks.item.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "t:sections.history_tab.blocks.item.settings.tab_label.label",
+          "default": "1998"
+        },
+        {
+          "type": "text",
+          "id": "date_label",
+          "label": "t:sections.history_tab.blocks.item.settings.date_label.label",
+          "default": "Dec. 1998"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:general.settings.heading.label",
+          "default": "Founded as ez Grout Corporation"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:general.settings.text.label",
+          "default": "<p>Lorem ipsum dolor sit amet consectetur. Feugiat dolor morbi dolor sed nulla aliquet. Donec tortor imperdiet mi feugiat urna vulputate tristique.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:general.settings.image.label"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "t:sections.history_tab.blocks.item.settings.image_position.label",
+          "info": "t:sections.history_tab.blocks.item.settings.image_position.info",
+          "options": [
+            { "value": "left", "label": "t:general.left" },
+            { "value": "right", "label": "t:general.right" }
+          ],
+          "default": "left"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.history_tab.name",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "tab_label": "1998",
+            "date_label": "Dec. 1998",
+            "title": "Founded as ez Grout Corporation"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "tab_label": "2000",
+            "date_label": "2000",
+            "title": "Add a milestone"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "tab_label": "Today",
+            "date_label": "Today",
+            "title": "Add a milestone"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

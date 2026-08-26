@@ -1,0 +1,65 @@
+{%- liquid
+  assign heading_text = block.settings.heading_text
+-%}
+
+{%- if heading_text != blank -%}
+  {%- if block.settings.enable_h1_tag -%}
+    <h1 class="promotional-heading {{ block.settings.heading_size }} hide-empty" {{ block.shopify_attributes }} aria-labelledby="heading-{{ section.id }}">{{- heading_text | escape -}}</h1>
+  {%- else -%}
+    <h2 class="promotional-heading {{ block.settings.heading_size }} hide-empty" {{ block.shopify_attributes }} aria-labelledby="heading-{{ section.id }}">{{- heading_text | escape -}}</h2>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:general.settings.heading.label",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "t:general.settings.text.label",
+      "default": "Some heading"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.text_size.label",
+      "id": "heading_size",
+      "visible_if": "{{ block.settings.heading_text != blank }}",
+      "options": [
+        {
+          "value": "headline",
+          "label": "t:general.settings.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:general.settings.heading_size.options.large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:general.settings.heading_size.options.regular.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:general.settings.heading_size.options.small.label"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_h1_tag",
+      "label": "t:general.settings.enable_h1_tag.label",
+      "info": "t:general.settings.enable_h1_tag_info.info",
+      "default": false,
+      "visible_if": "{{ block.settings.heading_text != blank }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.heading",
+      "category": "t:general.typography"
+    }
+  ]
+}
+{% endschema %}
+

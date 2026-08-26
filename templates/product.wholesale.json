@@ -1,0 +1,540 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor_achVeV": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title_6hGJBM": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h3",
+            "enable_h1_tag": true
+          }
+        },
+        "product_code_wQ8LJL": {
+          "type": "product_code",
+          "settings": {
+            "product_code_to_show": "both"
+          }
+        },
+        "divider_cPtBEW": {
+          "type": "divider",
+          "settings": {
+            "divider_color": "#e7e7e7"
+          }
+        },
+        "product_type_PDVKQT": {
+          "type": "product_type",
+          "settings": {
+            "color_product_type": ""
+          }
+        },
+        "description_Bx3PQ7": {
+          "type": "description",
+          "settings": {
+            "enable_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "custom_icon_color": "",
+            "heading": "Product specs",
+            "description_type": "collapsible",
+            "expand_collapsible": false
+          }
+        },
+        "pickup_availability_gPiFeg": {
+          "type": "pickup_availability",
+          "settings": {
+            "show_pickup_time": true,
+            "background_color": "rgba(0,0,0,0)",
+            "content_color": ""
+          }
+        },
+        "collapsible_item_NwhzH7": {
+          "type": "collapsible_item",
+          "settings": {
+            "enable_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "infor",
+            "custom_code": "",
+            "custom_icon_color": "",
+            "expand_collapsible": false,
+            "heading": "Details",
+            "text": "<p>Contemporary design meets functional storage in this elegant three-tier display shelf. Featuring clean lines and sophisticated arch-shaped details, this storage unit is perfect for showcasing books, decorative items, and personal collections in any modern home.</p><p><strong>Features</strong><br/>- Three-tier storage shelf with contemporary styling<br/>- Part of our modern home furniture collection<br/>- Three spacious tiers for books and decorative items<br/>- Durable metal construction with premium finishes<br/>- Wide shelving design with elegant arch detailing<br/>- Assembly required</p><p><strong>Care Instructions</strong><br/>- Assembly required - two-person assembly recommended. Instructions and hardware included.<br/>- Metal construction<br/>- Clean with soft, dry cloth<br/>- Quality materials</p><p><strong>Dimensions</strong><br/>- Overall: 27.5\"L x 14\"W x 52.4\"H<br/>- Leg height: 4\"<br/>- Shelf size: 27.5\"L x 14\"W<br/>- Shelf spacing: 15\"<br/>- Weight capacity per shelf: 15 lbs<br/>- Product weight: 26 lbs</p>",
+            "content_from_page": ""
+          }
+        },
+        "collapsible_item_gLQgp6": {
+          "type": "collapsible_item",
+          "settings": {
+            "enable_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "delivery-truck",
+            "custom_code": "",
+            "custom_icon_color": "",
+            "expand_collapsible": false,
+            "heading": "Shipping & Returns",
+            "text": "<p><strong>Shipping Restrictions</strong></p><p>This item ships via Standard and delivery is unavailable to international locations, US territories, AK, HI, PO boxes and APO/FPO addresses. Express and overnight ship methods are also unavailable.</p><p>This item is not available for delivery to one of our Collection Points.</p><p><strong>Returns</strong></p><p>Visit Returns & Exchanges for more information on completing a return.</p>",
+            "content_from_page": ""
+          }
+        },
+        "share_FxCQHP": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor_achVeV",
+        "title_6hGJBM",
+        "product_code_wQ8LJL",
+        "divider_cPtBEW",
+        "product_type_PDVKQT",
+        "description_Bx3PQ7",
+        "pickup_availability_gPiFeg",
+        "collapsible_item_NwhzH7",
+        "collapsible_item_gLQgp6",
+        "share_FxCQHP"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "main_media_ratio": "2/3",
+        "thumbnails_ratio": "1/1 fill",
+        "enable_media_zoom": true,
+        "zoom_images": true,
+        "media_background_color": "",
+        "enable_fullwidth": false,
+        "section_ordering": "fd-row-reverse-md",
+        "media_layout": "slideshow-right",
+        "media_width_on_desktop": "2/3",
+        "enable_sticky_media": true,
+        "media_width_on_mobile": "option_fullwidth",
+        "show_media_thumbnails": true,
+        "enable_sticky_add_to_cart": true,
+        "add_to_cart_sticky_position": "left-0"
+      }
+    },
+    "extensive_description": {
+      "type": "extensive-descriptions",
+      "blocks": {
+        "performance_graphs_nDgApt": {
+          "type": "performance_graphs",
+          "settings": {
+            "enable_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "chart",
+            "custom_code": "",
+            "custom_icon_color": "",
+            "graphs_style": "linear",
+            "custom_graphs_color": "",
+            "heading": "Product performance",
+            "show_as_collapsible": true,
+            "expand_collapsible": true,
+            "label": "Product fit",
+            "description": "Add more text for your graph",
+            "graph_max_value": 5,
+            "product_value": 5,
+            "use_list_of_graphs": true,
+            "graphs_metafield": ""
+          }
+        },
+        "collapsible_item_4zPfyx": {
+          "type": "collapsible_item",
+          "settings": {
+            "enable_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "seal-check",
+            "custom_code": "",
+            "custom_icon_color": "",
+            "expand_collapsible": false,
+            "heading": "Elevate Your Space with Thoughtful Design",
+            "text": "<p>Every piece in our collection is designed to bring warmth, personality, and functionality to your home. Whether you're looking for a statement piece or subtle accents, our carefully curated selection ensures a perfect fit for any style. From modern minimalism to classic elegance, find decor that complements your aesthetic effortlessly.</p>",
+            "content_from_page": ""
+          }
+        },
+        "collapsible_item": {
+          "type": "collapsible_item",
+          "settings": {
+            "enable_icon": false,
+            "icon_source": "theme_library",
+            "theme_library_icon": "heart",
+            "custom_code": "",
+            "custom_icon_color": "",
+            "expand_collapsible": true,
+            "heading": "Quality That Lasts",
+            "text": "<p>We prioritize craftsmanship and durability in all our products. Made from premium materials like solid wood, high-grade ceramics, and sustainable fabrics, our decor pieces are built to stand the test of time. With proper care, your selections will maintain their beauty and functionality for years to come.</p>",
+            "content_from_page": ""
+          }
+        },
+        "collapsible_item_jbcJic": {
+          "type": "collapsible_item",
+          "settings": {
+            "enable_icon": false,
+            "icon_source": "theme_library",
+            "theme_library_icon": "shop",
+            "custom_code": "",
+            "custom_icon_color": "",
+            "expand_collapsible": true,
+            "heading": "Bringing Comfort & Character to Your Home",
+            "text": "<p>Your home should reflect your personality and lifestyle. Whether it's cozy textiles, timeless lighting, or decorative accents, our collection is designed to help you create spaces that feel truly yours. Explore pieces that inspire relaxation, creativity, and connection in every room.</p>",
+            "content_from_page": ""
+          }
+        },
+        "contact_form": {
+          "type": "contact_form",
+          "settings": {
+            "enable_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "puzzed",
+            "custom_code": "",
+            "custom_icon_color": "",
+            "heading": "Any questions?",
+            "button_label": "Send message",
+            "show_as_collapsible": true,
+            "expand_collapsible": true
+          }
+        }
+      },
+      "block_order": [
+        "performance_graphs_nDgApt",
+        "collapsible_item_4zPfyx",
+        "collapsible_item",
+        "collapsible_item_jbcJic",
+        "contact_form"
+      ],
+      "settings": {
+        "color_scheme": "schema-1"
+      }
+    },
+    "quick_order_list_pBj8Cw": {
+      "type": "quick-order-list",
+      "settings": {
+        "color_scheme": "",
+        "show_sku": true,
+        "show_barcode": true,
+        "enable_variant_grouping": true,
+        "show_thumbnails": true,
+        "thumbnail_ratio": "1/1",
+        "background_color": "",
+        "show_payment_method": true,
+        "payment_heading": "We accept",
+        "enable_size_guide": false,
+        "size_label_heading": "Size chart",
+        "size_guide_content": ""
+      }
+    },
+    "content_collage_HC7LyK": {
+      "type": "content-collage",
+      "blocks": {
+        "text_a3Qp6e": {
+          "type": "text",
+          "settings": {
+            "heading": "More inspiration and ideas",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>Customize look & functionality </p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "1",
+            "desktop_row": "1",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "1",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "#f1e6d6",
+            "text_color": "#000000"
+          }
+        },
+        "video_zhqxKa": {
+          "type": "video",
+          "settings": {
+            "heading": "Living room decorations",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>Showcase your new collection or related content.</p>",
+            "video_source": "video_external",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "3",
+            "desktop_row": "2",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "1",
+            "button_label": "Explore more",
+            "button_style": "secondary",
+            "button_link": "",
+            "overlay_opacity": 20,
+            "mask_overlay_color": "#000000",
+            "content_overlay_color": "#ffffff"
+          }
+        },
+        "image_AGKY9c": {
+          "type": "image",
+          "settings": {
+            "heading": "Bedroom Collection",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "",
+            "desktop_content_position": "end-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "1",
+            "desktop_row": "1",
+            "mobile_content_position": "end-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "1",
+            "button_label": "Explore more",
+            "button_style": "secondary",
+            "button_link": "",
+            "overlay_opacity": 20,
+            "mask_overlay_color": "#000000",
+            "content_overlay_color": "#ffffff"
+          }
+        },
+        "product_YA9BPL": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "show_title": true,
+            "title_size": "h3",
+            "show_price": true,
+            "show_variant_swatches": true,
+            "limited_variants_to_show": 5,
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "1",
+            "overlay_opacity": 10,
+            "mask_overlay_color": "#000000",
+            "content_overlay_color": "#ffffff",
+            "price_color": "#ffffff"
+          }
+        },
+        "collection_ri3Nek": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "show_title": true,
+            "title_size": "h2",
+            "show_collection_quantity": true,
+            "quantity_style": "superscript",
+            "background_image": "",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "1",
+            "overlay_opacity": 10,
+            "mask_overlay_color": "#000000",
+            "content_overlay_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "text_a3Qp6e",
+        "video_zhqxKa",
+        "image_AGKY9c",
+        "product_YA9BPL",
+        "collection_ri3Nek"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": false,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "faqs_jWzjpp": {
+      "type": "faqs",
+      "blocks": {
+        "faq_item_XdCV7c": {
+          "type": "faq_item",
+          "settings": {
+            "show_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "layer-1",
+            "custom_code": "",
+            "icon_color": "",
+            "heading_faq_item": "What is the Return & Exchange Policy?",
+            "description_faq_item": "<p>Merchandise in perfect saleable condition with original receipt may be exchanged or returned for a full refund within thirty (30) days from the original purchase date except for custom or personalized items, which are final sale only. Returns or exchanges must include the original packaging and documentation. A refund of the original purchase price may only be made in the same form of payment as the original purchase. Please contact our customer service team for detailed return and exchange information.</p>"
+          }
+        },
+        "faq_item_CQ6YmG": {
+          "type": "faq_item",
+          "settings": {
+            "show_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "truck",
+            "custom_code": "",
+            "icon_color": "",
+            "heading_faq_item": "What shipping options are available?",
+            "description_faq_item": "<p><strong>Standard Delivery</strong><br/>Available for most locations with delivery timing based on product availability and location.<br/><br/><strong>Express Delivery</strong><br/>Expedited delivery options available where service permits. Contact customer service for availability in your area.<br/><br/><strong>White Glove Service</strong><br/>Professional delivery and setup service available for larger furniture items. This service includes delivery to your desired room and basic assembly where applicable.<br/><br/><strong>Local Pickup</strong><br/>Available at select locations. You will receive notification when your order is ready for pickup.<br/><br/>For specific delivery options and timing in your area, please contact our customer service team.</p>"
+          }
+        },
+        "faq_item_DUT87b": {
+          "type": "faq_item",
+          "settings": {
+            "show_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "apple-wallet",
+            "custom_code": "",
+            "icon_color": "",
+            "heading_faq_item": "What are the accepted payment methods?",
+            "description_faq_item": "<p>Payments are accepted via credit card, debit card, Apple Pay, or PayPal with a valid billing address and United States shipping address. Accepted credit cards are Visa, American Express, Discover, and Mastercard.<br/>When placing an order, your billing address must correspond to the address of your credit card, or we will not be able to process your order.</p>"
+          }
+        },
+        "faq_item_LqLgn6": {
+          "type": "faq_item",
+          "settings": {
+            "show_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "puzzed",
+            "custom_code": "",
+            "icon_color": "",
+            "heading_faq_item": "How do I return or exchange my online purchase?",
+            "description_faq_item": "<p><strong>Returns & Exchanges</strong></p><p>Online purchases can be returned within our standard return timeframe.<br/><strong>Returns Process</strong></p><p>• Contact our customer service team to initiate a return<br/>• Prepare your item in its original packaging<br/>• Follow the return instructions provided by our team<br/><br/><strong>Exchanges</strong></p><p>• Contact customer service for exchange requests<br/>• In-store exchanges may be available at participating locations<br/><br/><strong>Return Policy</strong><br/>• Returns accepted within standard timeframe<br/>• Items must be in original condition<br/>• Original packaging and documentation required<br/>• Custom or personalized items may not be eligible for return<br/><br/>Please contact our customer service team for detailed return and exchange information.</p>"
+          }
+        },
+        "faq_item_nAKmfj": {
+          "type": "faq_item",
+          "settings": {
+            "show_icon": true,
+            "icon_source": "theme_library",
+            "theme_library_icon": "recycle",
+            "custom_code": "",
+            "icon_color": "",
+            "heading_faq_item": "Where can I get a refill?",
+            "description_faq_item": "<p>Dinnerware   Your dinnerware was crafted using the finest Limoges porcelain. To preserve its beauty for as long as possible, we recommend that you follow these guidelines:    Wash your dinnerware carefully before using it for the first time.   Porcelain products are dishwasher-safe when a low-temperature setting is selected and only the recommended amount of dishwasher detergent is used. Take care to ensure that the dishes will not knock against each other. It is also possible to clean the porcelain by hand with soapy warm water and a soft sponge. Take care to avoid using the abrasive side of the sponge, which might damage the surface of the decoration.<br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_XdCV7c",
+        "faq_item_CQ6YmG",
+        "faq_item_DUT87b",
+        "faq_item_LqLgn6",
+        "faq_item_nAKmfj"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading_text": "Frequently asked questions",
+        "heading_size": "h1",
+        "description_text": "",
+        "one_item_expand": true,
+        "open_first_item": true,
+        "enable_contact_form": false,
+        "heading_contact_form": "Didn't find your answer?",
+        "description_contact_form": "",
+        "button_label": "Send message",
+        "color_custom_form_background": "#f3f3f3",
+        "color_custom_form_content": "#000000",
+        "heading_alignment_desktop": "ta-center-md middle-md",
+        "content_ordering": "fd-row-sm",
+        "heading_alignment_mobile": "ta-left top-xs",
+        "content_ordering_mobile": "fd-column"
+      }
+    },
+    "recommendation": {
+      "type": "product-recommendation",
+      "blocks": {
+        "product_attributes": {
+          "type": "product_attributes",
+          "settings": {}
+        },
+        "vendor": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "color_product_price": ""
+          }
+        },
+        "variants": {
+          "type": "variants",
+          "settings": {
+            "card_product_variants": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_attributes",
+        "vendor",
+        "title",
+        "price",
+        "variants"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading": "STAFF picks®",
+        "heading_size": "h5",
+        "description": "",
+        "products_to_show": 4,
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "true",
+        "columns_per_row_mobile": "2",
+        "show_quick_view": true,
+        "quick_buy": "standard"
+      }
+    },
+    "recently_viewed_products_YYLnGy": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "color_scheme": "",
+        "heading": "Recently viewed products",
+        "heading_size": "h3-regular",
+        "products_to_show": 10,
+        "show_vendor": true,
+        "enable_quick_view": true,
+        "quick_buy": "standard",
+        "show_variant_swatches": true,
+        "show_price": true,
+        "show_badge": true,
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "true",
+        "columns_per_row_mobile": "2"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "extensive_description",
+    "quick_order_list_pBj8Cw",
+    "content_collage_HC7LyK",
+    "faqs_jWzjpp",
+    "recommendation",
+    "recently_viewed_products_YYLnGy"
+  ]
+}

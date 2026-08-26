@@ -1,0 +1,20 @@
+<sht-dialog class="sht-dialog gradient-overlay--dialog gradient-overlay no-focus-visible bottom-xs end-xs p-fixed left-0 top-0 h-100 w-100 o-hidden zi-10 hidden-xs {{ class }}" id="{{- popup_id -}}" data-block-id="{{ block_id }}" hidden tabindex="-1">
+  <div class="sht-dialog-overlay js-dialog-overlay"></div>
+  <div class="js-dialog-container drawer-content-container js-scroll-element dialog popup-dialog cursor-initial disable-scrollbars {{ popup_style }}" role="dialog" aria-labelledby="{{- popup_label -}}" aria-modal="true">
+    <div class="dialog__content d-flex fd-column h-100">
+      <div class="dialog__header d-flex between-xs top-xs p-sticky top-0 p-relative">
+        <h3 class="dialog__title h5 m-zero" id="{{- popup_label -}}">{{ popup_heading }}</h3>
+        <button type="button" aria-label="{{- "accessibility.close_modal" | t -}}" class="dialog__btn btn-icon-l btn-icon btn-tertiary js-dialog-close-btn btn drawer__btn-close">
+          {%- render 'icon-x-mark' -%}
+        </button>
+      </div>
+      <div class="dialog__body js-dialog-body o-hidden">
+        <template>
+          <div class="hide-empty rte">
+            {{- popup_description | default: '' -}}
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</sht-dialog>

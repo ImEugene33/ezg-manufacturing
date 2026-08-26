@@ -1,0 +1,44 @@
+{% liquid
+  assign section_id = section.id | md5 | truncate: 12, ""
+  assign rand = 'now' | date: '%N' | append: section_id
+  assign form_id = 'LanguageSwitcher-' | append: rand
+  if settings.using_primary_button
+    assign menu_color = 'menu__item--color'
+  endif
+%}
+<sht-switcher class="fg-1">
+  {%- form 'localization', id: form_id, class: 'js-switcher-form' -%}
+    <div class="language-switcher__container no-js-hidden">
+      <h2 class="visually-hidden" id="LanguageSwitcherLabel-{{ rand }}">{{ 'localization.language_label' | t }}</h2>
+      <div class="language-switcher__wrapper p-relative">
+        <button type="button" class="f-extra js-switcher-btn fs-menu-item-small btn-localization focus-state w-100 c-pointer b-zero {{ menu_color }}" aria-expanded="false" aria-controls="LanguageSwitcherLanguageList-{{ rand }}" aria-describedby="LanguageSwitcherLabel-{{ rand }}">
+          {{ localization.language.iso_code | upcase }}
+          <span class="toggle__icon d-flex middle-xs center-xs select__icon select-icon-{{- settings.toggle_icon -}}">
+            {% render 'icon-toggle', icon_arrow: 'icon-caret-down icon-fix-m icon', class_first: 'toggle__icon--plus icon-fix-m icon p-absolute', class_second: 'toggle__icon--minus icon-fix-m icon p-absolute' %}
+          </span>
+        </button>
+        <div class="select-items localization-wapper js-switcher-list zi-9 p-absolute field__dropdown right-0 o-hidden" hidden="true">
+          <ul role="list" id="LanguageSwitcherLanguageList-{{ rand }}" class="localization-list dropdown-list ls-none o-hidden w-100 oy-scroll scrollbars">
+            {%- for language in localization.available_languages -%}
+              {% liquid
+                assign active_class = ''
+                assign active_attrs = ''
+
+                if language.iso_code == localization.language.iso_code
+                  assign active_class = 'link--active'
+                  assign active_attrs = 'aria-current="true"'
+                endif
+              %}
+              <li class="select-item fs-body-m dropdown-item p-zero" tabindex="-1">
+                <a class="js-switcher-item-link link d-block tt-cap field__dropdown__link p-s w-100 {{ active_class }}" href="#" {{ active_attrs }} data-value="{{ language.iso_code }}">
+                  {{ language.endonym_name | capitalize }} ({{ language.iso_code | upcase }})
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+      <input type="hidden" class="js-switcher-code-field" name="locale_code" value="{{ localization.language.iso_code }}">
+    </div>
+  {%- endform -%}
+</sht-switcher>

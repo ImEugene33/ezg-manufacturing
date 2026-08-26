@@ -1,0 +1,229 @@
+<comparison-drawer class="sht-dialog drawer-overlay comparison-drawer-main js-comparison-drawer middle-xs cursor-close hidden-xs" data-ui-component="Comaparison Drawer Section" role="region">
+  <div class="ctnr comparison-drawer-wrapper drawer-content-container d-flex fd-column w-100 p-scale-xl rad-l color-{{- section.settings.color_scheme }} background cursor-initial">
+    <div class="comparison-drawer-header d-flex between-xs middle-xs p-sticky top-0">
+      <h3 class="h5 m-zero">
+        {{ 'products.product.compare_products' | t }}
+      </h3>
+      <button type="button" aria-label="{{- "accessibility.close_modal" | t -}}"
+      class="js-comp-drawer-btn btn btn-icon btn-tertiary btn-icon-l">
+        {%- render 'icon-x-mark', size: 20 -%}
+      </button>
+    </div>
+    <div class="comparison-drawer-body js-comp-drawer-body d-flex fd-column gap-m oy-scroll disable-scrollbars flex-1 mb-m rad-m">
+      <div class="comp-drawer-media">
+        <div class="js-comp-drawer-media d-flex gap-m comp-drawer-info" style="--ratio: {{ section.settings.image_ratio }}"></div>
+      </div>
+      <div class="comp-drawer-item">
+        <div class="js-comp-drawer-title d-flex gap-m comp-drawer-info"></div>
+      </div>
+      <div class="comp-drawer-item">
+        <span class="comp-drawer-label b-zero d-block fs-heading-xs component-heading color-text-60">
+          <span class="p-sticky left-0">{{ 'section.comparison_drawer.price' | t }}</span>
+        </span>
+        <div class="js-comp-drawer-price d-flex gap-m comp-drawer-info"></div>
+      </div>
+      {% for block in section.blocks %}
+        {%- case block.type -%}
+          {% when 'vendor' %}
+            <div class="comp-drawer-item">
+              <span class="comp-drawer-label d-block fs-heading-xs component-heading color-text-60">
+                <span class="p-sticky left-0">{{ 'section.comparison_drawer.vendor' | t }}</span>
+              </span>
+              <div class="js-comp-drawer-vendor d-flex gap-m comp-drawer-info"></div>
+            </div>
+            {% when 'description' %}
+              <div class="comp-drawer-item">
+                <span class="comp-drawer-label d-block fs-heading-xs component-heading color-text-60">
+                  <span class="p-sticky left-0">{{ 'section.comparison_drawer.description' | t }}</span>
+                </span>
+                <sht-read-more class="js-comp-drawer-des d-flex gap-m comp-drawer-info {{ block.settings.truncate_text | replace: 'true', 'truncate-text-open' | replace: 'false', 'truncate-text-close' }}"></sht-read-more>
+              </div>
+            {%- when 'product_rating' -%}
+              <div class="comp-drawer-item">
+                <span class="comp-drawer-label d-block fs-heading-xs component-heading color-text-60">
+                  <span class="p-sticky left-0">Rating</span>
+                </span>
+                <div class="js-comp-drawer-rating d-flex gap-m comp-drawer-info">
+                  no way
+                  {%- render 'product-rating', product: product -%}
+                </div>
+              </div>
+            {% when 'product_type' %}
+              <div class="comp-drawer-item">
+                <span class="comp-drawer-label d-block fs-heading-xs component-heading color-text-60">
+                  <span class="p-sticky left-0">{{ 'section.comparison_drawer.product_type' | t }}</span>
+                </span>
+                <div class="js-comp-drawer-type d-flex gap-m comp-drawer-info"></div>
+              </div>
+            {%- when 'product_attributes' -%}
+              <div class="comp-drawer-item {{ settings.enable_product_attribute_tags | default: ' d-none-important' | replace: 'true', '' }}">
+                <span class="comp-drawer-label d-block fs-heading-xs component-heading color-text-60">
+                  <span class="p-sticky left-0">{{ 'section.comparison_drawer.product_attributes' | t }}</span>
+                </span>
+                <div class="js-comp-drawer-tags d-flex gap-m comp-drawer-info {{ settings.enable_product_attribute_tags | replace: true, 'd-flex' }} color-{{- settings.product_attribute_color}}"></div>
+              </div>
+            {%- when 'product_variants' -%}
+              <div class="comp-drawer-item">
+                <span class="comp-drawer-label d-block fs-heading-xs component-heading color-text-60">
+                  <span class="p-sticky left-0">{{ 'section.comparison_drawer.product_variants' | t }}</span>
+                </span>
+                <div class="js-comp-drawer-variants d-flex gap-m comp-drawer-info"></div>
+              </div>
+            {%- when 'custom_text_row' -%}
+              <div class="comp-drawer-item">
+                <span class="comp-drawer-label d-block fs-heading-xs component-heading color-text-60 hide-empty">
+                  <span class="p-sticky left-0">{{- block.settings.row_heading -}}</span>
+                </span>
+                <div class="d-flex gap-m comp-drawer-info">
+                  <div class="comp-drawer-value rte">{{- block.settings.product_1_value -}}</div>
+                  <div class="comp-drawer-value rte">{{- block.settings.product_2_value -}}</div>
+                  <div class="comp-drawer-value rte">{{- block.settings.product_3_value -}}</div>
+                </div>
+              </div>
+        {%- endcase -%}
+      {% endfor %}
+    </div>
+    <button aria-label="{{- "accessibility.close_modal" | t -}}" class="js-comp-drawer-btn btn btn-icon btn-tertiary btn-icon-l visually-hidden">
+      {%- render 'icon-x-mark', size: 20 -%}
+    </button>
+  </div>
+</comparison-drawer>
+{% schema %}
+  {
+    "name": "t:sections.comparison_drawer.name",
+    "enabled_on": {
+      "groups": [
+        "custom.overlay"
+      ]
+    },
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:sections.comparison_drawer.settings.paragraph.content"
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.general.content"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:general.settings.color_schemes.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "select",
+        "id": "image_ratio",
+        "label": "t:general.settings.image_ratio.label",
+        "default": "1/1",
+        "options": [
+          {
+            "value": "1/1",
+            "label": "t:general.settings.image_ratio.options.option_square.label"
+          },
+          {
+            "value": "2/3",
+            "label": "t:general.settings.image_ratio.options.option_portrait.label"
+          },
+          {
+            "value": "3/2",
+            "label": "t:general.settings.image_ratio.options.option_landscape.label"
+          },
+          {
+            "value": "auto",
+            "label": "t:general.settings.image_ratio.options.option_original.label"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "vendor",
+        "name": "t:general.verdor.name",
+        "limit": 1,
+        "settings": [
+        ]
+      },
+      {
+        "type": "product_type",
+        "name": "t:general.product_type.name",
+        "limit": 1,
+        "settings": [
+        ]
+      },
+      {
+        "type": "description",
+        "name": "t:general.description",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "truncate_text",
+            "label": "t:general.settings.truncate_text.label",
+            "info": "t:general.settings.truncate_text.info",
+            "default": true
+          }
+        ]
+      },
+      {
+        "type": "product_attributes",
+        "name": "t:general.product_attributes.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:general.settings.paragrap_2.label"
+          }
+        ]
+      },
+      {
+        "type": "product_variants",
+        "name": "t:general.product_variants.name",
+        "limit": 1,
+        "settings": [
+        ]
+      },
+      {
+        "type": "custom_text_row",
+        "name": "t:general.custom_text_row.name",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:sections.comparison_drawer.settings.paragrap_using_metafield.label"
+          },
+          {
+            "type": "text",
+            "id": "row_heading",
+            "label": "t:sections.comparison_drawer.settings.row_heading.label"
+          },
+          {
+            "type": "richtext",
+            "id": "product_1_value",
+            "label": "t:sections.comparison_drawer.settings.product_1_value.label"
+          },
+          {
+            "type": "richtext",
+            "id": "product_2_value",
+            "label": "t:sections.comparison_drawer.settings.product_2_value.label"
+          },
+          {
+            "type": "richtext",
+            "id": "product_3_value",
+            "label": "t:sections.comparison_drawer.settings.product_3_value.label"
+          }
+        ]
+      },
+      {
+        "type": "product_rating",
+        "name": "t:general.product_rating.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:general.settings.rating_paragrap.label"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

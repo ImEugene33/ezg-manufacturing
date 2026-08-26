@@ -1,0 +1,105 @@
+{%- liquid
+  assign media_ratio = block.settings.media_ratio
+  if media_ratio == 'auto'
+    if block.settings.video_source == 'external'
+      assign media_ratio = 1.778
+    else
+      assign media_ratio = block.settings.video_hosted.aspect_ratio | default: 1.778
+    endif
+  endif
+
+  assign image_sizes = '100vw'
+  assign default_thumbnail_image = 'blog-apparel-2' | placeholder_svg_tag: 'placeholder w-100 h-100 media d-block'
+  if block.settings.video_thumbnail_image
+    assign video_width = block.settings.video_thumbnail_image.width | append: 'px'
+  else 
+    if block.settings.video_hosted != blank
+      assign video_width = block.settings.video_hosted.preview_image.width | append: 'px'
+    endif
+  endif
+-%}
+
+{%- render 'video',
+  src: block.settings.video_source,
+  media_ratio: media_ratio,
+  video_thumbnail: block.settings.video_thumbnail_image,
+  video_hosted: block.settings.video_hosted,
+  external_video_link: block.settings.external_video_link,
+  play_icon: true,
+  default_thumbnail_image: default_thumbnail_image,
+  video_class: 'h-100',
+  image_sizes: image_sizes,
+  video_width: video_width
+-%}
+
+{% schema %}
+{
+  "name": "t:general.video",
+  "class": "w-100 h-100",
+  "settings": [
+    {
+      "type": "select",
+      "id": "video_source",
+      "label": "t:blocks.multi_columns.settings.video_source.label",
+      "options": [
+        {
+          "value": "external",
+          "label": "t:blocks.multi_columns.settings.option_external.label"
+        },
+        {
+          "value": "video_hosted",
+          "label": "t:blocks.multi_columns.settings.option_shopify_hosted.label"
+        }
+      ],
+      "default": "external"
+    },
+    {
+      "type": "video_url",
+      "id": "external_video_link",
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "label": "t:general.settings.external_video.label",
+      "info": "t:general.settings.video_link.info",
+      "accept": ["youtube", "vimeo"],
+      "visible_if": "{{ block.settings.video_source == 'external' }}"
+    },
+    {
+      "type": "video",
+      "id": "video_hosted",
+      "label": "t:blocks.multi_columns.settings.shopify_hosted_video.label",
+      "visible_if": "{{ block.settings.video_source == 'video_hosted' }}"
+    },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "t:general.settings.video_ratio.label",
+      "options": [
+        {
+          "value": "1.333",
+          "label": "t:sections.settings.video.settings.options.option_4_3.label"
+        },
+        {
+          "value": "1.778",
+          "label": "t:sections.settings.video.settings.options.option_16_9.label"
+        },
+        {
+          "value": "auto",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        }
+      ],
+      "default": "1.778"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_thumbnail_image",
+      "label": "t:blocks.multi_columns.settings.video_thumbnail_image.label",
+      "info": "t:sections.video.settings.video_thumbnail_image.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.video",
+      "category": "t:general.media"
+    }
+  ]
+}
+{% endschema %}

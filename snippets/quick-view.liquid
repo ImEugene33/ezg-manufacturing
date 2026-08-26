@@ -1,0 +1,17 @@
+<sht-dialog-quickview class="sht-dialog gradient-overlay--dialog gradient-overlay o-hidden dialog-quickview no-focus-visible bottom-xs end-xs p-fixed left-0 top-0 h-100 w-100 zi-10 hidden-xs" id="dialogQuickShop" hidden tabindex="-1">
+  <div class="sht-dialog-overlay js-dialog-overlay"></div>
+  <div class="js-dialog-container drawer-content-container background h-100 popup-content background color-{{- section.settings.color_scheme }} dialog disable-scrollbars" role="dialog" aria-labelledby="dialogTitle" aria-modal="true">
+    <div class="dialog__content d-flex fd-column h-100">
+      <div class="dialog__header d-flex between-xs top-xs p-sticky top-0">
+        <h2 class="dialog--animate h5 m-zero flex-1" id="dialogTitle">{{ 'products.product.quick_view' | t }}</h2>
+        <button class="drawer__btn-close btn btn-icon btn-icon-l btn-tertiary js-dialog-close-btn" type="button" aria-label="{{ 'accessibility.close' | t }}">
+          {%- render 'icon-x-mark', class: 'icon icon-fix-m' -%}
+        </button>
+      </div>
+      <div id="dialogBodyQuickView" class="dialog__body dialog-quickview__body js-scroll-element js-dialog-body disable-scrollbars o-hidden gap-scale-4xl">
+      </div>
+    </div>
+  </div>
+  <div class="view-full-btn js-view-full-btn drawer-content-container">
+  </div>
+</sht-dialog-quickview>

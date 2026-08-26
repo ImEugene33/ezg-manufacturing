@@ -1,0 +1,1263 @@
+{%- liquid
+  assign total_items = section.blocks.size
+  assign items_per_row_on_desktop = 12 | divided_by: total_items
+  assign items_per_row_on_tablet = 2
+  assign items_per_row_on_mobile = 1
+
+  assign carousel_style = 'js-carousel-items ox-auto p-relative scrollable scrollable-x disable-scrollbars'
+  assign carousel_item = 'js-carousel-item p-relative scrollable-aln-start'
+-%}
+{%- if section.blocks.size > 0 -%}
+  {%- render 'section-padding-collapse' -%}
+  <div data-animate="regular-section" class="js-animate section section--vertical o-hidden color-{{ section.settings.color_scheme }} background" data-ui-component="Section Cross Page Promotion" role="region" aria-labelledby="cross-promo-heading-{{ section.id }}">
+    <div class="section__content">
+      <div class="ctnr">
+        <sht-carousel class="sht-carousel p-relative d-block" aria-label="{{ 'accessibility.slide' | t }}">
+          <div aria-atomic="true" class="section-content-style rw o-hidden r-gap-scale-xl {{ carousel_style }} carousel--special" style="--carousel-xs:12;">
+            {% for block in section.blocks %}
+              <sht-carousel-itm class="clm carousel__item d-flex {{ carousel_item }} {% if total_items < 4 %}maw-md-100{% endif %}" style="--w-xs: 12; --w-sm: 6;--w-md: 3;" role="group" aria-roledescription="Slide" aria-label="{{ 'accessibility.slide' | t }} {{ forloop.index }} {{ 'accessibility.of' | t }} {{ forloop.length }}" data-item-index="{{ forloop.index }}" {{ block.shopify_attributes }}>
+                {% render 'card-icon-with-text',
+                  card_border: true,
+                  text_position: section.settings.text_position,
+                  theme_library_icon: block.settings.theme_library_icon,
+                  icon_color: section.settings.icon_color,
+                  icon_source: block.settings.icon_source,
+                  icon_image: block.settings.icon_image,
+                  custom_code: block.settings.custom_code,
+                  icon_size: section.settings.icon_size,
+                  title: block.settings.title,
+                  description: block.settings.description,
+                  link: block.settings.link,
+                  label: block.settings.label
+                %}
+              </sht-carousel-itm>
+            {% endfor %}
+          </div>
+          <div class="carousel-overflow d-none-md"></div>
+          {% if settings.show_progress_indicator %}
+            <div class="slider-scrollbar p-2xl d-none-md {% if items_per_row_on_tablet < total_items %} d-flex-sm {% else %} d-none-sm {% endif %} {% if items_per_row_on_mobile < total_items %} d-flex {% else %} d-none {% endif %} {{ total_items | replace: 1, 'd-none' }}">
+              <div class="scrollbar-track js-scrollbar-track" data-thumb-mobile="1" data-thumb-tablet="2" data-thumb-desk="{{ items_per_row_on_desktop }}" data-thumb-total="{{ total_items }}" style="--width-thumb-desktop: {{ items_per_row_on_desktop | times: 100.0 | divided_by: total_items }}%; --width-thumb-tablet: {{ 2 | times: 100.0 | divided_by: total_items }}%; --width-thumb-mobile: {{ 1 | times: 100.0 | divided_by: total_items }}%">
+                <div class="scrollbar-thumb js-scrollbar-thumb"></div>
+              </div>
+            </div>
+          {% endif %}
+        </sht-carousel>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.cross_page_promotion.name",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-4"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.promotion.content"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.text_position.label",
+      "id": "text_position",
+      "options": [
+        {
+          "value": "fd-column",
+          "label": "t:sections.promotion.settings.text_position.option_1.label"
+        },
+        {
+          "value": "fd-row",
+          "label": "t:sections.promotion.settings.text_position.option_2.label"
+        }
+      ],
+      "default": "fd-column"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.icon_size.label",
+      "id": "icon_size",
+      "options": [
+        {
+          "value": "icon-scale-3xl",
+          "label": "t:general.settings.option_small.label"
+        },
+        {
+          "value": "icon-scale-4xl",
+          "label": "t:general.settings.option_regular.label"
+        },
+        {
+          "value": "icon-scale-5xl",
+          "label": "t:general.settings.option_large.label"
+        }
+      ],
+      "default": "icon-scale-3xl"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "t:general.settings.custom_icon_color.label"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "t:general.settings.headers.promotion.content",
+      "type": "promotion",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.settings.button_style.options.icon.label"
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.icon_source.label",
+          "id": "icon_source",
+          "options": [
+            {
+              "value": "theme_library",
+              "label": "t:general.settings.theme_library.label"
+            },
+            {
+              "value": "image",
+              "label": "t:general.settings.image.label"
+            },
+            {
+              "value": "custom_svg",
+              "label": "t:general.settings.custom_svg.label"
+            }
+          ],
+          "default": "theme_library"
+        },
+        {
+          "type": "select",
+          "label": "t:general.settings.theme_library.label",
+          "id": "theme_library_icon",
+          "visible_if": "{{ block.settings.icon_source == 'theme_library' }}",
+          "options": [
+            {
+              "group": "Functional",
+              "value": "3d",
+              "label": "3d"
+            },
+            {
+              "group": "Functional",
+              "value": "add-03",
+              "label": "add 03"
+            },
+            {
+              "group": "Functional",
+              "value": "add-to-cart",
+              "label": "add to cart"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-down-circled",
+              "label": "arrow down circled"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-down",
+              "label": "arrow down"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-left-circled",
+              "label": "arrow left circled"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-left",
+              "label": "arrow left"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-right-circled",
+              "label": "arrow right circled"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-right",
+              "label": "arrow right"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-separate-vertical",
+              "label": "arrow separate vertical"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-separate",
+              "label": "arrow separate"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-union-vertical",
+              "label": "arrow union vertical"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-union",
+              "label": "arrow union"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-up-circled",
+              "label": "arrow up circled"
+            },
+            {
+              "group": "Functional",
+              "value": "arrow-up",
+              "label": "arrow up"
+            },
+            {
+              "group": "Functional",
+              "value": "bag-check",
+              "label": "bag check"
+            },
+            {
+              "group": "Functional",
+              "value": "bell-ringing",
+              "label": "bell ringing"
+            },
+            {
+              "group": "Functional",
+              "value": "bell",
+              "label": "bell"
+            },
+            {
+              "group": "Functional",
+              "value": "bookmark",
+              "label": "bookmark"
+            },
+            {
+              "group": "Functional",
+              "value": "calendar-1",
+              "label": "calendar 1"
+            },
+            {
+              "group": "Functional",
+              "value": "calendar",
+              "label": "calendar"
+            },
+            {
+              "group": "Functional",
+              "value": "caret-down",
+              "label": "caret down"
+            },
+            {
+              "group": "Functional",
+              "value": "caret-left",
+              "label": "caret left"
+            },
+            {
+              "group": "Functional",
+              "value": "caret-right",
+              "label": "caret right"
+            },
+            {
+              "group": "Functional",
+              "value": "caret-up",
+              "label": "caret up"
+            },
+            {
+              "group": "Functional",
+              "value": "cart",
+              "label": "cart"
+            },
+            {
+              "group": "Functional",
+              "value": "chart",
+              "label": "chart"
+            },
+            {
+              "group": "Functional",
+              "value": "chat-bubble",
+              "label": "chat bubble"
+            },
+            {
+              "group": "Functional",
+              "value": "check-circled-outline",
+              "label": "check circled outline"
+            },
+            {
+              "group": "Functional",
+              "value": "check",
+              "label": "check"
+            },
+            {
+              "group": "Functional",
+              "value": "clock",
+              "label": "clock"
+            },
+            {
+              "group": "Functional",
+              "value": "collapse",
+              "label": "collapse"
+            },
+            {
+              "group": "Functional",
+              "value": "community",
+              "label": "community"
+            },
+            {
+              "group": "Functional",
+              "value": "copy",
+              "label": "copy"
+            },
+            {
+              "group": "Functional",
+              "value": "cycle",
+              "label": "cycle"
+            },
+            {
+              "group": "Functional",
+              "value": "download",
+              "label": "download"
+            },
+            {
+              "group": "Functional",
+              "value": "drag",
+              "label": "drag"
+            },
+            {
+              "group": "Functional",
+              "value": "enlarge",
+              "label": "enlarge"
+            },
+            {
+              "group": "Functional",
+              "value": "expand",
+              "label": "expand"
+            },
+            {
+              "group": "Functional",
+              "value": "eye-solid",
+              "label": "eye solid"
+            },
+            {
+              "group": "Functional",
+              "value": "eye",
+              "label": "eye"
+            },
+            {
+              "group": "Functional",
+              "value": "filter",
+              "label": "filter"
+            },
+            {
+              "group": "Functional",
+              "value": "grabber",
+              "label": "grabber"
+            },
+            {
+              "group": "Functional",
+              "value": "group",
+              "label": "group"
+            },
+            {
+              "group": "Functional",
+              "value": "hourglass",
+              "label": "hourglass"
+            },
+            {
+              "group": "Functional",
+              "value": "infor",
+              "label": "infor"
+            },
+            {
+              "group": "Functional",
+              "value": "like",
+              "label": "like"
+            },
+            {
+              "group": "Functional",
+              "value": "link",
+              "label": "link"
+            },
+            {
+              "group": "Functional",
+              "value": "lock",
+              "label": "lock"
+            },
+            {
+              "group": "Functional",
+              "value": "mail",
+              "label": "mail"
+            },
+            {
+              "group": "Functional",
+              "value": "map-pin",
+              "label": "map pin"
+            },
+            {
+              "group": "Functional",
+              "value": "map",
+              "label": "map"
+            },
+            {
+              "group": "Functional",
+              "value": "menu",
+              "label": "menu"
+            },
+            {
+              "group": "Functional",
+              "value": "minus",
+              "label": "minus"
+            },
+            {
+              "group": "Functional",
+              "value": "notes",
+              "label": "notes"
+            },
+            {
+              "group": "Functional",
+              "value": "open-new-tab",
+              "label": "open new tab"
+            },
+            {
+              "group": "Functional",
+              "value": "page",
+              "label": "page"
+            },
+            {
+              "group": "Functional",
+              "value": "pause",
+              "label": "pause"
+            },
+            {
+              "group": "Functional",
+              "value": "play",
+              "label": "play"
+            },
+            {
+              "group": "Functional",
+              "value": "plus",
+              "label": "plus"
+            },
+            {
+              "group": "Functional",
+              "value": "question-bubble",
+              "label": "question bubble"
+            },
+            {
+              "group": "Functional",
+              "value": "question-mark",
+              "label": "question mark"
+            },
+            {
+              "group": "Functional",
+              "value": "quote-block",
+              "label": "quote block"
+            },
+            {
+              "group": "Functional",
+              "value": "reduce",
+              "label": "reduce"
+            },
+            {
+              "group": "Functional",
+              "value": "rss",
+              "label": "rss"
+            },
+            {
+              "group": "Functional",
+              "value": "scales",
+              "label": "scales"
+            },
+            {
+              "group": "Functional",
+              "value": "search",
+              "label": "search"
+            },
+            {
+              "group": "Functional",
+              "value": "send",
+              "label": "send"
+            },
+            {
+              "group": "Functional",
+              "value": "sound-high",
+              "label": "sound high"
+            },
+            {
+              "group": "Functional",
+              "value": "sound-off",
+              "label": "sound off"
+            },
+            {
+              "group": "Functional",
+              "value": "star-outlined",
+              "label": "star outlined"
+            },
+            {
+              "group": "Functional",
+              "value": "star-solid",
+              "label": "star solid"
+            },
+            {
+              "group": "Functional",
+              "value": "trashbin",
+              "label": "trashbin"
+            },
+            {
+              "group": "Functional",
+              "value": "tune-off",
+              "label": "tune off"
+            },
+            {
+              "group": "Functional",
+              "value": "tune-on",
+              "label": "tune on"
+            },
+            {
+              "group": "Functional",
+              "value": "user-circle",
+              "label": "user circle"
+            },
+            {
+              "group": "Functional",
+              "value": "view-columns-default",
+              "label": "view columns default"
+            },
+            {
+              "group": "Functional",
+              "value": "view-columns-dense",
+              "label": "view columns dense"
+            },
+            {
+              "group": "Functional",
+              "value": "view-columns-loose",
+              "label": "view columns loose"
+            },
+            {
+              "group": "Functional",
+              "value": "warning-circled",
+              "label": "warning circled"
+            },
+            {
+              "group": "Functional",
+              "value": "x-mark",
+              "label": "x mark"
+            },
+            {
+              "group": "Functional",
+              "value": "zoom-in",
+              "label": "zoom in"
+            },
+            {
+              "group": "Functional",
+              "value": "zoom-out",
+              "label": "zoom out"
+            },
+            {
+              "group": "Social media",
+              "value": "discord",
+              "label": "discord"
+            },
+            {
+              "group": "Social media",
+              "value": "facebook",
+              "label": "facebook"
+            },
+            {
+              "group": "Social media",
+              "value": "instagram",
+              "label": "instagram"
+            },
+            {
+              "group": "Social media",
+              "value": "line",
+              "label": "line"
+            },
+            {
+              "group": "Social media",
+              "value": "linkedin",
+              "label": "linkedin"
+            },
+            {
+              "group": "Social media",
+              "value": "pinterest",
+              "label": "pinterest"
+            },
+            {
+              "group": "Social media",
+              "value": "reddit",
+              "label": "reddit"
+            },
+            {
+              "group": "Social media",
+              "value": "snapchat",
+              "label": "snapchat"
+            },
+            {
+              "group": "Social media",
+              "value": "spotify",
+              "label": "spotify"
+            },
+            {
+              "group": "Social media",
+              "value": "threads",
+              "label": "threads"
+            },
+            {
+              "group": "Social media",
+              "value": "tiktok",
+              "label": "tiktok"
+            },
+            {
+              "group": "Social media",
+              "value": "tumblr",
+              "label": "tumblr"
+            },
+            {
+              "group": "Social media",
+              "value": "vimeo",
+              "label": "vimeo"
+            },
+            {
+              "group": "Social media",
+              "value": "wechat",
+              "label": "wechat"
+            },
+            {
+              "group": "Social media",
+              "value": "whatsapp",
+              "label": "whatsapp"
+            },
+            {
+              "group": "Social media",
+              "value": "x",
+              "label": "x"
+            },
+            {
+              "group": "Social media",
+              "value": "youtube",
+              "label": "youtube"
+            },
+            {
+              "group": "Fashion",
+              "value": "backpack",
+              "label": "backpack"
+            },
+            {
+              "group": "Fashion",
+              "value": "bag",
+              "label": "bag"
+            },
+            {
+              "group": "Fashion",
+              "value": "boot",
+              "label": "boot"
+            },
+            {
+              "group": "Fashion",
+              "value": "crown",
+              "label": "crown"
+            },
+            {
+              "group": "Fashion",
+              "value": "dress",
+              "label": "dress"
+            },
+            {
+              "group": "Fashion",
+              "value": "face-mask",
+              "label": "face mask"
+            },
+            {
+              "group": "Fashion",
+              "value": "glasses",
+              "label": "glasses"
+            },
+            {
+              "group": "Fashion",
+              "value": "hand-washing",
+              "label": "hand washing"
+            },
+            {
+              "group": "Fashion",
+              "value": "handbag",
+              "label": "handbag"
+            },
+            {
+              "group": "Fashion",
+              "value": "hat",
+              "label": "hat"
+            },
+            {
+              "group": "Fashion",
+              "value": "high-heel",
+              "label": "high heel"
+            },
+            {
+              "group": "Fashion",
+              "value": "hoodie",
+              "label": "hoodie"
+            },
+            {
+              "group": "Fashion",
+              "value": "pants",
+              "label": "pants"
+            },
+            {
+              "group": "Fashion",
+              "value": "ruler",
+              "label": "ruler"
+            },
+            {
+              "group": "Fashion",
+              "value": "sandals",
+              "label": "sandals"
+            },
+            {
+              "group": "Fashion",
+              "value": "scarf",
+              "label": "scarf"
+            },
+            {
+              "group": "Fashion",
+              "value": "shirt",
+              "label": "shirt"
+            },
+            {
+              "group": "Fashion",
+              "value": "short-pants",
+              "label": "short pants"
+            },
+            {
+              "group": "Fashion",
+              "value": "sneaker",
+              "label": "sneaker"
+            },
+            {
+              "group": "Fashion",
+              "value": "sock",
+              "label": "sock"
+            },
+            {
+              "group": "Fashion",
+              "value": "suitcase",
+              "label": "suitcase"
+            },
+            {
+              "group": "Fashion",
+              "value": "umbrella",
+              "label": "umbrella"
+            },
+            {
+              "group": "Fashion",
+              "value": "underwear",
+              "label": "underwear"
+            },
+            {
+              "group": "Fashion",
+              "value": "watch",
+              "label": "watch"
+            },
+            {
+              "group": "Interior",
+              "value": "angle-tool",
+              "label": "angle tool"
+            },
+            {
+              "group": "Interior",
+              "value": "archive",
+              "label": "archive"
+            },
+            {
+              "group": "Interior",
+              "value": "armchair",
+              "label": "armchair"
+            },
+            {
+              "group": "Interior",
+              "value": "bathtub",
+              "label": "bathtub"
+            },
+            {
+              "group": "Interior",
+              "value": "bed",
+              "label": "bed"
+            },
+            {
+              "group": "Interior",
+              "value": "bin",
+              "label": "bin"
+            },
+            {
+              "group": "Interior",
+              "value": "building",
+              "label": "building"
+            },
+            {
+              "group": "Interior",
+              "value": "chair",
+              "label": "chair"
+            },
+            {
+              "group": "Interior",
+              "value": "closet",
+              "label": "closet"
+            },
+            {
+              "group": "Interior",
+              "value": "crib",
+              "label": "crib"
+            },
+            {
+              "group": "Interior",
+              "value": "desk",
+              "label": "desk"
+            },
+            {
+              "group": "Interior",
+              "value": "drawer",
+              "label": "drawer"
+            },
+            {
+              "group": "Interior",
+              "value": "dresser",
+              "label": "dresser"
+            },
+            {
+              "group": "Interior",
+              "value": "flower",
+              "label": "flower"
+            },
+            {
+              "group": "Interior",
+              "value": "fridge",
+              "label": "fridge"
+            },
+            {
+              "group": "Interior",
+              "value": "garage",
+              "label": "garage"
+            },
+            {
+              "group": "Interior",
+              "value": "hammer",
+              "label": "hammer"
+            },
+            {
+              "group": "Interior",
+              "value": "home",
+              "label": "home"
+            },
+            {
+              "group": "Interior",
+              "value": "ladder",
+              "label": "ladder"
+            },
+            {
+              "group": "Interior",
+              "value": "lamp",
+              "label": "lamp"
+            },
+            {
+              "group": "Interior",
+              "value": "locker",
+              "label": "locker"
+            },
+            {
+              "group": "Interior",
+              "value": "mirror",
+              "label": "mirror"
+            },
+            {
+              "group": "Interior",
+              "value": "pillow",
+              "label": "pillow"
+            },
+            {
+              "group": "Interior",
+              "value": "sleeper-chair",
+              "label": "sleeper chair"
+            },
+            {
+              "group": "Interior",
+              "value": "toilet",
+              "label": "toilet"
+            },
+            {
+              "group": "Interior",
+              "value": "tools",
+              "label": "tools"
+            },
+            {
+              "group": "Interior",
+              "value": "two-seater-sofa",
+              "label": "two seater sofa"
+            },
+            {
+              "group": "Interior",
+              "value": "washing-machine",
+              "label": "washing machine"
+            },
+            {
+              "group": "Technology",
+              "value": "4k",
+              "label": "4k"
+            },
+            {
+              "group": "Technology",
+              "value": "airplay",
+              "label": "airplay"
+            },
+            {
+              "group": "Technology",
+              "value": "battery-charge",
+              "label": "battery charge"
+            },
+            {
+              "group": "Technology",
+              "value": "battery-charging",
+              "label": "battery charging"
+            },
+            {
+              "group": "Technology",
+              "value": "battery-empty",
+              "label": "battery empty"
+            },
+            {
+              "group": "Technology",
+              "value": "battery-full",
+              "label": "battery full"
+            },
+            {
+              "group": "Technology",
+              "value": "bluetooth",
+              "label": "bluetooth"
+            },
+            {
+              "group": "Technology",
+              "value": "cable",
+              "label": "cable"
+            },
+            {
+              "group": "Technology",
+              "value": "camera",
+              "label": "camera"
+            },
+            {
+              "group": "Technology",
+              "value": "charging-station",
+              "label": "charging station"
+            },
+            {
+              "group": "Technology",
+              "value": "code",
+              "label": "code"
+            },
+            {
+              "group": "Technology",
+              "value": "flash",
+              "label": "flash"
+            },
+            {
+              "group": "Technology",
+              "value": "game-controller",
+              "label": "game controller"
+            },
+            {
+              "group": "Technology",
+              "value": "hd",
+              "label": "hd"
+            },
+            {
+              "group": "Technology",
+              "value": "headphone",
+              "label": "headphone"
+            },
+            {
+              "group": "Technology",
+              "value": "laptop",
+              "label": "laptop"
+            },
+            {
+              "group": "Technology",
+              "value": "media-image",
+              "label": "media image"
+            },
+            {
+              "group": "Technology",
+              "value": "media-video",
+              "label": "media video"
+            },
+            {
+              "group": "Technology",
+              "value": "monitor",
+              "label": "monitor"
+            },
+            {
+              "group": "Technology",
+              "value": "movie",
+              "label": "movie"
+            },
+            {
+              "group": "Technology",
+              "value": "multi-devices",
+              "label": "multi devices"
+            },
+            {
+              "group": "Technology",
+              "value": "phone",
+              "label": "phone"
+            },
+            {
+              "group": "Technology",
+              "value": "printer",
+              "label": "printer"
+            },
+            {
+              "group": "Technology",
+              "value": "sd",
+              "label": "sd"
+            },
+            {
+              "group": "Technology",
+              "value": "smartphone",
+              "label": "smartphone"
+            },
+            {
+              "group": "Technology",
+              "value": "speaker",
+              "label": "speaker"
+            },
+            {
+              "group": "Technology",
+              "value": "tv",
+              "label": "tv"
+            },
+            {
+              "group": "Technology",
+              "value": "video-camera",
+              "label": "video camera"
+            },
+            {
+              "group": "Technology",
+              "value": "watch-1",
+              "label": "watch 1"
+            },
+            {
+              "group": "Technology",
+              "value": "wifi",
+              "label": "wifi"
+            },
+            {
+              "group": "Shopping",
+              "value": "apple-wallet",
+              "label": "apple wallet"
+            },
+            {
+              "group": "Shopping",
+              "value": "barcode",
+              "label": "barcode"
+            },
+            {
+              "group": "Shopping",
+              "value": "cash",
+              "label": "cash"
+            },
+            {
+              "group": "Shopping",
+              "value": "discount",
+              "label": "discount"
+            },
+            {
+              "group": "Shopping",
+              "value": "dollar",
+              "label": "dollar"
+            },
+            {
+              "group": "Shopping",
+              "value": "gift",
+              "label": "gift"
+            },
+            {
+              "group": "Shopping",
+              "value": "heart",
+              "label": "heart"
+            },
+            {
+              "group": "Shopping",
+              "value": "master-card",
+              "label": "master card"
+            },
+            {
+              "group": "Shopping",
+              "value": "palette",
+              "label": "palette"
+            },
+            {
+              "group": "Shopping",
+              "value": "piggy",
+              "label": "piggy"
+            },
+            {
+              "group": "Shopping",
+              "value": "qr-code",
+              "label": "qr code"
+            },
+            {
+              "group": "Shopping",
+              "value": "recycle",
+              "label": "recycle"
+            },
+            {
+              "group": "Shopping",
+              "value": "scan",
+              "label": "scan"
+            },
+            {
+              "group": "Shopping",
+              "value": "seal-check",
+              "label": "seal check"
+            },
+            {
+              "group": "Shopping",
+              "value": "shop",
+              "label": "shop"
+            },
+            {
+              "group": "Shopping",
+              "value": "wallet",
+              "label": "wallet"
+            },
+            {
+              "group": "Shipping",
+              "value": "layer-1",
+              "label": "layer 1"
+            },
+            {
+              "group": "Shipping",
+              "value": "air-plane",
+              "label": "air plane"
+            },
+            {
+              "group": "Shipping",
+              "value": "box",
+              "label": "box"
+            },
+            {
+              "group": "Shipping",
+              "value": "delivery-truck",
+              "label": "delivery truck"
+            },
+            {
+              "group": "Shipping",
+              "value": "globe",
+              "label": "globe"
+            },
+            {
+              "group": "Shipping",
+              "value": "return",
+              "label": "return"
+            },
+            {
+              "group": "Shipping",
+              "value": "rocket",
+              "label": "rocket"
+            },
+            {
+              "group": "Shipping",
+              "value": "truck",
+              "label": "truck"
+            },
+            {
+              "group": "Emoji",
+              "value": "alien",
+              "label": "alien"
+            },
+            {
+              "group": "Emoji",
+              "value": "happy",
+              "label": "happy"
+            },
+            {
+              "group": "Emoji",
+              "value": "puzzed",
+              "label": "puzzed"
+            },
+            {
+              "group": "Emoji",
+              "value": "quite",
+              "label": "quite"
+            },
+            {
+              "group": "Emoji",
+              "value": "sad",
+              "label": "sad"
+            },
+            {
+              "group": "Emoji",
+              "value": "surprise",
+              "label": "surprise"
+            }
+          ],
+          "default": "happy"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "t:general.settings.image.label",
+          "info": "t:general.settings.use_square_image.info",
+          "visible_if": "{{ block.settings.icon_source == 'image' }}"
+        },
+        {
+          "type": "html",
+          "label": "t:general.settings.custom_svg.label",
+          "id": "custom_code",
+          "info": "t:general.settings.custom_svg.info",
+          "visible_if": "{{ block.settings.icon_source == 'custom_svg' }}"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.text.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:general.settings.heading.label",
+          "default": "Promotion heading"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:general.settings.description.label",
+          "default": "<p>Share information about your policies or services</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:general.settings.headers.button.content"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:general.settings.label.label",
+          "info": "t:general.settings.hide_if_empty.info",
+          "default": "View our policies"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:general.settings.link.label",
+          "visible_if": "{{ block.settings.label != blank }}"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,9 @@
+<div class="p-relative d-flex middle-xs predictive-search__item gap-xs between-xs">
+  <a href="{{ query.url }}" aria-label="{{ query.text }}" class="p-absolute top-0 left-0 w-100 h-100 ele-focus-visible"></a>
+  <p class="predictive-search__item-query-result fs-body-xl color-text-60 m-zero"
+  aria-label="{{ query.text }}"
+  >
+      {{ query.styled_text }}
+  </p>
+  {% render 'icon-caret-right', size: 16, class: 'color-text-60 fs-icon rtl-flip-x' %}
+</div>

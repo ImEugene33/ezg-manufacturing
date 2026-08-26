@@ -1,0 +1,36 @@
+{% liquid
+unless section.settings.divider_color.alpha == 0.0 or section.settings.divider_color == blank
+  assign bgc_color = 'background: ' | append: section.settings.divider_color
+endunless
+%}
+<div id="section-{{ section.id }}"
+  data-animate="regular-section"
+  class="js-animate section-divider"
+  data-ui-component="Section Divider"
+  role="region"
+  aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}" style="{{ bgc_color }}"
+></div>
+
+{% schema %}
+  {
+    "name": "t:sections.divider.name",
+    "disabled_on": {
+      "groups": [
+        "custom.overlay"
+      ]
+    },
+    "settings": [
+      {
+        "type": "color",
+        "id": "divider_color",
+        "label": "t:general.settings.color.label",
+        "default": "#000000"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.divider.name"
+      }
+    ]
+  }
+{% endschema %}

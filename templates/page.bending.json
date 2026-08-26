@@ -1,0 +1,353 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_fAEpQV": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_jpd8FK": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Bending",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        },
+        "subheading_xTfGcg": {
+          "type": "subheading",
+          "settings": {
+            "subheading_text": "Precision Sheet Metal Bending Starts Here"
+          }
+        },
+        "description_fKHGTf": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>EZG Manufacturing offers high-accuracy sheet metal bending services using state-of-the-art equipment and expert technicians. Whether you're working with mild steel, stainless steel, or aluminum, our machine shop is equipped to bend sheet metal into different shapes and sizes with precision, every time.</p>"
+          }
+        },
+        "button_8KiYeT": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jpd8FK",
+        "subheading_xTfGcg",
+        "description_fKHGTf",
+        "button_8KiYeT"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/jobshop_bending_cpabilites_with-overlay-1.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "content_collage_8wYByj": {
+      "type": "content-collage",
+      "blocks": {
+        "image_9AD7V9": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/shet-metal-bending-2.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_kyUgaB": {
+          "type": "text",
+          "settings": {
+            "heading": "Bending Equipment That Delivers Consistent Results",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Our machine shop features two 6-axis brake presses designed to meet even the most precise specifications. Each is built to handle a wide range of sheet thicknesses, part lengths, and bend angles with exceptional control.</p><h5>Cincinnati Brake Press</h5><ul><li>350 ton capacity</li><li>16-foot bed (4.88 m)</li></ul><h5>Bystronic Xpert 150/310</h5><ul><li>150 ton capacity</li><li>10-foot bed (3.05 m)</li></ul>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_9AD7V9",
+        "text_kyUgaB"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 320,
+        "mobile_row_height": 300
+      }
+    },
+    "rich_text_custom_CTLGDc": {
+      "type": "rich-text-custom",
+      "blocks": {
+        "heading_WBH4cq": {
+          "type": "heading",
+          "settings": {
+            "heading_tag": "h2",
+            "heading": "<h2>Accuracy is at Our Core</h2>"
+          }
+        },
+        "text_pm6rJa": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The Bystronic Xpert and Cincinnati brake presses are known as some of the most accurate and high precision brakes available, capable of forming metals within a half-degree of accuracy. Their large beds allow for greater flexibility across different sheet sizes and configurations. Backed by our skilled team of brake press operators and engineers, we calculate exact bend radius, bend lines, and compensate for material thickness and part thickness throughout the bending process. Whether you need a single bent part or a full production run of custom metal components, we take pride in delivering consistent, high-quality results.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_WBH4cq",
+        "text_pm6rJa"
+      ],
+      "name": "t:sections.rich_text_custom.name",
+      "settings": {
+        "text_align": "left",
+        "padding_top": 30,
+        "padding_bottom": 40,
+        "padding_top_mob": 32,
+        "padding_bottom_mob": 32,
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "sect_class": ""
+      }
+    },
+    "content_collage_CVFJmC": {
+      "type": "content-collage",
+      "blocks": {
+        "text_A8rRjy": {
+          "type": "text",
+          "settings": {
+            "heading": "Why Customers Choose EZG for Sheet Metal Bending",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<ul><li>High Accuracy: Each bend is completed with attention to tight tolerances and clean finish edges</li><li>Different Thicknesses, Same Precision: From thin-gauge stainless to thicker mild steel, we adjust bending methods based on the sheet metal part</li><li>Flat Pattern Expertise: Our team works from your flat pattern to deliver parts ready for assembly or final use</li><li>No Outsourcing Needed: All sheet metal fabrication and bending happens in-house using the right tool for the jobs</li><li>Repeatable Results: Perfect for projects requiring multiple identical metal parts with consistent bend relief and angle</li></ul>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_kXpc6G": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/sheet-metal-bening-3.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_A8rRjy",
+        "image_kXpc6G"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_tVhtnm": {
+      "type": "content-collage",
+      "blocks": {
+        "image_y6N8ge": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/sheet-metal-bending.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_rNXHLN": {
+          "type": "text",
+          "settings": {
+            "heading": "Serving Complex Needs with the Right Tools",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Whether you need sharp bends, large radius, or multiple bends on a single part, EZG uses the right sheet metal tools to get the job done. Our bending process adapts to each sheet’s characteristics and the intended design, helping you avoid stress points or distortion in the finished product. We bend metal sheet components into different shapes that meet your specifications, every bend line carefully measured and executed.</p>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_y6N8ge",
+        "text_rNXHLN"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "rich_text_6Ar7f3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_c8X8tn": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Known for Our Reputation",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_XmWzwM": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Customers count on us for accuracy, reliability, and fast turnaround. Whether you need one part or a full production run, our team works closely with you to select the right bending technique. With advanced equipment and automated processes, we help save time and reduce costs on your next custom project. Contact Kenny or Bruce to learn more. </p>"
+          }
+        },
+        "button_hkxEeB": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading_c8X8tn",
+        "description_XmWzwM",
+        "button_hkxEeB"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_fAEpQV",
+    "content_collage_8wYByj",
+    "rich_text_custom_CTLGDc",
+    "content_collage_CVFJmC",
+    "content_collage_tVhtnm",
+    "rich_text_6Ar7f3"
+  ]
+}

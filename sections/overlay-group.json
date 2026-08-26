@@ -1,0 +1,223 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "custom.overlay",
+  "name": "Overlay Group",
+  "sections": {
+    "search_drawer": {
+      "type": "search-drawer",
+      "settings": {
+        "color_scheme": "",
+        "show_vendor": false,
+        "show_price": true,
+        "columns_per_row_product": "2",
+        "image_ratio_collection": "3/2",
+        "columns_per_row_collection": "2",
+        "image_ratio_blog": "1/1",
+        "show_tag_blog": true,
+        "columns_per_row_blog": "1",
+        "columns_per_row_page": "1",
+        "suggested_links": "main-menu",
+        "suggested_links_heading": "Top Searches",
+        "suggested_products": [],
+        "suggested_products_heading": "See our most frequently purchased!",
+        "suggested_collections": [],
+        "suggested_collections_heading": "Explore the rooms"
+      }
+    },
+    "comparison_drawer": {
+      "type": "comparison-drawer",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "product_type": {
+          "type": "product_type",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "truncate_text": true
+          }
+        },
+        "product_attributes": {
+          "type": "product_attributes",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor",
+        "product_type",
+        "description",
+        "product_attributes"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "image_ratio": "3/2"
+      }
+    },
+    "cart_drawer": {
+      "type": "cart-drawer",
+      "settings": {
+        "color_scheme": "",
+        "show_link_to_cart": true,
+        "show_in_empty_cart": true,
+        "show_in_recently_viewed_tab": false,
+        "promotion_image": "",
+        "promotion_image_ratio": "1/1",
+        "promotion_heading": "Furniture Refresh? Yes!",
+        "promotion_description": "",
+        "button_label": "SHOP NOW",
+        "promotion_link": "",
+        "content_position": "center-xs",
+        "content_alignment": "ta-center middle-xs",
+        "section_overlay_opacity": 30,
+        "promotion_mask_overlay_color": "#000000",
+        "promotion_content_overlay_color": "#ffffff",
+        "complementary_heading": "See our most frequently purchased!",
+        "complementary_max_products": 8,
+        "complementary_show_vendor": false,
+        "complementary_show_price": true,
+        "recently_viewed_enabled": true,
+        "recently_viewed_max_products": 8,
+        "recently_viewed_show_vendor": false,
+        "recently_viewed_show_price": true
+      }
+    },
+    "interaction_based_popup": {
+      "type": "interaction-based-popup",
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading_text": "Normcore"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Welcome to Our Home Collection",
+            "heading_size": "h5"
+          }
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "description_text": "<p>Receive special offers and first look at new products.</p>"
+          }
+        },
+        "discount_code": {
+          "type": "discount_code",
+          "settings": {
+            "code": "NORMCORE2025",
+            "discount_help_text": "Sign up to receive updates about our latest furniture collections"
+          }
+        },
+        "social_media_PUmyiK": {
+          "type": "social_media",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "description",
+        "discount_code",
+        "social_media_PUmyiK"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "popup_display": "center",
+        "delay_time": 30,
+        "enable_overlay_background_mask": true,
+        "content_alignment": "ta-left top-xs start-xs",
+        "popup_size": "size-small",
+        "image": "",
+        "image_position": "image-left",
+        "image_position_mobile": "image-top-mb",
+        "image_ratio": "1/1",
+        "background_image": "",
+        "overlay_opacity": 50,
+        "mask_overlay_color": "#000001",
+        "content_overlay_color": "#ffffff"
+      }
+    },
+    "time_delay_popup": {
+      "type": "time-delay-popup",
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Popup heading",
+            "heading_size": "h3-regular"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Receive special offers and first look at new products.</p>"
+          }
+        },
+        "discount_code": {
+          "type": "discount_code",
+          "settings": {
+            "code": "WELCOME",
+            "discount_help_text": "Stay informed about new product launches and design inspiration"
+          }
+        },
+        "newsletter_form": {
+          "type": "newsletter_form",
+          "settings": {
+            "submit_button": "Subscribe"
+          }
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "description",
+        "discount_code",
+        "newsletter_form"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "popup_display": "center",
+        "delay_until": 0,
+        "delay_time": 30,
+        "enable_overlay_background_mask": true,
+        "content_alignment": "ta-left top-xs start-xs",
+        "popup_size": "size-small",
+        "image_position": "image-left",
+        "image_position_mobile": "image-top-mb",
+        "image_ratio": "1/1",
+        "overlay_opacity": 30,
+        "mask_overlay_color": "",
+        "content_overlay_color": ""
+      }
+    }
+  },
+  "order": [
+    "search_drawer",
+    "comparison_drawer",
+    "cart_drawer",
+    "interaction_based_popup",
+    "time_delay_popup"
+  ]
+}

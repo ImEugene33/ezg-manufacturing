@@ -1,0 +1,160 @@
+{% liquid
+  assign current_year = 'now' | date: "%Y"
+  assign block_position = "between-md"
+  if section.settings.show_currency_selector == 'not-use' and section.settings.show_language_selector == false
+    assign block_position = "center-md"
+  endif
+%}
+{%- if section.settings.show_currency_selector != 'not-use' or section.settings.show_language_selector == true or section.settings.textarea != blank or shop.enabled_payment_types.size > 0 -%}
+  {%- render 'section-padding-collapse' -%}
+  <div class="section section--vertical section-copyright-bar color-{{- section.settings.color_scheme }} background" data-ui-component="Section Copyright Bar">
+    <div data-animate="js-animate regular-section" class="{{ section.settings.enable_fullwidth | default: 'ctnr' | replace: 'true', '' }} w-100 d-flex fd-column gap-3xs">
+      <div class="d-flex fd-column fd-row-md middle-xs gap-3xs {{ block_position }}">
+        <div class="copyright-language-currency d-flex fd-column fd-row-sm middle-xs">
+          {%- if section.settings.show_currency_selector != 'not-use' and localization.available_countries.size > 1 -%}
+            <sht-localization class="d-flex {{ section.settings.show_currency_selector }}" data-js-file-id="component-switcher-js-file" data-js-file="{{ 'component-switcher.js' | asset_url }}" data-section-id="shopify-section-country-switcher" data-url="{{ routes.root_url }}?section_id=country-switcher">
+              <button type="button" class="f-extra js-switcher-btn fs-menu-item-small btn-localization focus-state w-100 c-pointer b-zero">
+                <span class="country-flag flex-0-auto">
+                  {{- localization.country | image_url: width: 20, height: 20 | image_tag: widths: '350', sizes: '100vw', class: 'country-list--flag br-50p of-cover h-100', loading: 'lazy', fetchpriority: 'auto', decoding: 'async' -}}
+                </span>
+                <span class="country-name">
+                  {{ localization.country.name }}
+                  <span>•</span>
+                </span>
+                <span class="country-currency">
+                  {{ localization.country.currency.iso_code }}
+                  {{ localization.country.currency.symbol }}
+                </span>
+                <span class="toggle__icon d-flex middle-xs center-xs select__icon select-icon-{{- settings.toggle_icon -}}">
+                  {% render 'icon-toggle', icon_arrow: 'icon-caret-down icon-fix-m icon', class_first: 'toggle__icon--plus icon-fix-m icon p-absolute', class_second: 'toggle__icon--minus icon-fix-m icon p-absolute' %}
+                </span>
+              </button>
+            </sht-localization>
+          {%- endif -%}
+          {%- if section.settings.show_language_selector and localization.available_languages.size > 1 -%}
+            <sht-localization class="d-flex" data-js-file-id="component-switcher-js-file" data-js-file="{{ 'component-switcher.js' | asset_url }}" data-section-id="shopify-section-language-switcher" data-url="{{ routes.root_url }}?section_id=language-switcher">
+              <button type="button" class="f-extra js-switcher-btn fs-menu-item-small btn-localization focus-state w-100 c-pointer b-zero">
+                {{- localization.language.iso_code | upcase -}}
+                <span class="toggle__icon d-flex middle-xs center-xs select__icon select-icon-{{- settings.toggle_icon -}}">
+                  {% render 'icon-toggle', icon_arrow: 'icon-caret-down icon-fix-m icon', class_first: 'toggle__icon--plus icon-fix-m icon p-absolute', class_second: 'toggle__icon--minus icon-fix-m icon p-absolute' %}
+                </span>
+              </button>
+            </sht-localization>
+          {%- endif -%}
+        </div>
+        <div class="d-flex gap-s p-xs fw-wrap center-xs" role="region" aria-label="payment-methods">
+          <span class="hide-empty ta-center">{{- section.settings.text -}}</span>
+          <ul class="d-flex center-xs middle-xs gap-scale-xs fw-wrap ls-none">
+            {%- for type in shop.enabled_payment_types -%}
+              <li class="d-flex payment-icon">
+                {{ type | payment_type_svg_tag | replace: 'id="pi', 'id="pi-copyright-bar' }}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+      <div class="copyright-textarea hide-empty ta-center m-auto rte d-flex middle-xs center-xs fw-wrap" role="region" aria-label="copyright-text">
+        {{- section.settings.textarea | replace: '[year]', current_year -}}
+        {%- if section.settings.enable_powered_by_shopify -%}
+          &nbsp;
+          {{ powered_by_link }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "t:sections.copyright_bar.name",
+    "enabled_on": {
+      "groups": ["footer"]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.general.content"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:general.settings.color_schemes.label",
+        "default": "scheme-2"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_fullwidth",
+        "label": "t:general.settings.enable_fullwidth_content.label",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:sections.header.settings.headers.utilities.content"
+      },
+      {
+        "type": "select",
+        "id": "show_currency_selector",
+        "label": "t:general.settings.show_currency_selector.label",
+        "info": "t:general.settings.show_currency_selector.info",
+        "options": [
+          {
+            "value": "not-use",
+            "label": "t:general.settings.option_not_use.label"
+          },
+          {
+            "value": "show-currency-only",
+            "label": "t:general.settings.option_currency_only.label"
+          },
+          {
+            "value": "show-currency-flag",
+            "label": "t:general.settings.option_currency_flag.label"
+          },
+          {
+            "value": "show-currency-country-name",
+            "label": "t:general.settings.option_currency_country_name.label"
+          },
+          {
+            "value": "show-full",
+            "label": "t:general.settings.option_currency_country_name_flag.label"
+          }
+        ],
+        "default": "show-full"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_language_selector",
+        "label": "t:general.settings.show_language_selector.label",
+        "info": "t:general.settings.show_language_selector.info",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:sections.copyright_bar.settings.headers.copyright_bar.content"
+      },
+      {
+        "type": "richtext",
+        "id": "textarea",
+        "label": "t:sections.copyright_bar.settings.copyright_content.label",
+        "info": "t:sections.copyright_bar.settings.copyright_content.info",
+        "default": "<p>© [year]. All rights reserved.</p>"
+      },
+      {
+        "type": "checkbox",
+        "default": true,
+        "id": "enable_powered_by_shopify",
+        "label": "t:general.settings.show_powered_by_shopify.label"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.copyright_bar.settings.headers.payment_method.content"
+      },
+      {
+        "type": "text",
+        "id": "text",
+        "label": "t:general.settings.text.label",
+        "info": "t:general.settings.add_payment_methods.info",
+        "default": "We accept"
+      }
+    ]
+  }
+  {% endschema %}

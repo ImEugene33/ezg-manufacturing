@@ -1,0 +1,31 @@
+{%- for value in option.values -%}
+  {%- liquid
+    assign swatch_value = null
+    if value.swatch.color != blank or value.swatch.image != blank
+      if value.swatch.image
+        assign swatch_value = value.swatch.image | image_url
+      elsif value.swatch.color
+        assign swatch_value = value.swatch.color
+      else
+        assign swatch_value = null
+      endif
+    endif
+  -%}
+  <div class="filter-form__item product-swatches__item {% if value.count == 0 and value.active == false %} filter-form--disabled{% endif %}">
+    <input type="radio" class="filter-form__radio js-variant-radio-item visually-hidden"
+      name="{{ value.param_name }}"
+      value="{{ value.value }}"
+      id="Filter-{{ section.id }}-{{ option.label | escape }}-{{ forloop.index }}{{variant_id}}"
+      {% if value.active %}checked{% endif %}
+      {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+    <label class="form__label form-swatch__label d-flex c-pointer" for="Filter-{{ section.id }}-{{ option.label | escape }}-{{ forloop.index }}{{variant_id}}" tabindex="-1">
+      <span class="product-swatches js-variant-swatch-item br-50p d-block" aria-hidden="true" data-option-value="{{ value.value | downcase | escape | remove: " " }}" data-swatch-option-value="{{ swatch_value }}"></span>
+      <span class="product-swatches-label fs-bofy-m flex-1 wb-break-word">
+        <span>
+          {{ value.label | escape }}
+          <sup class="filter__counter fs-body-xs flex-auto {{ settings.numbers_style | replace: 'number', '' }}">{{ value.count }}</sup>
+        </span>
+      </span>
+    </label>
+  </div>
+{%- endfor -%}

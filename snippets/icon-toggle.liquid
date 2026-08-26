@@ -1,0 +1,8 @@
+{% liquid
+  if settings.toggle_icon == 'arrow'
+    render 'icon-caret-down', size: size, class: icon_arrow
+  else
+    render 'icon-plus', size: size, class: class_first
+    render 'icon-minus', size: size, class: class_second
+  endif
+%}

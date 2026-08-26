@@ -1,0 +1,340 @@
+{%- liquid
+  assign variant_label = 'color,colour,couleur,colore,boja,farbe,색,色,warna,dath,боја,lliw,liw,колір,värvi,värv,գույն,krāsa,màu sắc,màu,cor,cцвят,färg,farve,ngjyrë,kleur,väri,farge,renk,culoare,szín,цвет,kolor,barva,χρώμα,litur,spalva,farba' | split: ','
+  assign sort_by = search.sort_by | default: search.default_sort_by
+-%}
+<sht-srch-fltr-frm class="d-block">
+  <form id="mainSearchFiltersForm" class="filter-form">
+    {%- if results.terms -%}
+      <input type="hidden" name="q" value="{{ search.terms | escape }}">
+      <input name="options[prefix]" type="hidden" value="last">
+    {%- endif -%}
+    <div class="filter-form-wrapper scrollbars disable-scrollbars">
+      {%- unless results.filters == empty -%}
+        <span class="d-none">{{ 'general.search.search_filter' | t }}</span>
+      {%- endunless -%}
+      {% if enable_sort == true %}
+        <details class="d-block d-none-md js-details-filter sort-filter filter-form__details p-relative fs-body-m"  data-index="-1">
+          <summary class="js-summary-filter filter-form__summary d-flex middle-xs between-xs p-relative ls-none c-pointer gap-3xs" aria-controls="sortFilter-{{ section_id }}">
+            {{ 'sections.product_grid.filter_form.sort' | t }}
+            {{ accordion_icon }}
+          </summary>
+          <div class="filter-form__display" id="sortFilter-{{ section_id }}">
+            <sht-search-custom-sort-field class="filter-form__items gap-xs d-flex fd-column ls-none scrollbars">
+              {%- for option in search.sort_options -%}
+                {%- liquid
+                  assign option_selected = false
+                  if option.value == sort_by
+                    assign option_selected = true
+                  endif
+                -%}
+                <li class="filter-form__item">
+                  <span class="js-sort-field-item field__checkbox fs-body-m d-flex middle-xs c-pointer gap-xs p-relative {% if option_selected == true %} checked {% endif %} c-pointer">
+                    <span
+                      name="sort_by"
+                      data-value="{{ option.value | escape }}"
+                      class="js-sort-field-radio input__checkbox p-absolute left-0 top-0 opacity-0"
+                      id="filter-{{ option.value }}-{{- forloop.index -}}"
+                    >
+                    </span>
+                    <label for="filter-{{ option.value }}-{{- forloop.index -}}" class="field-checkbox-item__label middle-xs gap-xs d-flex flex-1 wb-break-word">
+                      <span class="d-block field-checkbox-item__icon">
+                        <span class="checkbox-icon d-flex middle-xs center-xs flex-0-auto">
+                          {% render 'icon-check', size: 16 %}
+                        </span>
+                      </span>
+                      <span>
+                        {{ option.name | escape }}
+                      </span>
+                    </label>
+                  </span>
+                </li>
+              {%- endfor -%}
+            </sht-search-custom-sort-field>
+          </div>
+        </details>
+      {% endif %}
+      {%- for filter in results.filters -%}
+        {% liquid
+          assign presentation = filter.presentation | default: 'text'
+          assign spacing_gap = settings.body_font_base | divided_by: 2
+        %}
+        {%- if filter.param_name  contains 'availability' -%}
+          {%- assign filter_value = filter.values[0] -%}
+          <label for="filter-{{- filter.label | handle -}}-{{- forloop.index -}}" class="js-details-filter field__checkbox d-flex middle-xs between-xs fs-body-m field__switch {% if filter_value.count == 0 and filter_value.active == false %} disabled filter-form--disabled {% else %} c-pointer{% endif %}" data-index="0">
+            <span class="c-pointer flex-1">{{- 'sections.main_collection_product.filter_form.instock_only' | t -}}</span>
+            <input type="checkbox" name="{{ filter_value.param_name }}"
+              value="{{ filter_value.value }}"
+              class="icon-switch input__checkbox p-relative field--focus"
+              id="filter-{{- filter.label | handle -}}-{{- forloop.index -}}"
+              {% if filter_value.active %}
+                checked
+              {% endif %}
+              {% if filter_value.count == 0 and filter_value.active == false %}
+                disabled
+              {% endif %}
+            >
+          </label>
+        {% else %}
+          {% case filter.type %}
+            {% when 'boolean', 'list' %}
+              {%- assign filter_name = filter.label | downcase -%}
+              <details class="js-details-filter filter-form__details p-relative fs-body-m"  data-index="{{ forloop.index }}">
+                <summary class="js-summary-filter filter-form__summary d-flex middle-xs between-xs p-relative ls-none c-pointer gap-3xs" aria-controls="filterBlock-{{ section_id }}-{{ forloop.index }}">
+                  {{ filter.label | escape }}
+                  {{ accordion_icon }}
+                </summary>
+                <div class="filter-form__display" id="filterBlock-{{ section_id }}-{{ forloop.index }}">
+                  {%- if variant_label contains filter_name -%}
+                    <sht-show-all-options class="d-block" data-step-expand="{{ section.settings.limited_filter_options_desktop }}" data-gap="{{ spacing_gap }}" data-col="2" style="--col-expand: {{ section.settings.limited_filter_options_desktop }}">
+                      <div class="expandable-content p-relative o-hidden js-expandable-content " data-expanded="false">
+                        {% render 'main-search-color-swatch', option: filter, section: section %}
+                      </div>
+                      <div class="expandable-content__btn d-none w-100 ta-center p-relative">
+                        <button type="button" class="btn btn-xs btn-tertiary js-expandable-content-btn c-pointer" data-view-more="View more" data-view-less="View less">
+                          {{ 'sections.product_grid.show_more' | t }}
+                        </button>
+                      </div>
+                    </sht-show-all-options>
+                  {%- else -%}
+                    <sht-show-all-options class="d-block" data-step-expand="{{ section.settings.limited_filter_options_desktop }}" data-gap="{{ spacing_gap }}" data-col="{%- if presentation == "image" or presentation == 'swatch' -%} 2 {%- else -%} 1 {%- endif -%}" style="--col-expand: {{ section.settings.limited_filter_options_desktop }}">
+                      <div class="expandable-content p-relative o-hidden js-expandable-content " data-expanded="false">
+                        <ul class="filter-form__items gap-xs d-flex fd-column ls-none scrollbars {% if presentation == 'image' or presentation == 'swatch' %} filter-form__items-swatch {% endif %}">
+                          {%- for value in filter.values -%}
+                            {%- if presentation == 'image' -%}
+                              {% liquid
+                                assign image_url = ''
+                                assign image_url = value.image | image_url: width: 300
+                                assign image_value = 'url(' | append: image_url | append: ')'
+                              %}
+                              <li class="filter-form__item d-flex">
+                                <div class="w-100">
+                                  <span class="field__checkbox gap-xs d-flex fd-column h-100 middle-xs filter-form__swatch {% if value.count == 0 and value.active == false %} disabled filter-form--disabled {% else %} c-pointer{% endif %}">
+                                    <input type="checkbox" name="{{ value.param_name }}"
+                                      value="{{ value.value }}"
+                                      class="input__checkbox p-absolute opacity-0 left-0 top-0"
+                                      id="filter-{{- filter.label | handle -}}-{{- forloop.index -}}"
+                                      {% if value.active %}
+                                        checked
+                                      {% endif %}
+                                      {% if value.count == 0 and value.active == false %}
+                                        disabled
+                                      {% endif %}
+                                    >
+                                    <span class="swatch checkbox-state__swatch" style="--swatch--background: {{ image_value }};">
+                                    </span>
+                                    <label for="filter-{{- filter.label | handle -}}-{{- forloop.index -}}" class="field-item__label wb-break-word d-flex fd-column middle-xs center-xs ta-center">
+                                      <span>
+                                        {{ value.label | escape }}
+                                        <sup class="filter__counter fs-body-xs flex-auto {{ settings.numbers_style | replace: 'number', '' }}">{{ value.count }}</sup>
+                                      </span>
+                                    </label>
+                                    <span class="visually-hidden">
+                                      {{- value.label | escape }} ( {{ value.count }} )
+                                    </span>
+                                  </span>
+                                </div>
+                              </li>
+                            {%- elsif presentation == 'swatch' -%}
+                              {% liquid
+                                assign swatch = value.swatch
+                                if swatch.image
+                                  assign image_url = swatch.image | image_url: width: 300
+                                  assign swatch_value = 'url(' | append: image_url | append: ')'
+                                  assign swatch_focal_point = swatch.image.presentation.focal_point
+                                elsif swatch.color
+                                  assign swatch_value = 'rgb(' | append: swatch.color.rgb | append: ')'
+                                endif
+                              %}
+                                <li class="filter-form__item d-flex">
+                                  <div class="w-100">
+                                    <span class="field__checkbox h-100 filter-form__swatch gap-xs d-flex fd-column middle-xs p-relative {% if value.count == 0 and value.active == false %} disabled filter-form--disabled {% else %} c-pointer{% endif %}">
+                                    <input type="checkbox" name="{{ value.param_name }}"
+                                      value="{{ value.value }}"
+                                      class="p-absolute left-0 top-0 input__checkbox p-absolute opacity-0"
+                                      id="filter-{{- filter.label | handle -}}-{{- forloop.index -}}"
+                                      {% if value.active %}
+                                        checked
+                                      {% endif %}
+                                      {% if value.count == 0 and value.active == false %}
+                                        disabled
+                                      {% endif %}
+                                    >
+                                    <span class="swatch checkbox-state__swatch" style="--swatch--background: {{ swatch_value }}; --swatch_focal_point: {{ swatch_focal_point }}">
+                                    </span>
+                                    <label for="filter-{{- filter.label | handle -}}-{{- forloop.index -}}" class="field-item__label wb-break-word d-flex fd-column middle-xs center-xs ta-center">
+                                      <span>
+                                        {{ value.label | escape }}
+                                        <sup class="filter__counter fs-body-xs flex-auto {{ settings.numbers_style | replace: 'number', '' }}">{{ value.count }}</sup>
+                                      </span>
+                                    </label>
+                                    <span class="visually-hidden">
+                                      {{- value.label | escape }} ( {{ value.count }} )
+                                    </span>
+                                  </span>
+                                  </div>
+                                </li>
+                            {%- else -%}
+                              <li class="filter-form__item">
+                                <span class="field__checkbox fs-body-m d-flex c-pointer p-relative {% if value.count == 0 and value.active == false %} disabled filter-form--disabled {% else %} c-pointer{% endif %}">
+                                  <input type="checkbox" name="{{ value.param_name }}"
+                                    value="{{ value.value }}"
+                                    class="input__checkbox p-absolute left-0 top-0 opacity-0"
+                                    id="filter-{{- filter.label | handle -}}-{{- forloop.index -}}"
+                                    {% if value.active %}
+                                      checked
+                                    {% endif %}
+                                    {% if value.count == 0 and value.active == false %}
+                                      disabled
+                                    {% endif %}
+                                  >
+                                  <label for="filter-{{- filter.label | handle -}}-{{- forloop.index -}}" class="field-checkbox-item__label middle-xs gap-xs d-flex flex-1 wb-break-word">
+                                    <span class="d-block field-checkbox-item__icon">
+                                      <span class="checkbox-icon d-flex middle-xs center-xs flex-0-auto">
+                                        {% render 'icon-check', size: 16 %}
+                                      </span>
+                                    </span>
+                                    <span>
+                                      {{ value.label | escape }}
+                                      <sup class="checkbox-icon__counter fs-body-xs flex-auto {{ settings.numbers_style | replace: 'number', '' }}">{{ value.count }}</sup>
+                                    </span>
+                                  </label>
+                                </span>
+                              </li>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </ul>
+                      </div>
+                      <div class="expandable-content__btn d-none w-100 ta-center p-relative">
+                        <button type="button" class="btn btn-xs btn-tertiary js-expandable-content-btn c-pointer" data-view-more="View more" data-view-less="View less">
+                          {{ 'sections.product_grid.show_more' | t }}
+                        </button>
+                      </div>
+                    </sht-show-all-options>
+                  {%- endif -%}
+                </div>
+              </details>
+            {% when 'price_range' %}
+              {% liquid
+                assign gte_value = 0
+                assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+                assign uses_comma_decimals = false
+                assign filter_range_max = filter.range_max | money_without_currency | replace: ',', ''
+                if currencies_using_comma_decimals contains cart.currency.iso_code
+                  assign uses_comma_decimals = true
+                  assign filter_range_max = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.'
+                endif
+                if filter.min_value.value
+                  if uses_comma_decimals
+                    assign gte_value = filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+                  else
+                    assign gte_value = filter.min_value.value | money_without_currency | replace: ',', ''
+                  endif
+                endif
+                assign lte_value = filter_range_max
+                if filter.max_value.value
+                  if uses_comma_decimals
+                    assign lte_value = filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+                  else
+                    assign lte_value = filter.max_value.value | money_without_currency | replace: ',', ''
+                  endif
+                endif
+              %}
+              <details class="js-details-filter filter-form__details p-relative fs-body-m"  data-index="{{ forloop.index }}">
+                <summary class="js-summary-filter filter-form__summary d-flex middle-xs between-xs p-relative ls-none m-zero c-pointer gap-3xs" aria-controls="filterBlock-{{ section_id }}-{{ forloop.index }}">
+                  {{ filter.label | escape }}
+                  {{ accordion_icon }}
+                </summary>
+                <div class="filter-form__display filter-form__display--price " id="filterBlock-{{ section_id }}-{{ forloop.index }}">
+                  <sht-srch-fltr-frm-rgn class="d-flex fd-column gap-3xl">
+                    <sht-adv-fltr-price-rgn-slider class="" data-slider-color="{{ section.settings.color_scheme.settings.color_body_text }}" data-slider-color-shadow="{{ section.settings.color_scheme.settings.color_body_text | color_modify: 'alpha', 0.12 }}">
+                      <div class="range-slider p-relative">
+                        <div class="range-slider-bar js-range-slider-bar w-100 p-absolute m-auto bottom-0 right-0 left-0 zi-1"></div>
+                        <input
+                          class="input_range js-price-range-slider-input js-slider-gte w-100 p-absolute top-0 bottom-0 right-0 left-0 pe-none m-zero zi-2"
+                          aria-label="{{ 'sections.main_collection_product.filter_form.from' | t }}"
+                          type="range"
+                          min="0"
+                          max="{{ filter_range_max }}"
+                          value="{{ gte_value }}"
+                          id="Filter-{{ filter.label | escape }}-Slider-GTE"
+                        >
+                        <label class="visually-hidden" for="Filter-{{ filter.label | escape }}-Slider-GTE">{{ 'sections.main_collection_product.filter_form.from' | t }}</label>
+                        <input
+                          class="input_range js-price-range-slider-input js-slider-lte w-100 p-absolute top-0 bottom-0 right-0 left-0 pe-none m-zero zi-2"
+                          aria-label="{{ 'sections.main_collection_product.filter_form.to' | t }}"
+                          type="range"
+                          min="0"
+                          max="{{ filter_range_max }}"
+                          value="{{ lte_value }}"
+                          id="Filter-{{ filter.label | escape }}-Slider-LTE"
+                        >
+                          <label class="visually-hidden" for="Filter-{{ filter.label | escape }}-Slider-LTE">{{ 'sections.main_collection_product.filter_form.to' | t }}</label>
+                      </div>
+                    </sht-adv-fltr-price-rgn-slider>
+                    <div class="field-currency__wrapper d-flex middle-xs">
+                      <div class="field-currency__label field-currency__item-1 fs-body-s color-text-60 mb-2">{{ 'sections.product_grid.min_price' | t }}</div>
+                      <div class="field-currency__label fs-body-s color-text-60 mb-2 field-currency__item-2">{{ 'sections.product_grid.max_price' | t }}</div>
+
+                      <div class="filter-form__field field-currency__item-3 flex-1">
+                        <label class="visually-hidden" for="Filter-{{ filter.label | escape }}-GTE">{{ 'sections.main_collection_product.filter_form.from' | t }}</label>
+                        <div class="field p-relative mt-4">
+                          <span class="field-currency color-text-60 fs-body-m p-absolute middle-y ml-xs zi-1">{{ cart.currency.symbol }}</span>
+                          <input
+                            class="field__text fs-body-m filter-form__price field--focus field--hover w-100 js-filter-price js-price-gte ta-right input-number"
+                            name="{{ filter.min_value.param_name }}"
+                            id="Filter-{{ filter.label | escape }}-GTE"
+                            value="{{ gte_value }}"
+                            type="number"
+                            placeholder="0"
+                            min="0"
+                            max="{{ filter_range_max }}"
+                          >
+                        </div>
+                      </div>
+
+                      <span class="field-currency__line field-currency__item-4">
+                        <svg class="d-block" width="16" height="2" viewBox="0 0 16 2" fill="none">
+                          <path d="M0 1H16" stroke="currentColor" stroke-opacity="0.2"/>
+                        </svg>
+                      </span>
+
+
+                      <div class="filter-form__field flex-1 field-currency__item-5">
+                        <label class="visually-hidden" for="Filter-{{ filter.label | escape }}-LTE">{{ 'sections.main_collection_product.filter_form.to' | t }}</label>
+                        <div class="field p-relative mt-4">
+                          <span class="field-currency color-text-60 fs-body-m p-absolute middle-y ml-xs zi-1">{{ cart.currency.symbol }}</span>
+                          <input
+                            class="field__text fs-body-m filter-form__price field--focus field--hover w-100 js-filter-price js-price-lte ta-right input-number"
+                            name="{{ filter.max_value.param_name }}"
+                            id="Filter-{{ filter.label | escape }}-LTE"
+                            value="{{ lte_value }}"
+                            type="number"
+                            min="0"
+                            placeholder="{{ filter_range_max }}"
+                            max="{{ filter_range_max }}"
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </sht-srch-fltr-frm-rgn>
+                </div>
+              </details>
+          {% endcase %}
+        {% endif %}
+      {%- endfor -%}
+      <noscript>
+        <button type="submit" class="btn btn-primary   center-xs ta-center w-100 mt-4">{{ 'sections.main_collection_product.filter_form.filter_button' | t }}</button>
+      </noscript>
+    </div>
+    {% if search.current_vendor or search.current_type %}
+      <input type="hidden" name="q" value="{{ search.current_vendor }}{{ search.current_type }}">
+    {% endif %}
+    <input type="hidden" name="" class="js-main-search-sort-by-field-hidden" value="{{ sort_by }}">
+    <script>
+      SHTHelper.qs('.js-main-search-sort-by-field-hidden').name = 'sort_by';
+      document.addEventListener("shopify:section:load", function (event) {
+        SHTHelper.qs('.js-main-search-sort-by-field-hidden').name = 'sort_by';
+      });
+    </script>
+  </form>
+</sht-srch-fltr-frm>

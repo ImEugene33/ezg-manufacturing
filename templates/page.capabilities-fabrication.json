@@ -1,0 +1,616 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_fAEpQV": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_jpd8FK": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "FABRICATION",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        },
+        "description_fKHGTf": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>At EZG Manufacturing, we operate a full-scale custom fabrication shop that takes challenging projects from concept to finished product. With years of experience and advanced equipment, our team focuses on accuracy, speed, and great customer service.</p>"
+          }
+        },
+        "button_8KiYeT": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_jpd8FK",
+        "description_fKHGTf",
+        "button_8KiYeT"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/64258d9c4d74993092f82efdb79ea93ff0e540ef.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "content_collage_8wYByj": {
+      "type": "content-collage",
+      "blocks": {
+        "text_kyUgaB": {
+          "type": "text",
+          "settings": {
+            "heading": "INVESTED IN TECHNOLOGY",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Our 120,000-square-foot fabrication facility in Malta, Ohio is fully equipped to handle all custom metal fabrication projects. From small precision components to large structural steel builds, our space and equipment allow us to take on what others can't.</p><p>• 15-ton lifting capacity<br/>• 13-foot under-hook crane clearance<br/>• Dedicated zones for machining, laser cutting, welding, coating, and assembly<br/>• In-house technical storage of raw materials for faster project launch</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_9AD7V9": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/Fabrication-1.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_kyUgaB",
+        "image_9AD7V9"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_WJRyJG": {
+      "type": "content-collage",
+      "blocks": {
+        "video_fBKrWa": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://www.youtube.com/watch?v=owfU0QwS6yk",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "3",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_yPzxHz": {
+          "type": "text",
+          "settings": {
+            "heading": "CUSTOM FABRICATION SERVICES",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>We work with a wide range of materials, including carbon steel, aluminum, stainless steel, hastelloys, plastics, and other specialty metals, to cut, roll, form, and build the sheet metal configurations our customers need. From custom stainless steel fabrication to custom parts and full assemblies, our shop is built to handle it.Clients come to us for reliable results and fast delivery. We’ve built everything from mezzanines and catwalks to ladders, stairs, cabinets, and storage tanks, all made to meet project goals and timing.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "1",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_fBKrWa",
+        "text_yPzxHz"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "image_with_text_Wry8wr": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_cD9f8P": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading_text": "Add a tagline"
+          }
+        },
+        "heading_RzNwgm": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Advanced Laser Cutting and Fabrication Capabilities",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_hk9YDH": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>We invest in top-of-the-line equipment to give our clients a better custom fabrication experience. One standout tool is our Mazak 10k fiber laser, one of the fastest machines on the market for high-speed, high-accuracy laser cutting. It helps us produce repeatable results with shorter lead times and less material waste. This, combined with our two Trumpf CO2 lasers, we can take your job from quote to finished part in days, not weeks.<br/>Laser Plate Cutting Maximum: 76″ (1930.4 mm) x 154″ (3911.6 mm) up to 1″ (25.4 mm) thick</p>"
+          }
+        },
+        "text_block_with_icon_yR78PG": {
+          "type": "text_block_with_icon",
+          "disabled": true,
+          "settings": {
+            "title": "Our feature",
+            "heading_size_text_icon": "h3-regular",
+            "description": "<p>Add in information or share content related to these images</p>",
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "icon_color": "",
+            "block_width_desktop": "desktop-width-one-two",
+            "block_width_mobile": "mobile-width-one-two"
+          }
+        },
+        "button_HNkXG9": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "CONTACT OUR TEAM",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_cD9f8P",
+        "heading_RzNwgm",
+        "description_hk9YDH",
+        "text_block_with_icon_yR78PG",
+        "button_HNkXG9"
+      ],
+      "name": "t:sections.images_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "image_alignment": "on_scroll",
+        "image_1": "shopify://shop_images/Test.jpg",
+        "image_1_link": "",
+        "image_2_link": "",
+        "image_3_link": "",
+        "image_4_link": "",
+        "desktop_layout": "text_first",
+        "desktop_media_width": "8",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "icon_with_text_zr3ANk": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_ycrdMq": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "Laser Plate Cutting Max.",
+            "description": "<p>up to 1\" (25.4 mm) thick</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_ezcjj8": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "Icon with text heading",
+            "description": "<p>Highlight your values, products, or services</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_3U7eCW": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "Laser Plate Cutting Max.",
+            "description": "<p>154\" (3911.6 mm)</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_AcTdnL": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "Laser Plate Cutting Max.",
+            "description": "<p>76\" (1930.4 mm)</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_pQid3k": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "Press Brake Max.",
+            "description": "<p>192\" (3048 mm)</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_LhhQDV": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "Brake Press Tonnage",
+            "description": "<p>350 Tons</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_G74QpB": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "Rolling Max.",
+            "description": "<p>.250\" (6.35 mm) x 6' (1.82 m) wide</p>",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_ycrdMq",
+        "icon_with_text_item_ezcjj8",
+        "icon_with_text_item_3U7eCW",
+        "icon_with_text_item_AcTdnL",
+        "icon_with_text_item_pQid3k",
+        "icon_with_text_item_LhhQDV",
+        "icon_with_text_item_G74QpB"
+      ],
+      "name": "t:sections.icon_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-439d6108-f5eb-4b63-ba2c-9a939980d66d",
+        "heading": "FAB CAPABILITIES",
+        "heading_size": "h4",
+        "description": "",
+        "text_position": "fd-row",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "label": "",
+        "link": ""
+      }
+    },
+    "content_collage_6CEMpw": {
+      "type": "content-collage",
+      "blocks": {
+        "text_RxqVCc": {
+          "type": "text",
+          "settings": {
+            "heading": "AUTOMATION CAPABILITIES",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<h6>Rotolas Tube Cutting System</h6>",
+            "desktop_content_position": "end-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "4",
+            "desktop_row": "1",
+            "mobile_content_position": "end-xs",
+            "mobile_content_alignment": "ta-center middle-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "text_HEbrce": {
+          "type": "text",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<ul><li>Tube length which can be cut without repositioning 160\" (4000 mm)</li><li>Min. length of tube remainder 6\" (150 mm)</li><li>Max. tube diameter or envelope circle 14.5\" (370 mm)</li><li>Min. tube diameter or envelope circle .60\" (15 mm)</li><li>Max. useful chuck opening 6.5\" (165 mm)</li></ul>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "text_nYmBba": {
+          "type": "text",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<ul><li>Max. wall thickness .50\" mild steel (O2).25\" stainless steel (N2)</li><li>.20\" aluminum alloys (N2)</li><li>Max. tube weight 435 lbs. (200 kg)</li><li>Max. position deviation 0.03°</li><li>Max. backlash 0.01°</li></ul>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_content_position": "start-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_RxqVCc",
+        "text_HEbrce",
+        "text_nYmBba"
+      ],
+      "custom_css": [
+        ".content-collage__block {border: none;}"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-b186a16e-497f-4b34-8545-7a00a01e780a",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 200,
+        "mobile_row_height": 160
+      }
+    },
+    "rich_text_CKc9HQ": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_9GKTHT": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "AUTOMATION CAPABILITES",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "subheading_XTfqgM": {
+          "type": "subheading",
+          "settings": {
+            "subheading_text": "ROTOLAS TUBE CUTTING SYSTEM"
+          }
+        },
+        "description_n64zJA": {
+          "type": "description",
+          "settings": {
+            "description_text": "<ul><li>Tube length which can be cut without repositioning 160\" (4000 mm)</li><li>Min. length of tube remainder 6\" (150 mm)</li><li>Max. tube diameter or envelope circle 14.5\" (370 mm)</li><li>Min. tube diameter or envelope circle .60\" (15 mm)</li><li>Max. useful chuck opening 6.5\" (165 mm)</li><li>Max. wall thickness .50\" mild steel (O2).25\" stainless steel (N2).20\" aluminum alloys (N2)</li><li>Max. tube weight 435 lbs. (200 kg)</li><li>Max. position deviation 0.03°</li><li>Max. backlash 0.01°</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_9GKTHT",
+        "subheading_XTfqgM",
+        "description_n64zJA"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-b186a16e-497f-4b34-8545-7a00a01e780a",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "image_with_text_tUwDVt": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_LBzjFp": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "BUILT FOR CUSTOM METAL FABRICATION PRODUCTION RUNS",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_Q3WPej": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Our fab shop works with both one-off custom builds and full production orders. Whether it’s custom design work for a commercial kitchen, retooling existing equipment, or developing custom parts for industrial applications, we handle it all under one roof.<br/><br/>Every job starts with a conversation. Our in-house engineers collaborate with each client to review designs, offer feedback, and make smart decisions about material, process, and fabrication methods. We welcome questions and are here to help from concept to delivery.</p>"
+          }
+        },
+        "button_qcXqTp": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "CONTACT OUR TEAM",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_LBzjFp",
+        "description_Q3WPej",
+        "button_qcXqTp"
+      ],
+      "name": "t:sections.images_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "image_alignment": "on_scroll",
+        "image_1": "shopify://shop_images/Test.jpg",
+        "image_1_link": "",
+        "image_2_link": "",
+        "image_3_link": "",
+        "image_4_link": "",
+        "desktop_layout": "text_first",
+        "desktop_media_width": "8",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "rich_text_6Ar7f3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_c8X8tn": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "LET'S BUILD SOMETHING GREAT TOGETHER",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_XmWzwM": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Versatile and multipurpose, the cutting-edge media-promotion sections easily handle images, slideshows, and videos, allowing you to enhance your online store with diverse content forms.</p>"
+          }
+        },
+        "button_hkxEeB": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_c8X8tn",
+        "description_XmWzwM",
+        "button_hkxEeB"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_fAEpQV",
+    "content_collage_8wYByj",
+    "content_collage_WJRyJG",
+    "image_with_text_Wry8wr",
+    "icon_with_text_zr3ANk",
+    "content_collage_6CEMpw",
+    "rich_text_CKc9HQ",
+    "image_with_text_tUwDVt",
+    "rich_text_6Ar7f3"
+  ]
+}

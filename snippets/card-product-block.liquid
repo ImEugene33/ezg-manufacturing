@@ -1,0 +1,285 @@
+{%- comment -%}
+{% render 'card-product-block',
+  product: block.settings.product,
+  show_vendor: true,
+  show_color_swatch: true,
+  show_sale_badge: true,
+  quick_buy: '',
+  item_per_row: 1,
+  ratio: '100',
+  show_quick_view: true,
+%}
+{%- endcomment -%}
+
+{%- liquid
+  assign image_loading = image_loading | default: 'lazy'
+  assign fetchpriority = fetchpriority | default: 'auto'
+  assign preload = preload | default: false
+  assign card_position = settings.product_card_position
+  assign ratio = settings.product_card_image_ratio | replace: 'auto', product.featured_media.aspect_ratio
+
+  assign section_id = section.id | md5 | truncate: 12, ""
+  assign random_number =  "now" | date: "%N" | append: section_id | append: product.id
+
+  assign product_image_id =  random_number | prepend: 'cardProductImage-'
+  assign product_link_class =  random_number | prepend: 'js-card-product-link-'
+  assign image_width = image_width | default: '160, 260, 320, 450, 550, 750, 950, 1024, 1200'
+
+  assign sizes = sizes | default: '(min-width: 769px) calc(' | append:  settings.container_max_width | append: 'px / 4), (min-width: 459px) calc(100vw/2), 100vw'
+
+  assign product_placeholder = 'product-apparel-1' | placeholder_svg_tag: 'placeholder w-100 h-100 media d-block'
+  assign product_image = product_placeholder
+
+  assign product_img_first_classes = 'media img-first w-100 h-100 ' | append: settings.product_card_image_type
+  assign product_img_second_classes = 'media img-second w-100 h-100 opacity-0 ' | append: settings.product_card_image_type
+
+  if product.featured_media
+    assign media_first = product.featured_media
+    capture srcset_first
+      if media_first.width >= 160
+        echo media_first | image_url: width: 160 | append: ' 160w,'
+      endif
+      if media_first.width >= 260
+        echo media_first | image_url: width: 260 | append: ' 260w,'
+      endif
+      if media_first.width >= 320
+        echo media_first | image_url: width: 320 | append: ' 320w,'
+      endif
+      if media_first.width >= 450
+        echo media_first | image_url: width: 450 | append: ' 450w,'
+      endif
+      if media_first.width >= 550
+        echo media_first | image_url: width: 550 | append: ' 550w,'
+      endif
+      if media_first.width >= 750
+        echo media_first | image_url: width: 750 | append: ' 750w,'
+      endif
+      if media_first.width >= 950
+        echo media_first | image_url: width: 950 | append: ' 950w,'
+      endif
+      if media_first.width >= 1024
+        echo media_first | image_url: width: 1024 | append: ' 1024w,'
+      endif
+      if media_first.width >= 1200
+        echo media_first | image_url: width: 1200 | append: ' 1200w,'
+      endif
+      echo media_first | image_url | append: ' ' | append: media_first.width | append: 'w'
+    endcapture
+    assign product_image = media_first | image_url: width: 550 | image_tag: srcset: srcset_first, sizes: sizes, alt: product.title, class: product_img_first_classes, id: product_image_id, loading: image_loading, fetchpriority: fetchpriority, decoding: 'async', preload: preload
+  else
+    assign product_image = product_placeholder
+  endif
+  assign secondary_image_class = ''
+  if product.media[1] != nil and settings.show_second_image_on_hover == "show_second_image"
+    assign media_second = product.media[1]
+    capture srcset_second
+      if media_second.width >= 160
+        echo media_second | image_url: width: 160 | append: ' 160w,'
+      endif
+      if media_second.width >= 260
+        echo media_second | image_url: width: 260 | append: ' 260w,'
+      endif
+      if media_second.width >= 320
+        echo media_second | image_url: width: 320 | append: ' 320w,'
+      endif
+      if media_second.width >= 450
+        echo media_second | image_url: width: 450 | append: ' 450w,'
+      endif
+      if media_second.width >= 550
+        echo media_second | image_url: width: 550 | append: ' 550w,'
+      endif
+      if media_second.width >= 750
+        echo media_second | image_url: width: 750 | append: ' 750w,'
+      endif
+      if media_second.width >= 950
+        echo media_second | image_url: width: 950 | append: ' 950w,'
+      endif
+      if media_second.width >= 1024
+        echo media_second | image_url: width: 1024 | append: ' 1024w,'
+      endif
+      if media_second.width >= 1200
+        echo media_second | image_url: width: 1200 | append: ' 1200w,'
+      endif
+      echo media_second | image_url | append: ' ' | append: media_second.width | append: 'w'
+    endcapture
+    assign product_image_second = media_second | image_url: width: 550 | image_tag: srcset: srcset_second, sizes: sizes, alt: product.title, class: product_img_second_classes, loading: 'lazy', fetchpriority: 'auto', decoding: 'async'
+    assign secondary_image_class = ' card--2-images'
+    capture secondary_image
+      render 'image', image_item: product_image_second, image_classes: ' w-100 h-100', image_wrap_classes: 'product__image-second p-absolute top-0 left-0 w-100 h-100 d-none d-block-md', ratio: ratio
+    endcapture
+  endif
+
+  assign days_new = settings.new_in_date_limit
+  assign published_date = product.published_at | date: "%s"
+  assign current_date = 'now' | date: "%s"
+  assign days_since_published = current_date | minus: published_date | divided_by: 86400
+  unless quick_buy
+    assign quick_buy = section.settings.quick_buy
+  endunless
+
+  if settings.show_second_image_on_hover == "zoom_in"
+    assign card_class = 'card--zoom-in'
+  endif
+-%}
+<sht-lazy-loader class="main-card h-100 d-flex fd-column top-xs gap-3xs js-product-card-block {{ secondary_image_class }} {{ card_class }}" data-loading="{{ image_loading }}">
+  {% if button_compare == true %}
+    <button class="btn bg-transparent no-js-hidden btn-add-to-compare js-btn-add-to-compare {{ btn_compare_classes }}" aria-label="{{ "products.product.add_to_compare" | t }}" aria-haspopup="true" type="button" data-product-id="{{ product.id }}" data-product-url="{{ product.url | split: "?" | first | replace: "&_pos=", "" | replace: "&_fid=", "" | replace: "&_ss=", "" }}">
+      <span class="icon-toggler-wrapper rad-xs d-flex middle-xs center-xs mr-xs">
+        {% render 'icon-checkbox-checked', | class: 'icon icon-fix-m icon-checked' %}
+      </span>
+      {{ 'products.product.add_to_compare' | t }}
+    </button>
+  {% endif %}
+  <div class="card--{{ settings.product_card_style }} product-card d-flex fd-column {{ secondary_image_class }} {{ card_class }} w-100 flex-1 p-relative rad-m o-hidden">
+    <div class="product__badge p-absolute d-flex fw-wrap top-xs zi-1 hide-empty gap-3xs {{ card_position }}">
+      {%- if product.available == false and settings.product_card_show_sold_out_badge -%}
+        <span class="fs-heading-xs component-heading f-extra badge badge--sold-out d-inline-block background color-{{ settings.sold_out_color }} {{ settings.stock_badge_corner_radius }}">
+          {{ 'products.product.sold_out' | t }}
+        </span>
+      {%- endif -%}
+      {%- if product.compare_at_price != null and product.compare_at_price > product.price -%}
+        {% if settings.product_card_show_sale_badge == 'text_sale_amount' %}
+        <span class="fs-heading-xs component-heading f-extra badge badge--sale d-inline-block background color-{{ settings.sale_color }} {{ settings.stock_badge_corner_radius }}">
+          <span>
+            {%- liquid
+              assign save_amount = product.compare_at_price | minus: product.price | times: 1.0 | divided_by: product.compare_at_price | times: 100 | round
+              if product.has_only_default_variant
+                echo 'products.product.card.save_percent' | t: save_amount: save_amount
+              else
+                assign save_amount = 0
+                for variant in product.variants
+                  assign saving = variant.compare_at_price | minus: variant.price | times: 1.0 | divided_by: variant.compare_at_price | times: 100 | round
+                  assign save_amount = saving | at_least: save_amount
+                endfor
+                echo 'products.product.card.save_percent_up_to' | t: save_amount: save_amount
+              endif
+            -%}
+          </span>
+          <span>
+            {{ 'products.product.off' | t }}
+          </span>
+        </span>
+        {% elsif settings.product_card_show_sale_badge == 'text_only' %}
+          <span class="fs-heading-xs component-heading f-extra badge badge--sale d-inline-block background color-{{ settings.sale_color }} {{ settings.stock_badge_corner_radius }}">
+            {{ 'products.product.sale_off' | t }}
+          </span>
+        {% endif %}
+      {%- endif -%}
+      {% if days_since_published < days_new and settings.product_card_show_new_in_badge %}
+        <span class="fs-heading-xs component-heading badge badge--newin d-inline-block background color-{{ settings.new_in_color }} {{ settings.stock_badge_corner_radius }}">
+          {{ 'products.product.new_in' | t }}
+        </span>
+      {% endif %}
+    </div>
+    <div class="card__media p-relative o-hidden" style="background-color: {{ settings.product_card_image_background }};">
+      <a href="{{- product.url | within: collection | default: '#' -}}" class="d-block w-100 h-100 p-absolute top-0 left-0 zi-1 {{ product_link_class }}" aria-label="{{ product.title | escape }}" tabindex="-1"></a>
+      {% render 'image', image_item: product_image, image_wrap_classes: 'product__image-first', ratio: ratio %}
+      {{ secondary_image }}
+      <div class="product__buttons p-absolute hide-empty zi-1 d-flex gap-3xs maw-fit-content {{ card_position }}">
+        {% if show_quick_view %}
+          <button class="btn btn-quick-view btn-focus btn-icon-l btn-secondary" aria-label="{{ "products.product.quick_view" | t }}" data-product-url="{{ product.url | split: "?" | first }}?view=quick-view-drawer" onclick="window.dialogQuickShop.showModal(this);">
+            {% render 'icon-infor', class: 'icon icon-fix-xl' %}
+          </button>
+        {% endif %}
+        {%- unless product.gift_card? -%}
+          {%- if quick_buy != 'not_use' -%}
+            {%- if product.has_only_default_variant -%}
+              {%- render 'quick-add-form', section: section, product: product, content_align: card_content_position | default: settings.product_card_position, btn_class: 'btn-quick-add btn-focus btn-icon-l', icon_class: 'icon icon-fix-xl', quick_buy: quick_buy -%}
+            {%- else -%}
+              <button class="btn btn-quick-add btn-focus btn-icon-l btn-secondary" data-selling-plan="{{- product.requires_selling_plan -}}" data-quick-buy="{{ quick_buy }}" aria-label="{{ "products.product.quick_add" | t }}" data-product-url="{{ product.url | split: "?" | first }}?view=quick-buy" aria-haspopup="dialog" onclick="window.dialogQuickBuy.showModal(this, true)" {% unless product.available %}disabled{% endunless %}>
+                {%- render 'icon-add-to-cart', class: 'icon icon-fix-xl' -%}
+              </button>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endunless -%}
+      </div>
+    </div>
+    <div class="card__content d-flex fd-column between-xs flex-1 gap-m w-100 wb-break-word p-m hide-empty {{ card_position }}">
+      {%- if section.blocks.size > 0 -%}
+        <div class="card-content-block">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'vendor' -%}
+                <div {{ block.shopify_attributes }}>
+                  <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+                  <span class="fs-body-s d-block mb-2xs color-text-60 f-extra">{{- product.vendor -}}</span>
+                </div>
+              {%- when 'title' -%}
+                <h3 class="{{ settings.product_card_title_text_size }} mb-xs" {{ block.shopify_attributes }}>
+                  <a href="{{- product.url | within: collection -}}" class="card__title td-none ele-focus-visible {{ product_link_class }}">{{- product.title -}}</a>
+                </h3>
+              {%- when 'product_type' -%}
+                <span class="fs-heading-xs component-heading color-text-60 d-block tt-up mb-2xs hide-empty f-extra" style="color: {{ block.settings.color_product_type }}" {{ block.shopify_attributes }}>{{- product.type -}}</span>
+              {%- when 'product_attributes' -%}
+                <div class="product__tags f-extra mb-s d-none gap-3xs fw-wrap hide-empty {{ card_position }} {{ settings.enable_product_attribute_tags | replace: true, 'd-flex' }} color-{{- settings.product_attribute_color}}" {{ block.shopify_attributes }}>
+                  {%- for tag in product.tags -%}
+                    <span class="{{ settings.enable_product_attribute_uppercase | replace: true, 'tt-up' }} tag background db">{{- tag -}}</span>
+                  {%- endfor -%}
+                </div>
+              {%- when 'price' -%}
+                {% liquid
+                  unless block.settings.color_product_price.alpha == 0.0 or block.settings.color_product_price == blank
+                    assign price_color = 'color: ' | append: block.settings.color_product_price
+                  endunless
+                %}
+                <div style="{{ price_color }}" {{ block.shopify_attributes }}>
+                  {%- liquid
+                    render 'product-price' product: product, target: product, price_class: 'd-block mb-xs', content_align: card_position
+                  -%}
+                </div>
+              {%- when 'variants' -%}
+                <div class="product-card__variant-swatches hide-empty mb-xs" {{ block.shopify_attributes }}>
+                  {%- assign card_product_variants = block.settings.card_product_variants -%}
+                  {%- render 'card-product-variant-swatches', product: product, product_image_id: product_image_id, product_link_class: product_link_class, content_align: card_position, card_variant_labels: card_product_variants  -%}
+                  </div>
+              {%- when 'product_rating' -%}
+                {%- render 'product-rating', product: product, block: block -%}
+            {%- endcase -%}
+          {%- endfor -%}
+          {%- if product.quantity_price_breaks_configured? -%}
+            <p class="fs-body-s color-text-80 mt-m mb-0">{{ 'product.volume_pricing_available' | t }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if is_bundle -%}
+        {%- if product.has_only_default_variant -%}
+          <button
+            data-product-id="{{ product.selected_or_first_available_variant.id }}"
+            data-product-url="{{ product.url }}"
+            class="btn btn-secondary btn-m w-100 js-btn-add-to-bundle btn-add-to-bundle"
+            {% if product.gift_card? or product.available == false or product.requires_selling_plan or product.quantity_price_breaks_configured? %}disabled{% endif %}
+            data-id-product-bundle="{{ id_bundle }}-{{ product.id }}"
+          >
+            {%- if product.available -%}
+              {{- 'products.product.add_to_bundle' | t -}}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </button>
+        {%- else -%}
+          <button
+            aria-label="{{ 'products.product.select_options' | t }}"
+            data-product-url="{{ product.url | split: "?" | first }}?view=product-bundle"
+            {% if product.gift_card? or product.available == false or product.requires_selling_plan or product.quantity_price_breaks_configured? %}disabled{% endif %}
+            class="js-product-add-bundle w-100 btn btn-secondary btn-m"
+            data-id-product-bundle="{{ id_bundle }}-{{ product.id }}"
+          >
+          {%- if product.available -%}
+            {{- 'products.product.select_options' | t -}}
+          {%- else -%}
+            {{ 'products.product.sold_out' | t }}
+          {%- endif -%}
+          </button>
+        {%- endif -%}
+      {% endif %}
+      <div class="d-flex w-100 gap-3xs d-none-important js-selling-plan-error-message {{ card_position }}">
+        {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error' -%}
+        <p class="fs-body-s color-text-80 mb-0">{{ 'products.product.selling_plan_error_message' | t }}</p>
+      </div>
+      <div class="d-flex w-100 gap-3xs d-none-important js-quick-buy-error-message {{ card_position }}">
+        {%- render 'icon-warning-circled', class: 'icon icon-fix-m color-error flex-0-auto' -%}
+        <p class="fs-body-s color-text-80 mb-0">{{ 'products.product.quick_add_error_message' | t: product_name: product.title }}</p>
+      </div>
+    </div>
+  </div>
+</sht-lazy-loader>

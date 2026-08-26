@@ -1,0 +1,42 @@
+{%- if product.description != blank -%}
+  {% assign value_default = "products.product.description" | t %}
+  <div class="product__info product__block-{{- block.type }} mb-3xl" {{ block.shopify_attributes }}>
+    {% if block.settings.description_type == 'collapsible' %}
+      <sht-accordion class="accordion d-flex fd-column">
+        <div class="accordion__item js-accordion-item rad-m border">
+          <button class="region-trigger accordion__header-large accordion__button ele-focus-visible w-100 p-zero js-accordion-trigger d-flex middle-xs p-relative c-pointer {{ block.settings.expand_collapsible | replace: true, 'open' | replace: false, '' }}" id="collapsible-control-{{- block.id -}}" aria-expanded="{{ block.settings.expand_collapsible }}" aria-controls="collapsible-content-{{- block.id -}}">
+            {%- liquid
+              if block.settings.enable_icon
+                render 'icon', theme_library_icon: block.settings.theme_library_icon, icon_color: block.settings.custom_icon_color, icon_source: block.settings.icon_source, icon_image: block.settings.icon_image, custom_code: block.settings.custom_code, size: 'icon-fix-xl'
+              endif
+            -%}
+            <span class="fs-body-m m-zero flex-1 ta-left">
+              <span class="fs-heading-s component-heading">{{- block.settings.heading | escape | default: value_default -}}</span>
+            </span>
+            <span class="toggle__icon d-flex middle-xs center-xs p-relative">
+              {% render 'icon-toggle', icon_arrow: 'icon-caret-down icon-fix-xl icon', class_first: 'toggle__icon--plus p-absolute icon-fix-xl icon', class_second: 'toggle__icon--minus p-absolute icon-fix-xl icon' %}
+            </span>
+          </button>
+          <div class="accordion__content-large o-hidden js-accordion-content accordion-content {{ block.settings.expand_collapsible | replace: true, 'open' | replace: false, '' }}" id="collapsible-content-{{- block.id -}}" role="region" aria-describedby="collapsible-control-{{- block.id -}}" tabindex="-1" style="max-height: {{ block.settings.expand_collapsible | replace: true, 'auto' | replace: false, '0' }};">
+            <div class="rte fs-body-l hide-empty">{{- product.description -}}</div>
+          </div>
+        </div>
+      </sht-accordion>
+    {% elsif block.settings.description_type == 'truncate' %}
+      <span class="fs-heading-s component-heading mb-s d-block">{{- block.settings.heading | escape | default: value_default -}}</span>
+      <sht-read-more class="js-comp-drawer-des">
+        <div class="prd-cp-des__content p-relative o-hidden js-expandable-content" data-expanded="false">
+          <div class="rte fs-body-l hide-empty">{{- product.description -}}</div>
+        </div>
+        <div class="prd-cp-des__btn w-100 ta-left p-relative mt-4">
+          <button type="button" class="btn btn-s btn-tertiary js-expandable-content-btn c-pointer" data-view-more="Show more" data-view-less="Show less">
+            {{ 'general.show_more.label' | t }}
+          </button>
+        </div>
+      </sht-read-more>
+    {% else %}
+      <span class="fs-heading-s component-heading mb-s d-block">{{- block.settings.heading | escape | default: value_default -}}</span>
+      <div class="rte fs-body-l hide-empty">{{- product.description -}}</div>
+    {% endif %}
+  </div>
+{%- endif -%}

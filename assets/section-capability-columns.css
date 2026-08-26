@@ -1,0 +1,54 @@
+/* Capability Columns */
+.capability-columns,
+.capability-columns *,
+.capability-columns *::before,
+.capability-columns *::after {
+  box-sizing: border-box;
+}
+.capability-columns {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.capability-columns__container {
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.capability-columns__heading {
+  margin: 0 0 32px;
+  color: var(--color-normal-text);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.capability-columns__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 32px 16px;
+  align-items: start;
+}
+@media screen and (min-width: 480px) {
+  .capability-columns__grid {
+    gap: 32px 20px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .capability-columns__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 20px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .capability-columns__grid {
+    grid-template-columns: repeat(var(--capability-columns-desktop, 3), 1fr);
+    gap: 40px 24px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .capability-columns__grid {
+    gap: 40px 28px;
+  }
+}
+

@@ -1,0 +1,36 @@
+<div class="card card--border card-animate w-100 h-100 p-s rad-m o-hidden d-flex fd-column gap-xs">
+  {% if show_image %}
+    {%- liquid
+      assign article_placeholder = 'collection-apparel-' | append: placeholder_index | placeholder_svg_tag: 'placeholder media of-cover h-100 w-100 d-block'
+    -%}
+    <div class="p-relative">
+      {% render 'image', ratio: image_ratio, image_item: article_placeholder, image_wrap_classes: 'rad-s' %}
+    </div>
+  {% endif %}
+  <div class="card__content">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'title' -%}
+          <h3 class="fs-heading-m component-heading mb-xs" {{ block.shopify_attributes }}>
+            <a href="#" tabindex="-1" class="pe-no-link">{{ 'sections.featured_blog.article.title' | t }}</a>
+          </h3>
+        {%- when 'additional_information' -%}
+          <div class="mb-2xs fs-body-s color-text-60" {{ block.shopify_attributes }}>
+            <span class="d-none {% if block.settings.info_to_show == 'author_name' or block.settings.info_to_show == 'both' %}d-inline-block{% endif %}">
+              {{ 'sections.featured_blog.article.lorem_author' | t }}
+            </span>
+            {% if block.settings.info_to_show == 'both' %}
+              <span class="">•</span>
+            {% endif %}
+            <span class="d-none {% if block.settings.info_to_show == 'published_date' or block.settings.info_to_show == 'both' %}d-inline-block{% endif %}">
+              {{ 'sections.featured_blog.article.lorem_date' | t }}
+            </span>
+          </div>
+        {%- when 'excerpt' -%}
+          <p class="card__excerpt o-hidden hide-empty fs-body-m" {{ block.shopify_attributes }}>
+            {{ 'sections.featured_blog.article.excerpt' | t | strip_html | truncatewords: 30 }}
+          </p>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>

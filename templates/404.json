@@ -1,0 +1,68 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "We're sorry, this page is not available!"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "404 — Page not found",
+            "heading_size": "h2",
+            "enable_h1_tag": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "description": "<p>The page URL might be outdated or contain typo errors. You can use the search bar below to quickly find what you’re looking for, or feel free to contact us at <a href=\"mailto:hello@saleshunterthemes.com\" target=\"_blank\" title=\"mailto:hello@saleshunterthemes.com\">hello@saleshunterthemes.com </a>for further assistance.</p>"
+          }
+        },
+        "search": {
+          "type": "search",
+          "settings": {}
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "home_page_link_text": "Homepage",
+            "catalogue_link_text": "Our catalogue"
+          }
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "description",
+        "search",
+        "button"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "image": "",
+        "desktop_content_ordering": "fd-row-md",
+        "desktop_image_width": "2/3",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_ordering": "fd-column-reverse",
+        "mobile_content_alignment": "ta-center middle-xs"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,68 @@
+<div class="product__sticky-info w-100 w-sm-auto p-fixed bottom-0 zi-4 hidden-xs opacity-0 p-m {{ purchasing_bar_position }}" id="productStickyInfo-{{ section.id }}">
+  <sht-prd-frm-sticky class="product-form-sticky d-flex fd-column rad-m gap-xs" data-src-frm-selector={{ product_form_id }}>
+    <div class="d-flex fd-column gap-xs w-100">
+      <div class="d-flex top-xs gap-xs">
+        <div class="product-sticky-info-media js-product-sticky-info-media rad-s o-hidden" style="--ratio: {{ settings.product_card_image_ratio }};">
+          {% assign product_image = product.featured_media | image_url: width: product.featured_media.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000', sizes: sizes, alt: product.title, class: 'h-100 w-100 of-cover' %}
+          {%- render 'image', image_item: product_image, ratio: settings.product_card_image_ratio -%}
+        </div>
+        <div class="d-flex fd-column flex-1">
+          <h2 class="product-sticky-info-title fs-heading-s component-heading">{{ product.title }}</h2>
+          <span class="product-sticky-info-variant js-product-sticky-info-variant hide-empty d-block fs-body-s color-text-60 mt-xs"></span>
+          <div class="form--error js-product-form-error-wrapper mt-m" data-type="error-wrapper" role="alert" hidden>
+            <span class="d-flex middle-xs gap-3xs">
+              <span class="fs-0 color-error">
+              {%- render 'icon-warning-circled', class: 'icon icon-fix-m d-block' -%}
+              </span>
+              <span class="js-product-form-error-message fs-body-s color-text-80" data-type="error-message"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      {%- form 'product', product, id: sticky_product_form_id, class: 'form w-100', novalidate: 'novalidate', data-type: 'add-to-cart-form-sticky' -%}
+        <div class="form__field">
+          <input type="hidden" class="form__control" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+        </div>
+        <div class="product-form__buttons d-flex top-xs fd-column">
+          <div class="d-flex w-100">
+            <div class="product__quantity d-none-important" id="productStickyQuantity-{{ section.id }}">
+              <label class="field__label visually-hidden" for="productStickyQuantityInput-{{ section.id }}">{{ 'products.product.quantity.label' | t }}:</label>
+              <sht-qty-inp-sticky class="field_quantity d-inline-flex middle-xs center-xs" data-src-input-selector="productQuantityInput-{{ section.id }}">
+                <button class="no-js-hidden js-quantity-btn js-quantity-btn-minus btn btn-plain" aria-label="{{ 'accessibility.minus' | t }}" name="minus" data-name="minus" type="button">
+                  {%- render 'icon-minus', class: 'icon icon-fix-xl' -%}
+                </button>
+                <input class="js-quantity-input product-quantity-input qty-element input-number b-zero ta-center"
+                    type="number"
+                    name="quantity"
+                    aria-label="{{ 'products.product.quantity.input_label' | t: product: product.title | escape }}"
+                    id="productStickyQuantityInput-{{ section.id }}"
+                    min="1"
+                    value="1"
+                    form="{{ sticky_product_form_id }}"/>
+                  <button class="no-js-hidden js-quantity-btn js-quantity-btn-plus btn" aria-label="{{ 'accessibility.plus' | t }}" name="plus" data-name="plus" type="button">
+                    {%- render 'icon-plus', class: 'icon icon-fix-xl' -%}
+                  </button>
+              </sht-qty-inp-sticky>
+            </div>
+            <button type="submit" name="add" class="js-product-form-submit-btn product-btn-atc btn-atc-sticky gap-m btn btn-primary w-100 fs-body-xl rad-m" {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+              <div class="d-flex gap-xs flex-0-auto middle-xs">
+                {% render 'icon-bag-check', class: 'icon icon-fix-2xl' %}
+                <span class="js-product-form-submit-btn-text flex-1">
+                  {{ add_to_cart_text }}
+                </span>
+              </div>
+              <span class="js-product-sticky-info-price product__sticky-info__price hide-empty">
+                {% if product.has_only_default_variant %}
+                  {% render 'product-price' product: product, target: product %}
+                {% endif %}
+              </span>
+            </button>
+          </div>
+          <div class="{% unless section.settings.sticky_button_type == 'dynamic_checkout' %} d-none-important {% endunless %} w-100">
+            {{ form | payment_button }}
+          </div>
+        </div>
+      {%- endform -%}
+    </div>
+  </sht-prd-frm-sticky>
+</div>

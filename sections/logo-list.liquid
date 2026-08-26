@@ -1,0 +1,331 @@
+{%- liquid
+  assign logo_size = section.settings.logo_size
+  if section.settings.list_style == "grid"
+    assign classes = "d-flex fd-column r-gap-scale-4xl"
+  endif
+-%}
+{%- if section.blocks.size > 0 or section.settings.heading != blank or section.settings.description != blank or section.settings.label != blank  -%}
+  {%- render 'section-padding-collapse' -%}
+  <div data-animate="regular-section" class="js-animate section section--vertical logo-list color-{{- section.settings.color_scheme }} background" data-ui-component="Section Logo List">
+    <div class="ctnr w-100 {{ classes }} hide-empty">
+      {%- if section.settings.heading != blank or section.settings.description != blank or section.settings.label != blank  -%}
+        <div class="section__header">
+          {% render 'section-content-horizontal',
+            class: 'p-relative zi-1',
+            heading_size: section.settings.heading_size,
+            button_main_text: section.settings.label,
+            button_main_link: section.settings.link,
+            button_main_style: 'btn-s btn-tertiary',
+            enable_button: true
+          %}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.list_style == "grid" -%}
+        <div class="section__content">
+          <div class="rw gap-unequal middle-xs ta-center js-animate m-zero gap-scale-5xl {{ section.settings.list_alignment }}">
+            {% for block in section.blocks %}
+              {%  render 'card-logo-list',
+	              index: forloop.index,
+                logo_link: block.settings.logo_link,
+                logo_image: block.settings.logo_image,
+                logo_size: logo_size
+              %}
+            {% endfor %}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+    {%- if section.blocks.size > 0 and section.settings.list_style == "running" -%}
+      <div class="section__content">
+        {%- liquid
+          assign running_speed = section.settings.rotating_speed
+          assign loop = 5
+          case section.blocks.size
+            when 1, 2
+              assign loop = 12
+            when 3, 4
+              assign loop = 10
+            when 5, 6
+              assign loop = 7
+          endcase
+        -%}
+        <sht-marquee-section class="marquee-section o-hidden w-100 p-relative d-block color-{{- section.settings.color_schemes }} background" data-ui-component="Running Content Section" role="region" normal-speed="{{ running_speed }}" hover-interaction="{{ section.settings.hover_interaction }}" slow-speed="1" direction="{{ section.settings.running_direction }}" size="{{ section.blocks.size }}">
+          {% capture marquee_list %}
+            <div aria-live="polite" aria-atomic="true" class="js-marquee-list d-flex fw-nowrap flex-auto">
+              {% for block in section.blocks %}
+                <div role="group" class="marquee-item js-marquee-item d-flex flex-auto">
+                  <div {{ block.shopify_attributes }} class="running-content-item ta-center d-flex center-xs middle-xs pl-scale-2xl">
+                    {%  render 'card-logo-list',
+	                    index: forloop.index,
+                      logo_link: block.settings.logo_link,
+                      logo_image: block.settings.logo_image,
+                      logo_size: logo_size
+                    %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endcapture %}
+          <div class="marquee-container d-flex js-marquee-container" loop-marquee="{{ loop }}">
+            {%- for i in (1..loop) -%}
+              <div class="d-flex fw-nowrap fs-0 marquee__items js-marquee-items middle-xs">
+                {{ marquee_list }}
+              </div>
+            {%- endfor -%}
+          </div>
+        </sht-marquee-section>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+{% schema %}
+  {
+    "name": "t:sections.logo_list.name",
+    "disabled_on": {
+      "groups": [
+        "header",
+        "footer",
+        "custom.overlay"
+      ]
+    },
+    "settings": [
+      {
+        "type": "header", 
+        "content": "t:general.settings.headers.general.content"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:general.settings.color_schemes.label",
+        "default": "scheme-1"
+      }, 
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "t:general.settings.section_heading.label",
+        "default": "Logo list"
+      },
+      {
+        "type": "select",
+        "label": "t:general.settings.heading_size.label",
+        "id": "heading_size",
+        "visible_if": "{{ section.settings.heading != blank }}",
+        "options": [
+          {
+            "value": "h3-regular",
+            "label": "t:general.settings.heading_size.options.extra_large.label"
+          },
+          {
+            "value": "h4",
+            "label": "t:general.settings.heading_size.options.large.label"
+          },
+          {
+            "value": "h5",
+            "label": "t:general.settings.heading_size.options.regular.label"
+          },
+          {
+            "value": "h6",
+            "label": "t:general.settings.heading_size.options.small.label"
+          }
+        ],
+        "default": "h5"
+      },
+      {
+        "type": "richtext",
+        "id": "description",
+        "label": "t:general.settings.section_description.label"
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.display_method.content"
+      },
+      {
+        "type": "select",
+        "id": "list_style",
+        "label": "t:general.settings.list_style.label",
+        "default": "running",
+        "options": [
+          {
+            "value": "grid",
+            "label": "t:general.settings.option_grid.label"
+          },
+          {
+            "value": "running",
+            "label": "t:general.settings.running.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "label": "t:general.settings.running_direction.label",
+        "id": "running_direction",
+        "visible_if": "{{ section.settings.list_style == 'running' }}",
+        "options": [
+          {
+            "value": "animation-direction",
+            "label": "t:general.settings.running_direction.option_1.label"
+          },
+          {
+            "value": "animation-reverse",
+            "label": "t:general.settings.running_direction.option_2.label"
+          }
+        ],
+        "default": "animation-direction"
+      },
+      {
+        "type": "select",
+        "id": "rotating_speed",
+        "label": "t:general.settings.rotating_speed.label",
+        "info": "t:general.settings.hover_interaction.info",
+        "visible_if": "{{ section.settings.list_style == 'running' }}",
+        "default": "3",
+        "options": [
+          {
+            "value": "1",
+            "label": "t:general.settings.very_slow.label"
+          },
+          {
+            "value": "2",
+            "label": "t:general.settings.slow.label"
+          },
+          {
+            "value": "3",
+            "label": "t:general.settings.regular.label"
+          },
+          {
+            "value": "4",
+            "label": "t:general.settings.fast.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "label": "t:general.settings.hover_interaction.label",
+        "info": "t:general.settings.hover_interaction.info",
+        "id": "hover_interaction",
+        "visible_if": "{{ section.settings.list_style == 'running' }}",
+        "options": [
+          {
+            "value": "slow_down",
+            "label": "t:general.settings.slow_down.label"
+          },
+          {
+            "value": "pause",
+            "label": "t:general.settings.pause.label"
+          }
+        ],
+        "default": "slow_down"
+      },
+      {
+        "type": "select",
+        "label": "t:general.settings.list_alignment.label",
+        "id": "list_alignment",
+        "info": "t:general.settings.list_alignment_info.info",
+        "visible_if": "{{ section.settings.list_style == 'grid' }}",
+        "options": [
+          {
+            "value": "start-xs",
+            "label": "t:general.settings.option_left.label"
+          },
+          {
+            "value": "center-xs",
+            "label": "t:general.settings.option_center.label"
+          }
+        ],
+        "default": "start-xs"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.logo_list.settings.headers.logo_item.content"
+      },
+      {
+        "type": "select",
+        "label": "t:general.settings.logo_size.label",
+        "id": "logo_size",
+        "options": [
+          {
+            "value": "50px",
+            "label": "t:general.settings.option_small.label"
+          },
+          {
+            "value": "70px",
+            "label": "t:general.settings.option_regular.label"
+          },
+          {
+            "value": "100px",
+            "label": "t:general.settings.option_large.label"
+          }
+        ],
+        "default": "50px"
+      },
+      {
+        "type": "header",
+        "content": "t:general.settings.headers.button.content"
+      },
+      {
+        "type": "text",
+        "id": "label",
+        "label": "t:general.settings.button_label.label",
+        "info": "t:general.settings.hide_if_empty.info",
+        "default": "Explore more"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "t:general.settings.link.label",
+        "visible_if": "{{ section.settings.label != blank }}"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo",
+        "name": "t:general.settings.logo_image.label",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo_image",
+            "label": "t:general.settings.logo_image.label",
+            "info": "t:sections.logo_list.settings.logo_image.info"
+          },
+          {
+            "type": "url",
+            "label": "t:general.settings.link.label",
+            "id": "logo_link"
+
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.logo_list.name",
+        "blocks": [
+          {
+            "type":"logo"
+          },
+          {
+            "type":"logo"
+          },
+          {
+            "type":"logo"
+          },
+          {
+            "type":"logo"
+          },
+          {
+            "type":"logo"
+          },
+          {
+            "type":"logo"
+          },
+          {
+            "type":"logo"
+          },
+          {
+            "type":"logo"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}

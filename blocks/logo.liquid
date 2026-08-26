@@ -1,0 +1,127 @@
+<div class="logo-block p-relative o-hidden" style="--logo-max-width: {{ block.settings.logo_max_width }}%; --ratio: {{ ratio }}" {{ block.shopify_attributes }}>
+  {%- case block.settings.logo_source -%}
+    {%- when 'image' -%}
+      <div class="logo-image w-100 h-100">
+        {%- if block.settings.logo_image != blank -%}
+          {{ block.settings.logo_image | image_url: width: block.settings.logo_image.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000', sizes: '100vw', alt: logo_alt, class: 'js-image-lazy maw-100 of-cover media', loading: loading, fetchpriority: fetchpriority, decoding: decoding }}
+        {%- else -%}
+          {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder w-100 h-100 of-cover' }}
+        {%- endif -%}
+      </div>
+    {%- when 'svg' -%}
+      {%- if block.settings.svg_code != blank -%}
+        <div class="logo-svg">
+          {{- block.settings.svg_code -}}
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="logo-text" style="--logo-text-scale: {{ block.settings.font_scale }}">
+        <span class="logo-text logo-text-{{- block.settings.font }} m-zero wb-break-word">{{ shop.name }}</span>
+      </div>
+  {%- endcase -%}
+  {% if block.settings.link_to_home != blank %}
+    <a href="{{- routes.root_url -}}" class="logo-link p-absolute inset zi-2 ele-focus-visible" aria-label="{{- shop.name | escape -}}"></a>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "t:general.logo",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.general"
+    },
+    {
+      "type": "select",
+      "id": "logo_source",
+      "label": "t:sections.fullwidth_logo.logo_source.content",
+      "options": [
+        {
+          "value": "store_name",
+          "label": "t:general.settings.store_name.label"
+        },
+        {
+          "value": "image",
+          "label": "t:general.settings.image.label"
+        },
+        {
+          "value": "svg",
+          "label": "t:general.settings.svg.label"
+        }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:general.logo_image.content"
+    },
+    {
+      "type": "range",
+      "unit": "%",
+      "max": 100,
+      "min": 50,
+      "step": 10,
+      "default": 100,
+      "id": "logo_max_width",
+      "label": "t:general.settings.logo_max_width.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "link_to_home",
+      "label": "t:general.settings.link_to_homepage.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "font",
+      "label": "t:general.settings.font.label",
+      "info": "t:general.settings.font_extra.info",
+      "options": [
+        {
+          "value": "heading",
+          "label": "t:general.settings.option_heading.label"
+        },
+        {
+          "value": "body",
+          "label": "t:general.settings.option_body.label"
+        },
+        {
+          "value": "extra",
+          "label": "t:general.settings.option_extra.label"
+        }
+      ],
+      "default": "body",
+      "visible_if": "{{ block.settings.logo_source == 'store_name' }}"
+    },
+    {
+      "type": "range",
+      "max": 10,
+      "min": 5,
+      "step": 1,
+      "default": 10,
+      "id": "font_scale",
+      "label": "t:general.settings.font_scale.label",
+      "visible_if": "{{ block.settings.logo_source == 'store_name' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "t:general.settings.image.label",
+      "visible_if": "{{ block.settings.logo_source == 'image' }}"
+    },
+    {
+      "type": "html",
+      "label": "t:general.settings.svg.label",
+      "id": "svg_code",
+      "visible_if": "{{ block.settings.logo_source == 'svg' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.logo",
+      "category": "t:general.basic"
+    }
+  ]
+}
+{% endschema %}

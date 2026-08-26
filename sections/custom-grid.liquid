@@ -1,0 +1,281 @@
+{{ 'section-custom-grid.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign image_sizes_desktop = 100.0 | divided_by: section.settings.columns_desktop | round
+  assign image_sizes = '(min-width: 1024px) ' | append: image_sizes_desktop | append: 'vw, (min-width: 768px) 50vw, 100vw'
+  assign image_alt = section.settings.image.alt | default: section.settings.image_alt
+
+  assign has_image = false
+  if section.settings.image != blank
+    assign has_image = true
+  endif
+
+  assign is_side_by_side = false
+  if has_image and section.settings.image_layout == 'side_by_side'
+    assign is_side_by_side = true
+    assign image_sizes = '(min-width: 768px) 50vw, 100vw'
+  endif
+-%}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mob }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+    background-color: var(--color-background);
+    color: var(--color-normal-text);
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .section-{{ section.id }} .custom-grid__grid {
+    --custom-grid-columns-desktop: {{ section.settings.columns_desktop }};
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }} custom-grid color-{{ section.settings.color_scheme }} {{ section.settings.sect_class }}">
+  <div class="custom-grid__container">
+    {%- if is_side_by_side -%}
+      <div class="custom-grid__grid custom-grid__grid--side-by-side">
+        <div class="custom-grid__side-cards">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'card' -%}
+              {%- render 'custom-grid-card', block: block -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- render 'custom-grid-image', image: section.settings.image, image_link: section.settings.image_link, image_alt: image_alt, image_sizes: image_sizes -%}
+      </div>
+    {%- elsif has_image -%}
+      <div class="custom-grid__grid custom-grid__grid--with-image">
+        {%- assign image_rendered = false -%}
+        {%- for block in section.blocks -%}
+          {%- if forloop.index0 == 1 -%}
+            {%- render 'custom-grid-image', image: section.settings.image, image_link: section.settings.image_link, image_alt: image_alt, image_sizes: image_sizes -%}
+            {%- assign image_rendered = true -%}
+          {%- endif -%}
+          {%- if block.type == 'card' -%}
+            {%- render 'custom-grid-card', block: block -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if image_rendered == false -%}
+          {%- render 'custom-grid-image', image: section.settings.image, image_link: section.settings.image_link, image_alt: image_alt, image_sizes: image_sizes -%}
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <div class="custom-grid__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'card' -%}
+            {%- render 'custom-grid-card', block: block -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.custom_grid.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.layout.content"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "t:sections.custom_grid.settings.columns_desktop.label",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.image.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:general.settings.image.label",
+      "info": "t:sections.custom_grid.settings.image.info"
+    },
+    {
+      "type": "select",
+      "id": "image_layout",
+      "label": "t:sections.custom_grid.settings.image_layout.label",
+      "options": [
+        { "value": "grid", "label": "t:sections.custom_grid.settings.image_layout.options.grid.label" },
+        { "value": "side_by_side", "label": "t:sections.custom_grid.settings.image_layout.options.side_by_side.label" }
+      ],
+      "default": "grid",
+      "info": "t:sections.custom_grid.settings.image_layout.info"
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "t:sections.custom_grid.settings.image_link.label"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "t:sections.custom_grid.settings.image_alt.label",
+      "info": "t:sections.custom_grid.settings.image_alt.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.custom_grid.settings.headers.padding.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.custom_grid.settings.padding_top.label",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.custom_grid.settings.padding_bottom.label",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.custom_grid.settings.padding_top_mob.label",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.custom_grid.settings.padding_bottom_mob.label",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "t:sections.custom_grid.settings.headers.background.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.custom_grid.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "sect_class",
+      "label": "t:sections.custom_grid.settings.sect_class.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "t:sections.custom_grid.blocks.card.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_style",
+          "label": "t:sections.custom_grid.blocks.card.settings.icon_style.label",
+          "options": [
+            { "value": "check", "label": "t:sections.custom_grid.blocks.card.settings.icon_style.options.check.label" },
+            { "value": "seal", "label": "t:sections.custom_grid.blocks.card.settings.icon_style.options.seal.label" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:general.settings.heading.label",
+          "default": "Welding"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:general.settings.text.label",
+          "default": "<p>Precision MIG and TIG welding by AWS-certified professionals, plus robotic welding for high-volume projects with repeatable quality.</p>"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "t:sections.custom_grid.blocks.card.settings.link_label.label",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:general.link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.custom_grid.name",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "heading": "Welding",
+            "text": "<p>Precision MIG and TIG welding by AWS-certified professionals, plus robotic welding for high-volume projects with repeatable quality.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "heading": "Machining",
+            "text": "<p>Multi-axis CNC machining, turning, and milling for precision-engineered components in carbon steel, aluminum, stainless steel, plastics, and specialty metals.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "heading": "Powder Coating",
+            "text": "<p>The in-house powder coat booths provide high-quality sprays that deliver a uniform, corrosion resistance finish. Coatings are safe to adhere onto finished surface. Multiple painting modules and automatic powder nozzles efficiently handle large surface areas in a short amount of time.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "heading": "Fabrication",
+            "text": "<p>We cut, roll, form, and assemble all types of materials using modern tools and custom manufacturing techniques.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "heading": "Bending",
+            "text": "<p>Accurate, repeatable results using industry-leading press brakes with dynamic crowning and angle control, up to 1” thick materials.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "heading": "Laser Cutting",
+            "text": "<p>High-speed fiber and optic laser cutting systems capable of cutting thick plate, tubing, and precision features with fast turnaround.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

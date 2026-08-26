@@ -1,0 +1,790 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_PkG43N": {
+      "type": "image-banner",
+      "blocks": {
+        "description_k4nbc9": {
+          "type": "description",
+          "settings": {
+            "description_text": "<h1><strong>Maintenance Tips<br/></strong></h1><h1></h1>"
+          }
+        },
+        "button_yzTcY3": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_primary_label": "Explore more",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "View details",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "description_k4nbc9",
+        "button_yzTcY3"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 70,
+        "section_mask_overlay_color": "#382b2b",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/circular-saw-cuts-beam.jpg",
+        "section_image_width": "max-width",
+        "height_desktop": "auto",
+        "desktop_content_position": "start-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "image_with_text_ctymVP": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_8XqJwk": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "For Equipment That Lasts",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_KgCgC8": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>After delivering your equipment, EZG is committed to remaining your trusted partner. We offer the following information on equipment upkeep to ensure your satisfaction with EZG equipment throughout product lifetimes.At EZG Manufacturing, we take pride in fabricating quality products that last several years. However, there is one way to extend your product’s lifespan: maintenance. Safe storage and proper equipment maintenance prevent corrosion and keep equipment in good working order. Let EZG help you take care of your fleet with these helpful tips. </p>"
+          }
+        },
+        "button_rbJUem": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Shop Spare Parts",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_8XqJwk",
+        "description_KgCgC8",
+        "button_rbJUem"
+      ],
+      "name": "t:sections.images_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_alignment": "middle-xs",
+        "image_1": "shopify://shop_images/Krack-Hog_edited_2023-Large.jpg",
+        "image_1_link": "",
+        "image_2_link": "",
+        "image_3_link": "",
+        "image_4_link": "",
+        "desktop_layout": "text_first",
+        "desktop_media_width": "6",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "rich_text_8AgrEE": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_RyhH3c": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "For Equipment That Lasts",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_r6hCyc": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>After delivering your equipment, EZG is committed to remaining your trusted partner. We offer the following information on equipment upkeep to ensure your satisfaction with EZG equipment throughout product lifetimes.</p><p>At EZG Manufacturing, we take pride in fabricating quality products that last several years. However, there is one way to extend your product’s lifespan: maintenance. <br/>Safe storage and proper equipment maintenance prevent corrosion and keep equipment in good working order. Let EZG help you take care of your fleet with these helpful tips. </p>"
+          }
+        },
+        "button_ViJH73": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Shop Spare Parts",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_RyhH3c",
+        "description_r6hCyc",
+        "button_ViJH73"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-center-md middle-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "image_with_text_nKeaqj": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_kJG7BJ": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "“When lead times are long, keeping the equipment you have in good working order is essential.”",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_gQ8Mdb": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>- Kevin Brooker</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_kJG7BJ",
+        "description_gQ8Mdb"
+      ],
+      "name": "t:sections.images_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "image_alignment": "on_scroll",
+        "image_1": "shopify://shop_images/Kevin_Brooker_Hog_Handler.png",
+        "image_1_link": "",
+        "image_2_link": "",
+        "image_3_link": "",
+        "image_4_link": "",
+        "desktop_layout": "text_first",
+        "desktop_media_width": "6",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "content_collage_BwFGQM": {
+      "type": "content-collage",
+      "blocks": {
+        "text_CYUn8z": {
+          "type": "text",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<h6>After delivering your equipment, EZG is committed to remaining your trusted partner. We offer the following information on equipment upkeep to ensure your satisfaction with EZG equipment throughout product lifetimes.</h6>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "text_7EWLBe": {
+          "type": "text",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>At EZG Manufacturing, we take pride in fabricating quality products that last several years. However, there is one way to extend your product’s lifespan: maintenance. <br/>Safe storage and proper equipment maintenance prevent corrosion and keep equipment in good working order. Let EZG help you take care of your fleet with these helpful tips. </p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_CYUn8z",
+        "text_7EWLBe"
+      ],
+      "disabled": true,
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 200,
+        "mobile_row_height": 300
+      }
+    },
+    "icon_with_text_fFWHny": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_yknJBG": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "arrow-right",
+            "custom_code": "",
+            "title": " Keep paddle shaft seals greased.",
+            "description": "<p>Grease seals daily to prevent material from leaking around the paddle shaft and getting into the bearings. </p><p>If mixer is running all day, grease at mid-day and at the end of the day. Grease at the end of use will help push material that may have gotten into the seal out before it sets up. </p><p>Material build up within the seal will wear grooves in the shaft causing the seals to fail, and damage shaft resulting in costly repairs.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_WCxGaW": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "arrow-right",
+            "custom_code": "",
+            "title": "Change paddle shaft seals at first sign of leakage.",
+            "description": "<p>If material is leaking through the seal be sure to changes seals before the material reaches the bearings causing the bearings to fail.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_f83Wqw": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "arrow-right",
+            "custom_code": "",
+            "title": "Service engine",
+            "description": "<p>Keeping the engine serviced prevents excessive wear on the engine. Change engine oil regularly according to engine recommendations. Keep air filter clean and change as needed. Keep excessive material build up off engine. Material build up around or on the engine can restrict air flow that keeps the engine cool.</p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_wKbmRN": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "arrow-right",
+            "custom_code": "",
+            "title": "Do not over adjust paddle rubbers.",
+            "description": "<p>Paddle rubbers should be adjust to where they are slightly away from the inside of the drum. If rubbers fold back on the paddle they are adjusted too tight. This will cause stretching and cracking of the paddle rubber. Over adjusted paddle rubbers also caused wear on the thickness of the drum resulting in holes worn in drum.</p>",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_yknJBG",
+        "icon_with_text_item_WCxGaW",
+        "icon_with_text_item_f83Wqw",
+        "icon_with_text_item_wKbmRN"
+      ],
+      "name": "t:sections.icon_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "heading": "TOP TIPS FOR EZG MASONRY MIXER MAINTENANCE",
+        "heading_size": "h5",
+        "description": "",
+        "text_position": "fd-row",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "4",
+        "carousel_mobile": "false",
+        "label": "",
+        "link": ""
+      }
+    },
+    "rich_text_JjhJrF": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_y8iG4U": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Paddle Shaft Seals",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_4tdWdX": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>In this tip we will explain the importance of keeping the paddle shaft seals greased on any of your EZG mixers. Keeping the paddle shaft seals greased will prevent excessive wear on the paddle shaft and protect the paddle shaft bearings from being contaminated with mortar. If the paddle shaft seals are not greased on a regular basis, the seals will wear grooves in the paddle shaft. If the seals become worn out, material could get through the seal and damage the bearings.<br/><br/>The best time to grease the paddle shaft seals is while the shaft is turning. This allows the grease to fill more seals, leaving less room for material to get into the seals. If the grease comes out on the outside of the paddle shaft, the seals are misaligned or may be worn out.<br/>Greasing the paddle shaft seals should be done on a daily basis and, greasing every four to five hours throughout usage is best. At the end of a work day, we recommend greasing the seals which will allow any material remaining on the seals to be pushed out before it sets up inside the seals.<br/>Overall, keeping the paddle shaft seals greased will prevent costly repairs and downtime. Please contact Kevin Brooker with any maintenance questions you might have regarding your EZG mixers.</p>"
+          }
+        },
+        "button_dMaJQD": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_primary_label": "Explore more",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "View details",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_y8iG4U",
+        "description_4tdWdX",
+        "button_dMaJQD"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "image_with_text_63aJGB": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_ngARAQ": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Paddle Shaft Seals",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_i6UcGE": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>In this tip we will explain the importance of keeping the paddle shaft seals greased on any of your EZG mixers. Keeping the paddle shaft seals greased will prevent excessive wear on the paddle shaft and protect the paddle shaft bearings from being contaminated with mortar. If the paddle shaft seals are not greased on a regular basis, the seals will wear grooves in the paddle shaft. If the seals become worn out, material could get through the seal and damage the bearings.</p><p>The best time to grease the paddle shaft seals is while the shaft is turning. This allows the grease to fill more seals, leaving less room for material to get into the seals. If the grease comes out on the outside of the paddle shaft, the seals are misaligned or may be worn out.<br/>Greasing the paddle shaft seals should be done on a daily basis and, greasing every four to five hours throughout usage is best. At the end of a work day, we recommend greasing the seals which will allow any material remaining on the seals to be pushed out before it sets up inside the seals.</p><p>Overall, keeping the paddle shaft seals greased will prevent costly repairs and downtime. Please contact Kevin Brooker with any maintenance questions you might have regarding your EZG mixers.</p>"
+          }
+        },
+        "text_block_with_icon_QRxYFj": {
+          "type": "text_block_with_icon",
+          "disabled": true,
+          "settings": {
+            "title": "Our feature",
+            "heading_size_text_icon": "h3-regular",
+            "description": "<p>Add in information or share content related to these images</p>",
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy",
+            "custom_code": "",
+            "icon_color": "",
+            "block_width_desktop": "desktop-width-one-two",
+            "block_width_mobile": "mobile-width-one-two"
+          }
+        },
+        "button_6ffbcG": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_primary_label": "Explore more",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "View details",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_ngARAQ",
+        "description_i6UcGE",
+        "text_block_with_icon_QRxYFj",
+        "button_6ffbcG"
+      ],
+      "name": "t:sections.images_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "image_alignment": "on_scroll",
+        "image_1": "shopify://shop_images/Hog-Jack_staged_2024-4.png",
+        "image_1_link": "",
+        "image_2_link": "",
+        "image_3_link": "",
+        "image_4_link": "",
+        "desktop_layout": "text_first",
+        "desktop_media_width": "6",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "content_collage_gHzzGW": {
+      "type": "content-collage",
+      "blocks": {
+        "video_igHGGk": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "4",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_ypGTbt": {
+          "type": "text",
+          "settings": {
+            "heading": "Text heading",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>A description for your collection, product or other</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "4",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_igHGGk",
+        "text_ypGTbt"
+      ],
+      "disabled": true,
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": false,
+        "desktop_row_height": 400,
+        "mobile_row_height": 300
+      }
+    },
+    "video_with_text_CAnDjN": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_QcgaVc": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Pressure Testing Mud hog mixers",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_peW88b": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Keven takes us through the steps to pressure test a Mud Hog mixer.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_QcgaVc",
+        "description_peW88b"
+      ],
+      "name": "t:sections.video_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "video_source": "video_external",
+        "video_url": "youtube.com/watch?v=4iGj6NRy1zE&time_continue=0&source_ve_path=NzY3NTg&embeds_referring_euri=https%3A%2F%2Fezgmfg.com%2F",
+        "media_ratio": "1.778",
+        "video_thumbnail_image": "shopify://shop_images/DM_Fence_Barbwire_Testimony-Video-Cover.png",
+        "enable_video_mute": true,
+        "content_ordering": "fd-row-reverse-md",
+        "media_width": "6",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "video_with_text_aGrHYN": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_xFUBxH": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Troubleshooting tips for an EZG Grout Hog",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_b3i4LL": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Having issues with your Grout Hog? Kevin shows you how to override electrical to test where the issue may be coming from.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_xFUBxH",
+        "description_b3i4LL"
+      ],
+      "name": "t:sections.video_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "video_source": "video_external",
+        "video_url": "https://www.youtube.com/watch?v=Dtcbl3WOOA4&time_continue=0&source_ve_path=NzY3NTg&embeds_referring_euri=https%3A%2F%2Fezgmfg.com%2F",
+        "media_ratio": "1.778",
+        "video_thumbnail_image": "shopify://shop_images/DM_Fence_Barbwire_Testimony-Video-Cover.png",
+        "enable_video_mute": true,
+        "content_ordering": "fd-row-reverse-md",
+        "media_width": "6",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "video_with_text_WeATNf": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_d8Kdtq": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "How to install a tilt plate attachment on an EZG Fence Hog",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_Dq9XWb": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Kevin walks you through how to remove the backing plate that comes attached to your Fence Hog, how to install the new tilt backing plate, and reconnecting the hydraulics</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_d8Kdtq",
+        "description_Dq9XWb"
+      ],
+      "name": "t:sections.video_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "video_source": "video_external",
+        "video_url": "youtube.com/watch?v=KIA1wRzpyDU&time_continue=0&source_ve_path=NzY3NTg&embeds_referring_euri=https%3A%2F%2Fezgmfg.com%2F",
+        "media_ratio": "1.778",
+        "video_thumbnail_image": "shopify://shop_images/DM_Fence_Barbwire_Testimony-Video-Cover.png",
+        "enable_video_mute": true,
+        "content_ordering": "fd-row-reverse-md",
+        "media_width": "6",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "video_with_text_YjNMpc": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_8hK4rV": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Installing a Wireless Remote on a Grout Hog",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_HVGKDr": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Wireless Grout Hog remotes are great for operating the machine from afar or limiting the damage often caused to the standard, hardwires remote. Kevin will walk you through the simple task of installing and troubleshooting a new wireless remote.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_8hK4rV",
+        "description_HVGKDr"
+      ],
+      "name": "t:sections.video_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "video_source": "video_external",
+        "video_url": "https://www.youtube.com/watch?v=D_gWKjRSmJo",
+        "media_ratio": "1.778",
+        "video_thumbnail_image": "shopify://shop_images/DM_Fence_Barbwire_Testimony-Video-Cover.png",
+        "enable_video_mute": true,
+        "content_ordering": "fd-row-reverse-md",
+        "media_width": "6",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "video_with_text_yNdgT9": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_x8E3t9": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Installing a Rear Seal Kit on a Grout Hog",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_DLYMgG": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Need to replace the rear seal kit on your Grout Hog? Kevin walks you through exactly what you’ll need to successfully remove the old rear seal kit and install the new one.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_x8E3t9",
+        "description_DLYMgG"
+      ],
+      "name": "t:sections.video_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "video_source": "video_external",
+        "video_url": "https://www.youtube.com/watch?v=D_gWKjRSmJo&t=29s",
+        "media_ratio": "1.778",
+        "video_thumbnail_image": "shopify://shop_images/DM_Fence_Barbwire_Testimony-Video-Cover.png",
+        "enable_video_mute": true,
+        "content_ordering": "fd-row-reverse-md",
+        "media_width": "6",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "video_with_text_Cjt3AG": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading_DgtWJG": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "How to Change the piston cups and seals on an EZG Hog Pump®",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_LMUeUt": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Steve and Tyler show you how to change the piston cups and seals on the Hog Pump® HP-20T4.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_DgtWJG",
+        "description_LMUeUt"
+      ],
+      "name": "t:sections.video_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "video_source": "video_external",
+        "video_url": "https://www.youtube.com/watch?v=Dtcbl3WOOA4&time_continue=0&source_ve_path=NzY3NTg&embeds_referring_euri=https%3A%2F%2Fezgmfg.com%2F",
+        "media_ratio": "1.778",
+        "video_thumbnail_image": "shopify://shop_images/DM_Fence_Barbwire_Testimony-Video-Cover.png",
+        "enable_video_mute": true,
+        "content_ordering": "fd-row-reverse-md",
+        "media_width": "6",
+        "desktop_content_alignment": "ta-left-md start-md",
+        "mobile_layout": "text-first",
+        "mobile_content_alignment": "ta-left start-xs"
+      }
+    },
+    "rich_text_CrNxHc": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_H3wdGp": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "LET'S BUILD SOMETHING GREAT TOGETHER",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_VyhNeK": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Versatile and multipurpose, the cutting-edge media-promotion sections easily handle images, slideshows, and videos, allowing you to enhance your online store with diverse content forms.</p>"
+          }
+        },
+        "button_j3mJCY": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_H3wdGp",
+        "description_VyhNeK",
+        "button_j3mJCY"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_PkG43N",
+    "image_with_text_ctymVP",
+    "rich_text_8AgrEE",
+    "image_with_text_nKeaqj",
+    "content_collage_BwFGQM",
+    "icon_with_text_fFWHny",
+    "rich_text_JjhJrF",
+    "image_with_text_63aJGB",
+    "content_collage_gHzzGW",
+    "video_with_text_CAnDjN",
+    "video_with_text_aGrHYN",
+    "video_with_text_WeATNf",
+    "video_with_text_YjNMpc",
+    "video_with_text_yNdgT9",
+    "video_with_text_Cjt3AG",
+    "rich_text_CrNxHc"
+  ]
+}

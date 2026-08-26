@@ -1,0 +1,229 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_eABMkG": {
+      "type": "image-banner",
+      "blocks": {
+        "subheading_kK73dG": {
+          "type": "subheading",
+          "settings": {
+            "subheading_text": "EXCELLENCE ACROSS DIVERSE SECTORS"
+          }
+        },
+        "heading_4Yb3GW": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "INDUSTRIES SERVED",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        },
+        "description_7cEJLG": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>At EZG Manufacturing, we take pride in delivering innovative, high-quality solutions tailored to the unique needs of a variety of manufacturing industries. From heavy-duty construction equipment to specialized medical devices, our expertise spans a wide spectrum of industries, ensuring precision, durability, and unparalleled performance.</p>"
+          }
+        },
+        "button_cDwWBM": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_kK73dG",
+        "heading_4Yb3GW",
+        "description_7cEJLG",
+        "button_cDwWBM"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 60,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/contract-assembly-services-banner_1.png",
+        "section_image_width": "max-width",
+        "height_desktop": "adapt_img",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "icon_with_text_jLhF4j": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_T8nmwy": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "OIL AND GAS EQUIPMENT",
+            "description": "<p>Precision MIG and TIG welding by AWS-certified professionals, plus robotic welding for high-volume projects with repeatable quality.</p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_9xJUUK": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "MATERIAL HANDLING",
+            "description": "<p>Custom-built equipment to move, lift, and store products efficiently in warehouses, factories, and logistics centers.<br/></p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_a7jqfN": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "FOOD PROCESSING",
+            "description": "<p>Safe, durable solutions made from food-grade materials to support clean food manufacturing operations.</p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_gCmbhF": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "LAWN & GARDEN",
+            "description": "<p>Built-to-last equipment that supports commercial and residential landscaping, designed for performance and ease of use.</p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_WgcLxP": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "MEDICAL EQUIPMENT",
+            "description": "<p>Precision-manufactured components and parts for healthcare applications where safety, consistency, and accuracy are non-negotiable.</p><p></p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_bEwPJM": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "icon_source": "theme_library",
+            "theme_library_icon": "check",
+            "custom_code": "",
+            "title": "CONSTRUCTION EQUIPMENT",
+            "description": "<p>Heavy-duty assemblies and parts that support large-scale building projects, engineered for toughness and reliability.</p>",
+            "label": "Learn More",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_T8nmwy",
+        "icon_with_text_item_9xJUUK",
+        "icon_with_text_item_a7jqfN",
+        "icon_with_text_item_gCmbhF",
+        "icon_with_text_item_WgcLxP",
+        "icon_with_text_item_bEwPJM"
+      ],
+      "name": "t:sections.icon_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "heading": "",
+        "heading_size": "h5",
+        "description": "",
+        "text_position": "fd-column",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "#5b7f95",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "label": "",
+        "link": ""
+      }
+    },
+    "rich_text_8zHBHB": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_UkpUbR": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Let's Build something great together",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_FDzDcR": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Versatile and multipurpose, the cutting-edge media-promotion sections easily handle images, slideshows, and videos, allowing you to enhance your online store with diverse content forms.</p>"
+          }
+        },
+        "button_GaDpbC": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_UkpUbR",
+        "description_FDzDcR",
+        "button_GaDpbC"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_eABMkG",
+    "icon_with_text_jLhF4j",
+    "rich_text_8zHBHB"
+  ]
+}

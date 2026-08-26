@@ -1,0 +1,11 @@
+.popup-size {
+  gap: calc(var(--scale-xs) * 2);
+}
+@media(min-width: 1025px) {
+  .popup-size--regular {
+    gap: calc(var(--scale-m) * 2);
+  }
+  .popup-size--large {
+    gap: calc(var(--scale-xl) * 2);
+  }
+}

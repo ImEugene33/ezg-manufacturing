@@ -1,0 +1,20 @@
+{%- liquid
+  assign has_link = false
+  if image_link != blank
+    assign has_link = true
+  endif
+-%}
+{%- capture image_markup -%}
+  {{ image | image_url: width: 1200 | image_tag:
+    widths: '375, 550, 750, 1100, 1200',
+    sizes: image_sizes,
+    alt: image_alt,
+    loading: 'lazy',
+    class: 'custom-grid__image-img'
+  }}
+{%- endcapture -%}
+{%- if has_link -%}
+  <a href="{{ image_link }}" class="custom-grid__image">{{ image_markup }}</a>
+{%- else -%}
+  <a class="custom-grid__image custom-grid__image--disabled" aria-disabled="true">{{ image_markup }}</a>
+{%- endif -%}

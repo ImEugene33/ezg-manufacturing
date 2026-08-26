@@ -1,0 +1,35 @@
+{% liquid
+  assign enable_section_link = true
+%}
+<div class="section__text w-100 d-flex fd-column hide-empty {{ alignment_class }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.subheading_text != blank -%}
+    <p class="subheading section__subheading promotional-subheading hide-empty">{{- block.settings.subheading_text | escape -}}</p>
+  {%- endif -%}
+  {%- if block.settings.heading_text != blank -%}
+    {%- if block.settings.enable_h1_tag -%}
+      <h1 class="section__heading promotional-heading {{ block.settings.heading_size }} hide-empty">{{- block.settings.heading_text | escape -}}</h1>
+    {%- else -%}
+      <h2 class="section__heading promotional-heading {{ block.settings.heading_size }} hide-empty">{{- block.settings.heading_text | escape -}}</h2>
+    {%- endif -%}
+  {%- endif -%}
+  {%- if block.settings.description_text != blank -%}
+    <div class="section__description fs-body-xl rte hide-empty o-hidden">{{- block.settings.description_text -}}</div>
+  {%- endif -%}
+  {%- if block.settings.button_primary_label != blank or block.settings.button_secondary_label != blank -%}
+    {%- assign enable_section_link = false -%}
+    <div class="section__button-group d-flex gap-xs {{ alignment_class }}">
+      {%- if block.settings.button_primary_label != blank -%}
+        <a href="{{- block.settings.button_primary_link | default: '#' -}}" {{ block.settings.button_primary_link | default: 'tabindex="-1"' | replace: block.settings.button_primary_link , '' }} class="btn btn-m js-button-group-link btn-{{- block.settings.button_primary_style }} hide-empty {{ block.settings.button_primary_link | default: 'disable' | replace: block.settings.button_primary_link , '' }}">{{- block.settings.button_primary_label | escape -}}</a>
+      {%- endif -%}
+      {%- if block.settings.button_secondary_label != blank -%}
+        <a href="{{- block.settings.button_secondary_link | default: '#' -}}" {{ block.settings.button_secondary_link | default: 'tabindex="-1"' | replace: block.settings.button_secondary_link , '' }} class="btn btn-m js-button-group-link btn-{{- block.settings.button_secondary_style }} hide-empty {{ block.settings.button_secondary_link | default: 'disable' | replace: block.settings.button_secondary_link , '' }}">{{- block.settings.button_secondary_label | escape -}}</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+{%- if block.settings.image_banner_link != blank and enable_section_link -%}
+  <a
+    href="{{- block.settings.image_banner_link -}}"
+    class="p-absolute inset zi-2"
+    aria-label="{{- block.settings.heading_text | escape -}}"></a>
+{%- endif -%}

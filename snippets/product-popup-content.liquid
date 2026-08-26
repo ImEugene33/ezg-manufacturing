@@ -1,0 +1,26 @@
+<sht-dialog class="sht-dialog gradient-overlay--dialog gradient-overlay no-focus-visible bottom-xs end-xs p-fixed left-0 top-0 h-100 w-100 o-hidden zi-10 hidden-xs" id="dialogPopupContent{{ popup_content_dialog_id }}" hidden tabindex="-1">
+  <div class="sht-dialog-overlay js-dialog-overlay"></div>
+  <div class="js-dialog-container js-scroll-element popup-content drawer-content-container background color-{{- section.settings.color_scheme }} dialog p-relative disable-scrollbars" role="dialog" aria-labelledby="dialogTitle{{- popup_content_dialog_id -}}" aria-modal="true">
+    <div class="dialog__content d-flex fd-column h-100">
+      <div class="dialog__header d-flex between-xs top-xs p-sticky top-0 p-relative">
+        <h3 class="dialog--animate h5 m-zero flex-1" id="dialogTitle{{- popup_content_dialog_id -}}">{{ block.settings.heading | default: 'Popup' }}</h3>
+        <button class="drawer__btn-close btn btn-icon btn-icon-l btn-tertiary js-dialog-close-btn" type="button" aria-label="{{ 'accessibility.close' | t }}">
+          {% render 'icon-x-mark', class: 'icon icon-fix-m' %}
+        </button>
+      </div>
+      <div class="dialog__body js-dialog-body o-hidden">
+        {%- if block.settings.text != blank -%}
+          <div class="rte">{{- block.settings.text -}}</div>
+        {%- endif -%}
+        <template>
+          <div class="hide-empty rte dialog--animate mt-m">
+            {{- block.settings.popup_page.content | default: '' -}}
+          </div>
+        </template>
+      </div>
+      <button aria-label="{{- "accessibility.close_modal" | t -}}" class="js-dialog-close-btn visually-hidden">
+        {%- render 'icon-x-mark' -%}
+      </button>
+    </div>
+  </div>
+</sht-dialog>

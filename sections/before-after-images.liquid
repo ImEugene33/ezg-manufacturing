@@ -1,0 +1,247 @@
+{%- liquid
+  assign loading = "lazy"
+  assign decoding ="async"
+  assign fetchpriority = "auto"
+
+  if section.index == 1
+    assign loading = "eager"
+    assign fetchpriority = "high"
+  endif
+  assign ratio_md = section.settings.desktop_image_before.aspect_ratio
+  assign ratio = ratio_md
+  assign desktop_image_width = '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000'
+  assign mobile_image_width = '320, 450, 550, 750, 950'
+  assign size = settings.container_max_width | append: 'px'
+  assign size_image = '(min-width: SIZE) SIZE, 100vw' | replace: 'SIZE', size
+
+  assign desktop_image_before = 'hero-apparel-1' | placeholder_svg_tag: 'placeholder w-100 h-100 d-block'
+
+  assign desktop_image_before_alt  = section.settings.desktop_image_before.alt | default: section.settings.desktop_image_before.image | split: '/' | last
+  assign desktop_image_before = section.settings.desktop_image_before | image_url: width: section.settings.desktop_image_before.width | image_tag: widths: desktop_image_width, sizes: size_image, alt: desktop_image_before_alt, class: 'w-100 h-100 of-cover', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+
+  if section.settings.mobile_image_before != blank
+    assign ratio = section.settings.mobile_image_before.aspect_ratio
+    assign mobile_image_before_alt  = section.settings.mobile_image_before.alt | default: section.settings.mobile_image_before.image | split: '/' | last
+    assign mobile_image_before = section.settings.mobile_image_before | image_url: width: section.settings.mobile_image_before.width | image_tag: widths: mobile_image_width, sizes: size_image, alt: mobile_image_before_alt, class: 'd-none-sm d-block w-100 h-100 of-cover', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+    assign desktop_image_before = desktop_image_before | replace: 'class="', 'class="d-none d-block-sm '
+  endif
+
+  assign desktop_image_after = 'hero-apparel-1' | placeholder_svg_tag: 'placeholder w-100 h-100'
+
+  assign desktop_image_alt_second  = section.settings.desktop_image_after.alt | default: section.settings.desktop_image_after.image | split: '/' | last
+  assign desktop_image_after = section.settings.desktop_image_after | image_url: width: section.settings.desktop_image_after.width | image_tag: widths: desktop_image_width, sizes: size_image, alt: desktop_image_alt_second, class: 'w-100 h-100 of-cover', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+  if section.settings.mobile_image_after != blank
+    assign mobile_image_alt_second  = section.settings.mobile_image_after.alt | default: section.settings.mobile_image_after.image | split: '/' | last
+    assign mobile_image_after = section.settings.mobile_image_after | image_url: width: section.settings.mobile_image_after.width | image_tag: widths: mobile_image_width, sizes: size_image, alt: mobile_image_alt_second, class: 'd-none-sm d-block w-100 h-100 of-cover', loading: loading, fetchpriority: fetchpriority, decoding: decoding
+    assign desktop_image_after = desktop_image_after | replace: 'class="', 'class="d-none d-block-sm '
+  endif
+
+-%}
+
+
+{%- render 'section-padding-collapse' -%}
+<div data-animate="regular-section" class="js-animate section section--vertical color-{{- section.settings.color_scheme }} background" data-ui-component="Section Before After Image" role="region" aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, "" }}">
+  <div class="section__header">
+    <div class="ctnr">
+      <div class="section__text w-100 d-flex fd-column hide-empty {{ section.settings.heading_alignment_desktop }} {{ section.settings.heading_alignment_mobile }}" >
+        {%- if section.settings.heading != blank -%}
+          <h2 class="section__heading promotional-heading {{ section.settings.heading_size }}">{{- section.settings.heading | escape -}}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="section__description fs-body-xl rte o-hidden">{{- section.settings.description -}}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  <div class="section__content">
+    <div class="ctnr">
+      <sht-before-after-images class="p-relative d-block rad-l o-hidden us-none" style="--aspect-ratio: {{ ratio }}; --aspect-ratio-md: {{ ratio_md }}; --before-after-initial-drag-position: 50%;">
+          <div class="before-image w-100 h-100 media-wrapper">
+            {%- liquid
+              echo desktop_image_before
+              echo mobile_image_before
+            -%}
+            <div class="p-absolute left-0 bottom-0 p-3xs">
+              <span class="tag hide-empty">{{- section.settings.label_image_before -}}</span>
+            </div>
+          </div>
+          <div class="after-image js-after-image p-absolute top-0 left-0 h-100 w-100">
+            <div class="w-100 h-100 media-wrapper">
+              {%- liquid
+                echo desktop_image_after
+                echo mobile_image_after
+              -%}
+              <div class="p-absolute right-0 bottom-0 p-3xs">
+                <span class="tag hide-empty">{{- section.settings.label_image_after -}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-absolute top-0 left-0 bottom-0 right-0">
+            <div class="split-cursor js-split-cursor">
+              <span class="js-split-cursor before-after-drag-button btn btn-secondary rad-p btn--large d-flex middle-xs center-xs" role="slider" aria-label="{{ 'accessibility.before_after' | t }}">
+                {% render 'icon-grabber', size: 16 %}
+              </span>
+            </div>
+          </div>
+        </sht-before-after-images>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.before_after_image.name",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:general.settings.section_heading.label",
+      "default": "Before/After"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.heading_size.label",
+      "id": "heading_size",
+      "visible_if": "{{ section.settings.heading != blank }}",
+      "options": [
+        {
+          "value": "headline",
+          "label": "t:general.settings.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:general.settings.heading_size.options.large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:general.settings.heading_size.options.regular.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:general.settings.heading_size.options.small.label"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:general.settings.section_description.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.before_image.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image_before",
+      "label": "t:general.settings.image.label",
+      "info": "t:sections.before_after_image.settings.desktop_image_recommended.info"
+    },
+    {
+      "type": "image_picker",
+      "label": "t:general.settings.mobile_image_optional.label",
+      "id": "mobile_image_before",
+      "info": "t:sections.before_after_image.settings.mobile_image_recommended.info"
+    },
+    {
+      "type": "text",
+      "id": "label_image_before",
+      "label": "t:general.settings.text.label",
+      "default": "Before"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.after_image.content"
+    },
+    {
+      "type": "image_picker",
+      "label": "t:general.settings.image.label",
+      "id": "desktop_image_after",
+      "info": "t:sections.before_after_image.settings.after_image_recommended.info"
+    },
+    {
+      "type": "image_picker",
+      "label": "t:general.settings.mobile_image_optional.label",
+      "id": "mobile_image_after",
+      "info": "t:sections.before_after_image.settings.after_image_recommended.info"
+    },
+    {
+      "type": "text",
+      "id": "label_image_after",
+      "label": "t:general.settings.text.label",
+      "default": "After"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.desktop_layout.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment_desktop",
+      "label": "t:general.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "ta-left-md top-md",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center-md middle-md",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right-md bottom-md",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-center-md middle-md"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.mobile_layout.content"
+    },
+  {
+    "type": "select",
+    "id": "heading_alignment_mobile",
+    "label": "t:general.settings.heading_alignment.label",
+    "options": [
+      {
+        "value": "ta-left top-xs",
+        "label": "t:general.settings.option_left.label"
+      },
+      {
+        "value": "ta-center middle-xs",
+        "label": "t:general.settings.option_center.label"
+      },
+      {
+        "value": "ta-right bottom-xs",
+        "label": "t:general.settings.option_right.label"
+      }
+    ],
+    "default": "ta-left top-xs"
+  }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.before_after_image.name"
+    }
+  ]
+}
+{% endschema %}

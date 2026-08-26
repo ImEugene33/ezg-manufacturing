@@ -1,0 +1,124 @@
+{% liquid
+  assign class = class | append: ' btn btn-icon-l btn-social '
+%}
+<ul class="{{ classes }} ls-none d-flex fw-wrap hide-empty" {{ block.shopify_attributes }} aria-label="social-media">
+  {%- if settings.social_facebook_link != blank -%}
+    <li>
+      <a href="{{ settings.social_facebook_link }}" rel="noopener" title="Facebook" aria-label="Facebook" class="{{ class }}">
+        {% render 'icon-facebook' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_twitter_link != blank -%}
+    <li>
+      <a href="{{ settings.social_twitter_link }}" rel="noopener" title="X-Twitter" aria-label="X-Twitter" class="{{ class }}">
+        {% render 'icon-x' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_instagram_link != blank -%}
+    <li>
+      <a href="{{ settings.social_instagram_link }}" rel="noopener" title="Instagram" aria-label="Instagram" class="{{ class }}">
+        {% render 'icon-instagram' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_tiktok_link != blank -%}
+    <li>
+      <a href="{{ settings.social_tiktok_link }}" rel="noopener" title="Tiktok" aria-label="Tiktok" class="{{ class }}">
+        {% render 'icon-tiktok' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_youtube_link != blank -%}
+    <li>
+      <a href="{{ settings.social_youtube_link }}" rel="noopener" title="Youtube" aria-label="Youtube" class="{{ class }}">
+        {% render 'icon-youtube' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_threads_link != blank -%}
+    <li>
+      <a href="{{ settings.social_threads_link }}" rel="noopener" title="Threads" aria-label="Threads" class="{{ class }}">
+        {% render 'icon-threads' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_pinterest_link != blank -%}
+    <li>
+      <a href="{{ settings.social_pinterest_link }}" rel="noopener" title="Pinterest" aria-label="Pinterest" class="{{ class }}">
+        {% render 'icon-pinterest' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_vimeo_link != blank -%}
+    <li>
+      <a href="{{ settings.social_vimeo_link }}" rel="noopener" title="Vimeo" aria-label="Vimeo" class="{{ class }}">
+        {% render 'icon-vimeo' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_whatsapp_link != blank -%}
+    <li>
+      <a href="{{ settings.social_whatsapp_link }}" rel="noopener" title="whatsapp" aria-label="whatsapp" class="{{ class }}">
+        {% render 'icon-whatsapp' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_tumblr_link != blank -%}
+    <li>
+      <a href="{{ settings.social_tumblr_link }}" rel="noopener" title="Tumblr" aria-label="Tumblr" class="{{ class }}">
+        {% render 'icon-tumblr' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_linkedin_link != blank -%}
+    <li>
+      <a href="{{ settings.social_linkedin_link }}" rel="noopener" title="Linkedin" aria-label="Linkedin" class="{{ class }}">
+        {% render 'icon-linkedin' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_snapchat_link != blank -%}
+    <li>
+      <a href="{{ settings.social_snapchat_link }}" rel="noopener" title="Snapchat" aria-label="Snapchat" class="{{ class }}">
+        {% render 'icon-snapchat' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_reddit_link != blank -%}
+    <li>
+      <a href="{{ settings.social_reddit_link }}" rel="noopener" title="Reddit" aria-label="Reddit" class="{{ class }}">
+        {% render 'icon-reddit' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_wechat_link != blank -%}
+    <li>
+      <a href="{{ settings.social_wechat_link }}" rel="noopener" title="wechat" aria-label="wechat" class="{{ class }}">
+        {% render 'icon-wechat' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_spotify_link != blank -%}
+    <li>
+      <a href="{{ settings.social_spotify_link }}" rel="noopener" title="spotify" aria-label="spotify" class="{{ class }}">
+        {% render 'icon-spotify' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_discord_link != blank -%}
+    <li>
+      <a href="{{ settings.social_discord_link }}" rel="noopener" title="discord" aria-label="discord" class="{{ class }}">
+        {% render 'icon-discord' %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_line_link != blank -%}
+    <li>
+      <a href="{{ settings.social_line_link }}" rel="noopener" title="line" aria-label="line" class="{{ class }}">
+        {% render 'icon-line' %}
+      </a>
+    </li>
+  {%- endif -%}
+</ul>

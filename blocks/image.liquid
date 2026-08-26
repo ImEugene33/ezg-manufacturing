@@ -1,0 +1,130 @@
+{% liquid
+  assign loading = 'lazy'
+  assign fetchpriority = 'auto'
+  if section.index == 1
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+  endif
+
+  assign size = '100vw'
+  assign desktop_image = 'hero-apparel-1' | placeholder_svg_tag: 'placeholder w-100 h-100 of-cover'
+
+  assign desktop_ratio = 'auto'
+  assign mobile_ratio = 'auto'
+  case block.settings.desktop_aspect_ratio
+    when 'auto'
+      assign desktop_ratio = block.settings.desktop_image.aspect_ratio | default: 'auto'
+    when '1/1'
+      assign desktop_ratio = 1
+    when '3/2'
+      assign desktop_ratio = 1.5
+    when '2/3'
+      assign desktop_ratio = 0.667
+  endcase
+
+  case block.settings.mobile_aspect_ratio
+    when 'auto'
+      assign mobile_ratio = block.settings.mobile_image.aspect_ratio | default: desktop_ratio
+    when '1/1'
+      assign mobile_ratio = 1
+    when '3/2'
+      assign mobile_ratio = 1.5
+    when '2/3'
+      assign mobile_ratio = 0.667
+  endcase
+
+  if block.settings.desktop_image != blank
+    assign desktop_image_alt = block.settings.desktop_image.alt | default: block.settings.desktop_image.image | split: '/' | last
+    assign desktop_image = block.settings.desktop_image | image_url: width: block.settings.desktop_image.width, height: block.settings.desktop_image.height | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000', sizes: size, alt: desktop_image_alt, class: 'desktop-image-block w-100 h-100 of-cover', loading: loading, fetchpriority: fetchpriority
+  endif
+  if block.settings.mobile_image != blank
+    assign mobile_image_alt  = block.settings.mobile_image.alt | default: block.settings.mobile_image.image | split: '/' | last
+    assign mobile_image = block.settings.mobile_image | image_url: width: block.settings.mobile_image.width | image_tag: widths: '320, 450, 550, 750, 950, 1024, 1200', sizes: size, alt: mobile_image_alt, class: 'mobile-image-block d-none-md d-block w-100 h-100 of-cover p-absolute top-0', loading: loading, fetchpriority: fetchpriority
+  endif
+%}
+
+<div class="p-relative o-hidden media w-100 h-100" {{ block.shopify_attributes }} style="--ratio-md: {{ desktop_ratio }}; --ratio: {{ mobile_ratio }};" {{ block.shopify_attributes }}>
+  {{ mobile_image }}
+  {{ desktop_image }}
+</div>
+
+{% schema %}
+{
+  "name": "t:general.image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.desktop_layout.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "t:general.settings.image.label"
+    },
+    {
+      "type": "select",
+      "id": "desktop_aspect_ratio",
+      "label": "t:general.settings.image_ratio.label",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        },
+        {
+          "value": "1/1",
+          "label": "t:general.settings.image_ratio.options.option_square.label"
+        },
+        {
+          "value": "3/2",
+          "label": "t:general.settings.image_ratio.options.option_landscape.label"
+        },
+        {
+          "value": "2/3",
+          "label": "t:general.settings.image_ratio.options.option_portrait.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.mobile_layout.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "t:general.settings.image.label"
+    },
+    {
+      "type": "select",
+      "id": "mobile_aspect_ratio",
+      "label": "t:general.settings.image_ratio.label",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:general.settings.image_ratio.options.option_original.label"
+        },
+        {
+          "value": "1/1",
+          "label": "t:general.settings.image_ratio.options.option_square.label"
+        },
+        {
+          "value": "3/2",
+          "label": "t:general.settings.image_ratio.options.option_landscape.label"
+        },
+        {
+          "value": "2/3",
+          "label": "t:general.settings.image_ratio.options.option_portrait.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.image",
+      "category": "t:general.media"
+    }
+  ]
+}
+{% endschema %}

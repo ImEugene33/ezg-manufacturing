@@ -1,0 +1,287 @@
+{{ 'section-sales-contact-form.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign intro_text = section.settings.intro_text
+  assign button_label = section.settings.button_label | default: 'Contact Our Team'
+  assign form_id = section.id | append: '-sales-contact'
+-%}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mob }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+    background-color: var(--color-background);
+    color: var(--color-normal-text);
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .section-{{ section.id }} .sales-contact__submit.btn--primary {
+    background-color: var(--color-button-primary-background);
+    color: var(--color-button-primary-text);
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }} sales-contact color-{{ section.settings.color_scheme }} {{ section.settings.sect_class }}">
+  <div class="sales-contact__container">
+    <div class="sales-contact__info">
+      {%- if intro_text != blank -%}
+        <div class="sales-contact__info-text">{{ intro_text }}</div>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="sales-contact__reps">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'sales_rep' -%}
+                {%- liquid
+                  assign rep_name = block.settings.name
+                  assign rep_title = block.settings.title
+                  assign rep_phone = block.settings.phone
+                  assign rep_tel = rep_phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-'
+                -%}
+                <div class="sales-contact__rep" {{ block.shopify_attributes }}>
+                  <div class="sales-contact__rep-details">
+                    {%- if rep_name != blank -%}
+                      <p class="sales-contact__rep-name">{{ rep_name }}</p>
+                    {%- endif -%}
+                    {%- if rep_title != blank -%}
+                      <p class="sales-contact__rep-title">{{ rep_title }}</p>
+                    {%- endif -%}
+                  </div>
+                  {%- if rep_phone != blank -%}
+                    <a href="tel:{{ rep_tel }}" class="sales-contact__rep-phone">
+                      {%- render 'icon-phone', class: 'sales-contact__rep-phone-icon', size: 18 -%}
+                      {{ rep_phone }}
+                    </a>
+                  {%- endif -%}
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="sales-contact__form-col">
+      {%- form 'contact', id: form_id, class: 'sales-contact__form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="sales-contact__message sales-contact__message--success">{{ 'general.contact_form.success' | t }}</p>
+        {%- elsif form.errors -%}
+          <p class="sales-contact__message sales-contact__message--error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+        {%- endif -%}
+
+        <div class="sales-contact__field-group">
+          <span class="sales-contact__field-label">Your Name</span>
+          <div class="sales-contact__field-row">
+            <input
+              type="text"
+              class="sales-contact__input"
+              id="{{ form_id }}-first-name"
+              name="contact[First Name]"
+              placeholder="First"
+              autocomplete="given-name"
+            >
+            <input
+              type="text"
+              class="sales-contact__input"
+              id="{{ form_id }}-last-name"
+              name="contact[Last Name]"
+              placeholder="Last"
+              autocomplete="family-name"
+            >
+          </div>
+        </div>
+
+        <div class="sales-contact__field-group">
+          <span class="sales-contact__field-label">Contact Info</span>
+          <div class="sales-contact__field-row">
+            <input
+              type="tel"
+              class="sales-contact__input"
+              id="{{ form_id }}-phone"
+              name="contact[phone]"
+              placeholder="Phone Number"
+              autocomplete="tel"
+              value="{{ form.phone }}"
+            >
+            <input
+              type="email"
+              class="sales-contact__input"
+              id="{{ form_id }}-email"
+              name="contact[email]"
+              placeholder="Email Address"
+              autocomplete="email"
+              spellcheck="false"
+              autocapitalize="off"
+              value="{{ form.email }}"
+              aria-required="true"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="sales-contact__field-group">
+          <span class="sales-contact__field-label">Company Info</span>
+          <div class="sales-contact__field-row">
+            <input
+              type="text"
+              class="sales-contact__input"
+              id="{{ form_id }}-company"
+              name="contact[Company Name]"
+              placeholder="Company Name"
+            >
+            <input
+              type="text"
+              class="sales-contact__input"
+              id="{{ form_id }}-zip"
+              name="contact[Zip Code]"
+              placeholder="Zip Code"
+              autocomplete="postal-code"
+            >
+          </div>
+        </div>
+
+        <div class="sales-contact__field-group">
+          <span class="sales-contact__field-label">Your Message</span>
+          <textarea
+            rows="5"
+            class="sales-contact__textarea"
+            id="{{ form_id }}-message"
+            name="contact[body]"
+          >{{ form.body }}</textarea>
+        </div>
+
+        <button type="submit" class="sales-contact__submit btn btn--primary">
+          {{ button_label }}
+        </button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.sales_contact_form.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.content.label"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "t:sections.sales_contact_form.settings.intro_text.label",
+      "default": "<p>Our sales team is available from 8 AM to 4:30 PM EST.</p><p>Call us at (888) 971-6301 or contact them directly:</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.sales_contact_form.settings.headers.form.content"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:general.settings.button_label.label",
+      "default": "Contact Our Team"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.sales_contact_form.settings.headers.padding.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.sales_contact_form.settings.padding_top.label",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.sales_contact_form.settings.padding_bottom.label",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.sales_contact_form.settings.padding_top_mob.label",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.sales_contact_form.settings.padding_bottom_mob.label",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "t:sections.sales_contact_form.settings.headers.background.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.sales_contact_form.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "sect_class",
+      "label": "t:sections.sales_contact_form.settings.sect_class.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sales_rep",
+      "name": "t:sections.sales_contact_form.blocks.sales_rep.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "name",
+          "label": "t:sections.sales_contact_form.blocks.sales_rep.settings.name.label",
+          "default": "Full Name"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "t:general.settings.title.label",
+          "default": "Sales Manager"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "t:sections.sales_contact_form.blocks.sales_rep.settings.phone.label",
+          "default": "(555) 123-4567"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.sales_contact_form.name",
+      "blocks": [
+        { "type": "sales_rep" },
+        { "type": "sales_rep" }
+      ]
+    }
+  ]
+}
+{% endschema %}

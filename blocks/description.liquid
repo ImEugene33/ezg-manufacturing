@@ -1,0 +1,24 @@
+{% render 'description', block: block %}
+
+{% schema %}
+{
+  "name": "t:general.description",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:general.text",
+      "default": "<p>We make things that work better and last longer. Our products solve real problems with clean design and honest materials.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.description",
+      "category": "t:general.typography",
+      "settings": {
+        "description": "<p>We make things that work better and last longer. Our products solve real problems with clean design and honest materials.</p>"
+      }
+    }
+  ]
+}
+{% endschema %}

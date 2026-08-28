@@ -1,0 +1,338 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_fAEpQV": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_jpd8FK": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Equipment",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        },
+        "description_fKHGTf": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>We believe if you’re going to build something it helps to have the right tools. Our shop has invested in some of the best tools and technology the industry has to offer to improve efficiency and cost-savings for our customers.</p>"
+          }
+        },
+        "button_8KiYeT": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jpd8FK",
+        "description_fKHGTf",
+        "button_8KiYeT"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/jobshop_cutting_equipment_withoverlay.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "content_collage_8wYByj": {
+      "type": "content-collage",
+      "blocks": {
+        "image_9AD7V9": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/jobshop_lasercutter_control_panel-pharhu3wyw654dxhklt0hmaxih5tdu0wlnwqcnxkg8.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_kyUgaB": {
+          "type": "text",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<h4>INVESTED IN TECHNOLOGY</h4><p>By investing in new equipment, we’re able to provide our customers with unmatched services, turnaround times and capabilities. Our team is always looking for new technologies to keep our shop running as efficiently as possible.</p><h4><br/>OUR TEAM IS OUR BIGGEST ASSET</h4><p>It’s not just talk when we say our team is our most valuable resource. Our technicians and engineers have been involved in designing some of the most innovative equipment in the masonry, fencing, hardscape, precast and refractory and other general construction industries, as well as hundreds of custom projects. With decades of combined experience, we’re confident there’s no job our team can’t handle.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_9AD7V9",
+        "text_kyUgaB"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "multi_columns_RTixW7": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_MwhAwH": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/laser-cutting-1-1.png",
+            "title": "Laser Cutting",
+            "description": "<p>Our two Trumpf lasers can cut 1″ thick mild and stainless steel and .625″ aluminum. We can also cut up to 10″ tubing with our RotoLas system.</p>",
+            "btn_label": "Learn More",
+            "btn_link": "shopify://blogs/hog-blog/what-is-a-flat-laser-and-how-is-it-used"
+          }
+        },
+        "image_column_LthMnt": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/bystronic-xpert-brake-press.png",
+            "title": "Milling",
+            "description": "<p>Our Mazak 510cVCM provides tooling for most SAE O-ring ports and common hydraulic cartridge cavities. With the 30 tool automatic tool changer and the 25HP spindle, we can provide fast performance with quality work.</p>",
+            "btn_label": "Learn More",
+            "btn_link": "shopify://pages/milling"
+          }
+        },
+        "image_column_BLmA8E": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/can-you-powder-coat-aluminum-parts-power-coating-callout.png",
+            "title": "Powder Coat Paint Booth",
+            "description": "<p>Our Mazak 510cVCM provides tooling for most SAE O-ring ports and common hydraulic cartridge cavities. With the 30 tool automatic tool changer and the 25HP spindle, we can provide fast performance with quality work.</p>",
+            "btn_label": "Learn More",
+            "btn_link": "shopify://blogs/hog-blog/blast-booth-safety-standards"
+          }
+        },
+        "image_column_T4mTai": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/lathe-equipment-2.png",
+            "title": "Lathe",
+            "description": "<p>The CNC Clausing Multi Turn 2000 turning center is equipped with hard-wired CNC controls and tools to minimize set-up times, as well as automatic part catching and indexing capabilities. Our CNC turning machine also possess magazine bar feeders to increase production efficiency.</p>",
+            "btn_label": "Learn More",
+            "btn_link": "shopify://blogs/hog-blog/blast-booth-safety-standards"
+          }
+        },
+        "image_column_JiCmpt": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/jobshop_manual-welding_equipment.png",
+            "title": "Robotic Welding",
+            "description": "<p>Our Fanuc 120ic robotic welding cell has a reach length of 74” and twin rotaries capable of 120” x 60” tooling for a better reach to all welds. This machine is ideal for repetitive parts in higher quantities. We’re able to decrease production time with this specially designed tool.</p><p>In addition to our robotic welding equipment, MIG and TIG welding bays give our expert welders plenty of room to work on stainless steel and aluminum materials.</p>",
+            "btn_label": "Learn More",
+            "btn_link": "shopify://blogs/hog-blog/4-welding-positions-explained"
+          }
+        },
+        "image_column_7n7p9i": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/jobshop_brakepress_in-action.png",
+            "title": "Press Brakes",
+            "description": "<p>The Bystronic Xpert 150″ x 310″ has the highest repeatability accuracy on the market. This 150 ton brake press boasts a 10′ bed capacity. The 6-axis back-gauge allows for faster bend times – producing bends with accuracy within a .5 degree. Our new Cincinnati brake press has a 16 ft. bed with dynamic crowing and can bend up to 1″ thick material. We provide bend angle control by using pressure references which eliminates errors. </p>",
+            "btn_label": "Learn More",
+            "btn_link": "shopify://blogs/hog-blog/what-is-a-press-brake-machine-and-how-does-it-work"
+          }
+        }
+      },
+      "block_order": [
+        "image_column_MwhAwH",
+        "image_column_LthMnt",
+        "image_column_BLmA8E",
+        "image_column_T4mTai",
+        "image_column_JiCmpt",
+        "image_column_7n7p9i"
+      ],
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "",
+        "heading": "OUR EQUIPMENT SERVICES",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "content_collage_CVFJmC": {
+      "type": "content-collage",
+      "blocks": {
+        "text_A8rRjy": {
+          "type": "text",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<h4>ADDITIONAL EQUIPMENT</h4><p><strong>CNC Rolls</strong> <br/>Used for drums and rings, this machine can roll up to 1/4\" at 6' wide.<br/><br/><strong>Vertical Saw</strong><br/>Fully programmable, CNC controlled with auto feed. This machine handles material up to 21\" wide.<br/><br/><strong>Pemserter Series 4 Insertion Machine<br/></strong>When welding is not an option due to cost or material properties, this totally pneumatic machine provides short cycle times for increased productivity. With 6 tons of force and a 18\" (457.2 mm) throat depth to provide clearance for a variety of chassis configurations. Designed to install self -clinching fasteners size #0 (M2) thru 3/8\" (M10) in steel and sizes up to 1/2\" (M12) in aluminum panels.</p>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "Contact Our Team",
+            "button_style": "primary",
+            "button_link": "shopify://pages/contact-us",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_kXpc6G": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/8924d45ca2b7aa6d222385750ef6bbfa0281d2ea.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_A8rRjy",
+        "image_kXpc6G"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "rich_text_6Ar7f3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_c8X8tn": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "LET’S BUILD SOMETHING GREAT TOGETHER",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_XmWzwM": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Versatile and multipurpose, the cutting-edge media-promotion sections easily handle images, slideshows, and videos, allowing you to enhance your online store with diverse content forms.</p>"
+          }
+        },
+        "button_hkxEeB": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading_c8X8tn",
+        "description_XmWzwM",
+        "button_hkxEeB"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_fAEpQV",
+    "content_collage_8wYByj",
+    "multi_columns_RTixW7",
+    "content_collage_CVFJmC",
+    "rich_text_6Ar7f3"
+  ]
+}

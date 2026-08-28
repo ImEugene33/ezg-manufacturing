@@ -1,0 +1,378 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_fAEpQV": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_jpd8FK": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "METAL MILLING",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        },
+        "description_fKHGTf": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>EZG Manufacturing offers precision milling services backed by advanced equipment, experienced machinists, and 100% accuracy. Whether you need custom components or OEM part production, our team delivers quality results, on spec and on time.</p>"
+          }
+        },
+        "button_8KiYeT": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jpd8FK",
+        "description_fKHGTf",
+        "button_8KiYeT"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/jobshop_cutting_equipment_withoverlay.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "content_collage_8wYByj": {
+      "type": "content-collage",
+      "blocks": {
+        "video_zM4zWa": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://youtu.be/uWyFWb61kwQ?feature=shared",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "3",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "Explore more",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_kyUgaB": {
+          "type": "text",
+          "settings": {
+            "heading": "CNC Milling Technology",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Our machine shop features industry-leading vertical CNC milling machines. With the ability to cut complex geometries, tight tolerances, and different types of materials, we help manufacturers, OEMs, and engineers create custom parts that meet exact project specifications.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "1",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_zM4zWa",
+        "text_kyUgaB"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_CVFJmC": {
+      "type": "content-collage",
+      "blocks": {
+        "text_A8rRjy": {
+          "type": "text",
+          "settings": {
+            "heading": "MAZAK 510c VCM VERTICAL MILLING CENTER",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>The Mazak 510c VCM is a powerful, production-ready CNC vertical milling machine designed to combine speed with reliability. Its 30-tool carousel and tough spindle make it ideal for projects requiring quick setup and consistent part accuracy.</p><ul><li>25 HP high-speed spindle</li><li>30-tool automatic tool changer</li><li>Supports most SAE O-ring ports and hydraulic cartridge cavities</li><li>Ideal for precision parts and rapid prototyping</li></ul>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "Contact Our Team",
+            "button_style": "primary",
+            "button_link": "shopify://pages/contact-us",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_kXpc6G": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/Mazak-laser.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_A8rRjy",
+        "image_kXpc6G"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-dfd7f710-1c3c-4730-be7a-3884f4f918ee",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_inBbMF": {
+      "type": "content-collage",
+      "blocks": {
+        "image_XVT94R": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/Custom-milling.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_8NdJXi": {
+          "type": "text",
+          "settings": {
+            "heading": "Custom CNC Milling Services and Applications",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Whether machining aluminum housings, stainless steel components, or tight-tolerance hydraulic fittings, this mill is built for high-performance output.</p><ul><li>Mill part sizes up to: Length: 40\", Width: 20\", Height: 16\"</li><li>Tolerances held to ±0.005\"</li><li>Complex features: pocketing, profiling, counterboring, countersinking</li><li>Materials: carbon steel, stainless steel, aluminum, specialty alloys</li><li>Industries served: OEM manufacturing, automotive, material handling, industrial equipment, prototyping</li></ul><p>From replacement parts to aftermarket components, our CNC milling services cover a range of use cases. We specialize in parts that require both durability and precision, helping clients improve system performance, extend equipment lifespan, and bring new designs to life.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "https://ezgmfg.com/contract-manufacturing/",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_XVT94R",
+        "text_8NdJXi"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_MyttaR": {
+      "type": "content-collage",
+      "blocks": {
+        "text_XgbgRM": {
+          "type": "text",
+          "settings": {
+            "heading": "EZG Machine Shop Capabilities",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>CNC milling is just one aspect of our full-service machining operation. We also offer turning, boring, drilling, threading, and more, all performed in-house for total quality control. With a full complement of tooling and experienced machinists, we’re equipped to handle both short-run and large-scale orders with efficiency and reliability.</p><ul><li>CNC Lathe and Mill Capabilities</li><li>Material flexibility for any job</li><li>Precision across tight tolerances</li><li>Full support for OEMs, engineers, and manufacturers</li><li>Integrated services for complete part manufacturing</li></ul>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "Explore All Machine Shop Capabilities",
+            "button_style": "primary",
+            "button_link": "https://ezgmfg.com/capabilities-2/",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_8HUCPA": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/EZG-manufacturing-shop.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_XgbgRM",
+        "image_8HUCPA"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "rich_text_6Ar7f3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_c8X8tn": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Let’s Talk About Your Machining Project",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_XmWzwM": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Need high-quality machined parts for your next project? EZG Manufacturing delivers fast, accurate, and cost-effective CNC milling services you can count on. Our machining team is ready to meet your specs and exceed your expectations.</p><p>Contact us today to request a quote and discuss your machining needs.</p>"
+          }
+        },
+        "button_hkxEeB": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading_c8X8tn",
+        "description_XmWzwM",
+        "button_hkxEeB"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_fAEpQV",
+    "content_collage_8wYByj",
+    "content_collage_CVFJmC",
+    "content_collage_inBbMF",
+    "content_collage_MyttaR",
+    "rich_text_6Ar7f3"
+  ]
+}

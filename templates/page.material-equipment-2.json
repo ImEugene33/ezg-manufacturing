@@ -1,0 +1,226 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_fAEpQV": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_jpd8FK": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Serving up the Food Processing Equipment You Need",
+            "heading_size": "h2",
+            "enable_h1_tag": true
+          }
+        },
+        "description_fKHGTf": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>At EZG Manufacturing, we build food processing equipment that supports your operation at every stage of the process. From streamlining production lines to ensuring safety and sanitation, our customized solutions for food processing help businesses meet rigorous industry standards and exceed operational goals. From custom conveyors to durable storage racks, we build components that become part of something bigger, your success. </p>"
+          }
+        },
+        "button_8KiYeT": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jpd8FK",
+        "description_fKHGTf",
+        "button_8KiYeT"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/food-processing-banner-image-01.jpg",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "content_collage_8wYByj": {
+      "type": "content-collage",
+      "blocks": {
+        "text_kyUgaB": {
+          "type": "text",
+          "settings": {
+            "heading": "Food Processing Solutions Built for Real Work",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>With years of experience serving food manufacturers and food processors, we understand what it takes to support production at every stage. Our team designs and builds equipment that fits into your existing manufacturing process while supporting food safety, quality control, and consistent output. Whether your operations involve preparation, packaging, or distribution, EZG Manufacturing delivers solutions that integrate seamlessly into your workflows. </p><p>Our food manufacturing equipment solutions include:</p><ul><li><strong>Custom Conveyor Systems: </strong>Designed for the precision, movement, and hygiene of food products, our conveyors support production lines of multiple types of food products.</li><li><strong>Sanitary Equipment Fabrication:</strong> We fabricate racks, storage systems, and food contact surfaces using food-grade materials that meet stringent cleanliness and safety requirements.</li><li><strong>Packaging Equipment Solutions: </strong>Our machinery helps support packaging line productivity and product quality without slowing down the production process.</li></ul>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "4",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_kyUgaB"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_FqhRtj": {
+      "type": "content-collage",
+      "blocks": {
+        "text_LXNNQE": {
+          "type": "text",
+          "settings": {
+            "heading": "Why Choose EZG Manufacturing for Food Processing Equipment?",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>EZG Manufacturing is dedicated to providing the optimal solutions your organization requires to adhere to the specific needs of the food production industry. When you partner with EZG, you get:</p><ul><li><strong>Custom Manufactured Designs: </strong>We understand that no two food processing facilities are the same. Our equipment is custom-built to match your specific requirements. Every rack, conveyor, and fabricated part is designed around your production requirements and facility layout.</li><li><strong>Durability and Reliability: </strong>Built to withstand demanding environments, our equipment ensures long-lasting performance. It stands up to constant use, cleaning, and movement, minimizing downtime during machinery moves or upgrades.</li><li><strong>Focus on Compliance: </strong>Our designs meet all necessary health and safety regulations, giving you confidence in your operations.</li></ul>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "4",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_LXNNQE"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_hMdhkJ": {
+      "type": "content-collage",
+      "blocks": {
+        "text_LcGtr4": {
+          "type": "text",
+          "settings": {
+            "heading": "Supporting a Range of Food Processing Applications",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>From large-scale production facilities to specialized niche operations, EZG Manufacturing serves businesses across the food processing spectrum. Our equipment supports applications such as:</p><ul><li>Meat and poultry processing</li><li>Dairy and beverage industry operations</li><li>Bakery and snack food manufacturing</li><li>Packaged goods and consumer-ready food production</li><li>Fermentation process systems</li><li>Pet food production</li></ul><p>Whether you're handling raw materials or contributing a component part to a larger system, we help support the entire process, from start to final product.</p>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "4",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_LcGtr4"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "rich_text_6Ar7f3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_c8X8tn": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Partner with EZG for Food Processing Equipment Manufacturing Excellence",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_XmWzwM": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>As a leader in custom food processing equipment manufacturing, EZG Manufacturing is your trusted partner in food manufacturing. Our commitment to innovation, quality, and customer satisfaction ensures your operations run smoothly and efficiently. From production equipment to fabricated parts, we build for your manufacturing operation with care and experience.</p><p><a href=\"/pages/contact-us\" title=\"Contact Us\"><span style=\"text-decoration:underline\">Contact us</span></a> today to learn how our food processing equipment solutions can elevate your business.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_c8X8tn",
+        "description_XmWzwM"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_fAEpQV",
+    "content_collage_8wYByj",
+    "content_collage_FqhRtj",
+    "content_collage_hMdhkJ",
+    "rich_text_6Ar7f3"
+  ]
+}

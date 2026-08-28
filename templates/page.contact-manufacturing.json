@@ -1,0 +1,97 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_yaXRg4": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_4Unb3f": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "CONTACT THE EZG  MANUFACTURING TEAM",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_4Unb3f"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 70,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "rgba(0,0,0,0)",
+        "desktop_image": "shopify://shop_images/Container.jpg",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "sales_contact_form_cCTDbD": {
+      "type": "sales-contact-form",
+      "blocks": {
+        "sales_rep_XU4ncg": {
+          "type": "sales_rep",
+          "settings": {
+            "name": "Kenny Jackson",
+            "title": "Contract Manufacturing Sales Manager",
+            "phone": "(740) 749-5867"
+          }
+        },
+        "sales_rep_tMBHKT": {
+          "type": "sales_rep",
+          "settings": {
+            "name": "<em><strong>Changing to Sam </strong></em>",
+            "title": "Contract Manufacturing Sales",
+            "phone": "(740) 525-1683"
+          }
+        }
+      },
+      "block_order": [
+        "sales_rep_XU4ncg",
+        "sales_rep_tMBHKT"
+      ],
+      "name": "t:sections.sales_contact_form.name",
+      "settings": {
+        "intro_text": "<p>Our sales team is available from 8 AM to 4:30 PM EST. <br/><br/>Call us at <a href=\"tel:8889716301\" target=\"_blank\">(888) 971-6301</a> or contact them directly:</p>",
+        "button_label": "Contact Our Team",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mob": 32,
+        "padding_bottom_mob": 32,
+        "color_scheme": "",
+        "sect_class": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_yaXRg4",
+    "sales_contact_form_cCTDbD"
+  ]
+}

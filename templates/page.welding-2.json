@@ -1,0 +1,352 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_fAEpQV": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_jpd8FK": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Robotic Welding Services",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        },
+        "description_fKHGTf": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>At EZG Manufacturing, we specialize in precision welding for high-volume metal components. Our robotic welding cell allows us to deliver consistent, high-quality results for customers in demanding industries.</p>"
+          }
+        },
+        "button_8KiYeT": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jpd8FK",
+        "description_fKHGTf",
+        "button_8KiYeT"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/welding-equipment.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "content_collage_Eb6f3V": {
+      "type": "content-collage",
+      "blocks": {
+        "image_bQexzJ": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/robotic-welding_53f0cd4c-4c0c-4b4f-aa9c-f51a6d050bf2.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_f8xbE8": {
+          "type": "text",
+          "settings": {
+            "heading": "Inside Our Robotic Welding Cell",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<h3>FANUC 120iC Robotic Welding Cell</h3><p>Our FANUC 120iC robotic welding cell is engineered for performance:</p><ul><li>74” reach arm provides extensive access to weld points across large or complex assemblies</li><li>Twin rotary tables (120” x 60” capacity) allow for part repositioning and dual-station loading, improving efficiency and weld access</li><li>Integrated with MIG welding for fast, strong welds</li><li>Programmed with custom paths to ensure every weld is consistent and on-spec</li></ul><p>This configuration is particularly valuable for repetitive jobs where accuracy and efficiency matter most.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_bQexzJ",
+        "text_f8xbE8"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 320,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_CVFJmC": {
+      "type": "content-collage",
+      "blocks": {
+        "text_A8rRjy": {
+          "type": "text",
+          "settings": {
+            "heading": "Benefits of the FANUC Robotic Welder",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Our robotic system leverages advanced technology to improve every step of the fabrication process. The FANUC 120iC offers a range of advantages that make it ideal for demanding production environments:</p><ul><li>Increased throughput with minimal operator intervention</li><li>Consistent, clean welds across every part in a production run</li><li>Access to difficult weld points via rotary positioning and robotic articulation</li><li>Decreased cycle time due to automation and twin-station design</li><li>Faster turnaround time for repeatable jobs, with reduced labor and part handling</li><li>Ideal for high-volume production, where the robotic welding process delivers repeatable results across thousands of identical parts</li><li>Cost savings through reduced labor, minimized waste, and shorter production schedules</li></ul>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "Request a Quote",
+            "button_style": "primary",
+            "button_link": "https://ezgmfg.com/contact-contract-manufacturing-team/",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_kXpc6G": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/welding-manual.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_A8rRjy",
+        "image_kXpc6G"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-dfd7f710-1c3c-4730-be7a-3884f4f918ee",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_inBbMF": {
+      "type": "content-collage",
+      "blocks": {
+        "text_8NdJXi": {
+          "type": "text",
+          "settings": {
+            "heading": "Industries We Serve",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>EZG’s CNC turning machine supports various industries. We understand the standards, materials, and tolerances specific to each sector:</p><ul><li><a href=\"https://ezgmfg.com/industries/oil-gas/\"><span style=\"text-decoration:underline\">Oil & Gas: </span></a>Rugged, pressure-resistant components</li><li><a href=\"https://ezgmfg.com/industries/food-processing/\"><span style=\"text-decoration:underline\">Food Processing:</span></a> Sanitary-grade fittings and hardware</li><li><a href=\"https://ezgmfg.com/industries/construction/\"><span style=\"text-decoration:underline\">Construction Equipment:</span></a> High-strength parts for heavy use</li><li><a href=\"https://ezgmfg.com/industries/material-handling/\"><span style=\"text-decoration:underline\">Material Handling & Infrastructure:</span></a> Long-lasting, industrial-grade components</li></ul>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "4",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "https://ezgmfg.com/contract-manufacturing/",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_8NdJXi"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_MyttaR": {
+      "type": "content-collage",
+      "blocks": {
+        "text_XgbgRM": {
+          "type": "text",
+          "settings": {
+            "heading": "Our Full-Service Fabrication & Machine Shop",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Robotic welding is just one part of our vertically integrated operation. At our facility in Malta, Ohio, EZG Manufacturing offers in-house fabrication, machining, forming, and finishing, all under one roof.</p><p>Capabilities include:</p><ul><li>CNC machining (lathe and milling for tight-tolerance parts)</li><li>Laser cutting (thick and thin materials, high precision)</li><li>Press brake forming (up to 1” steel plate)</li><li>Powder coating for a durable, finished product</li></ul><p>Our machine shop ensures a seamless handoff between fabrication and final production, saving you time, money, and headaches. Our team combines decades of fabrication experience with modern equipment and a commitment to quality. Whether you’re producing one component or thousands, EZG provides consistent weld quality throughout your project.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "3",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "Learn More",
+            "button_style": "primary",
+            "button_link": "https://ezgmfg.com/contract-manufacturing/",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_8HUCPA": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/EZG-machine-shop-3.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "3",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_XgbgRM",
+        "image_8HUCPA"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "rich_text_6Ar7f3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_c8X8tn": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Let’s Talk About Your Robotic Welding Project",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_XmWzwM": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>Ready to start a conversation? If you need contract welding services with dependable quality and turnaround, our team is here to help.</p><p>Contact us today to request a quote or schedule a consultation.</p>"
+          }
+        },
+        "button_hkxEeB": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "Contact Our Contract Manufacturing Team",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading_c8X8tn",
+        "description_XmWzwM",
+        "button_hkxEeB"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_fAEpQV",
+    "content_collage_Eb6f3V",
+    "content_collage_CVFJmC",
+    "content_collage_inBbMF",
+    "content_collage_MyttaR",
+    "rich_text_6Ar7f3"
+  ]
+}

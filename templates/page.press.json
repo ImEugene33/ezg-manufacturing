@@ -1,0 +1,417 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_fAEpQV": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_jpd8FK": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "CNC Press Brake Services",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        },
+        "description_fKHGTf": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>EZG Manufacturing delivers precise, repeatable results with advanced CNC press brake services designed for a wide range of metal fabrication needs. Our equipment, team, and process ensure accuracy at every bend.</p>"
+          }
+        },
+        "button_8KiYeT": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "CONTACT OUR TEAM",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jpd8FK",
+        "description_fKHGTf",
+        "button_8KiYeT"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/lathe-product-1.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "content_collage_Eb6f3V": {
+      "type": "content-collage",
+      "blocks": {
+        "video_hD9gPR": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://youtu.be/vtj0mNfN62Q?feature=shared",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_f8xbE8": {
+          "type": "text",
+          "settings": {
+            "heading": "Industry-Leading CNC Press Brake Technology",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>We operate two of the most advanced press brake machines in the industry, engineered to handle different metal types and part sizes with consistent accuracy. Backed by computer numerical control, our machines eliminate guesswork and reduce turnaround time for your jobs.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_hD9gPR",
+        "text_f8xbE8"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 320,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_8wYByj": {
+      "type": "content-collage",
+      "blocks": {
+        "image_LRFWpg": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/bystronic-xpert-brake-press.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_kyUgaB": {
+          "type": "text",
+          "settings": {
+            "heading": "Bystronic Xpert 150/310",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Our Bystronic press brake delivers high-speed, high-precision forming for smaller and mid-sized sheet metal parts. </p><ul><li>150-ton hydraulic press</li><li>10-foot bed (3.05 m)</li><li>6-axis back-gauge for faster bend times</li><li>Bend angle accuracy within 0.5 degrees</li></ul><p>With superior repeatability and minimal setup time, it’s ideal for projects that need tight tolerances and consistent results. Perfect for stainless steel, aluminum, and mild steel applications.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_LRFWpg",
+        "text_kyUgaB"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 320,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_CVFJmC": {
+      "type": "content-collage",
+      "blocks": {
+        "text_A8rRjy": {
+          "type": "text",
+          "settings": {
+            "heading": "Cincinnati Brake Press",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Our Cincinnati press brake provides the tonnage and bed length required for large-scale parts and structural components. Its dynamic crowning system ensures uniform press brake forming across long bends, eliminating errors and warping. </p><ul><li>350-ton capacity</li><li>16-foot bed (4.88 m)</li><li>Dynamic crowning for accurate angle control</li><li>Forms up to 1\" thick material</li></ul><p>Whether it's for construction, industrial, or OEM parts, this hydraulic press can shape even the toughest materials to your project specifications.</p>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "Explore All Capabilities",
+            "button_style": "primary",
+            "button_link": "https://ezgmfg.com/capabilities-2/",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_kXpc6G": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/cincinnati-brake-press-2.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_A8rRjy",
+        "image_kXpc6G"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-dfd7f710-1c3c-4730-be7a-3884f4f918ee",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_inBbMF": {
+      "type": "content-collage",
+      "blocks": {
+        "text_8NdJXi": {
+          "type": "text",
+          "settings": {
+            "heading": "Custom Metal Bending Services and Applications",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Our metal bending services combine advanced press brake technology with skilled craftsmanship to create your desired shape, accurately and efficiently. Whether working with thin-gauge sheet or thick plate, we achieve precise bends that meet the highest industry standards.</p><ul><li>Supports both low-volume prototypes and high-volume production runs</li><li>Delivers parts for enclosures, brackets, structural supports, and precision OEM components</li><li>Meets strict tolerance requirements for precision metal products</li></ul>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "4",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "Learn More",
+            "button_style": "primary",
+            "button_link": "https://ezgmfg.com/capabilities-2/bending/",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_8NdJXi"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_MyttaR": {
+      "type": "content-collage",
+      "blocks": {
+        "text_XgbgRM": {
+          "type": "text",
+          "settings": {
+            "heading": "EZG Machine Shop Capabilities",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>As a full-service fabrication shop, our capabilities extend far beyond bending. From laser cutting and robotic welding to powder coating and final assembly, we provide end-to-end solutions. Our experienced press brake operators and engineers in Malta, Ohio, work closely with you to match our services to your application and timeline.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "Contact Our Contract Manufacturing Team",
+            "button_style": "primary",
+            "button_link": "https://ezgmfg.com/capabilities-2/",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_8HUCPA": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/EZG-machine-shop-3.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_XgbgRM",
+        "image_8HUCPA"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 300,
+        "mobile_row_height": 300
+      }
+    },
+    "rich_text_6Ar7f3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_c8X8tn": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Partner with EZG for Reliable Metal Bending",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_XmWzwM": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p>When you need press brake metal services that combine speed, accuracy, and expert support, EZG Manufacturing is your trusted partner. Ready to discuss your custom metal forming project? Contact us today to request a quote and learn how our CNC press brake services can meet your most demanding fabrication needs.</p>"
+          }
+        },
+        "button_hkxEeB": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "",
+            "button_primary_style": "primary",
+            "button_primary_link": "",
+            "button_secondary_label": "Request a Quote",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "heading_c8X8tn",
+        "description_XmWzwM",
+        "button_hkxEeB"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_fAEpQV",
+    "content_collage_Eb6f3V",
+    "content_collage_8wYByj",
+    "content_collage_CVFJmC",
+    "content_collage_inBbMF",
+    "content_collage_MyttaR",
+    "rich_text_6Ar7f3"
+  ]
+}

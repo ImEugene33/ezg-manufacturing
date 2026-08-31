@@ -56,7 +56,7 @@
                   aria-label="{{ 'accessibility.slide' | t }} {{ forloop.index }} {{ 'accessibility.of' | t }} {{ total_items }}"
                   data-item-index="{{ forloop.index }}"
                   {{ block.shopify_attributes }}>
-                <div class="d-flex fd-column between-xs h-100 card--border rad-m o-hidden card-animate">
+                <div class="d-flex fd-column between-xs h-100 card--border rad-m o-hidden card-animate color-{{- section.settings.card_color_scheme }} background">
                   <div class="d-flex fd-column between-xs">
                     <div class="media__card hide-empty">
                       {%- case block.type -%}
@@ -178,6 +178,12 @@
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "card_color_scheme",
+      "label": "Card color scheme",
       "default": "scheme-1"
     },
     {

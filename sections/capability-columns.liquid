@@ -20,7 +20,7 @@
   }
 {%- endstyle -%}
 
-<div class="section-{{ section.id }} capability-columns color-{{ section.settings.color_scheme }} {{ section.settings.sect_class }}">
+<div class="section-{{ section.id }} capability-columns color-{{ section.settings.color_scheme }} {{ section.settings.sect_class }}{% if section.settings.stretch_cards %} capability-columns--stretch-cards{% endif %}">
   <div class="capability-columns__container">
     {%- if section.settings.heading != blank -%}
       <h2 class="capability-columns__heading h3">{{ section.settings.heading }}</h2>
@@ -31,6 +31,29 @@
     </div>
   </div>
 </div>
+
+<script>
+  function equalizeCapabilityCards() {
+    const grids = document.querySelectorAll('.capability-columns--stretch-cards');
+    grids.forEach(grid => {
+      const cards = grid.querySelectorAll('.capability-item');
+      let max = 0;
+      cards.forEach(c => {
+        c.style.minHeight = '0';
+        c.style.height = 'auto';
+      });
+      cards.forEach(c => {
+        if (c.offsetHeight > max) max = c.offsetHeight;
+      });
+      cards.forEach(c => {
+        c.style.minHeight = max + 'px';
+      });
+    });
+  }
+  window.addEventListener('load', equalizeCapabilityCards);
+  window.addEventListener('resize', equalizeCapabilityCards);
+  document.addEventListener('shopify:section:load', equalizeCapabilityCards);
+</script>
 
 {% schema %}
 {
@@ -124,6 +147,12 @@
       "type": "text",
       "id": "sect_class",
       "label": "t:sections.capability_columns.settings.sect_class.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "stretch_cards",
+      "label": "Stretch cards to equal height",
+      "default": false
     }
   ],
   "blocks": [

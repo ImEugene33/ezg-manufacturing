@@ -52,3 +52,6 @@
   }
 }
 
+.capability-columns--stretch-cards .capability-columns__grid {
+  align-items: stretch;
+}

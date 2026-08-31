@@ -10,6 +10,9 @@
       {%- if block.settings.value != blank -%}
         <p class="capability-item__value">{{ block.settings.value }}</p>
       {%- endif -%}
+      {%- if block.settings.pdf_link != blank -%}
+        <div class="capability-item__link">{{ block.settings.pdf_link }}</div>
+      {%- endif -%}
     </div>
   </div>
 {%- endif -%}
@@ -71,6 +74,21 @@
     line-height: 18px;
     letter-spacing: 0.28px;
   }
+
+  .capability-item__link,
+  .capability-item__link p {
+    margin: 0;
+    color: var(--color-normal-text);
+    font-family: "Helvetica Neue";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.28px;
+  }
+
+  .capability-item__link a {
+    text-decoration: underline;
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -96,6 +114,12 @@
       "id": "value",
       "label": "Value",
       "default": "up to 1\" (25.4 mm) thick"
+    },
+    {
+      "type": "richtext",
+      "id": "pdf_link",
+      "label": "PDF Link",
+      "info": "Add a link to a PDF or additional text."
     }
   ],
   "presets": [

@@ -1,0 +1,422 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "contact_form_extended_QPtAzA": {
+      "type": "contact-form-extended",
+      "blocks": {
+        "heading_JErWkA": {
+          "type": "heading",
+          "settings": {
+            "text": "Product Information",
+            "size": "h4"
+          }
+        },
+        "text_field_WGCNUJ": {
+          "type": "text_field",
+          "settings": {
+            "label": "Serial Number",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": true,
+            "use_as_textarea": false
+          }
+        },
+        "dropdown_Gx6xzj": {
+          "type": "dropdown",
+          "settings": {
+            "label": "Equipment Brand",
+            "options": "Barbwire Hog, Cement Hog, EZG Mixer, Fence Hog, Fork-N-Hog, Grout Hog, Hog Crusher, Hog Legs, Hog Pump, Hog Trough, Hog Waller, Krack Hog, Mud Hog, Mobile Mud Hog, Precast Equipment, Refractory Mixer, Stretch-N-Go",
+            "width": "50",
+            "required": true
+          }
+        },
+        "heading_bgcEA4": {
+          "type": "heading",
+          "settings": {
+            "text": "Product Owner Information",
+            "size": "h4"
+          }
+        },
+        "text_field_fCLEXg": {
+          "type": "text_field",
+          "settings": {
+            "label": "Contact Name",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": true,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_GpDMUY": {
+          "type": "text_field",
+          "settings": {
+            "label": "Phone #",
+            "placeholder": "Enter your text",
+            "field_type": "tel",
+            "width": "50",
+            "required": true,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_wjjKUj": {
+          "type": "text_field",
+          "settings": {
+            "label": "Company Name",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": true,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_DRdyEq": {
+          "type": "text_field",
+          "settings": {
+            "label": "Fax",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_K3DPeE": {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 1",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": true,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_Qeycpq": {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 2",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_XGEDFF": {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 3",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_Gip369": {
+          "type": "text_field",
+          "settings": {
+            "label": "Email Address",
+            "placeholder": "Enter your text",
+            "field_type": "email",
+            "width": "50",
+            "required": true,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_8zaNfB": {
+          "type": "text_field",
+          "settings": {
+            "label": "City",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": true,
+            "use_as_textarea": false
+          }
+        },
+        "dropdown_cjJytM": {
+          "type": "dropdown",
+          "settings": {
+            "label": "Country",
+            "options": "United States, Canada, Mexico, United Kingdom, Australia, Other",
+            "width": "50",
+            "required": true
+          }
+        },
+        "text_field_HCVgA3": {
+          "type": "text_field",
+          "settings": {
+            "label": "State/Province",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": true,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_cMMcPB": {
+          "type": "text_field",
+          "settings": {
+            "label": "ZIP",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": true,
+            "use_as_textarea": false
+          }
+        },
+        "heading_PrN767": {
+          "type": "heading",
+          "settings": {
+            "text": "EZG Distributor (If applicable)",
+            "size": "h4"
+          }
+        },
+        "checkbox_rN8PyD": {
+          "type": "checkbox",
+          "settings": {
+            "label": "Same as Product Owner",
+            "width": "100",
+            "required": false
+          }
+        },
+        "text_field_FLGMqP": {
+          "type": "text_field",
+          "settings": {
+            "label": "Contact Name",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_q6dMaW": {
+          "type": "text_field",
+          "settings": {
+            "label": "Phone #",
+            "placeholder": "Enter your text",
+            "field_type": "tel",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_TArXQf": {
+          "type": "text_field",
+          "settings": {
+            "label": "Company Name",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_UJtHBG": {
+          "type": "text_field",
+          "settings": {
+            "label": "Fax",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_YTyD36": {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 1",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_rNNA8T": {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 2",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_MqENKQ": {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 3",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_wfAKWr": {
+          "type": "text_field",
+          "settings": {
+            "label": "Email Address",
+            "placeholder": "Enter your text",
+            "field_type": "email",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_EE67gX": {
+          "type": "text_field",
+          "settings": {
+            "label": "City",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "dropdown_kbJUzz": {
+          "type": "dropdown",
+          "settings": {
+            "label": "Country",
+            "options": "United States, Canada, Mexico, United Kingdom, Australia, Other",
+            "width": "50",
+            "required": false
+          }
+        },
+        "text_field_J34FRh": {
+          "type": "text_field",
+          "settings": {
+            "label": "State/Province",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "text_field_PVBGyP": {
+          "type": "text_field",
+          "settings": {
+            "label": "ZIP",
+            "placeholder": "Enter your text",
+            "field_type": "text",
+            "width": "50",
+            "required": false,
+            "use_as_textarea": false
+          }
+        },
+        "heading_RUG9bg": {
+          "type": "heading",
+          "settings": {
+            "text": "Warranty/Product Registration",
+            "size": "h4"
+          }
+        },
+        "text_field_npj8Et": {
+          "type": "text_field",
+          "settings": {
+            "label": "Warranty Registration/Ownership Change Date",
+            "placeholder": "Enter your text",
+            "field_type": "date",
+            "width": "50",
+            "required": true,
+            "use_as_textarea": false
+          }
+        },
+        "heading_YrRCwd": {
+          "type": "heading",
+          "settings": {
+            "text": "Acknowledgement",
+            "size": "h4"
+          }
+        },
+        "radio_9f3AtW": {
+          "type": "radio",
+          "settings": {
+            "label": "New Machine Inspection Completed. Machine Delivered in Safe Operating Condition",
+            "options": "Yes, No",
+            "width": "100",
+            "required": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_JErWkA",
+        "text_field_WGCNUJ",
+        "dropdown_Gx6xzj",
+        "heading_bgcEA4",
+        "text_field_fCLEXg",
+        "text_field_GpDMUY",
+        "text_field_wjjKUj",
+        "text_field_DRdyEq",
+        "text_field_K3DPeE",
+        "text_field_Qeycpq",
+        "text_field_XGEDFF",
+        "text_field_Gip369",
+        "text_field_8zaNfB",
+        "dropdown_cjJytM",
+        "text_field_HCVgA3",
+        "text_field_cMMcPB",
+        "heading_PrN767",
+        "checkbox_rN8PyD",
+        "text_field_FLGMqP",
+        "text_field_q6dMaW",
+        "text_field_TArXQf",
+        "text_field_UJtHBG",
+        "text_field_YTyD36",
+        "text_field_rNNA8T",
+        "text_field_MqENKQ",
+        "text_field_wfAKWr",
+        "text_field_EE67gX",
+        "dropdown_kbJUzz",
+        "text_field_J34FRh",
+        "text_field_PVBGyP",
+        "heading_RUG9bg",
+        "text_field_npj8Et",
+        "heading_YrRCwd",
+        "radio_9f3AtW"
+      ],
+      "name": "Extended Contact Form",
+      "settings": {
+        "color_scheme": "",
+        "heading_text": "Product Owner Update/Warranty Registration",
+        "heading_size": "h2",
+        "content_alignment_desktop": "ta-center-md",
+        "desktop_content_ordering": "image-first-md",
+        "mobile_content_alignment": "ta-left",
+        "mobile_content_ordering": "image-first",
+        "button_label": "Send message"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "contact_form_extended_QPtAzA"
+  ]
+}

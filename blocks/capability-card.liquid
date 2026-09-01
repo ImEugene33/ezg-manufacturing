@@ -1,5 +1,5 @@
 {%- if block.settings.title != blank or block.settings.value != blank -%}
-  <div class="capability-item" {{ block.shopify_attributes }} style="border-color: {{ section.settings.accent_color | default: '#5b7f95' }};">
+  <div class="capability-item{% if section.settings.stretch_cards and section.settings.align_cards_top %} capability-item--align-top{% endif %}" {{ block.shopify_attributes }} style="border-color: {{ section.settings.accent_color | default: '#5b7f95' }};">
     {%- if block.settings.icon != blank -%}
       <span class="capability-item__icon" aria-hidden="true">{{ block.settings.icon }}</span>
     {%- endif -%}
@@ -33,6 +33,10 @@
       padding: 12px 25px;
       gap: 26px;
     }
+  }
+
+  .capability-item--align-top {
+    align-items: flex-start;
   }
 
   .capability-item__icon {

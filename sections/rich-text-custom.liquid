@@ -40,7 +40,7 @@
 
         {%- when 'text' -%}
           {%- if block.settings.text != blank -%}
-            <div class="rich-text-custom__text" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+            <div class="rich-text-custom__text{% if block.settings.full_width %} rich-text-custom__text--full{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
           {%- endif -%}
       {%- endcase -%}
     {%- endfor -%}
@@ -155,6 +155,12 @@
       "type": "text",
       "name": "t:general.text",
       "settings": [
+        {
+          "type": "checkbox",
+          "id": "full_width",
+          "label": "Full width",
+          "default": false
+        },
         {
           "type": "richtext",
           "id": "text",

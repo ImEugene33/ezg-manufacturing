@@ -307,8 +307,10 @@ sht-menu-header .menu__link-megamenu  .toggle__icon {
   margin: auto 0;
 }
 .btn.js-menu-drawer-trigger,
-.btn.js-mobile-nav-drawer-trigger {
-  min-width: 0px !important;
+.btn.js-mobile-nav-drawer-trigger,
+.btn.prd-swh-layout-label,
+.btn.btn-viewby {
+  min-width: unset !important;
 }
 
 /* Header - cart: icon only on mobile, icon + label together on desktop */

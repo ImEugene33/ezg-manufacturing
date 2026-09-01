@@ -138,6 +138,21 @@
                         </sht-select>
                       </div>
                     </div>
+                  {%- when 'title_field' -%}
+                    <div class="clm field mb-scale-xl" style="--w-xs:12;--w-md:6" {{ block.shopify_attributes }}>
+                      <label class="field__label fs-body-m d-block p-relative" for="{{ form_id }}-{{ forloop.index }}-title">
+                        {{- block.settings.label | escape -}}
+                        <sup class="p-absolute ml-4xs color-danger {{ block.settings.required_field | default: 'd-none' | replace: 'true', '' }}">*</sup>
+                      </label>
+                      <input
+                        class="field__text field--focus field--hover fs-body-m w-100"
+                        type="text"
+                        id="{{ form_id }}-{{ forloop.index }}-title"
+                        name="contact[Title]"
+                        placeholder="{{ block.settings.placeholder }}"
+                        {{ block.settings.required_field | default: '' | replace: 'true', 'required' }}
+                      >
+                    </div>
                 {%- endcase -%}
               {%- endfor -%}
 
@@ -373,6 +388,30 @@
             "label": "t:general.settings.value.label",
             "info": "t:general.settings.value.info",
             "default": "value1, value2, value3"
+          }
+        ]
+      },
+      {
+        "type": "title_field",
+        "name": "Title field",
+        "settings": [
+          {
+            "type": "text",
+            "id": "label",
+            "label": "t:general.settings.label.label",
+            "default": "Title"
+          },
+          {
+            "type": "text",
+            "id": "placeholder",
+            "label": "t:general.settings.placeholder.label",
+            "default": "Enter title"
+          },
+          {
+            "type": "checkbox",
+            "id": "required_field",
+            "label": "t:general.settings.field_is_required.label",
+            "default": false
           }
         ]
       }

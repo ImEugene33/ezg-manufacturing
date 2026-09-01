@@ -1,0 +1,899 @@
+{%- liquid
+  assign form_id = 'ContactForm-' | append: section.id
+  assign section_image = section.settings.section_image
+  assign default_button_send_message = 'templates.contact.form.send' | t
+-%}
+<div class="color-{{ section.settings.color_scheme }} section-contact section-contact--{{ section.id }} {{ section.settings.desktop_content_ordering }} {{ section.settings.mobile_content_ordering }}" id="{{ section.id }}" style="margin-bottom: 50px;">
+  <div class="ctnr" style="--section-image-radius: {{ section.settings.section_image_radius }}px;">
+    <div class="d-flex center-xs s-content rw align-stretch {{ section.settings.desktop_content_ordering }} {{ section.settings.mobile_content_ordering }}">
+      <div class="clm" style="--w-xs:12; width: 100%; max-width: 800px; margin: 0 auto;">
+        <div class="contact-form-content w-100">
+          <div class="s-header {{ section.settings.content_alignment_desktop }} {{ section.settings.mobile_content_alignment }}" style="margin-bottom: 50px;">
+            {%- if section.settings.heading_text != blank -%}
+              <h2 class="section__heading {{ section.settings.heading_size }} m-zero">{{ section.settings.heading_text | escape }}</h2>
+            {%- endif -%}
+          </div>
+          <div class="contact-form p-relative">
+            {%- form 'contact', id: form_id, class: 'form-contact contact-form-wrapper' -%}
+              {%- if form.posted_successfully? -%}
+                <div style="background-color: #e6f9e6; color: #006600; padding: 20px; border-radius: 8px; margin-bottom: 24px; text-align: center; font-weight: bold; width: 100%; border: 1px solid #006600;">
+                  Thank you! Your message has been sent successfully.
+                </div>
+              {%- elsif form.errors -%}
+                <div style="background-color: #fbecec; color: #cc0000; padding: 20px; border-radius: 8px; margin-bottom: 24px; text-align: center; font-weight: bold; width: 100%; border: 1px solid #cc0000;">
+                  Please check the errors below.
+                  <br>
+                  {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+                </div>
+              {%- endif -%}
+            <div class="rw gap-equal">
+              {%- assign has_email_field = false -%}
+              {%- for block in section.blocks -%}
+                {%- liquid
+                  assign custom_width = '--w-xs:12;--w-md:6;'
+                  if block.settings.width == '100'
+                    assign custom_width = '--w-xs:12;--w-md:12;'
+                  endif
+                -%}
+                
+                {%- case block.type -%}
+                  {%- when 'heading' -%}
+                    <div class="clm field mb-scale-xl" style="--w-xs:12;" {{ block.shopify_attributes }}>
+                      <{{ block.settings.size }} class="m-zero pt-24" style="border-bottom: 1px solid rgba(var(--color-text), 0.1); padding-bottom: 8px;">
+                        {{ block.settings.text | escape }}
+                      </{{ block.settings.size }}>
+                    </div>
+                    
+                  {%- when 'text_field' -%}
+                    <div class="clm field mb-scale-xl" style="{{ custom_width }}" {{ block.shopify_attributes }}>
+                      <label class="field__label fs-body-m d-block p-relative" for="{{ form_id }}-{{ forloop.index }}">
+                        {{- block.settings.label | escape -}}
+                        {%- if block.settings.required -%}
+                          <sup class="p-absolute ml-4xs color-danger">*</sup>
+                        {%- endif -%}
+                      </label>
+                      {%- liquid
+                        assign field_name = block.settings.internal_name | default: block.settings.label | escape
+                        if block.settings.field_type == 'email' and has_email_field == false
+                          assign field_name = 'email'
+                          assign has_email_field = true
+                        endif
+                      -%}
+                      {%- if block.settings.use_as_textarea -%}
+                        <textarea
+                          rows="5"
+                          id="{{ form_id }}-{{ forloop.index }}"
+                          class="textarea field__text field--focus field--hover fs-body-m w-100"
+                          name="contact[{{ field_name }}]"
+                          placeholder="{{ block.settings.placeholder }}"
+                          {% if block.settings.required %}required{% endif %}
+                          ></textarea>
+                      {%- else -%}
+                        <input
+                          class="field__text field--focus field--hover fs-body-m w-100"
+                          type="{{ block.settings.field_type }}"
+                          id="{{ form_id }}-{{ forloop.index }}"
+                          name="contact[{{ field_name }}]"
+                          placeholder="{{ block.settings.placeholder }}"
+                          {% if block.settings.required %}required{% endif %}
+                        >
+                      {%- endif -%}
+                    </div>
+                    
+                  {%- when 'dropdown' -%}
+                    <div class="clm field mb-scale-xl" style="{{ custom_width }}" {{ block.shopify_attributes }}>
+                      <label class="field__label fs-body-m d-block p-relative" for="{{ form_id }}-{{ forloop.index }}">
+                        {{- block.settings.label | escape -}}
+                        {%- if block.settings.required -%}
+                          <sup class="p-absolute ml-4xs color-danger">*</sup>
+                        {%- endif -%}
+                      </label>
+                      {%- assign options = block.settings.options | split: ',' -%}
+                      <div class="field__select p-relative p-zero d-block">
+                        <sht-select class="custom-select fs-body-m d-block" aria-label="{{- block.settings.label | escape -}}">
+                          <span class="toggle__icon d-flex middle-xs center-xs select__icon">
+                            {% render 'icon-toggle', icon_arrow: 'icon-caret-down icon-fix-m icon p-absolute', class_first: 'toggle__icon--plus icon-fix-m icon p-absolute', class_second: 'toggle__icon--minus icon-fix-m icon p-absolute' %}
+                          </span>
+                          <select class="js-variant-select-item" name="contact[{{ block.settings.internal_name | default: block.settings.label | escape }}]" id="{{ form_id }}-{{ forloop.index }}" {% if block.settings.required %}required{% endif %}>
+                            <option value="" disabled selected>-- Select --</option>
+                            {%- for value in options -%}
+                              <option value="{{- value | strip -}}">{{- value | strip -}}</option>
+                            {%- endfor -%}
+                          </select>
+                        </sht-select>
+                      </div>
+                    </div>
+                    
+                  {%- when 'checkbox' -%}
+                    <div class="clm field mb-scale-xl" style="{{ custom_width }}" {{ block.shopify_attributes }}>
+                      <div class="d-flex middle-xs mt-12">
+                        <input
+                          type="hidden"
+                          name="contact[{{ block.settings.internal_name | default: block.settings.label | escape }}]"
+                          value="No"
+                        >
+                        <input
+                          type="checkbox"
+                          id="{{ form_id }}-{{ forloop.index }}"
+                          name="contact[{{ block.settings.internal_name | default: block.settings.label | escape }}]"
+                          value="Yes"
+                          style="margin-right: 8px; transform: scale(1.2);"
+                          {% if block.settings.required %}required{% endif %}
+                        >
+                        <label class="fs-body-m mb-zero" for="{{ form_id }}-{{ forloop.index }}">
+                          {{- block.settings.label | escape -}}
+                          {%- if block.settings.required -%}
+                            <sup class="p-absolute ml-4xs color-danger">*</sup>
+                          {%- endif -%}
+                        </label>
+                      </div>
+                    </div>
+                    
+                  {%- when 'radio' -%}
+                    <div class="clm field mb-scale-xl" style="{{ custom_width }}" {{ block.shopify_attributes }}>
+                      <label class="field__label fs-body-m d-block p-relative mb-8" style="margin-bottom: 8px;">
+                        {{- block.settings.label | escape -}}
+                        {%- if block.settings.required -%}
+                          <sup class="p-absolute ml-4xs color-danger">*</sup>
+                        {%- endif -%}
+                      </label>
+                      {%- assign options = block.settings.options | split: ',' -%}
+                      <div class="d-flex fd-row gap-16" style="gap: 16px;">
+                        {%- for value in options -%}
+                          <div class="d-flex middle-xs">
+                            <input
+                              type="radio"
+                              id="{{ form_id }}-{{ forloop.parentloop.index }}-{{ forloop.index }}"
+                              name="contact[{{ block.settings.internal_name | default: block.settings.label | escape }}]"
+                              value="{{ value | strip }}"
+                              style="margin-right: 8px;"
+                              {% if block.settings.required and forloop.first %}required{% endif %}
+                            >
+                            <label class="fs-body-m mb-zero" for="{{ form_id }}-{{ forloop.parentloop.index }}-{{ forloop.index }}">
+                              {{- value | strip -}}
+                            </label>
+                          </div>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+
+                {%- endcase -%}
+              {%- endfor -%}
+
+              <div class="clm field d-flex fd-column fd-row-sm center-xs mt-24" style="--w-xs:12; margin-top: 24px;">
+                <button type="submit" class="btn btn-primary btn-l ta-center w-100 w-md-auto">
+                  {{- section.settings.button_label | escape | default: default_button_send_message -}}
+                </button>
+              </div>
+            </div>
+          {%- endform -%}
+        </div>
+      </div>
+      </div>
+      {%- if section.settings.section_image != blank -%}
+        <div class="contact-form-image rad-m o-hidden">
+          {%- render 'image', image_item: section_image, image_wrap_classes: 'image-animate', image_classes: 'mah-90v m-auto rad-m o-hidden', ratio: section.settings.section_image.aspect_ratio -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('{{ form_id }}');
+    if (!form) return;
+    
+    // Find all checkboxes in the form
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    let triggerCheckbox = null;
+    
+    checkboxes.forEach(cb => {
+      const label = cb.nextElementSibling;
+      if (label && label.textContent.includes('Same as Product Owner')) {
+        triggerCheckbox = cb;
+      }
+    });
+
+    if (triggerCheckbox) {
+      triggerCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+          const allFields = form.querySelectorAll('.field');
+          
+          let isTargetSection = false;
+          let sourceFields = {};
+          let targetFields = [];
+          
+          allFields.forEach(field => {
+            if (field.contains(triggerCheckbox)) {
+              isTargetSection = true;
+              return;
+            }
+            
+            const labelEl = field.querySelector('label');
+            const inputEl = field.querySelector('input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]), select, textarea');
+            
+            if (labelEl && inputEl) {
+              const labelText = labelEl.textContent.replace('*', '').trim();
+              
+              if (!isTargetSection) {
+                sourceFields[labelText] = inputEl.value;
+              } else {
+                // Only map fields up to the next heading or checkbox if needed, 
+                // but since we collect all after, it will just map any matching label after it
+                targetFields.push({
+                  input: inputEl,
+                  label: labelText
+                });
+              }
+            }
+          });
+          
+          // Apply values
+          targetFields.forEach(target => {
+            if (sourceFields[target.label] !== undefined) {
+              target.input.value = sourceFields[target.label];
+              
+              // If it's a select inside sht-select, we might need to update the visible text
+              if (target.input.tagName.toLowerCase() === 'select') {
+                const customSelect = target.input.closest('sht-select');
+                if (customSelect) {
+                  const visibleText = customSelect.querySelector('.js-variant-select-item-text, .toggle__text, span:not(.toggle__icon)');
+                  if (visibleText) {
+                    visibleText.textContent = target.input.options[target.input.selectedIndex].text;
+                  }
+                }
+              }
+              target.input.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          });
+        }
+      });
+    }
+  });
+</script>
+{%- schema -%}
+{
+  "name": "Extended Contact Form",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.overlay"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.general.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_schemes.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "t:general.settings.section_heading.label",
+      "default": "Contact form"
+    },
+    {
+      "type": "select",
+      "label": "t:general.settings.heading_size.label",
+      "id": "heading_size",
+      "visible_if": "{{ section.settings.heading_text != blank }}",
+      "options": [
+        {
+          "value": "headline",
+          "label": "t:general.settings.heading_size.options.extra_large.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:general.settings.heading_size.options.large.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:general.settings.heading_size.options.regular.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:general.settings.heading_size.options.small.label"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.image.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "section_image",
+      "label": "t:general.settings.headers.image.content"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.desktop_layout.label"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment_desktop",
+      "label": "t:general.settings.heading_alignment.label",
+      "visible_if": "{{ section.settings.heading_text != blank }}",
+      "options": [
+        {
+          "value": "ta-left-md",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center-md",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right-md",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-center-md"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_ordering",
+      "label": "t:general.settings.content_ordering.label",
+      "default": "image-first-md",
+      "options": [
+        {
+          "value": "text-first-md",
+          "label": "t:general.settings.section_ordering.option_text_first.label"
+        },
+        {
+          "value": "image-first-md",
+          "label": "t:sections.images_with_text.settings.content_ordering.options_2.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.mobile_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "t:general.settings.heading_alignment.label",
+      "visible_if": "{{ section.settings.heading_text != blank }}",
+      "options": [
+        {
+          "value": "ta-left",
+          "label": "t:general.settings.option_left.label"
+        },
+        {
+          "value": "ta-center",
+          "label": "t:general.settings.option_center.label"
+        },
+        {
+          "value": "ta-right",
+          "label": "t:general.settings.option_right.label"
+        }
+      ],
+      "default": "ta-left"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_ordering",
+      "label": "t:general.settings.content_ordering.label",
+      "default": "image-first",
+      "options": [
+        {
+          "value": "text-first",
+          "label": "t:general.settings.section_ordering.option_text_first.label"
+        },
+        {
+          "value": "image-first",
+          "label": "t:sections.images_with_text.settings.content_ordering.options_2.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.button.content"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:general.settings.label.label",
+      "default": "Send message"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Heading Text",
+          "default": "Section Heading"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Heading Size",
+          "options": [
+            {
+              "value": "h3",
+              "label": "Large"
+            },
+            {
+              "value": "h4",
+              "label": "Medium"
+            },
+            {
+              "value": "h5",
+              "label": "Small"
+            }
+          ],
+          "default": "h4"
+        }
+      ]
+    },
+    {
+      "type": "text_field",
+      "name": "Text Field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "internal_name",
+          "label": "Internal Name (Email label)",
+          "info": "Used in the email sent to you. Must be unique if you have multiple fields with the same label."
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your text"
+        },
+        {
+          "type": "select",
+          "id": "field_type",
+          "label": "Field Type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "value": "tel",
+              "label": "Phone"
+            },
+            {
+              "value": "date",
+              "label": "Date"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "select",
+          "id": "width",
+          "label": "Field Width (Desktop)",
+          "options": [
+            {
+              "value": "50",
+              "label": "50%"
+            },
+            {
+              "value": "100",
+              "label": "100%"
+            }
+          ],
+          "default": "50"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "use_as_textarea",
+          "label": "Use as Textarea (Message)",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "dropdown",
+      "name": "Dropdown",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Country"
+        },
+        {
+          "type": "text",
+          "id": "internal_name",
+          "label": "Internal Name (Email label)",
+          "info": "Used in the email sent to you. Must be unique if you have multiple fields with the same label."
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (Comma separated)",
+          "default": "USA, Canada, Mexico"
+        },
+        {
+          "type": "select",
+          "id": "width",
+          "label": "Field Width (Desktop)",
+          "options": [
+            {
+              "value": "50",
+              "label": "50%"
+            },
+            {
+              "value": "100",
+              "label": "100%"
+            }
+          ],
+          "default": "50"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "name": "Checkbox",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "I agree to the terms"
+        },
+        {
+          "type": "text",
+          "id": "internal_name",
+          "label": "Internal Name (Email label)",
+          "info": "Used in the email sent to you. Must be unique if you have multiple fields with the same label."
+        },
+        {
+          "type": "select",
+          "id": "width",
+          "label": "Field Width (Desktop)",
+          "options": [
+            {
+              "value": "50",
+              "label": "50%"
+            },
+            {
+              "value": "100",
+              "label": "100%"
+            }
+          ],
+          "default": "100"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "radio",
+      "name": "Radio Buttons",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Select an option"
+        },
+        {
+          "type": "text",
+          "id": "internal_name",
+          "label": "Internal Name (Email label)",
+          "info": "Used in the email sent to you. Must be unique if you have multiple fields with the same label."
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (Comma separated)",
+          "default": "Yes, No"
+        },
+        {
+          "type": "select",
+          "id": "width",
+          "label": "Field Width (Desktop)",
+          "options": [
+            {
+              "value": "50",
+              "label": "50%"
+            },
+            {
+              "value": "100",
+              "label": "100%"
+            }
+          ],
+          "default": "100"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Extended Contact Form",
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "text": "Product Information"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Serial Number",
+            "required": true
+          }
+        },
+        {
+          "type": "dropdown",
+          "settings": {
+            "label": "Equipment Brand",
+            "options": "Barbwire Hog, Cement Hog, EZG Mixer, Fence Hog, Fork-N-Hog, Grout Hog, Hog Crusher, Hog Legs, Hog Pump, Hog Trough, Hog Waller, Krack Hog, Mud Hog, Mobile Mud Hog, Precast Equipment, Refractory Mixer, Stretch-N-Go",
+            "required": true
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "text": "Product Owner Information"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Contact Name",
+            "required": true
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Phone #",
+            "field_type": "tel",
+            "required": true
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Company Name",
+            "required": true
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Fax"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 1",
+            "required": true
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 2"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 3"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Email Address",
+            "field_type": "email",
+            "required": true
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "City",
+            "required": true
+          }
+        },
+        {
+          "type": "dropdown",
+          "settings": {
+            "label": "Country",
+            "options": "United States, Canada, Mexico, United Kingdom, Australia, Other",
+            "required": true
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "State/Province",
+            "required": true
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "ZIP",
+            "required": true
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "text": "EZG Distributor (If applicable)"
+          }
+        },
+        {
+          "type": "checkbox",
+          "settings": {
+            "label": "Same as Product Owner",
+            "width": "100"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Contact Name",
+            "internal_name": "Distributor Contact Name"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Phone #",
+            "field_type": "tel",
+            "internal_name": "Distributor Phone #"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Company Name",
+            "internal_name": "Distributor Company Name"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Fax",
+            "internal_name": "Distributor Fax"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 1",
+            "internal_name": "Distributor Address 1"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 2",
+            "internal_name": "Distributor Address 2"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Address 3",
+            "internal_name": "Distributor Address 3"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Email Address",
+            "field_type": "email",
+            "internal_name": "Distributor Email Address"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "City",
+            "internal_name": "Distributor City"
+          }
+        },
+        {
+          "type": "dropdown",
+          "settings": {
+            "label": "Country",
+            "options": "United States, Canada, Mexico, United Kingdom, Australia, Other",
+            "internal_name": "Distributor Country"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "State/Province",
+            "internal_name": "Distributor State/Province"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "ZIP",
+            "internal_name": "Distributor ZIP"
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "text": "Warranty/Product Registration"
+          }
+        },
+        {
+          "type": "text_field",
+          "settings": {
+            "label": "Warranty Registration/Ownership Change Date",
+            "field_type": "date",
+            "width": "100",
+            "required": true
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "text": "Acknowledgement"
+          }
+        },
+        {
+          "type": "radio",
+          "settings": {
+            "label": "New Machine Inspection Completed. Machine Delivered in Safe Operating Condition",
+            "options": "Yes, No",
+            "required": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{%- endschema -%}

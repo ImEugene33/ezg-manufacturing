@@ -1,0 +1,321 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_f6ejkY": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_JPqpG9": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Skid Steer Attachments",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        },
+        "description_Uh43D6": {
+          "type": "description",
+          "settings": {
+            "description_text": "<p><strong>Enhance Equipment Versatility for Skid Steers, Excavators, and More</strong></p><p>EZG’s skid steer attachments transcend traditional applications, offering a wide range of functionalities for skid steers, excavators, track loaders, and stand-on units. From fencing installations to material recycling, our attachments open doors to new markets and revenue streams.</p><p>Instead of relying on extra labor or extra machines, you can use our attachments to take on more work, finish jobs faster, and diversify your service offerings to stay ahead in the industry. It’s a simple way to cut downtime and get more return out of the equipment you already own. EZG’s attachments <a href=\"https://ezgmfg.com/innovative-attachments/\">empower you to maximize</a> equipment efficiency and pioneer progress in construction.</p>"
+          }
+        },
+        "button_FytCKJ": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "View Brochure",
+            "button_primary_style": "secondary",
+            "button_primary_link": "https://cdn.shopify.com/s/files/1/0984/7937/4701/files/00352_EZG_SkidSteer-Attachment-Download_vf.pdf?v=1788187694",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_JPqpG9",
+        "description_Uh43D6",
+        "button_FytCKJ"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/attachments_product_image.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "multi_columns_wQrckV": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_NCrqWi": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/EZG_Mixer_bag_break-300x240.png",
+            "title": "MOBILE MIXERS",
+            "description": "",
+            "btn_label": "",
+            "btn_link": "shopify://collections/masonry-pumps"
+          }
+        },
+        "image_column_g8j8yV": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/HogTrainer_in_use_13-300x240.png",
+            "title": "MATERIAL RECYCLING SYSTEM",
+            "description": "",
+            "btn_label": "",
+            "btn_link": "shopify://collections/fencing"
+          }
+        },
+        "image_column_LiBHVG": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/Mobile_Mud_Hog_on_jobsite_2-300x240.png",
+            "title": "STRETCHERS & DISPENSERS",
+            "description": "",
+            "btn_label": "",
+            "btn_link": "shopify://collections/hardscape"
+          }
+        },
+        "image_column_RWYggK": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/Mortar_hog_on_jobsite-300x240.png",
+            "title": "BARBWIRE STRETCHER",
+            "description": "",
+            "btn_label": "",
+            "btn_link": "shopify://collections/precast-delivery-systems"
+          }
+        },
+        "image_column_NNrEgV": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/Hog_Trough_with_forklift-300x240.png",
+            "title": "MOBILE CEMENT DISPENSERS",
+            "description": "",
+            "btn_label": "",
+            "btn_link": "shopify://collections/precast-refractory"
+          }
+        },
+        "image_column_ry4tVN": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/RMH_PCH_hero_image-copy.png",
+            "title": "UP TO 3/8\" CONCRETE AGGREGATE",
+            "description": "",
+            "btn_label": "",
+            "btn_link": "shopify://pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "image_column_NCrqWi",
+        "image_column_g8j8yV",
+        "image_column_LiBHVG",
+        "image_column_RWYggK",
+        "image_column_NNrEgV",
+        "image_column_ry4tVN"
+      ],
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "card_color_scheme": "scheme-69f44541-eea0-43e5-ab4b-328cbe6b1550",
+        "heading": "EXPLORE ALL SKID STEER ATTACHMENTS",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "1/1",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "side_by_side_aRXQbE": {
+      "type": "side-by-side",
+      "blocks": {
+        "info_JMaDBg": {
+          "type": "info",
+          "settings": {
+            "heading": "",
+            "heading_tag": "h3",
+            "text": "<p>The <a href=\"/products/hog-slopper\" title=\"Hog Slopper\"><span style=\"text-decoration:underline\"><strong>Hog Slopper </strong></span></a>is your go-to for efficient material handling. This versatile tool ensures consistent mixes and faster batch times, reducing strain on your team. Keep your workspace clean and organized, whether you’re moving sand, dirt, or other granular mixes. Choose between fork pockets or a universal skid steer mount for seamless integration into your workflow</p>",
+            "bg_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "info_JMaDBg"
+      ],
+      "name": "t:sections.side_by_side.name",
+      "settings": {
+        "heading": "Additional Products",
+        "heading_tag": "h2",
+        "text": "",
+        "button_label": "Hog Slopper",
+        "button_link": "shopify://products/hog-slopper",
+        "button_style": "primary",
+        "button_align_desktop": "left",
+        "media_type": "image",
+        "image": "shopify://shop_images/Hog_Slopper_0634ad33-827e-4bc0-ab9b-b3312d067d3c.png",
+        "video_source": "external",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_autoplay": true,
+        "image_position": "left",
+        "image_width_desktop": 50,
+        "aspect_ratio": "1.78",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mob": 32,
+        "padding_bottom_mob": 32,
+        "color_scheme": "",
+        "sect_class": ""
+      }
+    },
+    "side_by_side_tP89cN": {
+      "type": "side-by-side",
+      "blocks": {
+        "info_CC4Ac6": {
+          "type": "info",
+          "settings": {
+            "heading": "",
+            "heading_tag": "h3",
+            "text": "<p><a href=\"/products/ground-protection-mats\" title=\"Hogtrax Ground Protection Mats\"><span style=\"text-decoration:underline\"><strong>Hogtrax Ground Protection Mats </strong></span></a>are made from a durable weather and rot resistant polyethylene material and feature a robust diamond cleat over honeycomb dual-surface tread design for aggressive grip, while preventing ruts, and establishing stable pathways.</p>",
+            "bg_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "info_CC4Ac6"
+      ],
+      "name": "t:sections.side_by_side.name",
+      "settings": {
+        "heading": "Additional Products",
+        "heading_tag": "h2",
+        "text": "",
+        "button_label": "Hogtrax",
+        "button_link": "shopify://products/ground-protection-mats",
+        "button_style": "primary",
+        "button_align_desktop": "left",
+        "media_type": "image",
+        "image": "shopify://shop_images/GPM_onsite_e2d92b3e-991e-4c26-aca2-5648feb86bca.png",
+        "video_source": "external",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_autoplay": true,
+        "image_position": "left",
+        "image_width_desktop": 50,
+        "aspect_ratio": "1.78",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mob": 32,
+        "padding_bottom_mob": 32,
+        "color_scheme": "",
+        "sect_class": ""
+      }
+    },
+    "rich_text_FfkztN": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_dTCyNE": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Why Choose Skid Steer Attachments from EZG",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_4VApYh": {
+          "type": "description",
+          "settings": {
+            "full_width": true,
+            "description_text": "<p>Unlock more value from your skid steer or skid loader by equipping it with quality attachments that let you do far more than load and transport. Because if your skid steer is sitting idle between jobs, it’s time to put it to better use.</p><ul><li><strong>Maximize machine use:</strong> One machine, multiple tasks: fence installs, mixing, trenching, and recycling.</li><li><strong>Faster production: </strong>Designed by contractors for contractors, these attachments help you move more material, build more fence, and complete more work in fewer hours.</li><li><strong>Increase profits:</strong> Add services like on-site mixing, material recycling, and micro-trenching that open new revenue without purchasing additional machines.</li><li><strong>Built for the jobsite:</strong> Heavy-duty construction, American-made quality, and dependable performance day after day.</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_dTCyNE",
+        "description_4VApYh"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "faqs_QFMXPW": {
+      "type": "faqs",
+      "blocks": {
+        "faq_item_WLxFbF": {
+          "type": "faq_item",
+          "repeater": "{{ page.metafields.custom.faqs.value }}",
+          "settings": {
+            "heading_faq_item": "{{ block.repeater.question.value }}",
+            "description_faq_item": "{{ block.repeater.answer | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_WLxFbF"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading_text": "Find the answers you need",
+        "heading_size": "h3",
+        "description_text": "",
+        "one_item_expand": true,
+        "open_first_item": false,
+        "enable_contact_form": false,
+        "heading_contact_form": "Didn't find your answer?",
+        "description_contact_form": "<p>We're here to help! If you didn't find the answer you were looking for, feel free to reach out to our team. Contact us directly, and we'll make sure to assist you as soon as possible.</p>",
+        "button_label": "Send message",
+        "color_custom_form_background": "rgba(0,0,0,0)",
+        "color_custom_form_content": "rgba(0,0,0,0)",
+        "heading_alignment_desktop": "ta-center-md middle-md",
+        "content_ordering": "fd-row-sm",
+        "heading_alignment_mobile": "ta-left top-xs",
+        "content_ordering_mobile": "fd-column"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_f6ejkY",
+    "multi_columns_wQrckV",
+    "side_by_side_aRXQbE",
+    "side_by_side_tP89cN",
+    "rich_text_FfkztN",
+    "faqs_QFMXPW"
+  ]
+}

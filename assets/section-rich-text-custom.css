@@ -69,6 +69,9 @@
   line-height: 20px;
   letter-spacing: 0.32px;
 }
+.rich-text-custom__text--full {
+  max-width: none;
+}
 @media only screen and (min-width: 768px) {
   .rich-text-custom__text {
     font-size: 18px;

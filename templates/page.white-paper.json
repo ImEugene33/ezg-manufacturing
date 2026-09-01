@@ -1,0 +1,362 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_hkK938": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_JgHQrg": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "WHITE PAPER",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        },
+        "button_JeJwDA": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Download Now",
+            "button_primary_style": "secondary",
+            "button_primary_link": "shopify://pages/contact-us",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_JgHQrg",
+        "button_JeJwDA"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 60,
+        "section_mask_overlay_color": "#0e0e0e",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/lathe-product-1.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "rich_text_3E6EWN": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_d8emYL": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "The Leanest Damn Hogs in the world",
+            "heading_size": "h1",
+            "enable_h1_tag": false
+          }
+        },
+        "description_RigwCp": {
+          "type": "description",
+          "settings": {
+            "full_width": false,
+            "description_text": "<p>These “Hogs” greedily mix, crush, tamp, grip and split their way through the toughest projects with relative ease, providing impressive returns on investment in more ways than one. Not surprisingly, they’re also consuming more and more market share and creating new categories altogether.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_d8emYL",
+        "description_RigwCp"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "desktop_content_alignment": "ta-center-md middle-md",
+        "mobile_content_alignment": "ta-center middle-xs"
+      }
+    },
+    "rich_text_PkGMn7": {
+      "type": "rich-text",
+      "blocks": {
+        "description_DXnfcw": {
+          "type": "description",
+          "settings": {
+            "full_width": true,
+            "description_text": "<p>It’s not very often you hear the words “hog” and “lean” in the same sentence because they usually mean the exact opposite. But when it comes to EZG Manufacturing and its innovative line of masonry products, “lean” and “hog” have become so synonymous with productivity and efficiency a new expression has been coined to describe it: “LEAN Masonry®.” A complete, yet ever-growing, line of masonry systems, including the Mud Hog®, Grout Hog® and Hog Crusher®, has redefined economies of scale and productivity levels for contractors, builders, and construction professionals all over the world.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "description_DXnfcw"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-center middle-xs"
+      }
+    },
+    "rich_text_YpbdXL": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_UyG4a6": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Redefining Return on Investment",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_ECn7Jg": {
+          "type": "description",
+          "settings": {
+            "full_width": true,
+            "description_text": "<p>In terms of ROI, EZG products save far more than just money. EZG masonry systems dramatically reduce physical strain with robust mechanized processes. The result is less wear and tear on workers, which in turn results in greater productivity and less time off, and even reduced workers’ compensation costs. When these cost, time, labor and productivity savings are all taken into consideration and viewed from a macro perspective, the true meaning and impact of “LEAN Masonry®” begins to take shape. And it couldn’t come at a better time. Maximizing efficiency is no longer just a matter of boosting profit—it’s a matter of survival. Construction and building firms of all sizes, from one-person contracting operations to global conglomerates, are feeling the economic pressure. The EZG philosophy of LEAN Masonry® isn’t new, but it’s timelier than ever.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_UyG4a6",
+        "description_ECn7Jg"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-center middle-xs"
+      }
+    },
+    "rich_text_9h3ExC": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_73CjT7": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Born from the Need of a Better Way",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_xGCRHa": {
+          "type": "description",
+          "settings": {
+            "full_width": true,
+            "description_text": "<p>EZG LEAN Masonry® actually started with one man’s recognition of the shortcomings in the masonry industry. Damian Lang saw that, all too often, masonry equipment failed in the field because it was either designed poorly or lacked sturdiness. Machine clogs and mechanical failures meant costly replacement and budget-crushing downtime. He founded EZG Manufacturing in 1998 with the goal of helping contractors increase efficiency and profitability with solid, affordable, American-made products that worked simply, predictably, and reliably. Far more than his ambition or vision, Lang’s most important attribute is that he genuinely listens. His life on the job and in the field, constantly listening to comments from masonry professionals, has led to constant improvements and developments of new masonry, fencing and construction products. Today, EZG products, including plenty of the originals, can be found working hard on construction and building sites all over the globe—each doing their part to fulfill the LEAN Masonry® legacy.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_73CjT7",
+        "description_xGCRHa"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-center middle-xs"
+      }
+    },
+    "content_collage_ekzGFP": {
+      "type": "content-collage",
+      "blocks": {
+        "image_JddJN4": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/lean_masonry_whitepaper_mock-1-1024x683.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_JWTQci": {
+          "type": "text",
+          "settings": {
+            "heading": "Download the White Paper!",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "<p>It’s not very often you hear the words “hog” and “lean” in the same sentence because they usually mean the exact opposite.<br/>But when it comes to EZG Manufacturing and its innovative line of masonry products, “lean” and “hog” have become so synonymous with productivity and efficiency a new expression has been coined to describe it: “LEAN Masonry®.” A complete, yet ever-growing, line of masonry systems, including the Mud Hog®, Grout Hog® and Hog Crusher®, has redefined economies of scale and productivity levels for contractors, builders, and construction professionals all over the world.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "Download Now",
+            "button_style": "secondary",
+            "button_link": "shopify://pages/contact-us",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_JddJN4",
+        "text_JWTQci"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": true,
+        "show_layout_grid": true,
+        "desktop_row_height": 400,
+        "mobile_row_height": 300
+      }
+    },
+    "multi_columns_MeENUP": {
+      "type": "multi-columns",
+      "blocks": {
+        "image_column_CnnrP6": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/ad8f383e9aca1bef41004fd413b92268ec406ae0.png",
+            "title": "",
+            "description": "",
+            "btn_label": "",
+            "btn_link": "shopify://collections/masonry-pumps"
+          }
+        },
+        "image_column_J4iMRE": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/fencing-construction-equipment.png",
+            "title": "",
+            "description": "",
+            "btn_label": "",
+            "btn_link": "shopify://collections/fencing"
+          }
+        },
+        "image_column_L7q7Aw": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/ad8f383e9aca1bef41004fd413b92268ec406ae0.png",
+            "title": "",
+            "description": "",
+            "btn_label": "",
+            "btn_link": "shopify://collections/masonry-pumps"
+          }
+        },
+        "image_column_RHUMnc": {
+          "type": "image_column",
+          "settings": {
+            "image_column_image": "shopify://shop_images/HSC_saw_shoe_in_use-1024x819.png",
+            "title": "",
+            "description": "",
+            "btn_label": "",
+            "btn_link": "shopify://collections/hardscape"
+          }
+        }
+      },
+      "block_order": [
+        "image_column_CnnrP6",
+        "image_column_J4iMRE",
+        "image_column_L7q7Aw",
+        "image_column_RHUMnc"
+      ],
+      "name": "t:general.settings.multi_columns.label",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "card_color_scheme": "scheme-69f44541-eea0-43e5-ab4b-328cbe6b1550",
+        "heading": "",
+        "heading_size": "h5",
+        "description": "",
+        "item_position": "ta-left start-xs",
+        "media_ratio": "3/2",
+        "heading_size_item": "fs-heading-m",
+        "carousel_desktop": "true",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "rich_text_Tfjke3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_L6WwDB": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "STAY CONNECTED WITH US",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_WiNBcW": {
+          "type": "description",
+          "settings": {
+            "full_width": false,
+            "description_text": "<p>As an industry leader, EZG has cultivated a wealth of helpful information we like to share through our blog and social media channels</p>"
+          }
+        },
+        "button_jmgXpd": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Connect with us",
+            "button_primary_style": "secondary",
+            "button_primary_link": "shopify://pages/contact-us",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_L6WwDB",
+        "description_WiNBcW",
+        "button_jmgXpd"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_hkK938",
+    "rich_text_3E6EWN",
+    "rich_text_PkGMn7",
+    "rich_text_YpbdXL",
+    "rich_text_9h3ExC",
+    "content_collage_ekzGFP",
+    "multi_columns_MeENUP",
+    "rich_text_Tfjke3"
+  ]
+}

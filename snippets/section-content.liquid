@@ -13,7 +13,7 @@
 					<h2 class="section__heading {{ heading_type | default: 'promotional-heading' }} {{ block.settings.heading_size }} hide-empty" {{ block.shopify_attributes }} aria-labelledby="heading-{{ section.id }}">{{- block.settings.heading_text | escape -}}</h2>
 				{%- endif -%}
 			{%- when 'description' -%}
-				<div class="section__description fs-body-xl rte hide-empty o-hidden {{ block.settings.truncate_text | replace: true, 'card__excerpt' }}" {{ block.shopify_attributes }} aria-label="description">{{- block.settings.description_text -}}</div>
+				<div class="section__description fs-body-xl rte hide-empty o-hidden {{ block.settings.truncate_text | replace: true, 'card__excerpt' }}" {{ block.shopify_attributes }} aria-label="description"{% if block.settings.full_width %} style="max-width: none; width: 100%;"{% endif %}>{{- block.settings.description_text -}}</div>
 			{%- when 'button' -%}
 				{% assign enable_section_link = false %}
 				<div class="section__button-group d-flex gap-xs {{ button_position_md }} {{ button_position_mb }} hide-empty" {{ block.shopify_attributes }} aria-label="button-group">

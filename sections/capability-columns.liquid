@@ -153,6 +153,13 @@
       "id": "stretch_cards",
       "label": "Stretch cards to equal height",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "align_cards_top",
+      "label": "Align cards content top",
+      "visible_if": "{{ section.settings.stretch_cards }}",
+      "default": false
     }
   ],
   "blocks": [

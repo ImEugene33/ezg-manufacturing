@@ -21,7 +21,16 @@
 {%- render 'section-padding-collapse' -%}
 
 {%- if section.blocks.size > 0 or section.settings.heading != blank or section.settings.description != blank or button_label != blank  -%}
-  <div data-animate="regular-section" class="js-animate section section--vertical o-hidden color-{{- section.settings.color_scheme }} background" data-ui-component="Section Icon With Text">
+  {%- if section.settings.vertical_header -%}
+  <style>
+    #section-{{ section.id }} .section__text-text {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  </style>
+  {%- endif -%}
+  <div id="section-{{ section.id }}" data-animate="regular-section" class="js-animate section section--vertical o-hidden color-{{- section.settings.color_scheme }} background" data-ui-component="Section Icon With Text">
     {%- if section.settings.heading != blank or section.settings.description != blank or button_label != blank  -%}
       <div class="section__header">
         <div class="ctnr">
@@ -46,7 +55,12 @@
               {% for block in section.blocks %}
                 {%- liquid assign total_items = forloop.length | plus: 0 -%}
                 <sht-carousel-itm class="carousel__item clm d-flex {{ carousel_item }} {{ section.settings.carousel_mobile | replace: 'false', '' | replace: 'true', 'carousel__item-xs' }} {{ section.settings.carousel_desktop | replace: 'false', '' | replace: 'true', 'carousel__item-md' }}" style="--w-xs: 12; --w-sm: 6; --w-md: {{- md -}};" role="group" aria-roledescription="Slide" aria-label="{{ 'accessibility.slide' | t }} {{ index_accessibility }} {{ 'accessibility.of' | t }} {{ total_items }}" data-item-index="{{ index_accessibility }}" {{ block.shopify_attributes }}>
+                  {% assign item_class = '' %}
+                  {% if block.settings.use_custom_color_scheme %}
+                    {% assign item_class = 'color-' | append: block.settings.color_scheme | append: ' background' %}
+                  {% endif %}
                   {% render 'card-icon-with-text',
+                    class: item_class,
                     card_border: true,
                     text_position: section.settings.text_position,
                     icon_color: section.settings.icon_color,
@@ -151,6 +165,12 @@
       "type": "richtext",
       "id": "description",
       "label": "t:general.settings.section_description.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "vertical_header",
+      "label": "Vertical header mode",
+      "default": false
     },
     {
       "type": "header",
@@ -284,6 +304,19 @@
       "name": "t:general.settings.headers.icon_with_text_item.content",
       "type": "icon_with_text_item",
       "settings": [
+        {
+          "type": "checkbox",
+          "id": "use_custom_color_scheme",
+          "label": "Use custom background color scheme",
+          "default": false
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Background color scheme",
+          "default": "scheme-1",
+          "visible_if": "{{ block.settings.use_custom_color_scheme }}"
+        },
         {
           "type": "header",
           "content": "t:general.settings.button_style.options.icon.label"

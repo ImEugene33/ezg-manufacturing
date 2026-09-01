@@ -30,7 +30,7 @@
     <span class="{{ heading_size | default: 'fs-heading-m' }} component-heading d-block mb-xs hide-empty">{{- title -}}</span>
     <div class="fs-body-m mb-m rte hide-empty">{{- description -}}</div>
     {% if label != blank %}
-      <a href="{{- link | default: '#' -}}" {{ link | default: 'tabindex="-1"' | replace: link , '' }} class="btn btn-tertiary btn-s hide-empty pe-no-link {{ link | default: 'disable' | replace: link , '' }}">
+      <a href="{{- link | default: '#' -}}" {{ link | default: 'tabindex="-1"' | replace: link , '' }} class="btn btn-tertiary btn-s hide-empty pe-no-link start-xs {{ link | default: 'disable' | replace: link , '' }}">
         {{- label -}}
       </a>
     {% endif %}

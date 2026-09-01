@@ -1,0 +1,259 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_AM7RGK": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_pEFmcw": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Our Story",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_pEFmcw"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/64258d9c4d74993092f82efdb79ea93ff0e540ef.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "rich_text_JLWM9R": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_zQAADK": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "A True American Success Story",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_zQAADK"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-center-md middle-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "content_collage_4NX7Pg": {
+      "type": "content-collage",
+      "blocks": {
+        "text_Jhwj6m": {
+          "type": "text",
+          "settings": {
+            "heading": "Humble Beginnings",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>EZG Manufacturing started as EZ Grout and was born from the desire of one man to improve the quality of masonry equipment. In 1998, founder and CEO Damian Lang sought to help contractors increase efficiency and profitability with American made products built from hands-on experience. Masonry equipment available at the time lacked sturdiness and reliability, causing operators to experience systemic machine clogs and mechanical failures.</p><p>Damian developed the first Grout Hog® after numerous prototypes. Over time, he perfected models by patenting new features specific only to the EZ Grout line, like clog-prevention mechanisms and an innovative delivery system.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "video_FGQ8kX": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://youtu.be/KROI4DnVS4w",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_nc39NF": {
+          "type": "text",
+          "settings": {
+            "heading": "Successful Expansion",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Once Damian’s invention proved useful, he turned his creative focus to other areas of construction and masonry markets, eventually releasing the Mud Hog®, Uphill Grout Hog®, Hog Slopper®, Hog Legs®, Hog Trough® and Booger Hog®. In the early 2000’s Damian broke into the fencing industry with the introduction of the Fence Hog® – which now includes several models designed to save contractors thousands of dollars and man hours required to complete jobs.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "text_pnXjQ3": {
+          "type": "text",
+          "settings": {
+            "heading": "EZG Manufacturing",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>EZ Grout’s reputation as an industry leader in the masonry, fencing and construction markets grew and soon products were found on construction sites across the globe. As Damian and his team learned more about each industry, they began to develop custom solutions for specific contracting problems. This led to the formation of EZG Manufacturing, which offers an extensive range of services, from laser cutting to machining, powder coat painting and more.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "text_ymMHRn": {
+          "type": "text",
+          "settings": {
+            "heading": "EZG Today",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Damian continues to expand EZG’s services and is quickly becoming a leading industry voice. As an author, Damian also shares what he’s learned after a lifetime of experience in his book<em>R.A.C.E. – Rewarding and Challenging Employees: For Profits in Masonry</em>.<a href=\"https://ezgmfg.com/category/contractor-tip-of-the-month/\" target=\"_blank\">Damian’s column</a>, “Contractor Tip of the Month,” is featured in multiple major industry magazines. He also regularly offers seminars and consultations for masonry and construction organizations all over the country.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "4",
+            "desktop_row": "1",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_Jhwj6m",
+        "video_FGQ8kX",
+        "text_nc39NF",
+        "text_pnXjQ3",
+        "text_ymMHRn"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 170,
+        "mobile_row_height": 300
+      }
+    },
+    "rich_text_3Ge8FM": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_EhpMkb": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "STAY CONNECTED WITH US",
+            "heading_size": "h3",
+            "enable_h1_tag": false
+          }
+        },
+        "description_zM7DmN": {
+          "type": "description",
+          "settings": {
+            "full_width": false,
+            "description_text": "<p>As an industry leader, EZG has cultivated a wealth of helpful information we like to share through our blog and social media channels</p>"
+          }
+        },
+        "button_ye783j": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Connect with us",
+            "button_primary_style": "secondary",
+            "button_primary_link": "shopify://pages/contact-us",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_EhpMkb",
+        "description_zM7DmN",
+        "button_ye783j"
+      ],
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_AM7RGK",
+    "rich_text_JLWM9R",
+    "content_collage_4NX7Pg",
+    "rich_text_3Ge8FM"
+  ]
+}

@@ -18,9 +18,770 @@
         "enable_h1_tag": true,
         "show_page_content": true
       }
+    },
+    "image_banner_dXPnwd": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_UxLTDd": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Maintenance Tips",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_UxLTDd"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/64258d9c4d74993092f82efdb79ea93ff0e540ef.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "content_collage_xf3xCh": {
+      "type": "content-collage",
+      "blocks": {
+        "text_MRbzey": {
+          "type": "text",
+          "settings": {
+            "heading": "FOR EQUIPMENT THAT LASTS",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>After delivering your equipment, EZG is committed to remaining your trusted partner. We offer the following information on equipment upkeep to ensure your satisfaction with EZG equipment throughout product lifetimes.<br/>At EZG Manufacturing, we take pride in fabricating quality products that last several years. However, there is one way to extend your product’s lifespan: maintenance. <br/>Safe storage and proper equipment maintenance prevent corrosion and keep equipment in good working order. Let EZG help you take care of your fleet with these helpful tips. <br/><br/>Contact our Parts Department: parts@ezgmfg.com or shop online for spare parts. </p>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_nFXY7c": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/08d7b60f57d6a0c80b394b3cc7a4638390a576bf.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_MRbzey",
+        "image_nFXY7c"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 200,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_q4mTbM": {
+      "type": "content-collage",
+      "blocks": {
+        "image_GbwVNa": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/c47f58d57a42ef0f7bf0539adcf8261c6e08dcee.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_KGxdJk": {
+          "type": "text",
+          "settings": {
+            "heading": "“WHEN LEAD TIMES ARE LONG, KEEPING THE EQUIPMENT YOU HAVE IN GOOD WORKING ORDER IS ESSENTIAL”",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>--Kevin Brooker</p>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_GbwVNa",
+        "text_KGxdJk"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-6be3bcd9-6ce2-40e0-8fb6-40ad9112f781",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 200,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_W6fVer": {
+      "type": "content-collage",
+      "blocks": {
+        "video_iw6NzL": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://youtu.be/4iGj6NRy1zE?si=Zp9xoxuBq10cGDDy",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_hRxeGj": {
+          "type": "text",
+          "settings": {
+            "heading": "Pressure Testing the Mud Hog® Mixers",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Keven takes us through the steps to pressure test a Mud Hog mixer.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_iw6NzL",
+        "text_hRxeGj"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 200,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_aTUiBy": {
+      "type": "content-collage",
+      "blocks": {
+        "video_q7dLn6": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://youtu.be/Dtcbl3WOOA4",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_NbYJpd": {
+          "type": "text",
+          "settings": {
+            "heading": "Troubleshooting tips for an EZG Grout Hog",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Having issues with your Grout Hog? Kevin shows you how to override electrical to test where the issue may be coming from.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_q7dLn6",
+        "text_NbYJpd"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 200,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_FcDM7T": {
+      "type": "content-collage",
+      "blocks": {
+        "video_7piAXP": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://youtu.be/KIA1wRzpyDU",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_RwpHYg": {
+          "type": "text",
+          "settings": {
+            "heading": "How to install a tilt plate attachment on an EZG Fence Hog",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Kevin walks you through how to remove the backing plate that comes attached to your Fence Hog, how to install the new tilt backing plate, and reconnecting the hydraulics</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_7piAXP",
+        "text_RwpHYg"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 200,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_tppe7J": {
+      "type": "content-collage",
+      "blocks": {
+        "video_yFtL99": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://youtu.be/D_gWKjRSmJo",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_cfBGRn": {
+          "type": "text",
+          "settings": {
+            "heading": "Installing a Wireless Remote on a Grout Hog",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Wireless Grout Hog remotes are great for operating the machine from afar or limiting the damage often caused to the standard, hardwires remote. Kevin will walk you through the simple task of installing and troubleshooting a new wireless remote.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_yFtL99",
+        "text_cfBGRn"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 200,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_WqQezh": {
+      "type": "content-collage",
+      "blocks": {
+        "video_DEAXrF": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://youtu.be/glWesTuJTR0",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_yyRhFy": {
+          "type": "text",
+          "settings": {
+            "heading": "Installing a Rear Seal Kit on a Grout Hog",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Need to replace the rear seal kit on your Grout Hog? Kevin walks you through exactly what you’ll need to successfully remove the old rear seal kit and install the new one.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_DEAXrF",
+        "text_yyRhFy"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 200,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_tAyFnX": {
+      "type": "content-collage",
+      "blocks": {
+        "video_WqGCqc": {
+          "type": "video",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "video_source": "video_external",
+            "video_url": "https://youtu.be/glWesTuJTR0",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 30,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        },
+        "text_UyNBwc": {
+          "type": "text",
+          "settings": {
+            "heading": "How to Change the piston cups and seals on an EZG Hog Pump®",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>Steve and Tyler show you how to change the piston cups and seals on the Hog Pump® HP-20T4.</p>",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_WqGCqc",
+        "text_UyNBwc"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 200,
+        "mobile_row_height": 300
+      }
+    },
+    "content_collage_x4eWrm": {
+      "type": "content-collage",
+      "blocks": {
+        "text_iXyJUp": {
+          "type": "text",
+          "settings": {
+            "heading": "PADDLE SHAFT SEALS",
+            "enable_h1_tag": false,
+            "heading_size": "h3",
+            "description": "<p>In this tip we will explain the importance of keeping the paddle shaft seals greased on any of your EZG mixers. Keeping the paddle shaft seals greased will prevent excessive wear on the paddle shaft and protect the paddle shaft bearings from being contaminated with mortar. If the paddle shaft seals are not greased on a regular basis, the seals will wear grooves in the paddle shaft. If the seals become worn out, material could get through the seal and damage the bearings.<br/><br/>The best time to grease the paddle shaft seals is while the shaft is turning. This allows the grease to fill more seals, leaving less room for material to get into the seals. If the grease comes out on the outside of the paddle shaft, the seals are misaligned or may be worn out.<br/>Greasing the paddle shaft seals should be done on a daily basis and, greasing every four to five hours throughout usage is best. At the end of a work day, we recommend greasing the seals which will allow any material remaining on the seals to be pushed out before it sets up inside the seals.<br/>Overall, keeping the paddle shaft seals greased will prevent costly repairs and downtime. Please contact Kevin Brooker with any maintenance questions you might have regarding your EZG mixers.<br/><br/></p>",
+            "desktop_content_position": "center-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "2",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "background_color": "",
+            "text_color": ""
+          }
+        },
+        "image_KEL7Qe": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "enable_h1_tag": false,
+            "heading_size": "h2",
+            "description": "",
+            "desktop_image": "shopify://shop_images/82193e0fee6841186505966e9b4237c9e18a65db.png",
+            "desktop_content_position": "start-md",
+            "desktop_content_alignment": "ta-left-md top-md",
+            "desktop_column": "2",
+            "desktop_row": "2",
+            "mobile_content_position": "center-xs",
+            "mobile_content_alignment": "ta-left top-xs",
+            "mobile_column": "1",
+            "mobile_row": "2",
+            "button_label": "",
+            "button_style": "primary",
+            "button_link": "",
+            "overlay_opacity": 0,
+            "mask_overlay_color": "",
+            "content_overlay_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_iXyJUp",
+        "image_KEL7Qe"
+      ],
+      "name": "t:sections.content_collage.name",
+      "settings": {
+        "color_scheme": "scheme-dfd7f710-1c3c-4730-be7a-3884f4f918ee",
+        "enable_fullwidth": false,
+        "show_layout_grid": true,
+        "desktop_row_height": 260,
+        "mobile_row_height": 300
+      }
+    },
+    "capability_columns_hgt4Q9": {
+      "type": "capability-columns",
+      "blocks": {
+        "capability_column_Nm9cnK": {
+          "type": "capability-column",
+          "settings": {},
+          "blocks": {
+            "capability_card_BpzACT": {
+              "type": "capability-card",
+              "settings": {
+                "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"9\" viewBox=\"0 0 12 9\" fill=\"none\">\n  <path d=\"M0.5 4.5H10.5M6.50003 8.5L10.5 4.5L6.50003 0.5\" stroke=\"#2D2926\" stroke-linecap=\"round\"/>\n</svg>",
+                "title": "Keep paddle shaft seals greased",
+                "value": "",
+                "pdf_link": "<p></p><p>Grease seals daily to prevent material from leaking around the paddle shaft and getting into the bearings.</p><p>If mixer is running all day, grease at mid-day and at the end of the day. Grease at the end of use will help push material that may have gotten into the seal out before it sets up.</p><p>Material build up within the seal will wear grooves in the shaft causing the seals to fail, and damage shaft resulting in costly repairs.</p>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "capability_card_BpzACT"
+          ]
+        },
+        "capability_column_UDc3GP": {
+          "type": "capability-column",
+          "settings": {},
+          "blocks": {
+            "capability_card_fPAQ8E": {
+              "type": "capability-card",
+              "settings": {
+                "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"9\" viewBox=\"0 0 12 9\" fill=\"none\">\n  <path d=\"M0.5 4.5H10.5M6.50003 8.5L10.5 4.5L6.50003 0.5\" stroke=\"#2D2926\" stroke-linecap=\"round\"/>\n</svg>",
+                "title": "Change paddle shaft seals at first sign of leakage.",
+                "value": "",
+                "pdf_link": "<p>If material is leaking through the seal be sure to changes seals before the material reaches the bearings causing the bearings to fail.</p>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "capability_card_fPAQ8E"
+          ]
+        },
+        "capability_column_HFCzPd": {
+          "type": "capability-column",
+          "settings": {},
+          "blocks": {
+            "capability_card_9UQpqX": {
+              "type": "capability-card",
+              "settings": {
+                "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"9\" viewBox=\"0 0 12 9\" fill=\"none\">\n  <path d=\"M0.5 4.5H10.5M6.50003 8.5L10.5 4.5L6.50003 0.5\" stroke=\"#2D2926\" stroke-linecap=\"round\"/>\n</svg>",
+                "title": "Service engine",
+                "value": "",
+                "pdf_link": "<p>Keeping the engine serviced prevents excessive wear on the engine. Change engine oil regularly according to engine recommendations. Keep air filter clean and change as needed. Keep excessive material build up off of engine. Material build up around or on the engine can restrict air flow that keeps the engine cool.</p>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "capability_card_9UQpqX"
+          ]
+        },
+        "capability_column_PCqBJX": {
+          "type": "capability-column",
+          "settings": {},
+          "blocks": {
+            "capability_card_aq3qG8": {
+              "type": "capability-card",
+              "settings": {
+                "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"9\" viewBox=\"0 0 12 9\" fill=\"none\">\n  <path d=\"M0.5 4.5H10.5M6.50003 8.5L10.5 4.5L6.50003 0.5\" stroke=\"#2D2926\" stroke-linecap=\"round\"/>\n</svg>",
+                "title": "Do not over adjust paddle rubbers.",
+                "value": "",
+                "pdf_link": "<p>Paddle rubbers should be adjust to where they are slightly away from the inside of the drum. If the rubbers fold back on the paddle they are adjusted too tight. This will cause stretching and cracking of the paddle rubber. Over adjusted paddle rubbers also cause wear on the thickness of the drum resulting in holes worn in drum.</p>"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "capability_card_aq3qG8"
+          ]
+        }
+      },
+      "block_order": [
+        "capability_column_Nm9cnK",
+        "capability_column_UDc3GP",
+        "capability_column_HFCzPd",
+        "capability_column_PCqBJX"
+      ],
+      "name": "t:sections.capability_columns.name",
+      "settings": {
+        "heading": "TOP TIPS FOR EZG MASONRY MIXER MAINTENANCE",
+        "columns_desktop": 4,
+        "accent_color": "#5b7f95",
+        "color_scheme": "",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mob": 32,
+        "padding_bottom_mob": 32,
+        "sect_class": "",
+        "stretch_cards": true,
+        "align_cards_top": true
+      }
+    },
+    "rich_text_RnF3Hc": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_i6JKfn": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "FIND THE MANUAL FOR YOUR PRODUCT",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_pH9rNb": {
+          "type": "description",
+          "settings": {
+            "full_width": false,
+            "description_text": "<p>All of our product manuals are designed to help you make the correct decision before and after buying your equipment.</p>"
+          }
+        },
+        "button_3ir6k3": {
+          "type": "button",
+          "settings": {
+            "button_primary_label": "Downloads",
+            "button_primary_style": "secondary",
+            "button_primary_link": "shopify://pages/ezg-equipment-resources",
+            "button_secondary_label": "",
+            "button_secondary_style": "secondary",
+            "button_secondary_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_i6JKfn",
+        "description_pH9rNb",
+        "button_3ir6k3"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "image_banner_dXPnwd",
+    "content_collage_xf3xCh",
+    "content_collage_q4mTbM",
+    "content_collage_W6fVer",
+    "content_collage_aTUiBy",
+    "content_collage_FcDM7T",
+    "content_collage_tppe7J",
+    "content_collage_WqQezh",
+    "content_collage_tAyFnX",
+    "content_collage_x4eWrm",
+    "capability_columns_hgt4Q9",
+    "rich_text_RnF3Hc"
   ]
 }

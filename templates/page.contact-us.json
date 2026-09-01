@@ -25,39 +25,157 @@
         "custom_text_field_R4hqDf": {
           "type": "custom_text_field",
           "settings": {
-            "label": "Order number",
-            "placeholder": "Leave field blank if not relevant to order",
-            "required_field": false,
+            "label": "Company",
+            "placeholder": "",
+            "required_field": true,
             "use_as_textarea": false
           }
         },
-        "custom_dropdown_zRWaYM": {
+        "custom_text_field_bKKQaq": {
+          "type": "custom_text_field",
+          "settings": {
+            "label": "ZIP",
+            "placeholder": "",
+            "required_field": true,
+            "use_as_textarea": false
+          }
+        },
+        "custom_text_field_ttC4Vz": {
+          "type": "custom_text_field",
+          "settings": {
+            "label": "Phone #",
+            "placeholder": "Phone number",
+            "required_field": true,
+            "use_as_textarea": false
+          }
+        },
+        "custom_dropdown_zRkJjJ": {
           "type": "custom_dropdown",
           "settings": {
-            "label": "Order Type",
-            "value": "Order support, Shipping/Tracking/Delivery, Order return, Repair/Warranty, Product information/Feedback, Request to HQ, My Online Account/Checkout, Other"
+            "label": "Select a Team",
+            "value": "Contract Manufacturing Team, Equipment Sales, Parts, Technical Support, General Inquiries"
           }
         }
       },
       "block_order": [
         "custom_text_field_R4hqDf",
-        "custom_dropdown_zRWaYM"
+        "custom_text_field_bKKQaq",
+        "custom_text_field_ttC4Vz",
+        "custom_dropdown_zRkJjJ"
       ],
       "settings": {
         "color_scheme": "",
-        "heading_text": "Contact us",
+        "heading_text": "Contact the EZG Team",
         "heading_size": "h2",
-        "section_image": "",
         "content_alignment_desktop": "ta-left-md",
         "desktop_content_ordering": "text-first-md",
         "mobile_content_alignment": "ta-left",
         "mobile_content_ordering": "text-first",
         "button_label": "Send message"
       }
+    },
+    "icon_with_text_kdUrxc": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_item_irNFHd": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
+            "icon_source": "theme_library",
+            "theme_library_icon": "user-circle",
+            "custom_code": "",
+            "title": "Thad Skinner",
+            "description": "<p>Sales Manager -<a href=\"tel:7407495844\">(740) 749-5844</a></p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_rPkBPx": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
+            "icon_source": "theme_library",
+            "theme_library_icon": "user-circle",
+            "custom_code": "",
+            "title": "Steve Wheeler",
+            "description": "<p>Masonry Sales -<a href=\"tel:7407495841\">(740) 749-5841</a></p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_iLGAxq": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
+            "icon_source": "theme_library",
+            "theme_library_icon": "user-circle",
+            "custom_code": "",
+            "title": "DJ Cunningham",
+            "description": "<p>Parts & Technical & Service -<a href=\"tel:7407495857\">(740) 749-5857</a></p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_XTWq4A": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
+            "icon_source": "theme_library",
+            "theme_library_icon": "user-circle",
+            "custom_code": "",
+            "title": "Kenny Jackson",
+            "description": "<p>Contract Manufacturing Sales -<a href=\"tel:7407495867\">(740) 749-5867</a></p>",
+            "label": "",
+            "link": ""
+          }
+        },
+        "icon_with_text_item_Jzhbp4": {
+          "type": "icon_with_text_item",
+          "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
+            "icon_source": "theme_library",
+            "theme_library_icon": "user-circle",
+            "custom_code": "",
+            "title": "Matt Schott",
+            "description": "<p>Fence Sales -<a href=\"tel:7407495836\">(740) 749-5836</a></p>",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_item_irNFHd",
+        "icon_with_text_item_rPkBPx",
+        "icon_with_text_item_iLGAxq",
+        "icon_with_text_item_XTWq4A",
+        "icon_with_text_item_Jzhbp4"
+      ],
+      "name": "t:sections.icon_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "heading": "Contact EZG",
+        "heading_size": "h5",
+        "description": "<p>Our sales team is available from 8 AM to 4:30 PM EST.</p><p>Call us at <a href=\"tel:8889716301\">(888) 971-6301</a> or email us using the form above.</p>",
+        "vertical_header": true,
+        "text_position": "fd-row",
+        "icon_size": "icon-scale-3xl",
+        "icon_color": "",
+        "carousel_desktop": "false",
+        "columns_per_row_desktop": "3",
+        "carousel_mobile": "true",
+        "label": "",
+        "link": ""
+      }
     }
   },
   "order": [
     "main",
-    "contact_form_gpdPzN"
+    "contact_form_gpdPzN",
+    "icon_with_text_kdUrxc"
   ]
 }

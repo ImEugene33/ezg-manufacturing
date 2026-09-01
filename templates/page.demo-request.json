@@ -1,0 +1,147 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": true,
+        "enable_h1_tag": true,
+        "show_page_content": true
+      }
+    },
+    "image_banner_iVTWCG": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_Ecz9HF": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Request a Demo",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_Ecz9HF"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/lean_masonry_header-2.png",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
+    "rich_text_Q7YK7c": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_YTybMY": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Schedule an EZG Equipment Demo",
+            "heading_size": "h2",
+            "enable_h1_tag": false
+          }
+        },
+        "description_z44LbF": {
+          "type": "description",
+          "settings": {
+            "full_width": true,
+            "description_text": "<p>Let us know the equipment you’d like to see by completing the following form.<br/>One of our equipment experts will be in touch to coordinate date, time, and location for the demo.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_YTybMY",
+        "description_z44LbF"
+      ],
+      "name": "t:sections.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "contact_form_gpdPzN": {
+      "type": "contact-form",
+      "blocks": {
+        "custom_text_field_R4hqDf": {
+          "type": "custom_text_field",
+          "settings": {
+            "label": "Company Name",
+            "placeholder": "Enter your Company Name",
+            "required_field": true,
+            "use_as_textarea": false
+          }
+        },
+        "custom_text_field_bKKQaq": {
+          "type": "custom_text_field",
+          "settings": {
+            "label": "ZIP",
+            "placeholder": "Enter your ZIP code",
+            "required_field": true,
+            "use_as_textarea": false
+          }
+        },
+        "custom_text_field_ttC4Vz": {
+          "type": "custom_text_field",
+          "settings": {
+            "label": "Phone #",
+            "placeholder": "Phone number",
+            "required_field": true,
+            "use_as_textarea": false
+          }
+        },
+        "custom_dropdown_zRkJjJ": {
+          "type": "custom_dropdown",
+          "settings": {
+            "label": "Products",
+            "value": "HPMC-220, HPMC-110, HP-20T4, HP-38, HP-38SS, HP-38SM, Hog Crusher, Pan Mixer"
+          }
+        }
+      },
+      "block_order": [
+        "custom_text_field_R4hqDf",
+        "custom_text_field_bKKQaq",
+        "custom_text_field_ttC4Vz",
+        "custom_dropdown_zRkJjJ"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "heading_text": "",
+        "heading_size": "h2",
+        "content_alignment_desktop": "ta-left-md",
+        "desktop_content_ordering": "text-first-md",
+        "mobile_content_alignment": "ta-left",
+        "mobile_content_ordering": "text-first",
+        "button_label": "Send message"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_iVTWCG",
+    "rich_text_Q7YK7c",
+    "contact_form_gpdPzN"
+  ]
+}

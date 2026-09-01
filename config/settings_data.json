@@ -229,6 +229,17 @@
           "secondary_button_color_text": "#a1a1a1",
           "tertiary_button_color_text": "#000000"
         }
+      },
+      "scheme-6be3bcd9-6ce2-40e0-8fb6-40ad9112f781": {
+        "settings": {
+          "color_background": "#FF8F1C",
+          "color_body_text": "#FFFFFF",
+          "primary_button_background": "#4b687a",
+          "primary_button_color_text": "#ffffff",
+          "secondary_button_color_background": "#191919",
+          "secondary_button_color_text": "#ffffff",
+          "tertiary_button_color_text": "#000000"
+        }
       }
     }
   },

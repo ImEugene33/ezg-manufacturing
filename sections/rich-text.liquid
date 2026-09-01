@@ -147,8 +147,13 @@ assign alignment_class = section.settings.desktop_content_alignment | append: ' 
       {
         "name": "t:general.settings.description.name",
         "type": "description",
-        "limit": 1,
         "settings": [
+          {
+            "type": "checkbox",
+            "id": "full_width",
+            "label": "Full width",
+            "default": false
+          },
           {
             "type": "richtext",
             "id": "description_text",

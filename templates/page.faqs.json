@@ -19,6 +19,39 @@
         "show_page_content": true
       }
     },
+    "image_banner_ngd9JD": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_b4iCLr": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "FAQ’s",
+            "heading_size": "h1",
+            "enable_h1_tag": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_b4iCLr"
+      ],
+      "name": "t:sections.image_banner.name",
+      "settings": {
+        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "enable_transparent_header": false,
+        "section_overlay_opacity": 80,
+        "section_mask_overlay_color": "#252525",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/ezgmfg.jpg",
+        "section_image_width": "max-width",
+        "height_desktop": "50vh",
+        "desktop_content_position": "center-md",
+        "desktop_content_alignment": "ta-left-md top-md",
+        "height_mobile": "70vh",
+        "mobile_content_position": "center-xs",
+        "mobile_content_alignment": "ta-left top-xs",
+        "image_banner_link": ""
+      }
+    },
     "faqs_NDejj9": {
       "type": "faqs",
       "blocks": {
@@ -70,6 +103,8 @@
         "icon_with_text_item_4zwnmd": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "box",
             "custom_code": "",
@@ -82,6 +117,8 @@
         "icon_with_text_item_PP9XdM": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "bag",
             "custom_code": "",
@@ -94,6 +131,8 @@
         "icon_with_text_item_TtVERz": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "wallet",
             "custom_code": "",
@@ -106,6 +145,8 @@
         "icon_with_text_item_jNRnqK": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "gift",
             "custom_code": "",
@@ -118,6 +159,8 @@
         "icon_with_text_item_L6GdRD": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "cycle",
             "custom_code": "",
@@ -130,6 +173,8 @@
         "icon_with_text_item_jR9cyD": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "infor",
             "custom_code": "",
@@ -153,6 +198,7 @@
         "heading": "Help categories",
         "heading_size": "h5",
         "description": "",
+        "vertical_header": false,
         "text_position": "fd-row",
         "icon_size": "icon-scale-3xl",
         "icon_color": "#000000",
@@ -166,6 +212,7 @@
   },
   "order": [
     "main",
+    "image_banner_ngd9JD",
     "faqs_NDejj9",
     "divider_FTUtVM",
     "icon_with_text_tCbNFR"

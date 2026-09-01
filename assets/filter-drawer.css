@@ -1,6 +1,7 @@
-.product-grid__fillter {
+.btn.product-grid__fillter {
   border: none;
   background: transparent;
+  color: inherit;
 }
 
 .product-grid__fillter svg {

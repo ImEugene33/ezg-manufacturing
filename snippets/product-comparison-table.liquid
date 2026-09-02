@@ -1,0 +1,54 @@
+{%- liquid
+  assign spec_data = product.metafields.custom.comparison_table.value.comparison_table.value
+-%}
+
+{%- if spec_data and spec_data.columns and product.variants.size > 1 -%}
+<div class="product-comparison-table-wrapper" style="overflow-x: auto; width: 100%;">
+  <table class="w-100" style="border-collapse: collapse; min-width: 600px; text-align: center; border: 1px solid rgba(0,0,0,0.1);">
+    <thead>
+      <tr>
+        <th style="width: 25%; background: #3c342f; color: white; padding: 20px;"></th>
+        {%- for col in spec_data.columns -%}
+          <th style="background: #3c342f; color: white; padding: 20px; border-left: 1px solid rgba(255,255,255,0.1);">{{ col }}</th>
+        {%- endfor -%}
+      </tr>
+    </thead>
+    <tbody>
+      {%- for row in spec_data.rows -%}
+        <tr style="border-bottom: 1px solid rgba(0,0,0,0.05); {% cycle 'background: #ffffff;', 'background: #f9f9f9;' %}">
+          <td style="background: #ebebeb; font-weight: bold; text-align: left; padding: 15px 20px; border-right: 1px solid rgba(0,0,0,0.05);">{{ row.label }}</td>
+          {%- for val in row.values -%}
+            <td style="padding: 15px 20px; border-left: 1px solid rgba(0,0,0,0.05);">{{ val }}</td>
+          {%- endfor -%}
+        </tr>
+      {%- endfor -%}
+      
+      <!-- Add to cart buttons row -->
+      <tr style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+        <td style="background: #ebebeb; border-right: 1px solid rgba(0,0,0,0.05);"></td>
+        {%- for col in spec_data.columns -%}
+          <td style="padding: 20px; border-left: 1px solid rgba(0,0,0,0.05);">
+             {%- liquid
+               assign match_variant = blank
+               for v in product.variants
+                 if v.title == col or v.title contains col or col contains v.title
+                   assign match_variant = v
+                   break
+                 endif
+               endfor
+             -%}
+             {%- if match_variant != blank and match_variant.available -%}
+               <form method="post" action="/cart/add" class="m-zero">
+                 <input type="hidden" name="id" value="{{ match_variant.id }}" />
+                 <button type="submit" style="padding: 10px 24px; border: 1px solid #f26b27; background: transparent; color: #f26b27; cursor: pointer; border-radius: 4px; font-weight: bold; width: 100%; max-width: 200px;">Add to Cart</button>
+               </form>
+             {%- elsif match_variant != blank -%}
+               <button disabled style="padding: 10px 24px; border: 1px solid #cccccc; background: transparent; color: #cccccc; cursor: not-allowed; border-radius: 4px; font-weight: bold; width: 100%; max-width: 200px;">Out of Stock</button>
+             {%- endif -%}
+          </td>
+        {%- endfor -%}
+      </tr>
+    </tbody>
+  </table>
+</div>
+{%- endif -%}

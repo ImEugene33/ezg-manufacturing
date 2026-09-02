@@ -67,6 +67,14 @@
             "option_name": ""
           }
         },
+        "custom_text_GNxAcR": {
+          "type": "custom_text",
+          "settings": {
+            "text": "<p>{{ product.metafields.custom.short_description | metafield_tag }}</p>",
+            "content_color": "",
+            "truncate_text": false
+          }
+        },
         "customization_code_La3XMb": {
           "type": "customization_code",
           "disabled": true,
@@ -113,7 +121,7 @@
             "custom_icon_color": "",
             "expand_collapsible": false,
             "heading": "Details",
-            "text": "<p>Contemporary design meets functional storage in this elegant three-tier display shelf. Featuring clean lines and sophisticated arch-shaped details, this storage unit is perfect for showcasing books, decorative items, and personal collections in any modern home.</p><p><strong>Features</strong><br/>- Three-tier storage shelf with contemporary styling<br/>- Part of our modern home furniture collection<br/>- Three spacious tiers for books and decorative items<br/>- Durable metal construction with premium finishes<br/>- Wide shelving design with elegant arch detailing<br/>- Assembly required</p><p><strong>Care Instructions</strong><br/>- Assembly required - two-person assembly recommended. Instructions and hardware included.<br/>- Metal construction<br/>- Clean with soft, dry cloth<br/>- Quality materials</p><p><strong>Dimensions</strong><br/>- Overall: 27.5\"L x 14\"W x 52.4\"H<br/>- Leg height: 4\"<br/>- Shelf size: 27.5\"L x 14\"W<br/>- Shelf spacing: 15\"<br/>- Weight capacity per shelf: 15 lbs<br/>- Product weight: 26 lbs</p>",
+            "text": "{{ product.metafields.custom.details | metafield_tag }}",
             "content_from_page": ""
           }
         },
@@ -171,6 +179,7 @@
         "price_wkNpbb",
         "variant_selector_yRVRxE",
         "product_variation_xQ9pLJ",
+        "custom_text_GNxAcR",
         "customization_code_La3XMb",
         "buy_buttons_YNKTfQ",
         "description_Bx3PQ7",
@@ -202,6 +211,26 @@
     "extensive_description": {
       "type": "extensive-descriptions",
       "blocks": {
+        "variant_specifications_YQmrGR": {
+          "type": "variant_specifications",
+          "settings": {
+            "heading": "Specifications",
+            "expand_collapsible": true,
+            "enable_icon": false,
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy"
+          }
+        },
+        "product_comparison_eReVBW": {
+          "type": "product_comparison",
+          "settings": {
+            "heading": "Comparison",
+            "expand_collapsible": true,
+            "enable_icon": false,
+            "icon_source": "theme_library",
+            "theme_library_icon": "happy"
+          }
+        },
         "divider_Le3Wct": {
           "type": "divider",
           "settings": {
@@ -287,6 +316,8 @@
         }
       },
       "block_order": [
+        "variant_specifications_YQmrGR",
+        "product_comparison_eReVBW",
         "divider_Le3Wct",
         "performance_graphs_nDgApt",
         "collapsible_item_4zPfyx",

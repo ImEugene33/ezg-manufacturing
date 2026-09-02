@@ -336,3 +336,12 @@ sht-menu-header .menu__link-megamenu  .toggle__icon {
 .mega-menu-wrapper {
     border-top: 2px solid #FF9015 !important;
 }
+
+.js-carousel-next-btn,
+.js-carousel-prev-btn,
+.btn.btn-icon-m,
+.btn.btn-icon-l,
+.social-share-link {
+  min-width: unset;
+  min-height: unset;
+}

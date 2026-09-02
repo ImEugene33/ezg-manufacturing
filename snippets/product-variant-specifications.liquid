@@ -1,0 +1,108 @@
+{%- liquid
+  assign spec_data = product.metafields.custom.comparison_table.value.comparison_table.value
+-%}
+
+{%- if spec_data and spec_data.columns -%}
+  <sht-variant-specs-updater data-product-id="{{ product.id }}">
+    <div class="variant-specifications-wrapper">
+      {%- for variant in product.variants -%}
+        {%- liquid
+          # Find the index of this variant in the JSON columns
+          assign col_index = -1
+          for col in spec_data.columns
+            if col == variant.title
+              assign col_index = forloop.index0
+              break
+            endif
+          endfor
+          
+          # If not found exactly, try matching the start or first part
+          if col_index == -1
+            for col in spec_data.columns
+              if variant.title contains col or col contains variant.title
+                assign col_index = forloop.index0
+                break
+              endif
+            endfor
+          endif
+        -%}
+
+        <div class="variant-spec-table js-variant-spec-table" 
+             data-variant-id="{{ variant.id }}" 
+             {% if product.selected_or_first_available_variant.id != variant.id %}hidden{% endif %}
+             style="{% if product.selected_or_first_available_variant.id != variant.id %}display: none;{% endif %}"
+             >
+          {%- if col_index != -1 -%}
+            <table class="variant-specs w-100" style="border-collapse: collapse; text-align: left; width: 100%;">
+              <tbody>
+                {%- for row in spec_data.rows -%}
+                  <tr style="border-bottom: 1px solid rgba(0,0,0,0.05); {% cycle 'background: #ffffff;', 'background: #f9f9f9;' %}">
+                    <td class="p-s" style="width: 30%; font-weight: bold; vertical-align: top;">
+                      {{ row.label }}
+                    </td>
+                    <td class="p-s" style="width: 70%; vertical-align: top;">
+                      {{ row.values[col_index] }}
+                    </td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          {%- else -%}
+            <p>No specifications available for {{ variant.title }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </sht-variant-specs-updater>
+{%- endif -%}
+<script>
+  if (!customElements.get('sht-variant-specs-updater')) {
+    class ShtVariantSpecsUpdater extends HTMLElement {
+      constructor() {
+        super();
+        this.tables = this.querySelectorAll('.js-variant-spec-table');
+        this.productId = this.dataset.productId;
+        
+        // Listen to variant changes. Many OS 2.0 themes dispatch 'variant:change' or 'variant:changed'
+        document.addEventListener('variant:change', this.onVariantChange.bind(this));
+        document.addEventListener('variant:changed', this.onVariantChange.bind(this));
+        
+        // Hook into history.replaceState which OS 2.0 themes use to update the URL
+        const originalReplaceState = history.replaceState;
+        history.replaceState = function() {
+          originalReplaceState.apply(history, arguments);
+          window.dispatchEvent(new Event('replacestate'));
+        };
+        window.addEventListener('replacestate', this.checkUrlForVariant.bind(this));
+      }
+      
+      onVariantChange(event) {
+        const variant = event.detail.variant;
+        if (variant && variant.id) {
+          this.updateTable(variant.id);
+        }
+      }
+      
+      checkUrlForVariant() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const variantId = urlParams.get('variant');
+        if (variantId) {
+          this.updateTable(variantId);
+        }
+      }
+      
+      updateTable(variantId) {
+        this.tables.forEach(table => {
+          if (table.dataset.variantId == variantId) {
+            table.hidden = false;
+            table.style.display = '';
+          } else {
+            table.hidden = true;
+            table.style.display = 'none';
+          }
+        });
+      }
+    }
+    customElements.define('sht-variant-specs-updater', ShtVariantSpecsUpdater);
+  }
+</script>

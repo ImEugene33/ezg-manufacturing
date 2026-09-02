@@ -9,31 +9,21 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "disabled": true,
-      "settings": {
-        "color_scheme": "",
-        "show_page_title": true,
-        "enable_h1_tag": true,
-        "show_page_content": true
-      }
-    },
     "image_banner_nCiVRc": {
       "type": "image-banner",
       "blocks": {
         "heading_qDft3k": {
           "type": "heading",
           "settings": {
-            "heading_text": "",
-            "heading_size": "headline",
+            "heading_text": "EZG Tradeshows & Events",
+            "heading_size": "h1",
             "enable_h1_tag": false
           }
         },
         "description_9847dw": {
           "type": "description",
           "settings": {
-            "description_text": "<p></p><p></p>"
+            "description_text": "<p></p><p>Our team can be found on the road at industry leading trade events throughout the year. We look forward to seeing our customers in person and taking the opportunity to provide hands on instruction for our equipment. </p><p> If you’re planning to attend a show and wish to arrange to speak with one of our sales specialists, or just want to find out where we will be exhibiting equipment this is the place to connect with us and find out more.</p>"
           }
         }
       },
@@ -46,12 +36,12 @@
         "color_scheme": "scheme-1",
         "enable_transparent_header": false,
         "section_overlay_opacity": 50,
-        "section_mask_overlay_color": "",
-        "section_content_overlay_color": "",
-        "desktop_image": "shopify://shop_images/WOC_2025_banner.png",
+        "section_mask_overlay_color": "#101010",
+        "section_content_overlay_color": "#ffffff",
+        "desktop_image": "shopify://shop_images/events_page-1-1.jpg",
         "section_image_width": "max-width",
         "height_desktop": "50vh",
-        "desktop_content_position": "start-md",
+        "desktop_content_position": "center-md",
         "desktop_content_alignment": "ta-left-md top-md",
         "height_mobile": "70vh",
         "mobile_content_position": "center-xs",
@@ -73,6 +63,7 @@
         "description_6648iV": {
           "type": "description",
           "settings": {
+            "full_width": false,
             "description_text": "<p>Our team can be found on the road at industry leading trade events throughout the year. We look forward to seeing our customers in person and taking the opportunity to provide hands on instruction for our equipment. </p><p> If you’re planning to attend a show and wish to arrange to speak with one of our sales specialists, or just want to find out where we will be exhibiting equipment this is the place to connect with us and find out more.</p>"
           }
         },
@@ -93,11 +84,21 @@
         "description_6648iV",
         "button_GgwNP9"
       ],
+      "disabled": true,
       "name": "t:sections.rich_text.name",
       "settings": {
         "color_scheme": "",
         "desktop_content_alignment": "ta-left-md top-md",
         "mobile_content_alignment": "ta-left top-xs"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "color_scheme": "",
+        "show_page_title": false,
+        "enable_h1_tag": false,
+        "show_page_content": true
       }
     },
     "blog_post_list_UJRe9h": {
@@ -130,6 +131,7 @@
         "additional_information_gHpphb",
         "excerpt_x6yT9J"
       ],
+      "disabled": true,
       "name": "t:sections.blog_post_list.name",
       "settings": {
         "color_scheme": "",
@@ -150,9 +152,9 @@
     }
   },
   "order": [
-    "main",
     "image_banner_nCiVRc",
     "rich_text_V9UbLn",
+    "main",
     "blog_post_list_UJRe9h"
   ]
 }

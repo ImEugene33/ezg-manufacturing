@@ -520,6 +520,20 @@
 							</div>
 						{%- endif -%}
           {%- when 'collapsible_item' -%}
+            {%- assign render_collapsible_item = false -%}
+            {%- if block.settings.text != blank or block.settings.content_from_page != blank -%}
+              {%- assign render_collapsible_item = true -%}
+            {%- endif -%}
+            {%- if block.settings.files_metafield != blank -%}
+              {%- assign files_ns = block.settings.files_metafield | split: '.' | first -%}
+              {%- assign files_key = block.settings.files_metafield | split: '.' | last -%}
+              {%- assign file_list = product.metafields[files_ns][files_key].value -%}
+              {%- if file_list -%}
+                {%- assign render_collapsible_item = true -%}
+              {%- endif -%}
+            {%- endif -%}
+
+            {%- if render_collapsible_item -%}
             <div class="product__info product__block-{{- block.type }} mb-m" {{ block.shopify_attributes }}>
               <sht-accordion class="accordion d-flex fd-column">
                 <div class="accordion__item js-accordion-item rad-m border">
@@ -538,11 +552,31 @@
                     {{- block.settings.text -}}
                     {%- if block.settings.content_from_page != blank -%}
                       {{- block.settings.content_from_page.content -}}
-                   {%- endif -%}
+                    {%- endif -%}
+                    {%- if block.settings.files_metafield != blank -%}
+                      {%- liquid
+                        assign files_ns = block.settings.files_metafield | split: '.' | first
+                        assign files_key = block.settings.files_metafield | split: '.' | last
+                        assign file_list = product.metafields[files_ns][files_key].value
+                      -%}
+                      {%- if file_list -%}
+                        <ul class="file-list mt-xs ls-none p-zero">
+                        {%- for file in file_list -%}
+                          <li class="mb-xs">
+                            <a href="{{ file.url }}" target="_blank" class="d-flex middle-xs gap-xs td-none color-text">
+                              {% render 'icon', theme_library_icon: 'document', size: 'icon-fix-m' %}
+                              <span class="td-underline">{{ file.url | split: '/' | last | split: '?' | first }}</span>
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    {%- endif -%}
                   </div>
                 </div>
               </sht-accordion>
             </div>
+            {%- endif -%}
           {%- when 'popup_content' -%}
             {%- liquid
               assign popup_content_dialog_id = block.id | append: section.id | md5 | truncate: 12, ""
@@ -4744,6 +4778,16 @@
           "id": "content_from_page",
           "label": "t:general.settings.content.label",
           "info": "t:sections.main_product.blocks.collapsible_item.settings.content_from_page.info"
+        },
+        {
+          "type": "header",
+          "content": "File List (Metafield)"
+        },
+        {
+          "type": "text",
+          "id": "files_metafield",
+          "label": "Files list metafield",
+          "info": "Enter namespace and key (e.g., custom.manuals). The metafield must be of type 'list.file_reference'."
         }
       ]
     },

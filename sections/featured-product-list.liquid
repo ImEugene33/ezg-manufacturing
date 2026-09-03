@@ -19,6 +19,7 @@
   assign index = 1
   assign index_accessibility = 0
 -%}
+{%- if section.settings.collection != blank or section.settings.product_list != blank -%}
 {%- render 'section-padding-collapse' -%}
 <div data-animate="regular-section" class="js-animate section section--vertical o-hidden color-{{- section.settings.color_scheme }} background" data-ui-component="Section Featured Product List">
   {%- if section.settings.heading != blank or section.settings.description != blank or section.settings.button_text != blank or section.settings.enable_countdown == true -%}
@@ -151,6 +152,7 @@
     </div>
   </div>
 </div>
+{%- endif -%}
 
 {% schema %}
 {

@@ -25,6 +25,26 @@
               endif
             endfor
           endif
+
+          # Fallback for single product: match by variant.sku, product.title, or product.handle
+          if col_index == -1 and product.variants.size == 1
+            for col in spec_data.columns
+              if col != blank
+                if variant.sku != blank and variant.sku contains col or col contains variant.sku
+                  assign col_index = forloop.index0
+                  break
+                elsif product.title contains col or product.handle contains col
+                  assign col_index = forloop.index0
+                  break
+                endif
+              endif
+            endfor
+
+            # If still not matched, default to first column (base model)
+            if col_index == -1
+              assign col_index = 0
+            endif
+          endif
         -%}
 
         <div class="variant-spec-table js-variant-spec-table" 

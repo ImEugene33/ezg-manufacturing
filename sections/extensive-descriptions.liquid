@@ -244,7 +244,10 @@
           </div>
           {%- endif -%}
         {%- when 'product_comparison' -%}
-          {%- if product.metafields.custom.comparison_table != blank and product.variants.size > 1 -%}
+          {%- liquid
+            assign comp_table_cols = product.metafields.custom.comparison_table.value.comparison_table.value.columns
+          -%}
+          {%- if product.metafields.custom.comparison_table != blank and comp_table_cols.size > 1 -%}
           <div class="product__info product__block-{{- block.type }} mb-xl" {{ block.shopify_attributes }}>
             <sht-accordion class="accordion d-flex fd-column">
               <div class="accordion__item js-accordion-item rad-m border">

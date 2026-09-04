@@ -2,7 +2,7 @@
   assign spec_data = product.metafields.custom.comparison_table.value.comparison_table.value
 -%}
 
-{%- if spec_data and spec_data.columns and product.variants.size > 1 -%}
+{%- if spec_data and spec_data.columns and spec_data.columns.size > 1 -%}
 <div class="product-comparison-table-wrapper" style="overflow-x: auto; width: 100%;">
   <table class="w-100" style="border-collapse: collapse; min-width: 600px; text-align: center; border: 1px solid rgba(0,0,0,0.1);">
     <thead>
@@ -23,6 +23,7 @@
         </tr>
       {%- endfor -%}
       
+      {%- if product.variants.size > 1 -%}
       <!-- Add to cart buttons row -->
       <tr style="border-bottom: 1px solid rgba(0,0,0,0.05);">
         <td style="background: #ebebeb; border-right: 1px solid rgba(0,0,0,0.05);"></td>
@@ -48,6 +49,7 @@
           </td>
         {%- endfor -%}
       </tr>
+      {%- endif -%}
     </tbody>
   </table>
 </div>

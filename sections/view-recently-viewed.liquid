@@ -1,5 +1,9 @@
 <sht-carousel-itm class="carousel__item clm js-carousel-item p-relative scrollable-aln-start" role="group" aria-roledescription="Slide">
-  {% render 'mini-card-product-recently-viewed', quick_action: true, show_variants: true, show_badge: true %}
+  {% render 'card-product-block',
+    product: product,
+    button_compare: false,
+    show_quick_view: true
+  %}
 </sht-carousel-itm>
 
 {% schema %}

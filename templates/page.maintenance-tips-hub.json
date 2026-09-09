@@ -638,7 +638,7 @@
                 "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"9\" viewBox=\"0 0 12 9\" fill=\"none\">\n  <path d=\"M0.5 4.5H10.5M6.50003 8.5L10.5 4.5L6.50003 0.5\" stroke=\"#2D2926\" stroke-linecap=\"round\"/>\n</svg>",
                 "title": "Keep paddle shaft seals greased",
                 "value": "",
-                "pdf_link": "<p></p><p>Grease seals daily to prevent material from leaking around the paddle shaft and getting into the bearings.</p><p>If mixer is running all day, grease at mid-day and at the end of the day. Grease at the end of use will help push material that may have gotten into the seal out before it sets up.</p><p>Material build up within the seal will wear grooves in the shaft causing the seals to fail, and damage shaft resulting in costly repairs.</p>"
+                "pdf_link": "<p>Grease seals daily to prevent material from leaking around the paddle shaft and getting into the bearings.</p><p>If mixer is running all day, grease at mid-day and at the end of the day. Grease at the end of use will help push material that may have gotten into the seal out before it sets up.</p><p>Material build up within the seal will wear grooves in the shaft causing the seals to fail, and damage shaft resulting in costly repairs.</p>"
               },
               "blocks": {}
             }
@@ -710,6 +710,9 @@
         "capability_column_UDc3GP",
         "capability_column_HFCzPd",
         "capability_column_PCqBJX"
+      ],
+      "custom_css": [
+        ".capability-columns__heading {max-width: 800px;}"
       ],
       "name": "t:sections.capability_columns.name",
       "settings": {

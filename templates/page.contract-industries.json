@@ -50,7 +50,7 @@
             "button_primary_link": "",
             "button_secondary_label": "CONTACT OUR TEAM",
             "button_secondary_style": "secondary",
-            "button_secondary_link": ""
+            "button_secondary_link": "shopify://pages/contact-us"
           }
         }
       },
@@ -69,7 +69,7 @@
         "section_content_overlay_color": "#ffffff",
         "desktop_image": "shopify://shop_images/contract-assembly-services-banner_1.png",
         "section_image_width": "max-width",
-        "height_desktop": "adapt_img",
+        "height_desktop": "70vh",
         "desktop_content_position": "center-md",
         "desktop_content_alignment": "ta-left-md top-md",
         "height_mobile": "70vh",
@@ -84,6 +84,8 @@
         "icon_with_text_item_T8nmwy": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -96,6 +98,8 @@
         "icon_with_text_item_9xJUUK": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -108,6 +112,8 @@
         "icon_with_text_item_a7jqfN": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -120,6 +126,8 @@
         "icon_with_text_item_gCmbhF": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -132,6 +140,8 @@
         "icon_with_text_item_WgcLxP": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -144,6 +154,8 @@
         "icon_with_text_item_bEwPJM": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -168,6 +180,7 @@
         "heading": "",
         "heading_size": "h5",
         "description": "",
+        "vertical_header": false,
         "text_position": "fd-column",
         "icon_size": "icon-scale-3xl",
         "icon_color": "#5b7f95",
@@ -192,6 +205,7 @@
         "description_FDzDcR": {
           "type": "description",
           "settings": {
+            "full_width": false,
             "description_text": "<p>Versatile and multipurpose, the cutting-edge media-promotion sections easily handle images, slideshows, and videos, allowing you to enhance your online store with diverse content forms.</p>"
           }
         },
@@ -203,7 +217,7 @@
             "button_primary_link": "",
             "button_secondary_label": "CONTACT OUR TEAM",
             "button_secondary_style": "secondary",
-            "button_secondary_link": ""
+            "button_secondary_link": "shopify://pages/contact-us"
           }
         }
       },

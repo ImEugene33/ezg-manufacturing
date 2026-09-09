@@ -68,7 +68,7 @@
         "color_scheme": "scheme-1",
         "enable_fullwidth": false,
         "show_layout_grid": true,
-        "desktop_row_height": 440,
+        "desktop_row_height": 400,
         "mobile_row_height": 300
       }
     },
@@ -578,7 +578,7 @@
         "color_scheme": "scheme-6be3bcd9-6ce2-40e0-8fb6-40ad9112f781",
         "enable_fullwidth": false,
         "show_layout_grid": true,
-        "desktop_row_height": 440,
+        "desktop_row_height": 400,
         "mobile_row_height": 300
       }
     },

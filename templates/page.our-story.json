@@ -174,7 +174,7 @@
             "heading": "EZG Today",
             "enable_h1_tag": false,
             "heading_size": "h3",
-            "description": "<p>Damian continues to expand EZG’s services and is quickly becoming a leading industry voice. As an author, Damian also shares what he’s learned after a lifetime of experience in his book<em>R.A.C.E. – Rewarding and Challenging Employees: For Profits in Masonry</em>.<a href=\"https://ezgmfg.com/category/contractor-tip-of-the-month/\" target=\"_blank\">Damian’s column</a>, “Contractor Tip of the Month,” is featured in multiple major industry magazines. He also regularly offers seminars and consultations for masonry and construction organizations all over the country.</p>",
+            "description": "<p>Damian continues to expand EZG’s services and is quickly becoming a leading industry voice. As an author, Damian also shares what he’s learned after a lifetime of experience in his book<em>R.A.C.E. – Rewarding and Challenging Employees: For Profits in Masonry</em>. <a href=\"https://ezgmfg.com/category/contractor-tip-of-the-month/\" target=\"_blank\">Damian’s column</a>, “Contractor Tip of the Month,” is featured in multiple major industry magazines. He also regularly offers seminars and consultations for masonry and construction organizations all over the country.</p>",
             "desktop_content_position": "start-md",
             "desktop_content_alignment": "ta-left-md top-md",
             "desktop_column": "4",
@@ -197,6 +197,9 @@
         "text_nc39NF",
         "text_pnXjQ3",
         "text_ymMHRn"
+      ],
+      "custom_css": [
+        "@media (max-width: 750px) {sht-content-collage .content-collage {display: flex; gap: 15px; flex-direction: column; } .content-collage__block:has(sht-load-video) {aspect-ratio: 1; }}"
       ],
       "name": "t:sections.content_collage.name",
       "settings": {

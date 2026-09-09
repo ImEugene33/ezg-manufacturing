@@ -118,7 +118,7 @@
         "section_content_overlay_color": "",
         "video_source": "external",
         "external_video_link": "https://youtu.be/KROI4DnVS4w",
-        "media_ratio": "1.778",
+        "media_ratio": "2.22",
         "video_thumbnail_image": "shopify://shop_images/Frame_113.png",
         "video_width": "max-width",
         "content_position": "middle-md",
@@ -253,13 +253,17 @@
         "icon_with_text_item_kpMD4H",
         "icon_with_text_item_exThRt"
       ],
+      "custom_css": [
+        ".section__heading,.section__description {width: 100%;}",
+        ".section__text-text {max-width: 100%;}"
+      ],
       "name": "t:sections.icon_with_text.name",
       "settings": {
         "color_scheme": "",
         "heading": "COMMITTED TO SAFETY",
         "heading_size": "h5",
         "description": "<p>The safety of our employees and customers is our company’s greatest responsibilities. We complete projects at a fast rate, but never at the expense of our employees’ safety. We always adhere to the following policies:</p>",
-        "vertical_header": false,
+        "vertical_header": true,
         "text_position": "fd-column",
         "icon_size": "icon-scale-3xl",
         "icon_color": "",
@@ -544,9 +548,10 @@
         "icon_with_text_item_z4qV9N",
         "icon_with_text_item_EER3jn"
       ],
+      "disabled": true,
       "name": "t:sections.icon_with_text.name",
       "settings": {
-        "color_scheme": "scheme-dfd7f710-1c3c-4730-be7a-3884f4f918ee",
+        "color_scheme": "scheme-575d54eb-b869-4257-9329-abea7ffa0e02",
         "heading": "INDUSTRIES WE SERVE",
         "heading_size": "h3-regular",
         "description": "<p>At EZG we hold quarterly safety meetings and have third parties provide us with shop inspections and auto metric testing. We also have random in-house safety audits by our safety team.<br/><br/>All equipment is reviewed by a safety standards check to make sure every part is accurate and each piece of equipment has all of the correct warning labels. All equipment includes a manual with safety procedures and warnings for our customers.</p>",
@@ -561,218 +566,127 @@
         "link": ""
       }
     },
-    "divider_H4raLA": {
-      "type": "divider",
-      "disabled": true,
-      "settings": {
-        "divider_color": "#f9f9f9"
-      }
-    },
-    "rich_text_XEkVL8": {
-      "type": "rich-text",
+    "rich_text_custom_7FX4DN": {
+      "type": "rich-text-custom",
       "blocks": {
-        "subheading_gey8fn": {
-          "type": "subheading",
-          "settings": {
-            "subheading_text": "Product DNA"
-          }
-        },
-        "heading_CjC9gf": {
+        "heading_BfFnH3": {
           "type": "heading",
           "settings": {
-            "heading_text": "Crafted for Quality and Sustainability",
-            "heading_size": "h3",
-            "enable_h1_tag": false
+            "heading_tag": "h2",
+            "heading": "<p>INDUSTRIES WE SERVE</p>"
           }
         },
-        "description_khNwpk": {
-          "type": "description",
+        "text_qyEKYB": {
+          "type": "text",
           "settings": {
             "full_width": false,
-            "description_text": "<p>Sustainability is at the heart of everything we do. From the materials we choose to the packaging we use, every detail is designed with the planet in mind.</p><p>We prioritize responsibly sourced materials, work with ethical suppliers, and constantly seek ways to reduce waste in our processes. By creating durable, timeless pieces, we aim to minimize the need for replacements and promote a culture of mindful consumption.</p>"
+            "text": "<p>At EZG we hold quarterly safety meetings and have third parties provide us with shop inspections and auto metric testing. We also have random in-house safety audits by our safety team.<br/><br/>All equipment is reviewed by a safety standards check to make sure every part is accurate and each piece of equipment has all of the correct warning labels. All equipment includes a manual with safety procedures and warnings for our customers.<br/><br/></p>"
           }
         }
       },
       "block_order": [
-        "subheading_gey8fn",
-        "heading_CjC9gf",
-        "description_khNwpk"
+        "heading_BfFnH3",
+        "text_qyEKYB"
       ],
-      "disabled": true,
+      "name": "t:sections.rich_text_custom.name",
       "settings": {
-        "color_scheme": "",
-        "desktop_content_alignment": "ta-left-md top-md",
-        "mobile_content_alignment": "ta-left top-xs"
+        "text_align": "left",
+        "padding_top": 40,
+        "padding_bottom": 32,
+        "padding_top_mob": 32,
+        "padding_bottom_mob": 20,
+        "color_scheme": "scheme-575d54eb-b869-4257-9329-abea7ffa0e02",
+        "sect_class": ""
       }
     },
-    "custom_section_aBJjCt": {
-      "type": "custom-section",
+    "custom_grid_Qr7N6N": {
+      "type": "custom-grid",
       "blocks": {
-        "heading_GQ64Ey": {
-          "type": "heading",
+        "card_4dJwk3": {
+          "type": "card",
           "settings": {
-            "heading_text": "Committed to Safety",
-            "heading_size": "h2",
-            "enable_h1_tag": false
-          },
-          "blocks": {}
-        },
-        "description_MYyz68": {
-          "type": "description",
-          "settings": {
-            "description": "<p>The safety of our employees and customers is our company’s greatest responsibilities. We complete projects at a fast rate, but never at the expense of our employees’ safety. We always adhere to the following policies:</p><ul><li>We are committed to providing a safe work environment for all of our employees.</li><li>We expect each employee to be responsible for their safety and to be held accountable for the safety of the people and equipment around them.</li><li>We expect each employee to: promote safety to others, report all hazards to a supervisor, use appropriate protective equipment and follow established production procedures at all times.</li></ul><p>At EZG we hold quarterly safety meetings and have third parties provide us with shop inspections and auto metric testing. We also have random in-house safety audits by our safety team.All equipment is reviewed by a safety standards check to make sure every part is accurate and each piece of equipment has all of the correct warning labels. All equipment includes a manual with safety procedures and warnings for our customers.</p>"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "heading_GQ64Ey",
-        "description_MYyz68"
-      ],
-      "disabled": true,
-      "name": "t:general.custom_section",
-      "settings": {
-        "color_scheme": "scheme-554f3a13-3752-4c9d-89c1-dc948a08cf1a",
-        "section_overlay_opacity": 30,
-        "section_mask_overlay_color": "",
-        "section_content_overlay_color": "",
-        "background_media": "none",
-        "video_source": "external",
-        "external_video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "show_video_controllers": true,
-        "enable_video_loop": true,
-        "video_controller_color": "transparent",
-        "section_image_width": "stretch",
-        "desktop_height": "auto",
-        "desktop_direction": "fd-column-md",
-        "content_alignment_desktop_vertical": "ta-left-md top-md",
-        "content_position_desktop_vertical": "start-md",
-        "content_alignment_desktop_horizontal": "ta-left-md start-md",
-        "content_position_desktop_horizontal": "top-md",
-        "desktop_gap": 24,
-        "mobile_height": "70vh",
-        "mobile_direction": "fd-column",
-        "content_alignment_mobile_vertical": "ta-center middle-xs",
-        "content_position_mobile_vertical": "center-xs",
-        "content_alignment_mobile_horizontal": "ta-left start-xs",
-        "content_position_mobile_horizontal": "top-xs",
-        "mobile_gap": 24,
-        "padding_top": 32,
-        "padding_bottom": 32
-      }
-    },
-    "icon_with_text_PQFR4K": {
-      "type": "icon-with-text",
-      "blocks": {
-        "icon_with_text_item_8aKnpL": {
-          "type": "icon_with_text_item",
-          "settings": {
-            "use_custom_color_scheme": false,
-            "color_scheme": "",
-            "icon_source": "theme_library",
-            "theme_library_icon": "happy",
-            "custom_code": "",
-            "title": "Teamwork",
-            "description": "",
-            "label": "",
-            "link": ""
+            "icon_style": "check",
+            "heading": "MASONRY",
+            "text": "<p>In continuation with our belief that customers always come first, our equipment is designed for teams to learn best practices quickly. Every piece of masonry equipment is designed to increase efficiency, safety and profitability – something we like to refer to as LEAN Masonry®.</p>",
+            "link_label": "Learn More",
+            "link": "https://8zka0t-xc.myshopify.com/pages/milling"
           }
         },
-        "icon_with_text_item_xhnE7t": {
-          "type": "icon_with_text_item",
+        "card_aGYBjz": {
+          "type": "card",
           "settings": {
-            "use_custom_color_scheme": false,
-            "color_scheme": "",
-            "icon_source": "theme_library",
-            "theme_library_icon": "happy",
-            "custom_code": "",
-            "title": "Best In-Class Equipment",
-            "description": "",
-            "label": "",
-            "link": ""
+            "icon_style": "check",
+            "heading": "FENCING",
+            "text": "<p>EZG’s fencing equipment eliminates obstacles typically encountered during both the installation and removal process. Developed to automate physically demanding tasks, our complete line of fencing products includes mixing and post hole filling equipment, dispensers for barbwire, chain link, and woven wire as well as a variety of fencing accessories.</p>",
+            "link_label": "Learn More",
+            "link": "https://8zka0t-xc.myshopify.com/blogs/hog-blog/building-a-fence-on-top-of-a-retaining-wall"
           }
         },
-        "icon_with_text_item_VHcDqN": {
-          "type": "icon_with_text_item",
+        "card_FXFgKp": {
+          "type": "card",
           "settings": {
-            "use_custom_color_scheme": false,
-            "color_scheme": "",
-            "icon_source": "theme_library",
-            "theme_library_icon": "happy",
-            "custom_code": "",
-            "title": "Trust and Respect",
-            "description": "",
-            "label": "",
-            "link": ""
+            "icon_style": "check",
+            "heading": "HARDSCAPE",
+            "text": "<p>Providing contractors with innovative tools is at our core. From drafting to completion, our labor-saving line of hardscape equipment focuses on reducing the costs and time required to complete a job.</p>",
+            "link_label": "Learn More",
+            "link": "https://8zka0t-xc.myshopify.com/collections/hardscape"
           }
         },
-        "icon_with_text_item_gcYtiQ": {
-          "type": "icon_with_text_item",
+        "card_nzd7qJ": {
+          "type": "card",
           "settings": {
-            "use_custom_color_scheme": false,
-            "color_scheme": "",
-            "icon_source": "theme_library",
-            "theme_library_icon": "happy",
-            "custom_code": "",
-            "title": "Safety",
-            "description": "",
-            "label": "",
-            "link": ""
+            "icon_style": "check",
+            "heading": "PRECAST",
+            "text": "<p>The quality of EZG’s precast and refractory equipment is what sets us apart from competing manufacturers. We work closely with our customers and listen to their needs before streamlining our equipment to better serve you. This is why after nearly two decades of making model improvements our mixers and dispensers are second to none.</p>",
+            "link_label": "Learn More",
+            "link": "https://8zka0t-xc.myshopify.com/collections/precast-refractory"
           }
         },
-        "icon_with_text_item_rNb9fW": {
-          "type": "icon_with_text_item",
+        "card_CxGVNg": {
+          "type": "card",
           "settings": {
-            "use_custom_color_scheme": false,
-            "color_scheme": "",
-            "icon_source": "theme_library",
-            "theme_library_icon": "happy",
-            "custom_code": "",
-            "title": "Innovation",
-            "description": "",
-            "label": "",
-            "link": ""
+            "icon_style": "check",
+            "heading": "REFRACTORY",
+            "text": "<p>The quality of EZG’s precast and refractory equipment is what sets us apart from competing manufacturers. We work closely with our customers and listen to their needs before streamlining our equipment to better serve you. This is why after nearly two decades of making model improvements our mixers and dispensers are second to none.</p>",
+            "link_label": "Learn More",
+            "link": "https://8zka0t-xc.myshopify.com/collections/refractory-mixers"
           }
         },
-        "icon_with_text_item_XtqHBT": {
-          "type": "icon_with_text_item",
+        "card_cXhtmF": {
+          "type": "card",
           "settings": {
-            "use_custom_color_scheme": false,
-            "color_scheme": "",
-            "icon_source": "theme_library",
-            "theme_library_icon": "happy",
-            "custom_code": "",
-            "title": "Satisfied Customers",
-            "description": "",
-            "label": "",
-            "link": ""
+            "icon_style": "check",
+            "heading": "CONTRACT MANUFACTURING",
+            "text": "<p>Derived from our manufacturing roots, EZG is a state-of-the-art contract manufacturing shop that can handle virtually every metal fabrication process. From bending and press braking to laser-cutting and machining. We believe in working closely with customers to ensure we provide a solution to meet your needs with the highest quality possible.</p>",
+            "link_label": "Learn More",
+            "link": "https://8zka0t-xc.myshopify.com/pages/contract-manufacturing"
           }
         }
       },
       "block_order": [
-        "icon_with_text_item_8aKnpL",
-        "icon_with_text_item_xhnE7t",
-        "icon_with_text_item_VHcDqN",
-        "icon_with_text_item_gcYtiQ",
-        "icon_with_text_item_rNb9fW",
-        "icon_with_text_item_XtqHBT"
+        "card_4dJwk3",
+        "card_aGYBjz",
+        "card_FXFgKp",
+        "card_nzd7qJ",
+        "card_CxGVNg",
+        "card_cXhtmF"
       ],
-      "disabled": true,
-      "name": "t:sections.icon_with_text.name",
+      "custom_css": [
+        ".custom-grid {background: #191919;}",
+        ".custom-grid__card-icon{display: none;}"
+      ],
+      "name": "t:sections.custom_grid.name",
       "settings": {
-        "color_scheme": "",
-        "heading": "EZG Safety Information",
-        "heading_size": "h5",
-        "description": "",
-        "vertical_header": false,
-        "text_position": "fd-row",
-        "icon_size": "icon-scale-3xl",
-        "icon_color": "",
-        "carousel_desktop": "false",
-        "columns_per_row_desktop": "3",
-        "carousel_mobile": "true",
-        "label": "",
-        "link": ""
+        "columns_desktop": 3,
+        "image_layout": "grid",
+        "image_link": "",
+        "image_alt": "",
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "padding_top_mob": 0,
+        "padding_bottom_mob": 32,
+        "color_scheme": "scheme-1",
+        "sect_class": ""
       }
     },
     "rich_text_3Ge8FM": {
@@ -811,7 +725,7 @@
         "button_ye783j"
       ],
       "settings": {
-        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
+        "color_scheme": "scheme-097aa6d3-1c98-4e3b-8ce5-e2d6648d3a25",
         "desktop_content_alignment": "ta-left-md top-md",
         "mobile_content_alignment": "ta-left top-xs"
       }
@@ -829,10 +743,8 @@
     "image_with_text_GzAekK",
     "content_collage_4NX7Pg",
     "icon_with_text_F6978b",
-    "divider_H4raLA",
-    "rich_text_XEkVL8",
-    "custom_section_aBJjCt",
-    "icon_with_text_PQFR4K",
+    "rich_text_custom_7FX4DN",
+    "custom_grid_Qr7N6N",
     "rich_text_3Ge8FM"
   ]
 }

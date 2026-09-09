@@ -2,6 +2,7 @@
   assign form_id = 'ContactForm-' | append: section.id
   assign section_image = section.settings.section_image
   assign default_button_send_message = 'templates.contact.form.send' | t
+  assign heading_tag = section.settings.heading_tag | default: 'h2'
 -%}
 <div class="color-{{ section.settings.color_scheme }} section-contact section-contact--{{ section.id }} {{ section.settings.desktop_content_ordering }} {{ section.settings.mobile_content_ordering }}" id="{{ section.id }}" style="margin-bottom: 50px;">
   <div class="ctnr" style="--section-image-radius: {{ section.settings.section_image_radius }}px;">
@@ -10,7 +11,11 @@
         <div class="contact-form-content w-100">
           <div class="s-header {{ section.settings.content_alignment_desktop }} {{ section.settings.mobile_content_alignment }}" style="margin-bottom: 50px;">
             {%- if section.settings.heading_text != blank -%}
-              <h2 class="section__heading {{ section.settings.heading_size }} m-zero">{{ section.settings.heading_text | escape }}</h2>
+              {%- if heading_tag == 'h1' -%}
+                <h1 class="section__heading {{ section.settings.heading_size }} m-zero">{{ section.settings.heading_text | escape }}</h1>
+              {%- else -%}
+                <h2 class="section__heading {{ section.settings.heading_size }} m-zero">{{ section.settings.heading_text | escape }}</h2>
+              {%- endif -%}
             {%- endif -%}
           </div>
           <div class="contact-form p-relative">
@@ -300,6 +305,23 @@
         {
           "value": "h3",
           "label": "t:general.settings.heading_size.options.small.label"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "visible_if": "{{ section.settings.heading_text != blank }}",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:general.settings.heading_size.options.h1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:general.settings.heading_size.options.h2.label"
         }
       ],
       "default": "h2"

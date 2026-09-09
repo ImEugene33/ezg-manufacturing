@@ -216,27 +216,33 @@
                     {%- if block.settings.video_url == blank -%}
                       {{ placeholder_image }}
                     {%- else -%}
-                      <iframe
-                        tabindex="-1"
-                        title="{{ block.settings.video_url.type }}"
-                        class="pe-none js-local-video iframe-banner"
+                      <iframe title="{{ block.settings.video_url.type }}"
+                        class="js-local-video iframe-banner"
                         allow="autoplay; encrypted-media"
                         loading="{{ block_loading }}"
                         fetchpriority="{{ block_fetchpriority }}"
                         decoding="{{ decoding }}"
                         data-src="
-                          {%- if block.settings.video_url.type == 'youtube' -%}
-                            https://www.youtube.com/embed/{{ block.settings.video_url.id }}?version=3&loop=1&controls=0&rel=0&showinfo=0&autoplay=1&enablejsapi=1&mute=1&fs=0&playlist={{ block.settings.video_url.id }}
-                          {%- elsif block.settings.video_url.type == 'vimeo' -%}
-                            https://player.vimeo.com/video/{{ block.settings.video_url.id }}?api=1&background=1&autoplay=1&loop=1&title=0&byline=0&portrait=0&controls=0&muted=1
-                          {%- endif -%}
-                        "
-                      >
+                        {%- if block.settings.video_url.type == 'youtube' -%}
+                          https://www.youtube.com/embed/{{ block.settings.video_url.id }}?version=3&loop=1&controls=1&rel=1&showinfo=1&autoplay=1&enablejsapi=1&mute=1&playsinline=1&fs=0&playlist={{ block.settings.video_url.id }}
+                        {%- elsif block.settings.video_url.type == 'vimeo' -%}
+                          https://player.vimeo.com/video/{{ block.settings.video_url.id }}?api=1&background=1&autoplay=1&loop=1&title=0&byline=0&portrait=0&controls=0&muted=1
+                        {%- endif -%}">
                       </iframe>
                     {%- endif -%}
                   {% endif %}
+                  <div class="js-video-controller video-controller d-block d-none-lg p-absolute zi-2 d-flex gap-3xs middle-xs rad-p video-controller--transparent">
+                    <button class="btn btn-icon-m bg-transparent js-btn-play" aria-label="Play or Pause">
+                      {% render 'icon-pause', class: 'icon-control icon-pause' %}
+                      {% render 'icon-play' , class: 'icon-control icon-play' %}
+                    </button>
+                    <button class="btn btn-icon-m bg-transparent js-btn-mute" aria-label="Mute or Unmute">
+                      {% render 'icon-sound-off', class: 'icon-control icon-sound-off' %}
+                      {% render 'icon-sound-high' , class: 'icon-control icon-sound-high' %}
+                    </button>
+                  </div>
                 </sht-load-video>
-                {{ content_collage_content }}
+                {{ content_collage_content | replace: 'banner-content__animate', 'banner-content__animate pe-none' | replace: '<a ', '<a style="pointer-events:auto" ' }}
               </div>
             </div>
           {%- when 'text' -%}

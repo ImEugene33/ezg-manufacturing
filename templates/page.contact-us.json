@@ -67,6 +67,7 @@
         "color_scheme": "",
         "heading_text": "Contact the EZG Team",
         "heading_size": "h2",
+        "heading_tag": "h1",
         "content_alignment_desktop": "ta-left-md",
         "desktop_content_ordering": "text-first-md",
         "mobile_content_alignment": "ta-left",

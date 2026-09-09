@@ -345,3 +345,8 @@ sht-menu-header .menu__link-megamenu  .toggle__icon {
   min-width: unset;
   min-height: unset;
 }
+
+.video-controller--secondary .btn {
+  min-width: unset;
+  min-height: unset;
+}

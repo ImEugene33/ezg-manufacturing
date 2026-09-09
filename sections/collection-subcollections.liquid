@@ -1,0 +1,285 @@
+{%- liquid
+  assign metafield_ns = 'custom'
+  assign metafield_key = 'child_collections'
+  assign auto_subcollections = collection.metafields[metafield_ns][metafield_key].value
+
+  assign has_manual_blocks = false
+  for block in section.blocks
+    if block.type == 'subcollection' and block.settings.collection != blank
+      assign has_manual_blocks = true
+      break
+    endif
+  endfor
+
+  assign has_auto = false
+  if auto_subcollections != blank
+    for sub in auto_subcollections
+      assign has_auto = true
+      break
+    endfor
+  endif
+
+  if has_manual_blocks
+    assign subcollections_source = 'blocks'
+  elsif has_auto
+    assign subcollections_source = 'metafield'
+  else
+    assign subcollections_source = 'none'
+  endif
+
+  assign products_per_row = section.settings.products_per_row | plus: 0
+  if products_per_row == 2
+    assign products_per_row = 2.7
+  endif
+-%}
+
+{%- if subcollections_source == 'none' -%}
+  <style>
+    #shopify-section-{{ section.id }} {
+      display: none !important;
+    }
+  </style>
+{%- else -%}
+  {%- render 'section-padding-collapse' -%}
+  <div
+    data-animate="regular-section"
+    class="js-animate section section--vertical color-{{ section.settings.color_scheme }} background subcollections-section"
+    data-ui-component="Section Collection Subcollections"
+    role="region"
+    aria-labelledby="sectionHeading-{{ section.id | md5 | truncate: 12, '' }}"
+  >
+    <div class="ctnr">
+      {%- if subcollections_source == 'blocks' -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'subcollection' -%}
+            {%- assign sub_col = block.settings.collection -%}
+            {%- if sub_col != blank -%}
+              {%- render 'subcollection-row',
+                subcollection: sub_col,
+                products_per_row: products_per_row,
+                show_description: section.settings.show_description,
+                image_ratio: section.settings.image_ratio,
+                block: block
+              -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for sub_col in auto_subcollections -%}
+          {%- render 'subcollection-row',
+            subcollection: sub_col,
+            products_per_row: products_per_row,
+            show_description: section.settings.show_description,
+            image_ratio: section.settings.image_ratio
+          -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+
+  <style>
+    .subcollections-section .ctnr {
+      margin-inline: 0;
+      margin-left: 0;
+    }
+    .subcollections-section .subcollection-row {
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: var(--spacing-scale-xl, 32px);
+      padding: var(--spacing-scale-xl, 32px) 0;
+      border-top: 1px solid var(--color-border, rgba(0, 0, 0, 0.1));
+    }
+    .subcollections-section .subcollection-row:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+    .subcollections-section .subcollection-row:last-child {
+      padding-bottom: 0;
+    }
+    .subcollections-section .subcollection-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--spacing-scale-s, 12px);
+      position: relative;
+      padding: var(--spacing-scale-xl, 32px) 0;
+      border-top: 3px solid #f5a623;
+      border-bottom: 3px solid #f5a623;
+    }
+    .subcollections-section .subcollection-title {
+      font-size: var(--fs-heading-m, 1.75rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+      margin: 0;
+      color: var(--color-normal-text);
+    }
+    .subcollections-section .subcollection-description {
+      font-size: var(--fs-body-s, 0.875rem);
+      line-height: 1.6;
+      color: var(--color-text-60, rgba(0, 0, 0, 0.6));
+      margin: 0;
+    }
+    .subcollections-section .subcollection-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--fs-body-s, 0.875rem);
+      font-weight: 600;
+      color: var(--color-normal-text);
+      text-decoration: none;
+      margin-top: 8px;
+    }
+    .subcollections-section .subcollection-link:hover {
+      opacity: 0.7;
+    }
+    .subcollections-section .subcollection-products {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .subcollections-section .subcollection-products::-webkit-scrollbar {
+      display: none;
+    }
+    .subcollections-section .subcollection-products-inner {
+      display: flex;
+      gap: var(--spacing-scale-m, 16px);
+      padding-bottom: 4px;
+      scroll-snap-type: x mandatory;
+    }
+    .subcollections-section .subcollection-product-card {
+      flex: 0 0 calc(100% / var(--products-per-row, 3) - var(--spacing-scale-m, 16px) * (var(--products-per-row, 3) - 1) / var(--products-per-row, 3));
+      min-width: 180px;
+      scroll-snap-align: start;
+    }
+    .subcollections-section .sub-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .subcollections-section .sub-card__media {
+      aspect-ratio: var(--img-ratio, 1/1);
+      overflow: hidden;
+      background: var(--color-background-secondary, #f5f5f5);
+      border-radius: var(--rad-xs, 4px);
+    }
+    .subcollections-section .sub-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    .subcollections-section .sub-card:hover .sub-card__media img {
+      transform: scale(1.03);
+    }
+    .subcollections-section .sub-card__vendor {
+      font-size: var(--fs-body-xs, 0.75rem);
+      color: var(--color-text-60, rgba(0, 0, 0, 0.5));
+      margin: 0;
+    }
+    .subcollections-section .sub-card__title {
+      font-size: var(--fs-body-s, 0.875rem);
+      font-weight: 600;
+      margin: 0;
+      line-height: 1.3;
+    }
+    .subcollections-section .sub-card__price {
+      font-size: var(--fs-body-s, 0.875rem);
+      color: var(--color-text-60, rgba(0, 0, 0, 0.6));
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .subcollections-section .subcollection-row {
+        grid-template-columns: 1fr;
+      }
+      .subcollections-section .subcollection-info {
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+      .subcollections-section .subcollection-product-card {
+        min-width: 150px;
+      }
+    }
+  </style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Collection Subcollections",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "paragraph",
+      "content": "By default, subcollections are pulled automatically from the collection metafield (custom.child_collections). You can override this by adding subcollection blocks below."
+    },
+    {
+      "type": "header",
+      "content": "Product Cards"
+    },
+    {
+      "type": "select",
+      "id": "products_per_row",
+      "label": "Products visible per row",
+      "default": "3",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "1/1",
+      "options": [
+        { "value": "1/1", "label": "Square (1:1)" },
+        { "value": "3/4", "label": "Portrait (3:4)" },
+        { "value": "4/3", "label": "Landscape (4:3)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show subcollection description",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subcollection",
+      "name": "Subcollection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Subcollections"
+    }
+  ]
+}
+{% endschema %}

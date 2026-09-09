@@ -151,24 +151,38 @@
                   --overlay: {{ overlay_opacity }};
                   --section-container-width: {{ size }};">
             <div class="js-slideshow-image w-100 h-100 p-absolute inset {{ current_item }}" data-slideshow-index="{{ forloop.index }}">
-              <sht-slideshow-load-img data-section-id="{{ section.id }}" class="js-wrap-image-lazy d-block w-100 h-100 no-animation" {{- loaded_item -}}>
-                <div class="promotion-section__background inset p-absolute d-block w-100 h-100 no-animation hide-empty">
-                  {% assign image_wrap_class = 'h-100' %}
-                  {%- if block.settings.mobile_background_image != blank -%}
+              {%- if block.settings.background_video != blank -%}
+                {%- liquid
+                  capture local_video
+                    echo block.settings.background_video | video_tag: autoplay: true, controls: false, loop: true, preload: 'none', class: 'js-image-lazy media of-cover w-100 h-100 video_local', loading: desktop_loading, fetchpriority: desktop_fetchpriority, decoding: decoding, image_size: '1920x'
+                  endcapture
+                  assign preview_image = block.settings.background_video.preview_image
+                  assign preview_alt_text = preview_image.src | split: '/' | last | split: '.' | first
+                  assign preview_image_text = '<img class="w-100 h-100 of-cover" loading="lazy" decoding="async" fetchpriority="low" alt="' | append: preview_alt_text | append: '"'
+                -%}
+                <sht-load-video class="promotion-section__background video_background inset p-absolute w-100 h-100 no-animation hide-empty" data-video-type="local_video" data-video-id="{{ block.settings.background_video.id }}" data-video-play="true" data-video-mute="true">
+                  {{- local_video | replace: '<source src="', '<source data-src="' | replace: '<img',  preview_image_text -}}
+                </sht-load-video>
+              {%- else -%}
+                <sht-slideshow-load-img data-section-id="{{ section.id }}" class="js-wrap-image-lazy d-block w-100 h-100 no-animation" {{- loaded_item -}}>
+                  <div class="promotion-section__background inset p-absolute d-block w-100 h-100 no-animation hide-empty">
+                    {% assign image_wrap_class = 'h-100' %}
+                    {%- if block.settings.mobile_background_image != blank -%}
+                      {%- render 'image',
+                        image_item: mobile_background_image,
+                        image_wrap_classes: 'h-100 p-absolute inset d-block d-none-lg',
+                        image_classes: 'h-100'
+                      -%}
+                      {% assign image_wrap_class = 'h-100 d-none d-block-lg' %}
+                    {%- endif -%}
                     {%- render 'image',
-                      image_item: mobile_background_image,
-                      image_wrap_classes: 'h-100 p-absolute inset d-block d-none-lg',
+                      image_item: background_image,
+                      image_wrap_classes: image_wrap_class,
                       image_classes: 'h-100'
                     -%}
-                    {% assign image_wrap_class = 'h-100 d-none d-block-lg' %}
-                  {%- endif -%}
-                  {%- render 'image',
-                    image_item: background_image,
-                    image_wrap_classes: image_wrap_class,
-                    image_classes: 'h-100'
-                  -%}
-                </div>
-              </sht-slideshow-load-img>
+                  </div>
+                </sht-slideshow-load-img>
+              {%- endif -%}
             </div>
             <div class="slider__content o-hidden h-100 p-relative zi-2 ctnr promotion-section-container section-slideshow d-flex {{ position_class }}" style="{{ section_content_style }}">
               {%- render 'block-content', block: block, alignment_class: alignment_class -%}
@@ -373,7 +387,7 @@
     {
       "name": "t:general.settings.section_slide.label",
       "type": "slide",
-      "limit": 5,
+      "limit": 10,
       "settings": [
         {
           "type": "header",
@@ -432,8 +446,14 @@
         },
         {
           "type": "header",
-          "content": "t:general.settings.headers.image.content",
+          "content": "Media",
           "info": "t:general.settings.slide_image.info"
+        },
+        {
+          "type": "video",
+          "id": "background_video",
+          "label": "Background video (Shopify hosted)",
+          "info": "Overrides the background image if provided. Autoplays without sound."
         },
         {
           "type": "image_picker",

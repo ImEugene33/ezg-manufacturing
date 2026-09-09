@@ -1,0 +1,96 @@
+{%- comment -%}
+Renders a single subcollection row with info panel (left) and product cards (right).
+
+Usage:
+{% render 'subcollection-row',
+  subcollection: collection_object,
+  products_per_row: 3,
+  show_description: true,
+  image_ratio: '1/1',
+  block: block  (optional, passed only for manual block overrides)
+%}
+{%- endcomment -%}
+
+{%- liquid
+  assign sub_products_per_row = products_per_row | default: 3
+  assign sub_image_ratio = image_ratio | default: '1/1'
+  assign sub_show_description = show_description | default: true
+
+  assign sub_col_products = subcollection.products | limit: 8
+-%}
+
+{%- if subcollection.products.size > 0 -%}
+<div class="subcollection-row" {% if block %} {{ block.shopify_attributes }} {% endif %}>
+  {{- '' -}}
+  {%- comment -%} LEFT: Info panel {%- endcomment -%}
+  <div class="subcollection-info">
+    <h2 class="subcollection-title">{{ subcollection.title | upcase }}</h2>
+
+    {%- if sub_show_description and subcollection.description != blank -%}
+      <div class="subcollection-description rte">
+        {{ subcollection.description | strip_html | truncate: 200 }}
+      </div>
+    {%- endif -%}
+
+    <a href="{{ subcollection.url }}" class="subcollection-link">
+      View all
+      {% render 'icon-caret-right', class: 'rtl-flip-x' %}
+    </a>
+  </div>
+
+  {%- comment -%} RIGHT: Products horizontal scroll {%- endcomment -%}
+  <div class="subcollection-products p-relative">
+    <sht-carousel class="sht-carousel p-relative d-block w-100" data-enable="true" data-enable-mobile="true">
+      <div
+        class="subcollection-products-inner js-carousel-items ox-auto p-relative scrollable scrollable-x disable-scrollbars"
+        style="--products-per-row: {{ sub_products_per_row }}; --img-ratio: {{ sub_image_ratio }};"
+      >
+        {%- for product in sub_col_products -%}
+          <sht-carousel-itm class="subcollection-product-card js-carousel-item p-relative scrollable-aln-start" role="group">
+            <a
+              href="{{ product.url }}"
+              class="sub-card"
+              aria-label="{{ product.title | escape }}"
+            >
+              <div class="sub-card__media">
+                {%- if product.featured_image -%}
+                  {%- assign img_alt = product.featured_image.alt | default: product.title | escape -%}
+                  {{
+                    product.featured_image
+                    | image_url: width: 800
+                    | image_tag:
+                      widths: '320, 480, 640, 800',
+                      sizes: '(min-width: 769px) 300px, 180px',
+                      alt: img_alt,
+                      loading: 'lazy',
+                      class: ''
+                  }}
+                {%- else -%}
+                  {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder w-100 h-100 of-cover' }}
+                {%- endif -%}
+              </div>
+              <div class="sub-card__content">
+                <p class="sub-card__vendor">{{ product.vendor }}</p>
+                <p class="sub-card__title">{{ product.title | escape }}</p>
+                <p class="sub-card__price">
+                  {%- if product.price_varies -%}
+                    From {{ product.price_min | money }}
+                  {%- else -%}
+                    {{ product.price | money }}
+                  {%- endif -%}
+                </p>
+              </div>
+            </a>
+          </sht-carousel-itm>
+        {%- else -%}
+          <p class="subcollection-description">No products found in this collection.</p>
+        {%- endfor -%}
+      </div>
+      <div class="carousel-pagination middle-y w-100 p-absolute no-js-hidden zi-3" style="pointer-events: none;">
+        <button type="button" data-step="1" data-step-mb="1" class="js-carousel-prev-btn btn-carousel-prev btn btn-icon-l btn-secondary middle-y p-absolute rtl-flip-x" style="left: 16px; pointer-events: auto;" aria-label="Previous" name="previous" disabled>{% render 'icon-caret-left' %}</button>
+        <button type="button" data-step="1" data-step-mb="1" class="js-carousel-next-btn btn-carousel-next btn btn-icon-l btn-secondary middle-y p-absolute rtl-flip-x" style="right: 16px; pointer-events: auto;" aria-label="Next" name="next" disabled>{% render 'icon-caret-right' %}</button>
+      </div>
+    </sht-carousel>
+  </div>
+</div>
+{%- endif -%}

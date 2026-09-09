@@ -1,0 +1,399 @@
+{%- comment -%}
+  Collection Comparison Table
+  Groups products by their specification row labels (signature)
+  and renders a tabbed comparison table for each group.
+{%- endcomment -%}
+
+{%- liquid
+  comment
+    Step 1: Collect all products that have comparison_table metafield
+    and build groups based on their row-label signature
+  endcomment
+
+  assign comp_products_handles = ''
+  assign comp_signatures = ''
+  assign comp_product_data = ''
+  assign group_count = 0
+  assign total_comp_products = 0
+  assign separator = '|||'
+  assign key_sep = ':::'
+  assign row_sep = '^^^'
+-%}
+
+{%- paginate collection.products by 50 -%}
+{%- liquid
+  for product in collection.products
+    if product.metafields.custom.comparison_table != blank
+      assign spec_data = product.metafields.custom.comparison_table.value.comparison_table.value
+      if spec_data and spec_data.rows and spec_data.rows.size > 0
+        assign total_comp_products = total_comp_products | plus: 1
+
+        comment
+          Build a signature from row labels
+        endcomment
+        assign sig = ''
+        for row in spec_data.rows
+          if sig == ''
+            assign sig = row.label
+          else
+            assign sig = sig | append: key_sep | append: row.label
+          endif
+        endfor
+
+        comment
+          Check if this signature already exists in our groups
+        endcomment
+        assign sig_found = false
+        if comp_signatures != ''
+          assign sig_array = comp_signatures | split: separator
+          for existing_sig in sig_array
+            if existing_sig == sig
+              assign sig_found = true
+              break
+            endif
+          endfor
+        endif
+
+        unless sig_found
+          if comp_signatures == ''
+            assign comp_signatures = sig
+          else
+            assign comp_signatures = comp_signatures | append: separator | append: sig
+          endif
+          assign group_count = group_count | plus: 1
+        endunless
+      endif
+    endif
+  endfor
+-%}
+
+{%- if group_count > 0 and total_comp_products >= 2 -%}
+  {%- liquid
+    assign sig_array = comp_signatures | split: separator
+  -%}
+
+  <style>
+    .collection-comparison-section .tab__panel--active.tab__panel {
+      position: relative;
+    }
+  </style>
+
+  <div class="collection-comparison-section section color-{{ section.settings.color_scheme }}" data-ui-component="Collection Comparison Table" {{ section.shopify_attributes }}>
+    <div class="ctnr">
+      {%- if section.settings.heading != blank -%}
+        <div class="section__header mb-scale-2xl {{ section.settings.heading_alignment }}">
+          <h2 class="{{ section.settings.heading_size }} m-zero">{{ section.settings.heading | escape }}</h2>
+          {%- if section.settings.description != blank -%}
+            <div class="fs-body-l mt-s color-text-60">{{ section.settings.description }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <sht-tabs class="d-block">
+        {%- if group_count > 1 -%}
+          <sht-tab-overflow class="p-relative tab__wrapper--underline" data-tab-style="{{ settings.tab_style }}">
+            <ul class="js-tab-container tab__header--{{ settings.tab_style }} p-relative ox-auto disable-scrollbars ls-none ws-nowrap d-flex mb-scale-2xl f-extra" role="tablist">
+              {%- for sig in sig_array -%}
+                {%- liquid
+                  comment
+                    Determine tab label: use product_type of first product in group
+                  endcomment
+                  assign tab_label = ''
+                  assign products_in_group = 0
+                  for product in collection.products
+                    if product.metafields.custom.comparison_table != blank
+                      assign p_spec = product.metafields.custom.comparison_table.value.comparison_table.value
+                      if p_spec and p_spec.rows and p_spec.rows.size > 0
+                        assign p_sig = ''
+                        for row in p_spec.rows
+                          if p_sig == ''
+                            assign p_sig = row.label
+                          else
+                            assign p_sig = p_sig | append: key_sep | append: row.label
+                          endif
+                        endfor
+                        if p_sig == sig
+                          assign products_in_group = products_in_group | plus: 1
+                          if tab_label == ''
+                            if product.type != blank
+                              assign tab_label = product.type
+                            else
+                              assign tab_label = product.title
+                            endif
+                          endif
+                        endif
+                      endif
+                    endif
+                  endfor
+                  if tab_label == ''
+                    assign tab_label = 'Group ' | append: forloop.index
+                  endif
+                -%}
+                <li class="tab__item d-inline-block" role="presentation">
+                  <a class="tab__link fs-body-xl d-block p-relative ele-focus-visible {% if forloop.first %}tab__link--active{% endif %} js-tab-link"
+                     role="tab"
+                     id="comp-tab-{{ section.id }}-{{ forloop.index }}"
+                     href="#comp-panel-{{ section.id }}-{{ forloop.index }}"
+                     aria-controls="comp-panel-{{ section.id }}-{{ forloop.index }}">
+                    {{ tab_label }} ({{ products_in_group }})
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+            <div class="js-tab-overflow tab-overflow p-absolute inset pe-none"></div>
+          </sht-tab-overflow>
+        {%- endif -%}
+
+        <div class="tab__content js-tab-content">
+          {%- for sig in sig_array -%}
+            {%- liquid
+              assign sig_labels = sig | split: key_sep
+            -%}
+
+            <div class="tab__panel {% if forloop.first %}tab__panel--active{% endif %} js-tab-panel js-animate"
+                 id="comp-panel-{{ section.id }}-{{ forloop.index }}"
+                 data-tab-content-id="comp-panel-{{ section.id }}-{{ forloop.index }}"
+                 aria-labelledby="comp-tab-{{ section.id }}-{{ forloop.index }}"
+                 role="tabpanel">
+
+              <div class="collection-comparison-table-wrapper" style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;">
+                <table class="collection-comparison-table w-100" style="border-spacing: 0; min-width: 600px; text-align: center; border: 1px solid rgba(0,0,0,0.1);">
+                  <thead>
+                    <tr>
+                      <th style="width: 180px; min-width: 180px; background: #2E2A26; color: white; padding: 20px; position: sticky; left: 0; z-index: 2; border: none;"></th>
+                      {%- for product in collection.products -%}
+                        {%- if product.metafields.custom.comparison_table != blank -%}
+                          {%- liquid
+                            assign p_spec = product.metafields.custom.comparison_table.value.comparison_table.value
+                            if p_spec and p_spec.rows and p_spec.rows.size > 0
+                              assign p_sig = ''
+                              for row in p_spec.rows
+                                if p_sig == ''
+                                  assign p_sig = row.label
+                                else
+                                  assign p_sig = p_sig | append: key_sep | append: row.label
+                                endif
+                              endfor
+                            endif
+                          -%}
+                          {%- if p_sig == sig -%}
+                            <th style="background: #2E2A26; color: white; padding: 20px; min-width: 160px; border: none; border-left: 1px solid rgba(255,255,255,0.1);">
+                              <a href="{{ product.url }}" style="color: white; text-decoration: none;">
+                                {{ product.title }}
+                              </a>
+                            </th>
+                          {%- endif -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%- for label in sig_labels -%}
+                      <tr style="border-bottom: 1px solid rgba(0,0,0,0.05); {% cycle 'background: #ffffff;', 'background: #f9f9f9;' %}">
+                        <td style="background: #ebebeb; font-weight: bold; text-align: left; padding: 15px 20px; border-right: 1px solid rgba(0,0,0,0.05); position: sticky; left: 0; z-index: 1;">
+                          {{ label }}
+                        </td>
+                        {%- for product in collection.products -%}
+                          {%- if product.metafields.custom.comparison_table != blank -%}
+                            {%- liquid
+                              assign p_spec = product.metafields.custom.comparison_table.value.comparison_table.value
+                              if p_spec and p_spec.rows and p_spec.rows.size > 0
+                                assign p_sig = ''
+                                for row in p_spec.rows
+                                  if p_sig == ''
+                                    assign p_sig = row.label
+                                  else
+                                    assign p_sig = p_sig | append: key_sep | append: row.label
+                                  endif
+                                endfor
+                              endif
+                            -%}
+                            {%- if p_sig == sig -%}
+                              {%- liquid
+                                comment
+                                  Find the value for this label in this product's spec data.
+                                  The product may have multiple columns (variants) — we take
+                                  the first column value (index 0) as the "primary" spec for
+                                  the product in the collection comparison context.
+                                endcomment
+                                assign cell_value = ''
+                                for row in p_spec.rows
+                                  if row.label == label
+                                    if p_spec.columns.size == 1
+                                      assign cell_value = row.values[0]
+                                    else
+                                      comment
+                                        If product has multiple columns (variants),
+                                        show the first value or combine them
+                                      endcomment
+                                      assign cell_value = row.values[0]
+                                    endif
+                                    break
+                                  endif
+                                endfor
+                              -%}
+                              <td style="padding: 15px 20px; border-left: 1px solid rgba(0,0,0,0.05); min-width: 160px;">
+                                {{ cell_value | default: '—' }}
+                              </td>
+                            {%- endif -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </tr>
+                    {%- endfor -%}
+
+                    {%- comment -%} Price row {%- endcomment -%}
+                    {%- if section.settings.show_price -%}
+                      <tr style="border-bottom: 1px solid rgba(0,0,0,0.05); background: #ffffff;">
+                        <td style="background: #ebebeb; font-weight: bold; text-align: left; padding: 15px 20px; border-right: 1px solid rgba(0,0,0,0.05); position: sticky; left: 0; z-index: 1;">
+                          {{ 'products.product.price.regular_price' | t | default: 'Price' }}
+                        </td>
+                        {%- for product in collection.products -%}
+                          {%- if product.metafields.custom.comparison_table != blank -%}
+                            {%- liquid
+                              assign p_spec = product.metafields.custom.comparison_table.value.comparison_table.value
+                              if p_spec and p_spec.rows and p_spec.rows.size > 0
+                                assign p_sig = ''
+                                for row in p_spec.rows
+                                  if p_sig == ''
+                                    assign p_sig = row.label
+                                  else
+                                    assign p_sig = p_sig | append: key_sep | append: row.label
+                                  endif
+                                endfor
+                              endif
+                            -%}
+                            {%- if p_sig == sig -%}
+                              <td style="padding: 15px 20px; border-left: 1px solid rgba(0,0,0,0.05); min-width: 160px; font-weight: bold;">
+                                {{ product.price | money }}
+                              </td>
+                            {%- endif -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </tr>
+                    {%- endif -%}
+
+                    {%- comment -%} CTA row: Add to Cart {%- endcomment -%}
+                    {%- if section.settings.show_cta -%}
+                      <tr style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                        <td style="background: #ebebeb; border-right: 1px solid rgba(0,0,0,0.05); position: sticky; left: 0; z-index: 1;"></td>
+                        {%- for product in collection.products -%}
+                          {%- if product.metafields.custom.comparison_table != blank -%}
+                            {%- liquid
+                              assign p_spec = product.metafields.custom.comparison_table.value.comparison_table.value
+                              if p_spec and p_spec.rows and p_spec.rows.size > 0
+                                assign p_sig = ''
+                                for row in p_spec.rows
+                                  if p_sig == ''
+                                    assign p_sig = row.label
+                                  else
+                                    assign p_sig = p_sig | append: key_sep | append: row.label
+                                  endif
+                                endfor
+                              endif
+                            -%}
+                            {%- if p_sig == sig -%}
+                              <td style="padding: 20px; border-left: 1px solid rgba(0,0,0,0.05); min-width: 160px;">
+                                {%- if product.available -%}
+                                  <form method="post" action="/cart/add" class="m-zero">
+                                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" />
+                                    <button type="submit" style="padding: 10px 24px; border: 2px solid #ff8f1c; background: transparent; color: #ff8f1c; cursor: pointer; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; width: 100%; max-width: 200px;">Add to Cart</button>
+                                  </form>
+                                {%- else -%}
+                                  <button disabled style="padding: 10px 24px; border: 2px solid #cccccc; background: transparent; color: #cccccc; cursor: not-allowed; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; width: 100%; max-width: 200px;">Out of Stock</button>
+                                {%- endif -%}
+                              </td>
+                            {%- endif -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </tr>
+                    {%- endif -%}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </sht-tabs>
+    </div>
+  </div>
+{%- endif -%}
+{%- endpaginate -%}
+
+{% schema %}
+  {
+    "name": "Collection Comparison",
+    "tag": "section",
+    "class": "section-collection-comparison",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Product Comparison"
+      },
+      {
+        "type": "select",
+        "id": "heading_size",
+        "label": "Heading size",
+        "default": "h3",
+        "options": [
+          { "value": "h2", "label": "H2" },
+          { "value": "h3", "label": "H3" },
+          { "value": "h4", "label": "H4" },
+          { "value": "h5", "label": "H5" }
+        ]
+      },
+      {
+        "type": "richtext",
+        "id": "description",
+        "label": "Description"
+      },
+      {
+        "type": "select",
+        "id": "heading_alignment",
+        "label": "Heading alignment",
+        "default": "ta-left",
+        "options": [
+          { "value": "ta-left", "label": "Left" },
+          { "value": "ta-center-md center-md ta-center center-xs", "label": "Center" }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Table options"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_price",
+        "label": "Show price row",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cta",
+        "label": "Show Add to Cart button",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Style"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "Color scheme",
+        "default": "scheme-1"
+      }
+    ],
+    "templates": ["collection"],
+    "presets": [
+      {
+        "name": "Collection Comparison"
+      }
+    ]
+  }
+{% endschema %}

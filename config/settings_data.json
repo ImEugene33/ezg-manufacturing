@@ -241,14 +241,25 @@
           "tertiary_button_color_text": "#000000"
         }
       },
-      "scheme-ca4c8556-e9b6-44f7-b321-d55d72f5e638": {
+      "scheme-575d54eb-b869-4257-9329-abea7ffa0e02": {
         "settings": {
-          "color_background": "#FFFFFF",
+          "color_background": "#191919",
           "color_body_text": "#FFFFFF",
-          "primary_button_background": "#101010",
-          "primary_button_color_text": "#FFFFFF",
-          "secondary_button_color_background": "#FFFFFF",
-          "secondary_button_color_text": "#101010",
+          "primary_button_background": "#4b687a",
+          "primary_button_color_text": "#ffffff",
+          "secondary_button_color_background": "#191919",
+          "secondary_button_color_text": "#ffffff",
+          "tertiary_button_color_text": "#000000"
+        }
+      },
+      "scheme-097aa6d3-1c98-4e3b-8ce5-e2d6648d3a25": {
+        "settings": {
+          "color_background": "#FF8F1C",
+          "color_body_text": "#2D2926",
+          "primary_button_background": "#000000",
+          "primary_button_color_text": "#ffffff",
+          "secondary_button_color_background": "#191919",
+          "secondary_button_color_text": "#ffffff",
           "tertiary_button_color_text": "#000000"
         }
       }

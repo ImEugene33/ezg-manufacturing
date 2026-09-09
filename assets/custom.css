@@ -345,8 +345,25 @@ sht-menu-header .menu__link-megamenu  .toggle__icon {
   min-width: unset;
   min-height: unset;
 }
-
-.video-controller--secondary .btn {
-  min-width: unset;
-  min-height: unset;
+@media(max-width:750px) {
+  .content-collage {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}
+.contact-form-content {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.form-contact .message--success {
+  background: green !important;
+  position: static !important;
+  margin-left: 0;
+  width: max-content;
+}
+.form-contact .message--success .btn {
+  background: transparent !important;
+  padding: 0;
+}
+.carousel-pagination button svg path {
+  stroke: #fff !important;
 }

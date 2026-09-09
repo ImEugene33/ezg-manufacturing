@@ -1,5 +1,5 @@
 {%- if block.settings.title != blank or block.settings.value != blank -%}
-  <div class="capability-item{% if section.settings.stretch_cards and section.settings.align_cards_top %} capability-item--align-top{% endif %}" {{ block.shopify_attributes }} style="border-color: {{ section.settings.accent_color | default: '#5b7f95' }};">
+  <div class="capability-item{% if section.settings.stretch_cards and section.settings.align_cards_top %} capability-item--align-top{% endif %}" {{ block.shopify_attributes }}>
     {%- if block.settings.icon != blank -%}
       <span class="capability-item__icon" aria-hidden="true">{{ block.settings.icon }}</span>
     {%- endif -%}
@@ -20,18 +20,20 @@
 {% stylesheet %}
   .capability-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
     min-height: 44px;
     padding: 12px 16px;
     background-color: var(--color-background);
     border: 1px solid;
     border-radius: 2px;
+    border: 1px solid #0000001A;
   }
   @media screen and (min-width: 768px) {
     .capability-item {
-      padding: 12px 25px;
+      padding: 16px 25px;
       gap: 26px;
+      min-height: 225px !important;
     }
   }
 
@@ -63,7 +65,7 @@
     margin: 0;
     color: var(--color-normal-text);
     font-family: "Helvetica Neue";
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     line-height: 22px;
     letter-spacing: 0.32px;
@@ -89,7 +91,12 @@
     line-height: 18px;
     letter-spacing: 0.28px;
   }
-
+  .capability-item__link:has(ul) {
+    padding-left: 20px;
+  }
+  .capability-item__link p:not(:last-child) {
+    margin-bottom: 32px;
+  }
   .capability-item__link a {
     text-decoration: underline;
   }

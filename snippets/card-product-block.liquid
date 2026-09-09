@@ -131,7 +131,7 @@
     </button>
   {% endif %}
   <div class="card--{{ settings.product_card_style }} product-card d-flex fd-column {{ secondary_image_class }} {{ card_class }} w-100 flex-1 p-relative rad-m o-hidden">
-    <div class="product__badge js-rv-badge p-absolute d-flex fw-wrap top-xs zi-1 hide-empty gap-3xs {{ card_position }}">
+    <div class="product__badge p-absolute d-flex fw-wrap top-xs zi-1 hide-empty gap-3xs {{ card_position }}">
       {%- if product.available == false and settings.product_card_show_sold_out_badge -%}
         <span class="fs-heading-xs component-heading f-extra badge badge--sold-out d-inline-block background color-{{ settings.sold_out_color }} {{ settings.stock_badge_corner_radius }}">
           {{ 'products.product.sold_out' | t }}
@@ -177,16 +177,16 @@
       {{ secondary_image }}
       <div class="product__buttons p-absolute hide-empty zi-1 d-flex gap-3xs maw-fit-content {{ card_position }}">
         {% if show_quick_view %}
-          <button class="btn btn-quick-view js-rv-view btn-focus btn-icon-l btn-secondary" aria-label="{{ "products.product.quick_view" | t }}" data-product-url="{{ product.url | split: "?" | first }}?view=quick-view-drawer" onclick="window.dialogQuickShop.showModal(this);">
+          <button class="btn btn-quick-view btn-focus btn-icon-l btn-secondary" aria-label="{{ "products.product.quick_view" | t }}" data-product-url="{{ product.url | split: "?" | first }}?view=quick-view-drawer" onclick="window.dialogQuickShop.showModal(this);">
             {% render 'icon-infor', class: 'icon icon-fix-xl' %}
           </button>
         {% endif %}
         {%- unless product.gift_card? -%}
           {%- if quick_buy != 'not_use' -%}
             {%- if product.has_only_default_variant -%}
-              {%- render 'quick-add-form', section: section, product: product, content_align: card_content_position | default: settings.product_card_position, btn_class: 'btn-quick-add js-rv-buy btn-focus btn-icon-l', icon_class: 'icon icon-fix-xl', quick_buy: quick_buy -%}
+              {%- render 'quick-add-form', section: section, product: product, content_align: card_content_position | default: settings.product_card_position, btn_class: 'btn-quick-add btn-focus btn-icon-l', icon_class: 'icon icon-fix-xl', quick_buy: quick_buy -%}
             {%- else -%}
-              <button class="btn btn-quick-add js-rv-buy btn-focus btn-icon-l btn-secondary" data-selling-plan="{{- product.requires_selling_plan -}}" data-quick-buy="{{ quick_buy }}" aria-label="{{ "products.product.quick_add" | t }}" data-product-url="{{ product.url | split: "?" | first }}?view=quick-buy" aria-haspopup="dialog" onclick="window.dialogQuickBuy.showModal(this, true)" {% unless product.available %}disabled{% endunless %}>
+              <button class="btn btn-quick-add btn-focus btn-icon-l btn-secondary" data-selling-plan="{{- product.requires_selling_plan -}}" data-quick-buy="{{ quick_buy }}" aria-label="{{ "products.product.quick_add" | t }}" data-product-url="{{ product.url | split: "?" | first }}?view=quick-buy" aria-haspopup="dialog" onclick="window.dialogQuickBuy.showModal(this, true)" {% unless product.available %}disabled{% endunless %}>
                 {%- render 'icon-add-to-cart', class: 'icon icon-fix-xl' -%}
               </button>
             {%- endif -%}
@@ -239,29 +239,6 @@
           {%- if product.quantity_price_breaks_configured? -%}
             <p class="fs-body-s color-text-80 mt-m mb-0">{{ 'product.volume_pricing_available' | t }}</p>
           {%- endif -%}
-        </div>
-      {%- else -%}
-        <div class="card-content-block">
-          <div class="js-rv-vendor">
-            <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-            <span class="fs-body-s d-block mb-2xs color-text-60 f-extra">{{- product.vendor -}}</span>
-          </div>
-          <h3 class="{{ settings.product_card_title_text_size }} mb-xs">
-            <a href="{{- product.url | within: collection -}}" class="card__title td-none ele-focus-visible {{ product_link_class }}">{{- product.title -}}</a>
-          </h3>
-          <div class="js-rv-price">
-            {%- liquid
-              render 'product-price' product: product, target: product, price_class: 'd-block mb-xs', content_align: card_position
-            -%}
-          </div>
-          {%- if settings.product_card_show_variant_swatches -%}
-            <div class="product-card__variant-swatches js-rv-variant hide-empty mb-xs">
-              {%- render 'card-product-variant-swatches', product: product, product_image_id: product_image_id, product_link_class: product_link_class, content_align: card_position -%}
-            </div>
-          {%- endif -%}
-          <div class="js-rv-rating">
-            {%- render 'product-rating', product: product -%}
-          </div>
         </div>
       {%- endif -%}
       {%- if is_bundle -%}

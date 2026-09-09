@@ -9,157 +9,44 @@
  */
 {
   "sections": {
-    "image_banner_WLRVbW": {
-      "type": "image-banner",
+    "collection-banner": {
+      "type": "collection-banner",
       "blocks": {
-        "heading_9YkKf3": {
+        "heading": {
           "type": "heading",
+          "disabled": true,
           "settings": {
-            "heading_text": "{{ collection.title }}",
-            "heading_size": "h1",
+            "heading_size": "h3",
             "enable_h1_tag": true
           }
         },
-        "description_FGfaCK": {
+        "description": {
           "type": "description",
+          "disabled": true,
           "settings": {
-            "description_text": "{{ collection.description }}"
+            "truncate_text": false
           }
         }
       },
       "block_order": [
-        "heading_9YkKf3",
-        "description_FGfaCK"
-      ],
-      "name": "t:sections.image_banner.name",
-      "settings": {
-        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
-        "enable_transparent_header": false,
-        "section_overlay_opacity": 80,
-        "section_mask_overlay_color": "#252525",
-        "section_content_overlay_color": "#ffffff",
-        "desktop_image": "shopify://shop_images/64258d9c4d74993092f82efdb79ea93ff0e540ef.png",
-        "section_image_width": "max-width",
-        "height_desktop": "50vh",
-        "desktop_content_position": "center-md",
-        "desktop_content_alignment": "ta-left-md top-md",
-        "height_mobile": "70vh",
-        "mobile_content_position": "center-xs",
-        "mobile_content_alignment": "ta-left top-xs",
-        "image_banner_link": ""
-      }
-    },
-    "featured_product_list_4hncdh": {
-      "type": "featured-product-list",
-      "blocks": {
-        "title_YLnyY6": {
-          "type": "title",
-          "settings": {}
-        },
-        "price_jehbEL": {
-          "type": "price",
-          "settings": {
-            "color_product_price": ""
-          }
-        }
-      },
-      "block_order": [
-        "title_YLnyY6",
-        "price_jehbEL"
-      ],
-      "name": "t:sections.featured_product_list.name",
-      "settings": {
-        "color_scheme": "",
-        "heading": "BEST SELLERS",
-        "heading_size": "h5",
-        "description": "",
-        "collection": "",
-        "products_to_shows": 5,
-        "product_list": [
-          "fence-hog-fh08-24",
-          "grout-hog",
-          "uphill-grout-hog",
-          "fence-hog",
-          "fh24-extensions"
-        ],
-        "carousel_desktop": "true",
-        "columns_per_row_desktop": "4",
-        "carousel_mobile": "true",
-        "columns_per_row_mobile": "1",
-        "button_text": "",
-        "button_link": "",
-        "show_quick_view": true,
-        "quick_buy": "standard",
-        "enable_countdown": false,
-        "hide_on_end": true,
-        "end_date": "",
-        "end_time": "",
-        "end_text": "<p>This event is finished</p>",
-        "countdown_background": "",
-        "countdown_number_color": ""
-      }
-    },
-    "collection_subcollections_cXdHnN": {
-      "type": "collection-subcollections",
-      "name": "Collection Subcollections",
-      "settings": {
-        "color_scheme": "",
-        "products_per_row": "2",
-        "image_ratio": "1/1",
-        "show_description": true
-      }
-    },
-    "image_banner_CrXVNX": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_WzaCgE": {
-          "type": "heading",
-          "settings": {
-            "heading_text": "WELDING",
-            "heading_size": "h1",
-            "enable_h1_tag": true
-          }
-        },
-        "description_3fm8Mp": {
-          "type": "description",
-          "settings": {
-            "description_text": "<p>Looking to outsource your production welding needs? EZG Manufacturing specializes in precision welding services for industrial manufacturing projects of all sizes. Our custom welding services support the production of equipment, metal components, structural assemblies, and specialized machinery used across industries.</p>"
-          }
-        },
-        "button_9Wyd8P": {
-          "type": "button",
-          "settings": {
-            "button_primary_label": "",
-            "button_primary_style": "primary",
-            "button_primary_link": "",
-            "button_secondary_label": "CONTACT OUR TEAM",
-            "button_secondary_style": "secondary",
-            "button_secondary_link": "shopify://pages/contact-us"
-          }
-        }
-      },
-      "block_order": [
-        "heading_WzaCgE",
-        "description_3fm8Mp",
-        "button_9Wyd8P"
+        "heading",
+        "description"
       ],
       "disabled": true,
-      "name": "t:sections.image_banner.name",
       "settings": {
-        "color_scheme": "scheme-25bcc029-2a30-42b3-8506-5beab657fffd",
+        "color_scheme": "",
         "enable_transparent_header": false,
-        "section_overlay_opacity": 80,
-        "section_mask_overlay_color": "#252525",
+        "section_overlay_opacity": 30,
+        "section_mask_overlay_color": "#000000",
         "section_content_overlay_color": "#ffffff",
-        "desktop_image": "shopify://shop_images/64258d9c4d74993092f82efdb79ea93ff0e540ef.png",
+        "desktop_image": "",
         "section_image_width": "max-width",
-        "height_desktop": "50vh",
-        "desktop_content_position": "center-md",
+        "height_desktop": "auto",
+        "desktop_content_position": "start-md",
         "desktop_content_alignment": "ta-left-md top-md",
-        "height_mobile": "70vh",
+        "height_mobile": "50vh",
         "mobile_content_position": "center-xs",
-        "mobile_content_alignment": "ta-left top-xs",
-        "image_banner_link": ""
+        "mobile_content_alignment": "ta-center middle-xs"
       }
     },
     "main": {
@@ -192,13 +79,11 @@
         "price_EdrRtr",
         "product_attributes_PaVTtJ"
       ],
-      "disabled": true,
       "settings": {
         "color_scheme": "",
         "products_per_load": "24",
         "products_load_method": "loadmore",
         "show_collection_title": true,
-        "enable_h1_tag": false,
         "allow_switch_columns": true,
         "switcher_style": "btn-viewby--fill",
         "heading": "Catalog",
@@ -219,181 +104,10 @@
         "show_quick_view": true,
         "quick_buy": "bulk"
       }
-    },
-    "collection-banner": {
-      "type": "collection-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading_size": "h1",
-            "enable_h1_tag": true
-          }
-        },
-        "description": {
-          "type": "description",
-          "settings": {
-            "truncate_text": true
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "description"
-      ],
-      "disabled": true,
-      "settings": {
-        "color_scheme": "scheme-1",
-        "enable_transparent_header": false,
-        "section_overlay_opacity": 30,
-        "section_mask_overlay_color": "#000000",
-        "section_content_overlay_color": "#ffffff",
-        "desktop_image": "{{ collection.image }}",
-        "section_image_width": "max-width",
-        "height_desktop": "50vh",
-        "desktop_content_position": "center-md",
-        "desktop_content_alignment": "ta-left-md top-md",
-        "height_mobile": "50vh",
-        "mobile_content_position": "center-xs",
-        "mobile_content_alignment": "ta-center middle-xs"
-      }
-    },
-    "content_collage_YDRFXN": {
-      "type": "content-collage",
-      "blocks": {
-        "image_aV87dU": {
-          "type": "image",
-          "settings": {
-            "heading": "",
-            "enable_h1_tag": false,
-            "heading_size": "h2",
-            "description": "",
-            "desktop_image": "{{ collection.metafields.custom.collection_feature.value.media.value }}",
-            "desktop_content_position": "start-md",
-            "desktop_content_alignment": "ta-left-md top-md",
-            "desktop_column": "2",
-            "desktop_row": "1",
-            "mobile_content_position": "center-xs",
-            "mobile_content_alignment": "ta-left top-xs",
-            "mobile_column": "2",
-            "mobile_row": "1",
-            "button_label": "",
-            "button_style": "primary",
-            "button_link": "",
-            "overlay_opacity": 30,
-            "mask_overlay_color": "",
-            "content_overlay_color": ""
-          }
-        },
-        "text_LN9PPT": {
-          "type": "text",
-          "settings": {
-            "heading": "{{ collection.metafields.custom.collection_feature.value.title.value }}",
-            "enable_h1_tag": false,
-            "heading_size": "h3",
-            "description": "{{ collection.metafields.custom.collection_feature.value.description | metafield_tag }}",
-            "desktop_content_position": "start-md",
-            "desktop_content_alignment": "ta-left-md top-md",
-            "desktop_column": "2",
-            "desktop_row": "1",
-            "mobile_content_position": "center-xs",
-            "mobile_content_alignment": "ta-left top-xs",
-            "mobile_column": "2",
-            "mobile_row": "1",
-            "button_label": "{{ collection.metafields.custom.collection_feature.value.button_title.value }}",
-            "button_style": "secondary",
-            "button_link": "{{ collection.metafields.custom.collection_feature.value.button_link.value }}",
-            "background_color": "",
-            "text_color": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_aV87dU",
-        "text_LN9PPT"
-      ],
-      "name": "t:sections.content_collage.name",
-      "settings": {
-        "color_scheme": "scheme-6be3bcd9-6ce2-40e0-8fb6-40ad9112f781",
-        "enable_fullwidth": false,
-        "show_layout_grid": true,
-        "desktop_row_height": 440,
-        "mobile_row_height": 300
-      }
-    },
-    "recently_viewed_products_Mh9yV9": {
-      "type": "recently-viewed-products",
-      "name": "t:sections.recently_viewed_products.name",
-      "settings": {
-        "color_scheme": "",
-        "heading": "Recently viewed products",
-        "heading_size": "h5",
-        "products_to_show": 8,
-        "show_vendor": false,
-        "show_rating": false,
-        "enable_quick_view": true,
-        "quick_buy": "standard",
-        "show_variant_swatches": true,
-        "show_price": true,
-        "show_badge": true,
-        "carousel_desktop": "true",
-        "columns_per_row_desktop": "4",
-        "carousel_mobile": "true",
-        "columns_per_row_mobile": "2"
-      }
-    },
-    "rich_text_wqeAKt": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_CGEcFa": {
-          "type": "heading",
-          "settings": {
-            "heading_text": "LET’S BUILD SOMETHING GREAT TOGETHER",
-            "heading_size": "h2",
-            "enable_h1_tag": false
-          }
-        },
-        "description_a8aFFX": {
-          "type": "description",
-          "settings": {
-            "full_width": false,
-            "description_text": "<p>Versatile and multipurpose, the cutting-edge media-promotion sections easily handle images, slideshows, and videos, allowing you to enhance your online store with diverse content forms.</p>"
-          }
-        },
-        "button_8cjAra": {
-          "type": "button",
-          "settings": {
-            "button_primary_label": "",
-            "button_primary_style": "primary",
-            "button_primary_link": "",
-            "button_secondary_label": "CONTACT OUR TEAM",
-            "button_secondary_style": "secondary",
-            "button_secondary_link": "shopify://pages/contact-us"
-          }
-        }
-      },
-      "block_order": [
-        "heading_CGEcFa",
-        "description_a8aFFX",
-        "button_8cjAra"
-      ],
-      "name": "t:sections.rich_text.name",
-      "settings": {
-        "color_scheme": "scheme-ee060b83-2f12-4898-8e1f-6726225957bf",
-        "desktop_content_alignment": "ta-left-md top-md",
-        "mobile_content_alignment": "ta-left top-xs"
-      }
     }
   },
   "order": [
-    "image_banner_WLRVbW",
-    "featured_product_list_4hncdh",
-    "collection_subcollections_cXdHnN",
-    "image_banner_CrXVNX",
-    "main",
     "collection-banner",
-    "content_collage_YDRFXN",
-    "recently_viewed_products_Mh9yV9",
-    "rich_text_wqeAKt"
+    "main"
   ]
 }

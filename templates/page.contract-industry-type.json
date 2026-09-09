@@ -84,6 +84,8 @@
         "icon_with_text_item_rhDhiw": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -96,6 +98,8 @@
         "icon_with_text_item_BmMEPg": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -108,6 +112,8 @@
         "icon_with_text_item_rf7tfN": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -120,6 +126,8 @@
         "icon_with_text_item_dWERtV": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -132,6 +140,8 @@
         "icon_with_text_item_xXQp47": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -144,6 +154,8 @@
         "icon_with_text_item_MiG3AM": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -156,6 +168,8 @@
         "icon_with_text_item_CYtAYV": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -181,6 +195,7 @@
         "heading": "BUILT TOUGH: ADVANCED SOLUTIONS FOR CONSTRUCTION EQUIPMENT MANUFACTURING",
         "heading_size": "h4",
         "description": "",
+        "vertical_header": false,
         "text_position": "fd-column",
         "icon_size": "icon-scale-3xl",
         "icon_color": "",
@@ -261,6 +276,8 @@
         "icon_with_text_item_CptrVW": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -273,6 +290,8 @@
         "icon_with_text_item_XVU6TT": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -285,6 +304,8 @@
         "icon_with_text_item_6Bbfrc": {
           "type": "icon_with_text_item",
           "settings": {
+            "use_custom_color_scheme": false,
+            "color_scheme": "",
             "icon_source": "theme_library",
             "theme_library_icon": "check",
             "custom_code": "",
@@ -306,6 +327,7 @@
         "heading": "BUILT TOUGH: ADVANCED SOLUTIONS FOR CONSTRUCTION EQUIPMENT MANUFACTURING",
         "heading_size": "h4",
         "description": "",
+        "vertical_header": false,
         "text_position": "fd-column",
         "icon_size": "icon-scale-3xl",
         "icon_color": "",
@@ -330,6 +352,7 @@
         "description_JWPEJh": {
           "type": "description",
           "settings": {
+            "full_width": false,
             "description_text": "<p>From small-scale residential builds to massive commercial projects, EZG Manufacturing serves a wide range of clients in the construction industry. Our solutions support applications such as:</p><ul><li>Site development and groundwork</li><li>Concrete and masonry work</li><li>Material handling and transport</li><li>Equipment for specialized trades</li><li>Road construction machinery</li><li>Durable mining equipment</li></ul>"
           }
         }
@@ -358,7 +381,8 @@
         "text_Vw9V39": {
           "type": "text",
           "settings": {
-            "text": "<p>At EZG Manufacturing, we’re always laying the groundwork for better performance and reliability. Our construction equipment solutions are designed to help your projects run smoothly from the ground up. With a focus on innovation and quality, we provide the tools you need to build with confidence.</p><p><a href=\"https://ezgmfg.com/contact-us/\"><span style=\"text-decoration:underline\">Contact us</span></a> today to learn how our construction equipment solutions can elevate your operations and provide a customer experience from start to finish.</p>"
+            "full_width": false,
+            "text": "<p>At EZG Manufacturing, we’re always laying the groundwork for better performance and reliability. Our construction equipment solutions are designed to help your projects run smoothly from the ground up. With a focus on innovation and quality, we provide the tools you need to build with confidence.</p><p><a href=\"/pages/contact-us\" title=\"Contact Us\"><span style=\"text-decoration:underline\">Contact us</span></a> today to learn how our construction equipment solutions can elevate your operations and provide a customer experience from start to finish.</p>"
           }
         }
       },
